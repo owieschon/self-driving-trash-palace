@@ -249,8 +249,8 @@ importers:
         specifier: workspace:*
         version: link:../core
       posthog-node:
-        specifier: 5.40.0
-        version: 5.40.0
+        specifier: 5.44.0
+        version: 5.44.0
       zod:
         specifier: 4.4.3
         version: 4.4.3
@@ -1095,11 +1095,11 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  '@posthog/core@1.40.2':
-    resolution: {integrity: sha512-H12j7O9iHGvpK9t2ko8W4pvfbV1pBDxrsWC1LA6yp2RhzwvC4T3sWhu+AekDQJSRSrJEWlB0t/Ueq9QhPSq7FQ==}
+  '@posthog/core@1.42.1':
+    resolution: {integrity: sha512-cZojBmvf92gZAn0MGf/J2S+3t2sZqb9E2/6mjY4jJsImwz7PuYqdNj870Wx2iwwlf++wfhRuH4K4bpDy9GIoCA==}
 
-  '@posthog/types@1.393.0':
-    resolution: {integrity: sha512-vzWeEJZ7ERQhFRoQYaP5jzN1JvIu46UJyHXsuv+dTGW2r3sMgREOhNxXLZjmFHwZ8/FOHQoyqqQmXTCXZSfMSg==}
+  '@posthog/types@1.395.0':
+    resolution: {integrity: sha512-Ty0gbVc6d9ku9H3caF54PmEfu4PHUGpJKTriMyDb4rjCTsEYOOjD4r6Fw/UMYSSWg8Ls3KnCtTow8LL6ciqNDg==}
 
   '@rolldown/binding-android-arm64@1.1.5':
     resolution: {integrity: sha512-lZg8fqIv2v7FF237bwMgzGZEJvGL79/s5knJ/i6FmsGF4XXlzccZ4jb+TrFIxtSSxFtIpdsgrPZeMk1I9AFcyQ==}
@@ -2140,8 +2140,8 @@ packages:
     resolution: {integrity: sha512-9ZhXKM/rw350N1ovuWHbGxnGh/SNJ4cnxHiM0rxE4VN41wsg8P8zWn9hv/buK00RP4WvlOyr/RBDiptyxVbkZQ==}
     engines: {node: '>=0.10.0'}
 
-  posthog-node@5.40.0:
-    resolution: {integrity: sha512-DrLfHuauO0W6qruF80iqr5JdmLysef74XzOB4eh36oRLRhxCySLraTqsi2Pj161LZnp9/JNdRDxwT8ei8VK2YA==}
+  posthog-node@5.44.0:
+    resolution: {integrity: sha512-dTKnUffCFfA4lSD8dD7sQ7SnGb0g8S42jEbhyGJxNim6SPHd95OBvhWSf9uDc/1X26XLZRGEln01IRPjLey+yQ==}
     engines: {node: ^20.20.0 || >=22.22.0}
     peerDependencies:
       rxjs: ^7.0.0
@@ -3013,11 +3013,11 @@ snapshots:
     dependencies:
       playwright: 1.58.0
 
-  '@posthog/core@1.40.2':
+  '@posthog/core@1.42.1':
     dependencies:
-      '@posthog/types': 1.393.0
+      '@posthog/types': 1.395.0
 
-  '@posthog/types@1.393.0': {}
+  '@posthog/types@1.395.0': {}
 
   '@rolldown/binding-android-arm64@1.1.5':
     optional: true
@@ -3982,9 +3982,9 @@ snapshots:
     dependencies:
       xtend: 4.0.2
 
-  posthog-node@5.40.0:
+  posthog-node@5.44.0:
     dependencies:
-      '@posthog/core': 1.40.2
+      '@posthog/core': 1.42.1
 
   prelude-ls@1.2.1: {}
 
