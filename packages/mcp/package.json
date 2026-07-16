@@ -1,0 +1,23 @@
+{
+  "name": "@trash-palace/mcp",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./client": "./src/client.ts"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "smoke": "tsx src/smoke-cli.ts",
+    "test": "vitest run --root ../.. packages/mcp/src",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "@trash-palace/application": "workspace:*",
+    "@trash-palace/core": "workspace:*",
+    "zod": "4.4.3"
+  }
+}

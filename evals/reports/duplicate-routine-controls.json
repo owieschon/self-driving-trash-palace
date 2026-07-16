@@ -1,0 +1,363 @@
+{
+  "schemaVersion": "duplicate-routine-executable-evidence-report@1",
+  "title": "Ambiguous activation responses create duplicate routines",
+  "generatedFrom": {
+    "fixtureManifestId": "night-shift-homecoming@1",
+    "fixtureCohortHash": "83725ddc967a07c286d9991c66d7fc6b40cfc8853b8236c24a2044f9ad4d747a",
+    "adapterInput": "bounded_postgresql_projection_plus_safe_local_jsonl",
+    "legacyControl": {
+      "kind": "legacy_negative_control",
+      "labOnly": true,
+      "productionSelectable": false,
+      "mcpSelectable": false,
+      "expectedCreatedRoutineCount": 2
+    }
+  },
+  "acceptance": {
+    "status": "passed",
+    "brokenActiveRoutineCount": 2,
+    "correctedActiveRoutineCount": 1,
+    "brokenVerifierStatus": "failed",
+    "correctedVerifierStatus": "passed"
+  },
+  "evidenceClassification": {
+    "basis": "credential_free_deterministic_fixture",
+    "reportContract": "Implemented",
+    "deterministicMeasurement": "Deterministic-verified",
+    "posthogIngestion": "Blocked",
+    "liveImprovementLoop": "Blocked"
+  },
+  "proofBoundary": {
+    "proves": [
+      "The bounded PostgreSQL row projection and strict local JSONL adapter produce one privacy-safe normal form.",
+      "The quarantined legacy fixture produces two active routines while the corrected fixture produces one.",
+      "The retained metric, guardrails, aliases, and stable evidence identities are deterministic."
+    ],
+    "doesNotProve": [
+      "A live model chooses the same plan, tools, or recovery behavior.",
+      "A hosted PostgreSQL deployment or PostHog project accepted this retained fixture evidence.",
+      "A reviewed change was deployed and improved a live observation window."
+    ]
+  },
+  "comparison": {
+    "schemaVersion": "duplicate-routine-control-comparison@1",
+    "title": "Ambiguous activation responses create duplicate routines",
+    "changeUnderTest": "server_stable_operation_identity_and_reconciliation_before_retry",
+    "evidenceClassification": {
+      "basis": "credential_free_deterministic_fixture",
+      "reportContract": "Implemented",
+      "deterministicMeasurement": "Deterministic-verified",
+      "posthogIngestion": "Blocked",
+      "liveImprovementLoop": "Blocked"
+    },
+    "broken": {
+      "schemaVersion": "duplicate-routine-measurement-report@1",
+      "title": "Ambiguous activation responses create duplicate routines",
+      "control": "broken",
+      "scenario": "two_routines_one_timeout",
+      "fixtureCohortHash": "83725ddc967a07c286d9991c66d7fc6b40cfc8853b8236c24a2044f9ad4d747a",
+      "cohortIdentityHash": "a47db5e3c8ea9c4829c683d395ea4d4ba2a634924ccc7515d0706a3fdab29605",
+      "window": {
+        "startedAt": "2026-08-14T05:35:00.000Z",
+        "endedAt": "2026-08-14T06:35:00.000Z"
+      },
+      "evidenceClassification": {
+        "basis": "credential_free_deterministic_fixture",
+        "reportContract": "Implemented",
+        "deterministicMeasurement": "Deterministic-verified",
+        "posthogIngestion": "Blocked",
+        "liveImprovementLoop": "Blocked"
+      },
+      "evidenceInventory": {
+        "receivedRecordCount": 12,
+        "uniqueRecordCount": 12,
+        "replayedRecordCount": 0,
+        "collections": {
+          "activationIntents": {
+            "received": 1,
+            "unique": 1,
+            "replayed": 0
+          },
+          "planActions": {
+            "received": 1,
+            "unique": 1,
+            "replayed": 0
+          },
+          "operations": {
+            "received": 2,
+            "unique": 2,
+            "replayed": 0
+          },
+          "attempts": {
+            "received": 2,
+            "unique": 2,
+            "replayed": 0
+          },
+          "activeDurableRoutineOutcomes": {
+            "received": 2,
+            "unique": 2,
+            "replayed": 0
+          },
+          "verifierResults": {
+            "received": 1,
+            "unique": 1,
+            "replayed": 0
+          },
+          "activationLatencies": {
+            "received": 1,
+            "unique": 1,
+            "replayed": 0
+          },
+          "reconciliations": {
+            "received": 1,
+            "unique": 1,
+            "replayed": 0
+          },
+          "cancellationSafetyChecks": {
+            "received": 0,
+            "unique": 0,
+            "replayed": 0
+          },
+          "userInterventions": {
+            "received": 0,
+            "unique": 0,
+            "replayed": 0
+          },
+          "modelCosts": {
+            "received": 1,
+            "unique": 1,
+            "replayed": 0
+          }
+        }
+      },
+      "primaryMetric": {
+        "name": "plans_with_duplicate_durable_routines_per_1000_activation_intents",
+        "unit": "plans_per_1000_activation_intents",
+        "result": {
+          "state": "measured",
+          "numerator": 1,
+          "denominator": 1,
+          "value": 1000
+        }
+      },
+      "signals": {
+        "unknownOperationAttemptCount": 1,
+        "planActionWithMultipleOperationsCount": 1,
+        "planWithMultipleActiveRoutinesCount": 1,
+        "manualDuplicateCleanupCount": 0
+      },
+      "guardrails": {
+        "verifierPassRatePercent": {
+          "state": "measured",
+          "numerator": 0,
+          "denominator": 1,
+          "value": 0
+        },
+        "activationLatency": {
+          "state": "measured",
+          "count": 1,
+          "medianMs": 10000,
+          "p95Ms": 10000,
+          "maximumMs": 10000
+        },
+        "reconciliationLatency": {
+          "state": "measured",
+          "count": 1,
+          "medianMs": 4000,
+          "p95Ms": 4000,
+          "maximumMs": 4000
+        },
+        "cancellationSafetyPassRatePercent": {
+          "state": "zero_denominator",
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "userInterventionsPer1000ActivationIntents": {
+          "state": "measured",
+          "numerator": 0,
+          "denominator": 1,
+          "value": 0
+        },
+        "modelCost": {
+          "totalCostUsd": 0.009,
+          "averageCostPerActivationIntentUsd": {
+            "state": "measured",
+            "numerator": 0.009,
+            "denominator": 1,
+            "value": 0.009
+          },
+          "inputTokens": 900,
+          "outputTokens": 180
+        }
+      },
+      "duplicateClusters": [
+        {
+          "organizationAlias": "tpa_organization_v1_BeiRhhhpTAQkHtpSjUkY8Mrr0G6CxhqztG8GtBKjGtk",
+          "missionAlias": "tpa_mission_v1_Jj15r8EVVhD_oxBr46WWrcNroY47er_ylrxYW5MtFNU",
+          "activationIntentAlias": "tpa_activation_intent_v1_8JRnVa77NAIX-AoMD5LX1ebvuhh6Nkto_j1QHPE_dKc",
+          "planAlias": "tpa_plan_v1_99lMrIKKmB3BRHDUHrfRxzzK3Bzb-v5BGJY-d0SHeK8",
+          "planActionAlias": "tpa_plan_action_v1_8-Cs_fjW_CQwqXQg-Y2ouY2Cm83qyCwKwtt6mm1vGug",
+          "operationCount": 2,
+          "unknownAttemptCount": 1,
+          "activeDurableRoutineCount": 2,
+          "manualDuplicateCleanupCount": 0
+        }
+      ]
+    },
+    "corrected": {
+      "schemaVersion": "duplicate-routine-measurement-report@1",
+      "title": "Ambiguous activation responses create duplicate routines",
+      "control": "corrected",
+      "scenario": "two_routines_one_timeout",
+      "fixtureCohortHash": "83725ddc967a07c286d9991c66d7fc6b40cfc8853b8236c24a2044f9ad4d747a",
+      "cohortIdentityHash": "a47db5e3c8ea9c4829c683d395ea4d4ba2a634924ccc7515d0706a3fdab29605",
+      "window": {
+        "startedAt": "2026-08-14T05:35:00.000Z",
+        "endedAt": "2026-08-14T06:35:00.000Z"
+      },
+      "evidenceClassification": {
+        "basis": "credential_free_deterministic_fixture",
+        "reportContract": "Implemented",
+        "deterministicMeasurement": "Deterministic-verified",
+        "posthogIngestion": "Blocked",
+        "liveImprovementLoop": "Blocked"
+      },
+      "evidenceInventory": {
+        "receivedRecordCount": 9,
+        "uniqueRecordCount": 9,
+        "replayedRecordCount": 0,
+        "collections": {
+          "activationIntents": {
+            "received": 1,
+            "unique": 1,
+            "replayed": 0
+          },
+          "planActions": {
+            "received": 1,
+            "unique": 1,
+            "replayed": 0
+          },
+          "operations": {
+            "received": 1,
+            "unique": 1,
+            "replayed": 0
+          },
+          "attempts": {
+            "received": 1,
+            "unique": 1,
+            "replayed": 0
+          },
+          "activeDurableRoutineOutcomes": {
+            "received": 1,
+            "unique": 1,
+            "replayed": 0
+          },
+          "verifierResults": {
+            "received": 1,
+            "unique": 1,
+            "replayed": 0
+          },
+          "activationLatencies": {
+            "received": 1,
+            "unique": 1,
+            "replayed": 0
+          },
+          "reconciliations": {
+            "received": 1,
+            "unique": 1,
+            "replayed": 0
+          },
+          "cancellationSafetyChecks": {
+            "received": 0,
+            "unique": 0,
+            "replayed": 0
+          },
+          "userInterventions": {
+            "received": 0,
+            "unique": 0,
+            "replayed": 0
+          },
+          "modelCosts": {
+            "received": 1,
+            "unique": 1,
+            "replayed": 0
+          }
+        }
+      },
+      "primaryMetric": {
+        "name": "plans_with_duplicate_durable_routines_per_1000_activation_intents",
+        "unit": "plans_per_1000_activation_intents",
+        "result": {
+          "state": "measured",
+          "numerator": 0,
+          "denominator": 1,
+          "value": 0
+        }
+      },
+      "signals": {
+        "unknownOperationAttemptCount": 1,
+        "planActionWithMultipleOperationsCount": 0,
+        "planWithMultipleActiveRoutinesCount": 0,
+        "manualDuplicateCleanupCount": 0
+      },
+      "guardrails": {
+        "verifierPassRatePercent": {
+          "state": "measured",
+          "numerator": 1,
+          "denominator": 1,
+          "value": 100
+        },
+        "activationLatency": {
+          "state": "measured",
+          "count": 1,
+          "medianMs": 8000,
+          "p95Ms": 8000,
+          "maximumMs": 8000
+        },
+        "reconciliationLatency": {
+          "state": "measured",
+          "count": 1,
+          "medianMs": 1500,
+          "p95Ms": 1500,
+          "maximumMs": 1500
+        },
+        "cancellationSafetyPassRatePercent": {
+          "state": "zero_denominator",
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "userInterventionsPer1000ActivationIntents": {
+          "state": "measured",
+          "numerator": 0,
+          "denominator": 1,
+          "value": 0
+        },
+        "modelCost": {
+          "totalCostUsd": 0.006,
+          "averageCostPerActivationIntentUsd": {
+            "state": "measured",
+            "numerator": 0.006,
+            "denominator": 1,
+            "value": 0.006
+          },
+          "inputTokens": 900,
+          "outputTokens": 180
+        }
+      },
+      "duplicateClusters": []
+    },
+    "primaryMetricDeltaPer1000": -1000,
+    "duplicatePlanDelta": -1,
+    "controlGate": {
+      "status": "passed",
+      "sameFixtureCohort": true,
+      "nonzeroActivationIntentDenominator": true,
+      "brokenControlCreatedExactlyTwoActiveRoutines": true,
+      "brokenControlReportedDuplication": true,
+      "correctedControlReportedZeroDuplication": true,
+      "primaryMetricImproved": true
+    }
+  }
+}

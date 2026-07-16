@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0.0",
+  "changeId": "change.initial-product-contracts",
+  "changedContracts": [
+    "contract.mission-identities",
+    "contract.unknown-outcome-recovery",
+    "contract.frozen-context-authority",
+    "contract.bounded-retrieval",
+    "contract.evidence-improvement",
+    "contract.homecoming-procedure",
+    "contract.lost-response-recovery"
+  ],
+  "affectedClaimIds": [
+    "TP-MODEL-001",
+    "TP-MODEL-002",
+    "TP-MODEL-003",
+    "TP-RELIABILITY-001",
+    "TP-RELIABILITY-002",
+    "TP-CONTEXT-001",
+    "TP-CONTEXT-002",
+    "TP-CONTEXT-003",
+    "TP-CONTEXT-004",
+    "TP-KNOWLEDGE-001",
+    "TP-KNOWLEDGE-002",
+    "TP-EVIDENCE-001",
+    "TP-EVIDENCE-002",
+    "TP-EVIDENCE-003",
+    "TP-EVIDENCE-004",
+    "TP-PROCEDURE-001",
+    "TP-PROCEDURE-002",
+    "TP-PROCEDURE-003",
+    "TP-INCIDENT-001",
+    "TP-INCIDENT-002"
+  ],
+  "assessedAt": "2026-07-15T00:00:00.000Z",
+  "disposition": "updated",
+  "updatedSourceIds": [
+    "concept.missions-plans-operations",
+    "concept.unknown-outcomes",
+    "concept.context-authority",
+    "concept.evidence-improvement",
+    "procedure.operate-homecoming-mission",
+    "incident.two-routines-one-timeout"
+  ]
+}

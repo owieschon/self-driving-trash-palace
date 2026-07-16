@@ -1,0 +1,260 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "contractHash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "contractId": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+      "type": "string"
+    },
+    "contractVersion": {
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$",
+      "type": "string"
+    },
+    "instructionRole": {
+      "const": "host_policy",
+      "type": "string"
+    },
+    "policy": {
+      "additionalProperties": false,
+      "properties": {
+        "corePolicy": {
+          "additionalProperties": false,
+          "properties": {
+            "approvalExpirySeconds": {
+              "const": 900,
+              "type": "number"
+            },
+            "budgets": {
+              "additionalProperties": false,
+              "properties": {
+                "maxActiveRuntimeSeconds": {
+                  "const": 300,
+                  "type": "number"
+                },
+                "maxClarificationPauses": {
+                  "const": 2,
+                  "type": "number"
+                },
+                "maxPlanRevisions": {
+                  "const": 3,
+                  "type": "number"
+                },
+                "maxReconciliationPolls": {
+                  "const": 3,
+                  "type": "number"
+                },
+                "maxToolCallsPerRun": {
+                  "const": 24,
+                  "type": "number"
+                }
+              },
+              "required": [
+                "maxToolCallsPerRun",
+                "maxPlanRevisions",
+                "maxClarificationPauses",
+                "maxReconciliationPolls",
+                "maxActiveRuntimeSeconds"
+              ],
+              "type": "object"
+            },
+            "invariants": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "id": {
+                    "enum": [
+                      "tenant_context_host_derived",
+                      "verified_identity_required_for_unlock",
+                      "routine_activation_validated",
+                      "exact_plan_approval_required",
+                      "retry_preserves_logical_operation",
+                      "verifier_owns_mission_success",
+                      "secrets_excluded_from_model_context"
+                    ],
+                    "type": "string"
+                  },
+                  "statement": {
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "statement"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "schemaVersion": {
+              "const": "host-policy@1",
+              "type": "string"
+            },
+            "tenantContextSource": {
+              "const": "authenticated_host_session",
+              "type": "string"
+            },
+            "verifierOwner": {
+              "const": "application_code",
+              "type": "string"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "invariants",
+            "budgets",
+            "approvalExpirySeconds",
+            "tenantContextSource",
+            "verifierOwner"
+          ],
+          "type": "object"
+        },
+        "deniedCapabilities": {
+          "items": {
+            "enum": [
+              "arbitrary-code-execution",
+              "filesystem",
+              "shell",
+              "unrestricted-web"
+            ],
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "servicePermissions": {
+          "items": {
+            "enum": [
+              "palace:read",
+              "crew:read",
+              "capability:read",
+              "routine:read",
+              "routine:draft",
+              "routine:validate",
+              "routine:simulate",
+              "routine:approve",
+              "routine:activate",
+              "recovery:propose",
+              "operation:reconcile",
+              "verification:read",
+              "knowledge:read",
+              "mission:cancel"
+            ],
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "tools": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "allowedPhases": {
+                "items": {
+                  "enum": [
+                    "understand",
+                    "plan",
+                    "validate",
+                    "approve",
+                    "execute",
+                    "reconcile",
+                    "observe",
+                    "verify"
+                  ],
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              "permission": {
+                "enum": [
+                  "palace:read",
+                  "crew:read",
+                  "capability:read",
+                  "routine:read",
+                  "routine:draft",
+                  "routine:validate",
+                  "routine:simulate",
+                  "routine:approve",
+                  "routine:activate",
+                  "recovery:propose",
+                  "operation:reconcile",
+                  "verification:read",
+                  "knowledge:read",
+                  "mission:cancel"
+                ],
+                "type": "string"
+              },
+              "readOnly": {
+                "type": "boolean"
+              },
+              "risk": {
+                "enum": [
+                  "read",
+                  "proposal",
+                  "pause",
+                  "consequential",
+                  "control"
+                ],
+                "type": "string"
+              },
+              "toolId": {
+                "enum": [
+                  "palaces.get",
+                  "crews.list",
+                  "capabilities.list",
+                  "routines.list",
+                  "routines.get",
+                  "executions.list",
+                  "knowledge.search",
+                  "plans.propose",
+                  "plans.validate",
+                  "plans.simulate",
+                  "plans.request_approval",
+                  "plans.activate",
+                  "operations.get",
+                  "verification.get_evidence",
+                  "missions.cancel"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "toolId",
+              "permission",
+              "risk",
+              "allowedPhases",
+              "readOnly"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "corePolicy",
+        "servicePermissions",
+        "deniedCapabilities",
+        "tools"
+      ],
+      "type": "object"
+    },
+    "source": {
+      "const": "compiler-generated",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source",
+    "instructionRole",
+    "contractId",
+    "contractVersion",
+    "contractHash",
+    "policy"
+  ],
+  "type": "object"
+}

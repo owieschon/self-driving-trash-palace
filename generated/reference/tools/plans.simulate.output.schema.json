@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "feasible": {
+      "type": "boolean"
+    },
+    "projectedBatteryUsePercentagePoints": {
+      "maximum": 100,
+      "minimum": 0,
+      "type": "number"
+    },
+    "results": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "evidence": {
+            "maxLength": 500,
+            "minLength": 1,
+            "type": "string"
+          },
+          "passed": {
+            "type": "boolean"
+          },
+          "scenario": {
+            "enum": [
+              "timing",
+              "access",
+              "energy",
+              "transport_failure"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "scenario",
+          "passed",
+          "evidence"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "feasible",
+    "projectedBatteryUsePercentagePoints",
+    "results"
+  ],
+  "type": "object"
+}

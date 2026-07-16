@@ -1,0 +1,9 @@
+.beads/
+.dockerignore
+**/dist/
+**/node_modules/
+apps/web/next-env.d.ts
+Dockerfile
+generated/reference/
+packages/db/migrations/
+pnpm-lock.yaml

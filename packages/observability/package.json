@@ -1,0 +1,19 @@
+{
+  "name": "@trash-palace/observability",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@trash-palace/core": "workspace:*",
+    "posthog-node": "5.40.0",
+    "zod": "4.4.3"
+  }
+}

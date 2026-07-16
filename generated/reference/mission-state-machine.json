@@ -1,0 +1,804 @@
+{
+  "events": [
+    "approval_expired_or_stale",
+    "approval_granted",
+    "approval_rejected",
+    "cancel_reconciliation_completed",
+    "cancel_reconciliation_required",
+    "cancel_requested",
+    "candidate_persisted",
+    "clarification_answered",
+    "context_sufficient",
+    "corrective_work_requested",
+    "evidence_arrived",
+    "execution_committed",
+    "execution_non_retryable_failure",
+    "execution_unknown",
+    "intervention_required",
+    "lease_acquired",
+    "lease_lost",
+    "material_ambiguity",
+    "observation_deadline_expired",
+    "reconcile_absent_retryable",
+    "reconcile_budget_exhausted",
+    "reconcile_commit_found",
+    "reconcile_retry_authorized",
+    "reconcile_stopped",
+    "safe_correction_available",
+    "terminal_result_acknowledged",
+    "user_response_expired",
+    "validation_failed",
+    "validation_passed",
+    "verification_passed"
+  ],
+  "generatedFrom": [
+    "packages/core/src/missions.ts#MissionStateSchema",
+    "packages/core/src/missions.ts#resolveMissionTransition"
+  ],
+  "schemaVersion": "mission-state-machine@1",
+  "stateMachineHash": "56a0a72e6bd68664fb75823672638f31285c5a22d26131dee5eba0a136095a36",
+  "states": [
+    {
+      "phase": "approve",
+      "status": "cancelled"
+    },
+    {
+      "phase": "execute",
+      "status": "cancelled"
+    },
+    {
+      "phase": "observe",
+      "status": "cancelled"
+    },
+    {
+      "phase": "plan",
+      "status": "cancelled"
+    },
+    {
+      "phase": "reconcile",
+      "status": "cancelled"
+    },
+    {
+      "phase": "understand",
+      "status": "cancelled"
+    },
+    {
+      "phase": "validate",
+      "status": "cancelled"
+    },
+    {
+      "phase": "verify",
+      "status": "cancelled"
+    },
+    {
+      "phase": "execute",
+      "status": "failed"
+    },
+    {
+      "phase": "observe",
+      "status": "failed"
+    },
+    {
+      "phase": "reconcile",
+      "status": "failed"
+    },
+    {
+      "phase": "verify",
+      "status": "failed"
+    },
+    {
+      "phase": "understand",
+      "status": "queued"
+    },
+    {
+      "phase": "execute",
+      "status": "running"
+    },
+    {
+      "phase": "plan",
+      "status": "running"
+    },
+    {
+      "phase": "reconcile",
+      "status": "running"
+    },
+    {
+      "phase": "understand",
+      "status": "running"
+    },
+    {
+      "phase": "validate",
+      "status": "running"
+    },
+    {
+      "phase": "verify",
+      "status": "running"
+    },
+    {
+      "phase": "verify",
+      "status": "succeeded"
+    },
+    {
+      "phase": "observe",
+      "status": "waiting_for_system"
+    },
+    {
+      "phase": "approve",
+      "status": "waiting_for_user"
+    },
+    {
+      "phase": "plan",
+      "status": "waiting_for_user"
+    },
+    {
+      "phase": "reconcile",
+      "status": "waiting_for_user"
+    },
+    {
+      "phase": "verify",
+      "status": "waiting_for_user"
+    }
+  ],
+  "transitions": [
+    {
+      "event": "approval_expired_or_stale",
+      "from": {
+        "phase": "approve",
+        "status": "waiting_for_user"
+      },
+      "hostAction": "revalidate_and_revise_plan",
+      "to": {
+        "phase": "plan",
+        "status": "running"
+      }
+    },
+    {
+      "event": "approval_expired_or_stale",
+      "from": {
+        "phase": "execute",
+        "status": "running"
+      },
+      "hostAction": "invalidate_operation_and_revise_plan",
+      "to": {
+        "phase": "plan",
+        "status": "running"
+      }
+    },
+    {
+      "event": "approval_granted",
+      "from": {
+        "phase": "approve",
+        "status": "waiting_for_user"
+      },
+      "hostAction": "materialize_logical_operations",
+      "to": {
+        "phase": "execute",
+        "status": "running"
+      }
+    },
+    {
+      "event": "approval_rejected",
+      "from": {
+        "phase": "approve",
+        "status": "waiting_for_user"
+      },
+      "hostAction": "invalidate_approval_request",
+      "to": {
+        "phase": "plan",
+        "status": "running"
+      }
+    },
+    {
+      "event": "cancel_reconciliation_completed",
+      "from": {
+        "phase": "reconcile",
+        "status": "running"
+      },
+      "hostAction": "freeze_reconciled_cancellation_receipt",
+      "to": {
+        "phase": "reconcile",
+        "status": "cancelled"
+      }
+    },
+    {
+      "event": "cancel_reconciliation_required",
+      "from": {
+        "phase": "execute",
+        "status": "running"
+      },
+      "hostAction": "stop_remaining_actions_and_reconcile_effect",
+      "to": {
+        "phase": "reconcile",
+        "status": "running"
+      }
+    },
+    {
+      "event": "cancel_reconciliation_required",
+      "from": {
+        "phase": "observe",
+        "status": "waiting_for_system"
+      },
+      "hostAction": "stop_remaining_actions_and_reconcile_effect",
+      "to": {
+        "phase": "reconcile",
+        "status": "running"
+      }
+    },
+    {
+      "event": "cancel_reconciliation_required",
+      "from": {
+        "phase": "reconcile",
+        "status": "running"
+      },
+      "hostAction": "continue_reconciling_cancelled_effect",
+      "to": {
+        "phase": "reconcile",
+        "status": "running"
+      }
+    },
+    {
+      "event": "cancel_requested",
+      "from": {
+        "phase": "approve",
+        "status": "waiting_for_user"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "approve",
+        "status": "cancelled"
+      }
+    },
+    {
+      "event": "cancel_requested",
+      "from": {
+        "phase": "execute",
+        "status": "running"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "execute",
+        "status": "cancelled"
+      }
+    },
+    {
+      "event": "cancel_requested",
+      "from": {
+        "phase": "observe",
+        "status": "waiting_for_system"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "observe",
+        "status": "cancelled"
+      }
+    },
+    {
+      "event": "cancel_requested",
+      "from": {
+        "phase": "plan",
+        "status": "running"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "plan",
+        "status": "cancelled"
+      }
+    },
+    {
+      "event": "cancel_requested",
+      "from": {
+        "phase": "plan",
+        "status": "waiting_for_user"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "plan",
+        "status": "cancelled"
+      }
+    },
+    {
+      "event": "cancel_requested",
+      "from": {
+        "phase": "reconcile",
+        "status": "running"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "reconcile",
+        "status": "cancelled"
+      }
+    },
+    {
+      "event": "cancel_requested",
+      "from": {
+        "phase": "reconcile",
+        "status": "waiting_for_user"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "reconcile",
+        "status": "cancelled"
+      }
+    },
+    {
+      "event": "cancel_requested",
+      "from": {
+        "phase": "understand",
+        "status": "queued"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "understand",
+        "status": "cancelled"
+      }
+    },
+    {
+      "event": "cancel_requested",
+      "from": {
+        "phase": "understand",
+        "status": "running"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "understand",
+        "status": "cancelled"
+      }
+    },
+    {
+      "event": "cancel_requested",
+      "from": {
+        "phase": "validate",
+        "status": "running"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "validate",
+        "status": "cancelled"
+      }
+    },
+    {
+      "event": "cancel_requested",
+      "from": {
+        "phase": "verify",
+        "status": "running"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "verify",
+        "status": "cancelled"
+      }
+    },
+    {
+      "event": "cancel_requested",
+      "from": {
+        "phase": "verify",
+        "status": "waiting_for_user"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "verify",
+        "status": "cancelled"
+      }
+    },
+    {
+      "event": "candidate_persisted",
+      "from": {
+        "phase": "plan",
+        "status": "running"
+      },
+      "hostAction": "freeze_plan_revision",
+      "to": {
+        "phase": "validate",
+        "status": "running"
+      }
+    },
+    {
+      "event": "clarification_answered",
+      "from": {
+        "phase": "plan",
+        "status": "waiting_for_user"
+      },
+      "hostAction": "persist_answer_and_revise_plan",
+      "to": {
+        "phase": "plan",
+        "status": "running"
+      }
+    },
+    {
+      "event": "context_sufficient",
+      "from": {
+        "phase": "understand",
+        "status": "running"
+      },
+      "hostAction": "persist_facts_and_task_ledger",
+      "to": {
+        "phase": "plan",
+        "status": "running"
+      }
+    },
+    {
+      "event": "corrective_work_requested",
+      "from": {
+        "phase": "verify",
+        "status": "waiting_for_user"
+      },
+      "hostAction": "create_new_plan_revision",
+      "to": {
+        "phase": "plan",
+        "status": "running"
+      }
+    },
+    {
+      "event": "evidence_arrived",
+      "from": {
+        "phase": "observe",
+        "status": "waiting_for_system"
+      },
+      "hostAction": "run_deterministic_assertions",
+      "to": {
+        "phase": "verify",
+        "status": "running"
+      }
+    },
+    {
+      "event": "execution_committed",
+      "from": {
+        "phase": "execute",
+        "status": "running"
+      },
+      "hostAction": "await_external_evidence",
+      "to": {
+        "phase": "observe",
+        "status": "waiting_for_system"
+      }
+    },
+    {
+      "event": "execution_non_retryable_failure",
+      "from": {
+        "phase": "execute",
+        "status": "running"
+      },
+      "hostAction": "persist_terminal_receipt",
+      "to": {
+        "phase": "execute",
+        "status": "failed"
+      }
+    },
+    {
+      "event": "execution_unknown",
+      "from": {
+        "phase": "execute",
+        "status": "running"
+      },
+      "hostAction": "preserve_logical_operation",
+      "to": {
+        "phase": "reconcile",
+        "status": "running"
+      }
+    },
+    {
+      "event": "intervention_required",
+      "from": {
+        "phase": "verify",
+        "status": "running"
+      },
+      "hostAction": "present_failed_assertions",
+      "to": {
+        "phase": "verify",
+        "status": "waiting_for_user"
+      }
+    },
+    {
+      "event": "lease_acquired",
+      "from": {
+        "phase": "understand",
+        "status": "queued"
+      },
+      "hostAction": "create_run_and_context_receipt",
+      "to": {
+        "phase": "understand",
+        "status": "running"
+      }
+    },
+    {
+      "event": "lease_lost",
+      "from": {
+        "phase": "approve",
+        "status": "waiting_for_user"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "approve",
+        "status": "waiting_for_user"
+      }
+    },
+    {
+      "event": "lease_lost",
+      "from": {
+        "phase": "execute",
+        "status": "running"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "execute",
+        "status": "running"
+      }
+    },
+    {
+      "event": "lease_lost",
+      "from": {
+        "phase": "observe",
+        "status": "waiting_for_system"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "observe",
+        "status": "waiting_for_system"
+      }
+    },
+    {
+      "event": "lease_lost",
+      "from": {
+        "phase": "plan",
+        "status": "running"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "plan",
+        "status": "running"
+      }
+    },
+    {
+      "event": "lease_lost",
+      "from": {
+        "phase": "plan",
+        "status": "waiting_for_user"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "plan",
+        "status": "waiting_for_user"
+      }
+    },
+    {
+      "event": "lease_lost",
+      "from": {
+        "phase": "reconcile",
+        "status": "running"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "reconcile",
+        "status": "running"
+      }
+    },
+    {
+      "event": "lease_lost",
+      "from": {
+        "phase": "reconcile",
+        "status": "waiting_for_user"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "reconcile",
+        "status": "waiting_for_user"
+      }
+    },
+    {
+      "event": "lease_lost",
+      "from": {
+        "phase": "understand",
+        "status": "queued"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "understand",
+        "status": "queued"
+      }
+    },
+    {
+      "event": "lease_lost",
+      "from": {
+        "phase": "understand",
+        "status": "running"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "understand",
+        "status": "running"
+      }
+    },
+    {
+      "event": "lease_lost",
+      "from": {
+        "phase": "validate",
+        "status": "running"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "validate",
+        "status": "running"
+      }
+    },
+    {
+      "event": "lease_lost",
+      "from": {
+        "phase": "verify",
+        "status": "running"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "verify",
+        "status": "running"
+      }
+    },
+    {
+      "event": "lease_lost",
+      "from": {
+        "phase": "verify",
+        "status": "waiting_for_user"
+      },
+      "hostAction": null,
+      "to": {
+        "phase": "verify",
+        "status": "waiting_for_user"
+      }
+    },
+    {
+      "event": "material_ambiguity",
+      "from": {
+        "phase": "plan",
+        "status": "running"
+      },
+      "hostAction": "request_bounded_clarification",
+      "to": {
+        "phase": "plan",
+        "status": "waiting_for_user"
+      }
+    },
+    {
+      "event": "observation_deadline_expired",
+      "from": {
+        "phase": "observe",
+        "status": "waiting_for_system"
+      },
+      "hostAction": "verify_failure_evidence",
+      "to": {
+        "phase": "verify",
+        "status": "running"
+      }
+    },
+    {
+      "event": "reconcile_absent_retryable",
+      "from": {
+        "phase": "reconcile",
+        "status": "running"
+      },
+      "hostAction": "retry_same_logical_operation",
+      "to": {
+        "phase": "execute",
+        "status": "running"
+      }
+    },
+    {
+      "event": "reconcile_budget_exhausted",
+      "from": {
+        "phase": "reconcile",
+        "status": "running"
+      },
+      "hostAction": "present_evidence_and_safest_action",
+      "to": {
+        "phase": "reconcile",
+        "status": "waiting_for_user"
+      }
+    },
+    {
+      "event": "reconcile_commit_found",
+      "from": {
+        "phase": "reconcile",
+        "status": "running"
+      },
+      "hostAction": "return_original_operation_outcome",
+      "to": {
+        "phase": "observe",
+        "status": "waiting_for_system"
+      }
+    },
+    {
+      "event": "reconcile_retry_authorized",
+      "from": {
+        "phase": "reconcile",
+        "status": "waiting_for_user"
+      },
+      "hostAction": "retry_existing_logical_operation",
+      "to": {
+        "phase": "execute",
+        "status": "running"
+      }
+    },
+    {
+      "event": "reconcile_stopped",
+      "from": {
+        "phase": "reconcile",
+        "status": "waiting_for_user"
+      },
+      "hostAction": "stop_remaining_actions",
+      "to": {
+        "phase": "reconcile",
+        "status": "cancelled"
+      }
+    },
+    {
+      "event": "safe_correction_available",
+      "from": {
+        "phase": "verify",
+        "status": "running"
+      },
+      "hostAction": "propose_new_revision",
+      "to": {
+        "phase": "plan",
+        "status": "running"
+      }
+    },
+    {
+      "event": "terminal_result_acknowledged",
+      "from": {
+        "phase": "verify",
+        "status": "waiting_for_user"
+      },
+      "hostAction": "freeze_failed_verifier_receipt",
+      "to": {
+        "phase": "verify",
+        "status": "failed"
+      }
+    },
+    {
+      "event": "user_response_expired",
+      "from": {
+        "phase": "plan",
+        "status": "waiting_for_user"
+      },
+      "hostAction": "record_user_response_expired",
+      "to": {
+        "phase": "plan",
+        "status": "cancelled"
+      }
+    },
+    {
+      "event": "validation_failed",
+      "from": {
+        "phase": "validate",
+        "status": "running"
+      },
+      "hostAction": "record_evidence_and_replan",
+      "to": {
+        "phase": "plan",
+        "status": "running"
+      }
+    },
+    {
+      "event": "validation_passed",
+      "from": {
+        "phase": "validate",
+        "status": "running"
+      },
+      "hostAction": "create_approval_request",
+      "to": {
+        "phase": "approve",
+        "status": "waiting_for_user"
+      }
+    },
+    {
+      "event": "verification_passed",
+      "from": {
+        "phase": "verify",
+        "status": "running"
+      },
+      "hostAction": "freeze_verifier_receipt",
+      "to": {
+        "phase": "verify",
+        "status": "succeeded"
+      }
+    }
+  ]
+}

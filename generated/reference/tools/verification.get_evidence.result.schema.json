@@ -1,0 +1,2807 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "additionalProperties": false,
+      "properties": {
+        "callId": {
+          "pattern": "^call_[a-z0-9][a-z0-9_-]{7,63}$",
+          "type": "string"
+        },
+        "data": {
+          "additionalProperties": false,
+          "properties": {
+            "evidence": {
+              "items": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "id": {
+                        "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "identityTagId": {
+                        "pattern": "^tag_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "missionId": {
+                        "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "observedAt": {
+                        "format": "date-time",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                        "type": "string"
+                      },
+                      "organizationId": {
+                        "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "palaceId": {
+                        "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "type": {
+                        "const": "identity_arrival",
+                        "type": "string"
+                      },
+                      "verified": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "organizationId",
+                      "missionId",
+                      "palaceId",
+                      "observedAt",
+                      "type",
+                      "identityTagId",
+                      "verified"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "causedByEvidenceId": {
+                        "anyOf": [
+                          {
+                            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "command": {
+                        "enum": [
+                          "unlock",
+                          "locked_desired_state",
+                          "set_temperature",
+                          "set_lighting"
+                        ],
+                        "type": "string"
+                      },
+                      "deviceId": {
+                        "pattern": "^dev_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "id": {
+                        "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "missionId": {
+                        "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "observedAt": {
+                        "format": "date-time",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                        "type": "string"
+                      },
+                      "organizationId": {
+                        "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "palaceId": {
+                        "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "type": {
+                        "const": "device_command",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "organizationId",
+                      "missionId",
+                      "palaceId",
+                      "observedAt",
+                      "type",
+                      "deviceId",
+                      "command",
+                      "causedByEvidenceId"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "celsius": {
+                        "maximum": 80,
+                        "minimum": -50,
+                        "type": "number"
+                      },
+                      "deviceId": {
+                        "pattern": "^dev_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "id": {
+                        "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "missionId": {
+                        "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "observedAt": {
+                        "format": "date-time",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                        "type": "string"
+                      },
+                      "organizationId": {
+                        "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "palaceId": {
+                        "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "type": {
+                        "const": "temperature_observation",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "organizationId",
+                      "missionId",
+                      "palaceId",
+                      "observedAt",
+                      "type",
+                      "deviceId",
+                      "celsius"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "active": {
+                        "type": "boolean"
+                      },
+                      "deviceId": {
+                        "pattern": "^dev_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "id": {
+                        "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "intensityPercent": {
+                        "maximum": 100,
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "missionId": {
+                        "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "observedAt": {
+                        "format": "date-time",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                        "type": "string"
+                      },
+                      "organizationId": {
+                        "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "palaceId": {
+                        "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "type": {
+                        "const": "lighting_observation",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "organizationId",
+                      "missionId",
+                      "palaceId",
+                      "observedAt",
+                      "type",
+                      "deviceId",
+                      "intensityPercent",
+                      "active"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "desiredState": {
+                        "enum": [
+                          "locked",
+                          "unlocked"
+                        ],
+                        "type": "string"
+                      },
+                      "deviceId": {
+                        "pattern": "^dev_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "id": {
+                        "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "missionId": {
+                        "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "observedAt": {
+                        "format": "date-time",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                        "type": "string"
+                      },
+                      "organizationId": {
+                        "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "palaceId": {
+                        "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "type": {
+                        "const": "lock_observation",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "organizationId",
+                      "missionId",
+                      "palaceId",
+                      "observedAt",
+                      "type",
+                      "deviceId",
+                      "desiredState"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "id": {
+                        "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "missionId": {
+                        "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "observedAt": {
+                        "format": "date-time",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                        "type": "string"
+                      },
+                      "organizationId": {
+                        "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "palaceId": {
+                        "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "projectedUsePercentagePoints": {
+                        "maximum": 100,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "type": {
+                        "const": "battery_projection",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "organizationId",
+                      "missionId",
+                      "palaceId",
+                      "observedAt",
+                      "type",
+                      "projectedUsePercentagePoints"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "active": {
+                        "type": "boolean"
+                      },
+                      "id": {
+                        "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "missionId": {
+                        "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "observedAt": {
+                        "format": "date-time",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                        "type": "string"
+                      },
+                      "organizationId": {
+                        "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "palaceId": {
+                        "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "planHash": {
+                        "anyOf": [
+                          {
+                            "pattern": "^[a-f0-9]{64}$",
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "planId": {
+                        "anyOf": [
+                          {
+                            "pattern": "^pln_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "routineId": {
+                        "pattern": "^rtn_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "routineVersionId": {
+                        "pattern": "^rtv_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "type": {
+                        "const": "routine_state",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "organizationId",
+                      "missionId",
+                      "palaceId",
+                      "observedAt",
+                      "type",
+                      "routineId",
+                      "routineVersionId",
+                      "active",
+                      "planId",
+                      "planHash"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "allowed": {
+                        "type": "boolean"
+                      },
+                      "attemptedOrganizationId": {
+                        "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "id": {
+                        "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "missionId": {
+                        "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "observedAt": {
+                        "format": "date-time",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                        "type": "string"
+                      },
+                      "operationId": {
+                        "anyOf": [
+                          {
+                            "pattern": "^op_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "organizationId": {
+                        "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "palaceId": {
+                        "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "type": {
+                        "const": "tenant_access_audit",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "organizationId",
+                      "missionId",
+                      "palaceId",
+                      "observedAt",
+                      "type",
+                      "attemptedOrganizationId",
+                      "allowed",
+                      "operationId"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "attemptId": {
+                        "pattern": "^att_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "errorCode": {
+                        "const": "APPLICATION_RESPONSE_LOST",
+                        "type": "string"
+                      },
+                      "id": {
+                        "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "missionId": {
+                        "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "observedAt": {
+                        "format": "date-time",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                        "type": "string"
+                      },
+                      "operationCommitted": {
+                        "const": true,
+                        "type": "boolean"
+                      },
+                      "operationId": {
+                        "pattern": "^op_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "organizationId": {
+                        "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "palaceId": {
+                        "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "status": {
+                        "const": "unknown",
+                        "type": "string"
+                      },
+                      "toolCallId": {
+                        "pattern": "^call_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "transport": {
+                        "const": "worker",
+                        "type": "string"
+                      },
+                      "type": {
+                        "const": "operation_transport",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "organizationId",
+                      "missionId",
+                      "palaceId",
+                      "observedAt",
+                      "type",
+                      "operationId",
+                      "attemptId",
+                      "toolCallId",
+                      "transport",
+                      "status",
+                      "operationCommitted",
+                      "errorCode"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "code": {
+                        "anyOf": [
+                          {
+                            "pattern": "^[A-Z][A-Z0-9_]{2,63}$",
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "gatewayCommandId": {
+                        "pattern": "^gcmd_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "id": {
+                        "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "missionId": {
+                        "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "observedAt": {
+                        "format": "date-time",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                        "type": "string"
+                      },
+                      "operationId": {
+                        "pattern": "^op_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "organizationId": {
+                        "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "palaceId": {
+                        "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "status": {
+                        "enum": [
+                          "completed",
+                          "failed"
+                        ],
+                        "type": "string"
+                      },
+                      "type": {
+                        "const": "gateway_delivery",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "organizationId",
+                      "missionId",
+                      "palaceId",
+                      "observedAt",
+                      "type",
+                      "gatewayCommandId",
+                      "operationId",
+                      "status",
+                      "code"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "abandonedClaimGeneration": {
+                        "exclusiveMinimum": 0,
+                        "maximum": 9007199254740991,
+                        "type": "integer"
+                      },
+                      "claimExpiredAt": {
+                        "format": "date-time",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                        "type": "string"
+                      },
+                      "durableObservation": {
+                        "enum": [
+                          "expired_claim_without_terminal_result",
+                          "completed_result_observed",
+                          "durable_absence_observed"
+                        ],
+                        "type": "string"
+                      },
+                      "id": {
+                        "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "invocationBindingHash": {
+                        "pattern": "^[a-f0-9]{64}$",
+                        "type": "string"
+                      },
+                      "missionId": {
+                        "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "observationHash": {
+                        "pattern": "^[a-f0-9]{64}$",
+                        "type": "string"
+                      },
+                      "observedAt": {
+                        "format": "date-time",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                        "type": "string"
+                      },
+                      "observedAttemptId": {
+                        "anyOf": [
+                          {
+                            "pattern": "^att_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "observedResultHash": {
+                        "anyOf": [
+                          {
+                            "pattern": "^[a-f0-9]{64}$",
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "observer": {
+                        "const": "application_code",
+                        "type": "string"
+                      },
+                      "organizationId": {
+                        "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "palaceId": {
+                        "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "reconciledOutcome": {
+                        "enum": [
+                          "still_unknown",
+                          "committed",
+                          "definitely_absent"
+                        ],
+                        "type": "string"
+                      },
+                      "source": {
+                        "const": "tool_invocation_ledger",
+                        "type": "string"
+                      },
+                      "toolCallId": {
+                        "pattern": "^call_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "toolName": {
+                        "enum": [
+                          "palaces.get",
+                          "crews.list",
+                          "capabilities.list",
+                          "routines.list",
+                          "routines.get",
+                          "executions.list",
+                          "knowledge.search",
+                          "plans.propose",
+                          "plans.validate",
+                          "plans.simulate",
+                          "plans.request_approval",
+                          "plans.activate",
+                          "operations.get",
+                          "verification.get_evidence",
+                          "missions.cancel"
+                        ],
+                        "type": "string"
+                      },
+                      "type": {
+                        "const": "tool_invocation_reconciliation",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "organizationId",
+                      "missionId",
+                      "palaceId",
+                      "observedAt",
+                      "type",
+                      "toolCallId",
+                      "toolName",
+                      "invocationBindingHash",
+                      "abandonedClaimGeneration",
+                      "claimExpiredAt",
+                      "source",
+                      "observer",
+                      "durableObservation",
+                      "reconciledOutcome",
+                      "observedResultHash",
+                      "observedAttemptId",
+                      "observationHash"
+                    ],
+                    "type": "object"
+                  }
+                ]
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "evidence"
+          ],
+          "type": "object"
+        },
+        "error": {
+          "type": "null"
+        },
+        "receiptId": {
+          "pattern": "^rcp_[a-z0-9][a-z0-9_-]{7,63}$",
+          "type": "string"
+        },
+        "resourceVersion": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "schemaVersion": {
+          "const": "tool-result@1",
+          "type": "string"
+        },
+        "status": {
+          "const": "succeeded",
+          "type": "string"
+        },
+        "toolName": {
+          "const": "verification.get_evidence",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "toolName",
+        "callId",
+        "retryable",
+        "receiptId",
+        "resourceVersion",
+        "status",
+        "data",
+        "error"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "callId": {
+          "pattern": "^call_[a-z0-9][a-z0-9_-]{7,63}$",
+          "type": "string"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "evidence": {
+                  "items": {
+                    "oneOf": [
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "identityTagId": {
+                            "pattern": "^tag_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "missionId": {
+                            "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "observedAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "organizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "palaceId": {
+                            "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "identity_arrival",
+                            "type": "string"
+                          },
+                          "verified": {
+                            "type": "boolean"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "organizationId",
+                          "missionId",
+                          "palaceId",
+                          "observedAt",
+                          "type",
+                          "identityTagId",
+                          "verified"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "causedByEvidenceId": {
+                            "anyOf": [
+                              {
+                                "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "command": {
+                            "enum": [
+                              "unlock",
+                              "locked_desired_state",
+                              "set_temperature",
+                              "set_lighting"
+                            ],
+                            "type": "string"
+                          },
+                          "deviceId": {
+                            "pattern": "^dev_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "id": {
+                            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "missionId": {
+                            "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "observedAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "organizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "palaceId": {
+                            "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "device_command",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "organizationId",
+                          "missionId",
+                          "palaceId",
+                          "observedAt",
+                          "type",
+                          "deviceId",
+                          "command",
+                          "causedByEvidenceId"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "celsius": {
+                            "maximum": 80,
+                            "minimum": -50,
+                            "type": "number"
+                          },
+                          "deviceId": {
+                            "pattern": "^dev_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "id": {
+                            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "missionId": {
+                            "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "observedAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "organizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "palaceId": {
+                            "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "temperature_observation",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "organizationId",
+                          "missionId",
+                          "palaceId",
+                          "observedAt",
+                          "type",
+                          "deviceId",
+                          "celsius"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "active": {
+                            "type": "boolean"
+                          },
+                          "deviceId": {
+                            "pattern": "^dev_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "id": {
+                            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "intensityPercent": {
+                            "maximum": 100,
+                            "minimum": 0,
+                            "type": "integer"
+                          },
+                          "missionId": {
+                            "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "observedAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "organizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "palaceId": {
+                            "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "lighting_observation",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "organizationId",
+                          "missionId",
+                          "palaceId",
+                          "observedAt",
+                          "type",
+                          "deviceId",
+                          "intensityPercent",
+                          "active"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "desiredState": {
+                            "enum": [
+                              "locked",
+                              "unlocked"
+                            ],
+                            "type": "string"
+                          },
+                          "deviceId": {
+                            "pattern": "^dev_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "id": {
+                            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "missionId": {
+                            "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "observedAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "organizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "palaceId": {
+                            "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "lock_observation",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "organizationId",
+                          "missionId",
+                          "palaceId",
+                          "observedAt",
+                          "type",
+                          "deviceId",
+                          "desiredState"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "missionId": {
+                            "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "observedAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "organizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "palaceId": {
+                            "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "projectedUsePercentagePoints": {
+                            "maximum": 100,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "type": {
+                            "const": "battery_projection",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "organizationId",
+                          "missionId",
+                          "palaceId",
+                          "observedAt",
+                          "type",
+                          "projectedUsePercentagePoints"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "active": {
+                            "type": "boolean"
+                          },
+                          "id": {
+                            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "missionId": {
+                            "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "observedAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "organizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "palaceId": {
+                            "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "planHash": {
+                            "anyOf": [
+                              {
+                                "pattern": "^[a-f0-9]{64}$",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "planId": {
+                            "anyOf": [
+                              {
+                                "pattern": "^pln_[a-z0-9][a-z0-9_-]{7,63}$",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "routineId": {
+                            "pattern": "^rtn_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "routineVersionId": {
+                            "pattern": "^rtv_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "routine_state",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "organizationId",
+                          "missionId",
+                          "palaceId",
+                          "observedAt",
+                          "type",
+                          "routineId",
+                          "routineVersionId",
+                          "active",
+                          "planId",
+                          "planHash"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "allowed": {
+                            "type": "boolean"
+                          },
+                          "attemptedOrganizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "id": {
+                            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "missionId": {
+                            "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "observedAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "operationId": {
+                            "anyOf": [
+                              {
+                                "pattern": "^op_[a-z0-9][a-z0-9_-]{7,63}$",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "organizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "palaceId": {
+                            "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "tenant_access_audit",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "organizationId",
+                          "missionId",
+                          "palaceId",
+                          "observedAt",
+                          "type",
+                          "attemptedOrganizationId",
+                          "allowed",
+                          "operationId"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "attemptId": {
+                            "pattern": "^att_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "errorCode": {
+                            "const": "APPLICATION_RESPONSE_LOST",
+                            "type": "string"
+                          },
+                          "id": {
+                            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "missionId": {
+                            "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "observedAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "operationCommitted": {
+                            "const": true,
+                            "type": "boolean"
+                          },
+                          "operationId": {
+                            "pattern": "^op_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "organizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "palaceId": {
+                            "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "status": {
+                            "const": "unknown",
+                            "type": "string"
+                          },
+                          "toolCallId": {
+                            "pattern": "^call_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "transport": {
+                            "const": "worker",
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "operation_transport",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "organizationId",
+                          "missionId",
+                          "palaceId",
+                          "observedAt",
+                          "type",
+                          "operationId",
+                          "attemptId",
+                          "toolCallId",
+                          "transport",
+                          "status",
+                          "operationCommitted",
+                          "errorCode"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "code": {
+                            "anyOf": [
+                              {
+                                "pattern": "^[A-Z][A-Z0-9_]{2,63}$",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "gatewayCommandId": {
+                            "pattern": "^gcmd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "id": {
+                            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "missionId": {
+                            "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "observedAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "operationId": {
+                            "pattern": "^op_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "organizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "palaceId": {
+                            "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "status": {
+                            "enum": [
+                              "completed",
+                              "failed"
+                            ],
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "gateway_delivery",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "organizationId",
+                          "missionId",
+                          "palaceId",
+                          "observedAt",
+                          "type",
+                          "gatewayCommandId",
+                          "operationId",
+                          "status",
+                          "code"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "abandonedClaimGeneration": {
+                            "exclusiveMinimum": 0,
+                            "maximum": 9007199254740991,
+                            "type": "integer"
+                          },
+                          "claimExpiredAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "durableObservation": {
+                            "enum": [
+                              "expired_claim_without_terminal_result",
+                              "completed_result_observed",
+                              "durable_absence_observed"
+                            ],
+                            "type": "string"
+                          },
+                          "id": {
+                            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "invocationBindingHash": {
+                            "pattern": "^[a-f0-9]{64}$",
+                            "type": "string"
+                          },
+                          "missionId": {
+                            "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "observationHash": {
+                            "pattern": "^[a-f0-9]{64}$",
+                            "type": "string"
+                          },
+                          "observedAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "observedAttemptId": {
+                            "anyOf": [
+                              {
+                                "pattern": "^att_[a-z0-9][a-z0-9_-]{7,63}$",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "observedResultHash": {
+                            "anyOf": [
+                              {
+                                "pattern": "^[a-f0-9]{64}$",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "observer": {
+                            "const": "application_code",
+                            "type": "string"
+                          },
+                          "organizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "palaceId": {
+                            "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "reconciledOutcome": {
+                            "enum": [
+                              "still_unknown",
+                              "committed",
+                              "definitely_absent"
+                            ],
+                            "type": "string"
+                          },
+                          "source": {
+                            "const": "tool_invocation_ledger",
+                            "type": "string"
+                          },
+                          "toolCallId": {
+                            "pattern": "^call_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "toolName": {
+                            "enum": [
+                              "palaces.get",
+                              "crews.list",
+                              "capabilities.list",
+                              "routines.list",
+                              "routines.get",
+                              "executions.list",
+                              "knowledge.search",
+                              "plans.propose",
+                              "plans.validate",
+                              "plans.simulate",
+                              "plans.request_approval",
+                              "plans.activate",
+                              "operations.get",
+                              "verification.get_evidence",
+                              "missions.cancel"
+                            ],
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "tool_invocation_reconciliation",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "organizationId",
+                          "missionId",
+                          "palaceId",
+                          "observedAt",
+                          "type",
+                          "toolCallId",
+                          "toolName",
+                          "invocationBindingHash",
+                          "abandonedClaimGeneration",
+                          "claimExpiredAt",
+                          "source",
+                          "observer",
+                          "durableObservation",
+                          "reconciledOutcome",
+                          "observedResultHash",
+                          "observedAttemptId",
+                          "observationHash"
+                        ],
+                        "type": "object"
+                      }
+                    ]
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [
+                "evidence"
+              ],
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "error": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "code": {
+                  "pattern": "^[A-Z][A-Z0-9_]{2,63}$",
+                  "type": "string"
+                },
+                "details": {
+                  "additionalProperties": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ]
+                  },
+                  "default": {},
+                  "propertyNames": {
+                    "type": "string"
+                  },
+                  "type": "object"
+                },
+                "message": {
+                  "maxLength": 500,
+                  "minLength": 1,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "code",
+                "message",
+                "details"
+              ],
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "receiptId": {
+          "pattern": "^rcp_[a-z0-9][a-z0-9_-]{7,63}$",
+          "type": "string"
+        },
+        "resourceVersion": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "schemaVersion": {
+          "const": "tool-result@1",
+          "type": "string"
+        },
+        "status": {
+          "const": "pending",
+          "type": "string"
+        },
+        "toolName": {
+          "const": "verification.get_evidence",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "toolName",
+        "callId",
+        "retryable",
+        "receiptId",
+        "resourceVersion",
+        "status",
+        "data",
+        "error"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "callId": {
+          "pattern": "^call_[a-z0-9][a-z0-9_-]{7,63}$",
+          "type": "string"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "evidence": {
+                  "items": {
+                    "oneOf": [
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "identityTagId": {
+                            "pattern": "^tag_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "missionId": {
+                            "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "observedAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "organizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "palaceId": {
+                            "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "identity_arrival",
+                            "type": "string"
+                          },
+                          "verified": {
+                            "type": "boolean"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "organizationId",
+                          "missionId",
+                          "palaceId",
+                          "observedAt",
+                          "type",
+                          "identityTagId",
+                          "verified"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "causedByEvidenceId": {
+                            "anyOf": [
+                              {
+                                "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "command": {
+                            "enum": [
+                              "unlock",
+                              "locked_desired_state",
+                              "set_temperature",
+                              "set_lighting"
+                            ],
+                            "type": "string"
+                          },
+                          "deviceId": {
+                            "pattern": "^dev_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "id": {
+                            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "missionId": {
+                            "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "observedAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "organizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "palaceId": {
+                            "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "device_command",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "organizationId",
+                          "missionId",
+                          "palaceId",
+                          "observedAt",
+                          "type",
+                          "deviceId",
+                          "command",
+                          "causedByEvidenceId"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "celsius": {
+                            "maximum": 80,
+                            "minimum": -50,
+                            "type": "number"
+                          },
+                          "deviceId": {
+                            "pattern": "^dev_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "id": {
+                            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "missionId": {
+                            "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "observedAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "organizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "palaceId": {
+                            "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "temperature_observation",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "organizationId",
+                          "missionId",
+                          "palaceId",
+                          "observedAt",
+                          "type",
+                          "deviceId",
+                          "celsius"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "active": {
+                            "type": "boolean"
+                          },
+                          "deviceId": {
+                            "pattern": "^dev_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "id": {
+                            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "intensityPercent": {
+                            "maximum": 100,
+                            "minimum": 0,
+                            "type": "integer"
+                          },
+                          "missionId": {
+                            "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "observedAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "organizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "palaceId": {
+                            "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "lighting_observation",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "organizationId",
+                          "missionId",
+                          "palaceId",
+                          "observedAt",
+                          "type",
+                          "deviceId",
+                          "intensityPercent",
+                          "active"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "desiredState": {
+                            "enum": [
+                              "locked",
+                              "unlocked"
+                            ],
+                            "type": "string"
+                          },
+                          "deviceId": {
+                            "pattern": "^dev_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "id": {
+                            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "missionId": {
+                            "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "observedAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "organizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "palaceId": {
+                            "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "lock_observation",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "organizationId",
+                          "missionId",
+                          "palaceId",
+                          "observedAt",
+                          "type",
+                          "deviceId",
+                          "desiredState"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "missionId": {
+                            "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "observedAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "organizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "palaceId": {
+                            "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "projectedUsePercentagePoints": {
+                            "maximum": 100,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "type": {
+                            "const": "battery_projection",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "organizationId",
+                          "missionId",
+                          "palaceId",
+                          "observedAt",
+                          "type",
+                          "projectedUsePercentagePoints"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "active": {
+                            "type": "boolean"
+                          },
+                          "id": {
+                            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "missionId": {
+                            "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "observedAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "organizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "palaceId": {
+                            "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "planHash": {
+                            "anyOf": [
+                              {
+                                "pattern": "^[a-f0-9]{64}$",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "planId": {
+                            "anyOf": [
+                              {
+                                "pattern": "^pln_[a-z0-9][a-z0-9_-]{7,63}$",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "routineId": {
+                            "pattern": "^rtn_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "routineVersionId": {
+                            "pattern": "^rtv_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "routine_state",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "organizationId",
+                          "missionId",
+                          "palaceId",
+                          "observedAt",
+                          "type",
+                          "routineId",
+                          "routineVersionId",
+                          "active",
+                          "planId",
+                          "planHash"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "allowed": {
+                            "type": "boolean"
+                          },
+                          "attemptedOrganizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "id": {
+                            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "missionId": {
+                            "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "observedAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "operationId": {
+                            "anyOf": [
+                              {
+                                "pattern": "^op_[a-z0-9][a-z0-9_-]{7,63}$",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "organizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "palaceId": {
+                            "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "tenant_access_audit",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "organizationId",
+                          "missionId",
+                          "palaceId",
+                          "observedAt",
+                          "type",
+                          "attemptedOrganizationId",
+                          "allowed",
+                          "operationId"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "attemptId": {
+                            "pattern": "^att_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "errorCode": {
+                            "const": "APPLICATION_RESPONSE_LOST",
+                            "type": "string"
+                          },
+                          "id": {
+                            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "missionId": {
+                            "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "observedAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "operationCommitted": {
+                            "const": true,
+                            "type": "boolean"
+                          },
+                          "operationId": {
+                            "pattern": "^op_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "organizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "palaceId": {
+                            "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "status": {
+                            "const": "unknown",
+                            "type": "string"
+                          },
+                          "toolCallId": {
+                            "pattern": "^call_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "transport": {
+                            "const": "worker",
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "operation_transport",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "organizationId",
+                          "missionId",
+                          "palaceId",
+                          "observedAt",
+                          "type",
+                          "operationId",
+                          "attemptId",
+                          "toolCallId",
+                          "transport",
+                          "status",
+                          "operationCommitted",
+                          "errorCode"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "code": {
+                            "anyOf": [
+                              {
+                                "pattern": "^[A-Z][A-Z0-9_]{2,63}$",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "gatewayCommandId": {
+                            "pattern": "^gcmd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "id": {
+                            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "missionId": {
+                            "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "observedAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "operationId": {
+                            "pattern": "^op_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "organizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "palaceId": {
+                            "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "status": {
+                            "enum": [
+                              "completed",
+                              "failed"
+                            ],
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "gateway_delivery",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "organizationId",
+                          "missionId",
+                          "palaceId",
+                          "observedAt",
+                          "type",
+                          "gatewayCommandId",
+                          "operationId",
+                          "status",
+                          "code"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "abandonedClaimGeneration": {
+                            "exclusiveMinimum": 0,
+                            "maximum": 9007199254740991,
+                            "type": "integer"
+                          },
+                          "claimExpiredAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "durableObservation": {
+                            "enum": [
+                              "expired_claim_without_terminal_result",
+                              "completed_result_observed",
+                              "durable_absence_observed"
+                            ],
+                            "type": "string"
+                          },
+                          "id": {
+                            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "invocationBindingHash": {
+                            "pattern": "^[a-f0-9]{64}$",
+                            "type": "string"
+                          },
+                          "missionId": {
+                            "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "observationHash": {
+                            "pattern": "^[a-f0-9]{64}$",
+                            "type": "string"
+                          },
+                          "observedAt": {
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                            "type": "string"
+                          },
+                          "observedAttemptId": {
+                            "anyOf": [
+                              {
+                                "pattern": "^att_[a-z0-9][a-z0-9_-]{7,63}$",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "observedResultHash": {
+                            "anyOf": [
+                              {
+                                "pattern": "^[a-f0-9]{64}$",
+                                "type": "string"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "observer": {
+                            "const": "application_code",
+                            "type": "string"
+                          },
+                          "organizationId": {
+                            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "palaceId": {
+                            "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "reconciledOutcome": {
+                            "enum": [
+                              "still_unknown",
+                              "committed",
+                              "definitely_absent"
+                            ],
+                            "type": "string"
+                          },
+                          "source": {
+                            "const": "tool_invocation_ledger",
+                            "type": "string"
+                          },
+                          "toolCallId": {
+                            "pattern": "^call_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "toolName": {
+                            "enum": [
+                              "palaces.get",
+                              "crews.list",
+                              "capabilities.list",
+                              "routines.list",
+                              "routines.get",
+                              "executions.list",
+                              "knowledge.search",
+                              "plans.propose",
+                              "plans.validate",
+                              "plans.simulate",
+                              "plans.request_approval",
+                              "plans.activate",
+                              "operations.get",
+                              "verification.get_evidence",
+                              "missions.cancel"
+                            ],
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "tool_invocation_reconciliation",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "organizationId",
+                          "missionId",
+                          "palaceId",
+                          "observedAt",
+                          "type",
+                          "toolCallId",
+                          "toolName",
+                          "invocationBindingHash",
+                          "abandonedClaimGeneration",
+                          "claimExpiredAt",
+                          "source",
+                          "observer",
+                          "durableObservation",
+                          "reconciledOutcome",
+                          "observedResultHash",
+                          "observedAttemptId",
+                          "observationHash"
+                        ],
+                        "type": "object"
+                      }
+                    ]
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [
+                "evidence"
+              ],
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "error": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "code": {
+                  "pattern": "^[A-Z][A-Z0-9_]{2,63}$",
+                  "type": "string"
+                },
+                "details": {
+                  "additionalProperties": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ]
+                  },
+                  "default": {},
+                  "propertyNames": {
+                    "type": "string"
+                  },
+                  "type": "object"
+                },
+                "message": {
+                  "maxLength": 500,
+                  "minLength": 1,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "code",
+                "message",
+                "details"
+              ],
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "receiptId": {
+          "pattern": "^rcp_[a-z0-9][a-z0-9_-]{7,63}$",
+          "type": "string"
+        },
+        "resourceVersion": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "schemaVersion": {
+          "const": "tool-result@1",
+          "type": "string"
+        },
+        "status": {
+          "const": "unknown",
+          "type": "string"
+        },
+        "toolName": {
+          "const": "verification.get_evidence",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "toolName",
+        "callId",
+        "retryable",
+        "receiptId",
+        "resourceVersion",
+        "status",
+        "data",
+        "error"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "callId": {
+          "pattern": "^call_[a-z0-9][a-z0-9_-]{7,63}$",
+          "type": "string"
+        },
+        "data": {
+          "type": "null"
+        },
+        "error": {
+          "additionalProperties": false,
+          "properties": {
+            "code": {
+              "pattern": "^[A-Z][A-Z0-9_]{2,63}$",
+              "type": "string"
+            },
+            "details": {
+              "additionalProperties": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ]
+              },
+              "default": {},
+              "propertyNames": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "message": {
+              "maxLength": 500,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "code",
+            "message",
+            "details"
+          ],
+          "type": "object"
+        },
+        "receiptId": {
+          "pattern": "^rcp_[a-z0-9][a-z0-9_-]{7,63}$",
+          "type": "string"
+        },
+        "resourceVersion": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "schemaVersion": {
+          "const": "tool-result@1",
+          "type": "string"
+        },
+        "status": {
+          "const": "denied",
+          "type": "string"
+        },
+        "toolName": {
+          "const": "verification.get_evidence",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "toolName",
+        "callId",
+        "retryable",
+        "receiptId",
+        "resourceVersion",
+        "status",
+        "data",
+        "error"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "callId": {
+          "pattern": "^call_[a-z0-9][a-z0-9_-]{7,63}$",
+          "type": "string"
+        },
+        "data": {
+          "type": "null"
+        },
+        "error": {
+          "additionalProperties": false,
+          "properties": {
+            "code": {
+              "pattern": "^[A-Z][A-Z0-9_]{2,63}$",
+              "type": "string"
+            },
+            "details": {
+              "additionalProperties": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ]
+              },
+              "default": {},
+              "propertyNames": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "message": {
+              "maxLength": 500,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "code",
+            "message",
+            "details"
+          ],
+          "type": "object"
+        },
+        "receiptId": {
+          "pattern": "^rcp_[a-z0-9][a-z0-9_-]{7,63}$",
+          "type": "string"
+        },
+        "resourceVersion": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "schemaVersion": {
+          "const": "tool-result@1",
+          "type": "string"
+        },
+        "status": {
+          "const": "conflict",
+          "type": "string"
+        },
+        "toolName": {
+          "const": "verification.get_evidence",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "toolName",
+        "callId",
+        "retryable",
+        "receiptId",
+        "resourceVersion",
+        "status",
+        "data",
+        "error"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "callId": {
+          "pattern": "^call_[a-z0-9][a-z0-9_-]{7,63}$",
+          "type": "string"
+        },
+        "data": {
+          "type": "null"
+        },
+        "error": {
+          "additionalProperties": false,
+          "properties": {
+            "code": {
+              "pattern": "^[A-Z][A-Z0-9_]{2,63}$",
+              "type": "string"
+            },
+            "details": {
+              "additionalProperties": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ]
+              },
+              "default": {},
+              "propertyNames": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "message": {
+              "maxLength": 500,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "code",
+            "message",
+            "details"
+          ],
+          "type": "object"
+        },
+        "receiptId": {
+          "pattern": "^rcp_[a-z0-9][a-z0-9_-]{7,63}$",
+          "type": "string"
+        },
+        "resourceVersion": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "schemaVersion": {
+          "const": "tool-result@1",
+          "type": "string"
+        },
+        "status": {
+          "const": "failed",
+          "type": "string"
+        },
+        "toolName": {
+          "const": "verification.get_evidence",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "toolName",
+        "callId",
+        "retryable",
+        "receiptId",
+        "resourceVersion",
+        "status",
+        "data",
+        "error"
+      ],
+      "type": "object"
+    }
+  ]
+}

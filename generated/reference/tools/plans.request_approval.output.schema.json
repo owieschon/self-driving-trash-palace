@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "approvalRequestId": {
+      "pattern": "^apr_[a-z0-9][a-z0-9_-]{7,63}$",
+      "type": "string"
+    },
+    "paused": {
+      "const": true,
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "approvalRequestId",
+    "paused"
+  ],
+  "type": "object"
+}

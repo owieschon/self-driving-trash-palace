@@ -1,0 +1,22 @@
+{
+  "name": "@trash-palace/gateway-simulator",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "node --import tsx src/main.ts",
+    "start": "node --import tsx src/main.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --config vitest.config.ts"
+  },
+  "dependencies": {
+    "@trash-palace/core": "workspace:*",
+    "@trash-palace/testkit": "workspace:*",
+    "zod": "4.4.3"
+  }
+}

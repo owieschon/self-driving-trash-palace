@@ -1,0 +1,31 @@
+{
+  "name": "@trash-palace/db",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./migrations": "./src/migrations.ts",
+    "./schema": "./src/schema.ts"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --root ../.. packages/db/src",
+    "db:generate": "drizzle-kit generate --config=drizzle.config.ts",
+    "db:check": "drizzle-kit check --config=drizzle.config.ts"
+  },
+  "dependencies": {
+    "@trash-palace/agent": "workspace:*",
+    "@trash-palace/application": "workspace:*",
+    "@trash-palace/connectors": "workspace:*",
+    "@trash-palace/core": "workspace:*",
+    "drizzle-orm": "0.45.2",
+    "pg": "8.22.0"
+  },
+  "devDependencies": {
+    "@types/pg": "8.20.0",
+    "drizzle-kit": "0.31.10"
+  }
+}

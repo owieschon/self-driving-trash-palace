@@ -1,0 +1,1 @@
+ALTER TYPE "public"."caretaker_run_checkpoint_kind" ADD VALUE 'decision_attempt' BEFORE 'tool_call';

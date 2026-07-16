@@ -1,0 +1,432 @@
+{
+  "$defs": {
+    "__schema0": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "#/$defs/__schema0"
+          },
+          "type": "array"
+        },
+        {
+          "additionalProperties": {
+            "$ref": "#/$defs/__schema0"
+          },
+          "propertyNames": {
+            "type": "string"
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "__schema1": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "#/$defs/__schema1"
+          },
+          "type": "array"
+        },
+        {
+          "additionalProperties": {
+            "$ref": "#/$defs/__schema1"
+          },
+          "propertyNames": {
+            "type": "string"
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "__schema2": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "#/$defs/__schema2"
+          },
+          "type": "array"
+        },
+        {
+          "additionalProperties": {
+            "$ref": "#/$defs/__schema2"
+          },
+          "propertyNames": {
+            "type": "string"
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "__schema3": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "#/$defs/__schema3"
+          },
+          "type": "array"
+        },
+        {
+          "additionalProperties": {
+            "$ref": "#/$defs/__schema3"
+          },
+          "propertyNames": {
+            "type": "string"
+          },
+          "type": "object"
+        }
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "contractHash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "contractId": {
+      "const": "caretaker-tool-and-error-contracts",
+      "type": "string"
+    },
+    "contractVersion": {
+      "const": "1.0.0",
+      "type": "string"
+    },
+    "instructionRole": {
+      "const": "exact_contract",
+      "type": "string"
+    },
+    "resultContract": {
+      "additionalProperties": false,
+      "properties": {
+        "errorSchema": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "errorSchemaHash": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "statuses": {
+          "items": {
+            "enum": [
+              "succeeded",
+              "pending",
+              "denied",
+              "conflict",
+              "unknown",
+              "failed"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "statuses",
+        "errorSchema",
+        "errorSchemaHash"
+      ],
+      "type": "object"
+    },
+    "results": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "enum": [
+              "palaces.get",
+              "crews.list",
+              "capabilities.list",
+              "routines.list",
+              "routines.get",
+              "executions.list",
+              "knowledge.search",
+              "plans.propose",
+              "plans.validate",
+              "plans.simulate",
+              "plans.request_approval",
+              "plans.activate",
+              "operations.get",
+              "verification.get_evidence",
+              "missions.cancel"
+            ],
+            "type": "string"
+          },
+          "schema": {
+            "$ref": "#/$defs/__schema2"
+          },
+          "schemaHash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "schemaVersion": {
+            "const": "tool-result-contract@1",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schemaVersion",
+          "name",
+          "schema",
+          "schemaHash"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "source": {
+      "const": "compiler-generated",
+      "type": "string"
+    },
+    "toolRegistryHash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "tools": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "allowedPhases": {
+            "items": {
+              "enum": [
+                "understand",
+                "plan",
+                "validate",
+                "approve",
+                "execute",
+                "reconcile",
+                "observe",
+                "verify"
+              ],
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array"
+          },
+          "contractHash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "inputSchema": {
+            "$ref": "#/$defs/__schema0"
+          },
+          "inputSchemaHash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "mcp": {
+            "additionalProperties": false,
+            "properties": {
+              "annotations": {
+                "additionalProperties": false,
+                "properties": {
+                  "destructiveHint": {
+                    "type": "boolean"
+                  },
+                  "idempotentHint": {
+                    "type": "boolean"
+                  },
+                  "openWorldHint": {
+                    "type": "boolean"
+                  },
+                  "readOnlyHint": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "readOnlyHint",
+                  "destructiveHint",
+                  "idempotentHint",
+                  "openWorldHint"
+                ],
+                "type": "object"
+              },
+              "description": {
+                "maxLength": 500,
+                "minLength": 1,
+                "type": "string"
+              },
+              "title": {
+                "maxLength": 120,
+                "minLength": 1,
+                "type": "string"
+              }
+            },
+            "required": [
+              "title",
+              "description",
+              "annotations"
+            ],
+            "type": "object"
+          },
+          "name": {
+            "enum": [
+              "palaces.get",
+              "crews.list",
+              "capabilities.list",
+              "routines.list",
+              "routines.get",
+              "executions.list",
+              "knowledge.search",
+              "plans.propose",
+              "plans.validate",
+              "plans.simulate",
+              "plans.request_approval",
+              "plans.activate",
+              "operations.get",
+              "verification.get_evidence",
+              "missions.cancel"
+            ],
+            "type": "string"
+          },
+          "outputSchema": {
+            "$ref": "#/$defs/__schema1"
+          },
+          "outputSchemaHash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "permission": {
+            "enum": [
+              "palace:read",
+              "crew:read",
+              "capability:read",
+              "routine:read",
+              "routine:draft",
+              "routine:validate",
+              "routine:simulate",
+              "routine:approve",
+              "routine:activate",
+              "recovery:propose",
+              "operation:reconcile",
+              "verification:read",
+              "knowledge:read",
+              "mission:cancel"
+            ],
+            "type": "string"
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "risk": {
+            "enum": [
+              "read",
+              "proposal",
+              "pause",
+              "consequential",
+              "control"
+            ],
+            "type": "string"
+          },
+          "route": {
+            "additionalProperties": false,
+            "properties": {
+              "authentication": {
+                "const": "session_or_bearer",
+                "type": "string"
+              },
+              "method": {
+                "const": "POST",
+                "type": "string"
+              },
+              "path": {
+                "pattern": "^\\/api\\/v1\\/tools\\/[a-z][a-z_.]+$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "method",
+              "path",
+              "authentication"
+            ],
+            "type": "object"
+          },
+          "schemaVersion": {
+            "const": "tool-contract@1",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schemaVersion",
+          "name",
+          "permission",
+          "risk",
+          "allowedPhases",
+          "readOnly",
+          "route",
+          "mcp",
+          "inputSchema",
+          "inputSchemaHash",
+          "outputSchema",
+          "outputSchemaHash",
+          "contractHash"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    }
+  },
+  "required": [
+    "source",
+    "instructionRole",
+    "contractId",
+    "contractVersion",
+    "toolRegistryHash",
+    "tools",
+    "results",
+    "resultContract",
+    "contractHash"
+  ],
+  "type": "object"
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "palaceId": {
+      "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "palaceId"
+  ],
+  "type": "object"
+}

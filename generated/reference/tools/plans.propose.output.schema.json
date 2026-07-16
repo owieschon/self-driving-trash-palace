@@ -1,0 +1,643 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "plan": {
+      "additionalProperties": false,
+      "properties": {
+        "actions": {
+          "items": {
+            "oneOf": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "expectedProtectedVersion": {
+                    "exclusiveMinimum": 0,
+                    "maximum": 9007199254740991,
+                    "type": "integer"
+                  },
+                  "id": {
+                    "pattern": "^act_[a-z0-9][a-z0-9_-]{7,63}$",
+                    "type": "string"
+                  },
+                  "palaceId": {
+                    "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                    "type": "string"
+                  },
+                  "protectedRoutineId": {
+                    "pattern": "^rtn_[a-z0-9][a-z0-9_-]{7,63}$",
+                    "type": "string"
+                  },
+                  "protectedRoutineVersionId": {
+                    "pattern": "^rtv_[a-z0-9][a-z0-9_-]{7,63}$",
+                    "type": "string"
+                  },
+                  "replacement": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "actions": {
+                        "items": {
+                          "oneOf": [
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "completeBy": {
+                                  "pattern": "^(?:[01]\\d|2[0-3]):[0-5]\\d$",
+                                  "type": "string"
+                                },
+                                "targetCelsius": {
+                                  "maximum": 35,
+                                  "minimum": 5,
+                                  "type": "number"
+                                },
+                                "type": {
+                                  "const": "preheat",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "targetCelsius",
+                                "completeBy"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "beginsAfter": {
+                                  "const": "verified_arrival",
+                                  "type": "string"
+                                },
+                                "durationSeconds": {
+                                  "maximum": 86400,
+                                  "minimum": 1,
+                                  "type": "integer"
+                                },
+                                "intensityPercent": {
+                                  "maximum": 100,
+                                  "minimum": 1,
+                                  "type": "integer"
+                                },
+                                "type": {
+                                  "const": "pathway_lighting",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "intensityPercent",
+                                "durationSeconds",
+                                "beginsAfter"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "durationSeconds": {
+                                  "maximum": 300,
+                                  "minimum": 1,
+                                  "type": "integer"
+                                },
+                                "requireVerifiedIdentity": {
+                                  "const": true,
+                                  "type": "boolean"
+                                },
+                                "type": {
+                                  "const": "unlock",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "durationSeconds",
+                                "requireVerifiedIdentity"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "afterUnlockSeconds": {
+                                  "maximum": 300,
+                                  "minimum": 1,
+                                  "type": "integer"
+                                },
+                                "type": {
+                                  "const": "lock_desired_state",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "afterUnlockSeconds"
+                              ],
+                              "type": "object"
+                            }
+                          ]
+                        },
+                        "maxItems": 16,
+                        "minItems": 1,
+                        "type": "array"
+                      },
+                      "constraints": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "hardInvariantIds": {
+                            "items": {
+                              "enum": [
+                                "tenant_context_host_derived",
+                                "verified_identity_required_for_unlock",
+                                "routine_activation_validated",
+                                "exact_plan_approval_required",
+                                "retry_preserves_logical_operation",
+                                "verifier_owns_mission_success",
+                                "secrets_excluded_from_model_context"
+                              ],
+                              "type": "string"
+                            },
+                            "minItems": 1,
+                            "type": "array"
+                          },
+                          "projectedBatteryUseMaxPercentagePoints": {
+                            "maximum": 100,
+                            "minimum": 0,
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "projectedBatteryUseMaxPercentagePoints",
+                          "hardInvariantIds"
+                        ],
+                        "type": "object"
+                      },
+                      "name": {
+                        "maxLength": 120,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "projectedBatteryUsePercentagePoints": {
+                        "maximum": 100,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "trigger": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "timezone": {
+                            "maxLength": 64,
+                            "minLength": 1,
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "verified_arrival",
+                            "type": "string"
+                          },
+                          "windowEnd": {
+                            "pattern": "^(?:[01]\\d|2[0-3]):[0-5]\\d$",
+                            "type": "string"
+                          },
+                          "windowStart": {
+                            "pattern": "^(?:[01]\\d|2[0-3]):[0-5]\\d$",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "windowStart",
+                          "windowEnd",
+                          "timezone"
+                        ],
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "trigger",
+                      "actions",
+                      "constraints",
+                      "projectedBatteryUsePercentagePoints"
+                    ],
+                    "type": "object"
+                  },
+                  "replacementRoutineId": {
+                    "pattern": "^rtn_[a-z0-9][a-z0-9_-]{7,63}$",
+                    "type": "string"
+                  },
+                  "replacementRoutineVersionId": {
+                    "pattern": "^rtv_[a-z0-9][a-z0-9_-]{7,63}$",
+                    "type": "string"
+                  },
+                  "type": {
+                    "const": "replace_homecoming_routine",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "type",
+                  "palaceId",
+                  "protectedRoutineId",
+                  "protectedRoutineVersionId",
+                  "expectedProtectedVersion",
+                  "replacementRoutineId",
+                  "replacementRoutineVersionId",
+                  "replacement"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "expectedProtectedVersion": {
+                    "exclusiveMinimum": 0,
+                    "maximum": 9007199254740991,
+                    "type": "integer"
+                  },
+                  "id": {
+                    "pattern": "^act_[a-z0-9][a-z0-9_-]{7,63}$",
+                    "type": "string"
+                  },
+                  "palaceId": {
+                    "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                    "type": "string"
+                  },
+                  "protectedRoutineId": {
+                    "pattern": "^rtn_[a-z0-9][a-z0-9_-]{7,63}$",
+                    "type": "string"
+                  },
+                  "protectedRoutineVersionId": {
+                    "pattern": "^rtv_[a-z0-9][a-z0-9_-]{7,63}$",
+                    "type": "string"
+                  },
+                  "replacement": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "actions": {
+                        "prefixItems": [
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "compartment": {
+                                "const": "service_hatch",
+                                "type": "string"
+                              },
+                              "durationSeconds": {
+                                "maximum": 900,
+                                "minimum": 1,
+                                "type": "integer"
+                              },
+                              "requireVerifiedIdentity": {
+                                "const": true,
+                                "type": "boolean"
+                              },
+                              "type": {
+                                "const": "grant_service_hatch_access",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "type",
+                              "durationSeconds",
+                              "requireVerifiedIdentity",
+                              "compartment"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "atWindowEnd": {
+                                "const": true,
+                                "type": "boolean"
+                              },
+                              "type": {
+                                "const": "lock_service_hatch",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "type",
+                              "atWindowEnd"
+                            ],
+                            "type": "object"
+                          }
+                        ],
+                        "readOnly": true,
+                        "type": "array"
+                      },
+                      "constraints": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "finalServiceHatchState": {
+                            "const": "locked",
+                            "type": "string"
+                          },
+                          "hardInvariantIds": {
+                            "items": {
+                              "enum": [
+                                "tenant_context_host_derived",
+                                "verified_identity_required_for_unlock",
+                                "routine_activation_validated",
+                                "exact_plan_approval_required",
+                                "retry_preserves_logical_operation",
+                                "verifier_owns_mission_success",
+                                "secrets_excluded_from_model_context"
+                              ],
+                              "type": "string"
+                            },
+                            "minItems": 1,
+                            "type": "array"
+                          },
+                          "residentialHatchMustRemainLocked": {
+                            "const": true,
+                            "type": "boolean"
+                          },
+                          "serviceHatchOnly": {
+                            "const": true,
+                            "type": "boolean"
+                          }
+                        },
+                        "required": [
+                          "serviceHatchOnly",
+                          "residentialHatchMustRemainLocked",
+                          "finalServiceHatchState",
+                          "hardInvariantIds"
+                        ],
+                        "type": "object"
+                      },
+                      "name": {
+                        "maxLength": 120,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "projectedBatteryUsePercentagePoints": {
+                        "maximum": 100,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "trigger": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "authorizedIdentityTagId": {
+                            "pattern": "^tag_[a-z0-9][a-z0-9_-]{7,63}$",
+                            "type": "string"
+                          },
+                          "timezone": {
+                            "maxLength": 64,
+                            "minLength": 1,
+                            "type": "string"
+                          },
+                          "type": {
+                            "const": "scheduled_access_window",
+                            "type": "string"
+                          },
+                          "windowEnd": {
+                            "pattern": "^(?:[01]\\d|2[0-3]):[0-5]\\d$",
+                            "type": "string"
+                          },
+                          "windowStart": {
+                            "pattern": "^(?:[01]\\d|2[0-3]):[0-5]\\d$",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "windowStart",
+                          "windowEnd",
+                          "timezone",
+                          "authorizedIdentityTagId"
+                        ],
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "trigger",
+                      "actions",
+                      "constraints",
+                      "projectedBatteryUsePercentagePoints"
+                    ],
+                    "type": "object"
+                  },
+                  "replacementRoutineId": {
+                    "pattern": "^rtn_[a-z0-9][a-z0-9_-]{7,63}$",
+                    "type": "string"
+                  },
+                  "replacementRoutineVersionId": {
+                    "pattern": "^rtv_[a-z0-9][a-z0-9_-]{7,63}$",
+                    "type": "string"
+                  },
+                  "type": {
+                    "const": "replace_scheduled_hauler_access_routine",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "type",
+                  "palaceId",
+                  "protectedRoutineId",
+                  "protectedRoutineVersionId",
+                  "expectedProtectedVersion",
+                  "replacementRoutineId",
+                  "replacementRoutineVersionId",
+                  "replacement"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "expectedCurrentVersion": {
+                    "exclusiveMinimum": 0,
+                    "maximum": 9007199254740991,
+                    "type": "integer"
+                  },
+                  "id": {
+                    "pattern": "^act_[a-z0-9][a-z0-9_-]{7,63}$",
+                    "type": "string"
+                  },
+                  "palaceId": {
+                    "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                    "type": "string"
+                  },
+                  "restoreVersionId": {
+                    "pattern": "^rtv_[a-z0-9][a-z0-9_-]{7,63}$",
+                    "type": "string"
+                  },
+                  "routineId": {
+                    "pattern": "^rtn_[a-z0-9][a-z0-9_-]{7,63}$",
+                    "type": "string"
+                  },
+                  "type": {
+                    "const": "restore_routine_version",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "type",
+                  "palaceId",
+                  "routineId",
+                  "restoreVersionId",
+                  "expectedCurrentVersion"
+                ],
+                "type": "object"
+              }
+            ]
+          },
+          "maxItems": 16,
+          "minItems": 1,
+          "type": "array"
+        },
+        "constraints": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "pathwayLightingBeginsAfter": {
+                  "const": "verified_arrival",
+                  "type": "string"
+                },
+                "preheatBy": {
+                  "pattern": "^(?:[01]\\d|2[0-3]):[0-5]\\d$",
+                  "type": "string"
+                },
+                "projectedBatteryUseMaxPercentagePoints": {
+                  "maximum": 100,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                "requireVerifiedIdentityForUnlock": {
+                  "const": true,
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "preheatBy",
+                "requireVerifiedIdentityForUnlock",
+                "pathwayLightingBeginsAfter",
+                "projectedBatteryUseMaxPercentagePoints"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "accessWindowEnd": {
+                  "pattern": "^(?:[01]\\d|2[0-3]):[0-5]\\d$",
+                  "type": "string"
+                },
+                "accessWindowStart": {
+                  "pattern": "^(?:[01]\\d|2[0-3]):[0-5]\\d$",
+                  "type": "string"
+                },
+                "authorizedIdentityTagId": {
+                  "pattern": "^tag_[a-z0-9][a-z0-9_-]{7,63}$",
+                  "type": "string"
+                },
+                "finalServiceHatchState": {
+                  "const": "locked",
+                  "type": "string"
+                },
+                "residentialHatchMustRemainLocked": {
+                  "const": true,
+                  "type": "boolean"
+                },
+                "serviceHatchOnly": {
+                  "const": true,
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "accessWindowStart",
+                "accessWindowEnd",
+                "authorizedIdentityTagId",
+                "serviceHatchOnly",
+                "residentialHatchMustRemainLocked",
+                "finalServiceHatchState"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "createdAt": {
+          "format": "date-time",
+          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+          "type": "string"
+        },
+        "hash": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "id": {
+          "pattern": "^pln_[a-z0-9][a-z0-9_-]{7,63}$",
+          "type": "string"
+        },
+        "missionId": {
+          "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+          "type": "string"
+        },
+        "objective": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "type": "string"
+        },
+        "organizationId": {
+          "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+          "type": "string"
+        },
+        "palaceId": {
+          "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+          "type": "string"
+        },
+        "revision": {
+          "exclusiveMinimum": 0,
+          "maximum": 9007199254740991,
+          "type": "integer"
+        },
+        "status": {
+          "enum": [
+            "candidate",
+            "validated",
+            "awaiting_approval",
+            "approved",
+            "superseded",
+            "rejected"
+          ],
+          "type": "string"
+        },
+        "successCriteriaIds": {
+          "items": {
+            "maxLength": 120,
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "organizationId",
+        "missionId",
+        "palaceId",
+        "revision",
+        "hash",
+        "status",
+        "objective",
+        "constraints",
+        "actions",
+        "successCriteriaIds",
+        "createdAt"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "plan"
+  ],
+  "type": "object"
+}

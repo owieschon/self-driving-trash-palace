@@ -1,0 +1,20 @@
+{
+  "name": "@trash-palace/application",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./testing": "./src/testing/index.ts"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@trash-palace/core": "workspace:*",
+    "@trash-palace/observability": "workspace:*",
+    "zod": "4.4.3"
+  }
+}

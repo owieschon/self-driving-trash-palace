@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "checks": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "message": {
+            "maxLength": 500,
+            "minLength": 1,
+            "type": "string"
+          },
+          "passed": {
+            "type": "boolean"
+          },
+          "type": {
+            "enum": [
+              "schema",
+              "capability",
+              "conflict",
+              "hard_invariant"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "passed",
+          "message"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "valid": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "valid",
+    "checks"
+  ],
+  "type": "object"
+}

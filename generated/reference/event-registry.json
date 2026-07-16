@@ -1,0 +1,3643 @@
+{
+  "eventRegistryHash": "6001afe35f3ca381e680579310922614e1634923273347375bbed275a3f66cb6",
+  "events": [
+    {
+      "allowedProperties": [
+        "$ai_cache_creation_input_tokens",
+        "$ai_cache_read_input_tokens",
+        "$ai_http_status",
+        "$ai_input_tokens",
+        "$ai_is_error",
+        "$ai_latency",
+        "$ai_model",
+        "$ai_output_tokens",
+        "$ai_parent_id",
+        "$ai_provider",
+        "$ai_session_id",
+        "$ai_span_id",
+        "$ai_span_name",
+        "$ai_stop_reason",
+        "$ai_stream",
+        "$ai_time_to_first_token",
+        "$ai_total_cost_usd",
+        "$ai_trace_id",
+        "app_version",
+        "attempt_alias",
+        "cache_token_counts_exclusive",
+        "completion_claim",
+        "context_manifest_hash",
+        "data_origin",
+        "environment",
+        "error_code",
+        "feature_flags",
+        "harness_version",
+        "input_redaction_count",
+        "mission_alias",
+        "model_config_version",
+        "operation_alias",
+        "organization_alias",
+        "output_redaction_count",
+        "palace_alias",
+        "privacy_classification",
+        "run_alias",
+        "schema_version",
+        "sdk_duration_seconds",
+        "tool_registry_hash"
+      ],
+      "category": "ai",
+      "event": "$ai_generation",
+      "propertySchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "$ai_cache_creation_input_tokens": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "$ai_cache_read_input_tokens": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "$ai_http_status": {
+            "maximum": 599,
+            "minimum": 100,
+            "type": "integer"
+          },
+          "$ai_input_tokens": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "$ai_is_error": {
+            "type": "boolean"
+          },
+          "$ai_latency": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "$ai_model": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "$ai_output_tokens": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "$ai_parent_id": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "$ai_provider": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "$ai_session_id": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "$ai_span_id": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "$ai_span_name": {
+            "maxLength": 96,
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "$ai_stop_reason": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "$ai_stream": {
+            "type": "boolean"
+          },
+          "$ai_time_to_first_token": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "$ai_total_cost_usd": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "$ai_trace_id": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "app_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "attempt_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "cache_token_counts_exclusive": {
+            "type": "boolean"
+          },
+          "completion_claim": {
+            "enum": [
+              "none",
+              "verifier_receipt_available",
+              "safe_stop"
+            ],
+            "type": "string"
+          },
+          "context_manifest_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "data_origin": {
+            "enum": [
+              "fixture",
+              "live",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "environment": {
+            "enum": [
+              "test",
+              "local",
+              "hosted_demo",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "error_code": {
+            "maxLength": 96,
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "feature_flags": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+                  "type": "string"
+                }
+              ]
+            },
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9-]{0,95}$",
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "harness_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "input_redaction_count": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "mission_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "model_config_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "operation_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "organization_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "output_redaction_count": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "palace_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "privacy_classification": {
+            "const": "analytics_safe",
+            "type": "string"
+          },
+          "run_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1",
+            "type": "string"
+          },
+          "sdk_duration_seconds": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "tool_registry_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "environment",
+          "data_origin",
+          "privacy_classification",
+          "app_version",
+          "organization_alias",
+          "mission_alias",
+          "run_alias",
+          "$ai_session_id",
+          "$ai_trace_id",
+          "$ai_span_id",
+          "$ai_span_name",
+          "$ai_model",
+          "$ai_provider",
+          "$ai_input_tokens",
+          "$ai_output_tokens",
+          "$ai_latency",
+          "$ai_stream",
+          "$ai_is_error",
+          "input_redaction_count",
+          "output_redaction_count",
+          "completion_claim"
+        ],
+        "type": "object"
+      },
+      "propertySchemaHash": "cd145be192a2c150870b4bcd26150923ca0d8399b034557871a83975db4dec0d",
+      "schemaVersion": "evidence-event-contract@1"
+    },
+    {
+      "allowedProperties": [
+        "$ai_is_error",
+        "$ai_latency",
+        "$ai_parent_id",
+        "$ai_session_id",
+        "$ai_span_id",
+        "$ai_span_name",
+        "$ai_trace_id",
+        "app_version",
+        "attempt_alias",
+        "context_manifest_hash",
+        "data_origin",
+        "environment",
+        "error_code",
+        "feature_flags",
+        "harness_version",
+        "mission_alias",
+        "model_config_version",
+        "operation_alias",
+        "organization_alias",
+        "palace_alias",
+        "privacy_classification",
+        "run_alias",
+        "schema_version",
+        "span_kind",
+        "status",
+        "tool_name",
+        "tool_registry_hash"
+      ],
+      "category": "ai",
+      "event": "$ai_span",
+      "propertySchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "$ai_is_error": {
+            "type": "boolean"
+          },
+          "$ai_latency": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "$ai_parent_id": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "$ai_session_id": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "$ai_span_id": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "$ai_span_name": {
+            "maxLength": 96,
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "$ai_trace_id": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "app_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "attempt_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "context_manifest_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "data_origin": {
+            "enum": [
+              "fixture",
+              "live",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "environment": {
+            "enum": [
+              "test",
+              "local",
+              "hosted_demo",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "error_code": {
+            "maxLength": 96,
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "feature_flags": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+                  "type": "string"
+                }
+              ]
+            },
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9-]{0,95}$",
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "harness_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "mission_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "model_config_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "operation_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "organization_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "palace_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "privacy_classification": {
+            "const": "analytics_safe",
+            "type": "string"
+          },
+          "run_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1",
+            "type": "string"
+          },
+          "span_kind": {
+            "enum": [
+              "context",
+              "retrieval",
+              "tool",
+              "api",
+              "simulation",
+              "reconciliation",
+              "verification",
+              "other"
+            ],
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "succeeded",
+              "pending",
+              "denied",
+              "conflict",
+              "unknown",
+              "failed"
+            ],
+            "type": "string"
+          },
+          "tool_name": {
+            "maxLength": 96,
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "tool_registry_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "environment",
+          "data_origin",
+          "privacy_classification",
+          "app_version",
+          "organization_alias",
+          "mission_alias",
+          "run_alias",
+          "$ai_session_id",
+          "$ai_trace_id",
+          "$ai_span_id",
+          "$ai_span_name",
+          "$ai_latency",
+          "$ai_is_error",
+          "span_kind",
+          "status"
+        ],
+        "type": "object"
+      },
+      "propertySchemaHash": "dc29330483a546dc09f84144af98de49dccb814aaa1597ab876c5047340ebef9",
+      "schemaVersion": "evidence-event-contract@1"
+    },
+    {
+      "allowedProperties": [
+        "$ai_is_error",
+        "$ai_latency",
+        "$ai_session_id",
+        "$ai_span_name",
+        "$ai_trace_id",
+        "active_runtime_ms",
+        "app_version",
+        "attempt_alias",
+        "budget_exhausted",
+        "clarification_pause_count",
+        "context_manifest_hash",
+        "data_origin",
+        "environment",
+        "error_code",
+        "feature_flags",
+        "generation_count",
+        "harness_version",
+        "mission_alias",
+        "model_config_version",
+        "operation_alias",
+        "organization_alias",
+        "outcome",
+        "palace_alias",
+        "pause_reason",
+        "plan_revision_count",
+        "privacy_classification",
+        "reconciliation_poll_count",
+        "run_alias",
+        "schema_version",
+        "tool_call_count",
+        "tool_registry_hash"
+      ],
+      "category": "ai",
+      "event": "$ai_trace",
+      "propertySchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "$ai_is_error": {
+            "type": "boolean"
+          },
+          "$ai_latency": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "$ai_session_id": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "$ai_span_name": {
+            "maxLength": 96,
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "$ai_trace_id": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "active_runtime_ms": {
+            "maximum": 300000,
+            "minimum": 0,
+            "type": "number"
+          },
+          "app_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "attempt_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "budget_exhausted": {
+            "type": "boolean"
+          },
+          "clarification_pause_count": {
+            "maximum": 2,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "context_manifest_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "data_origin": {
+            "enum": [
+              "fixture",
+              "live",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "environment": {
+            "enum": [
+              "test",
+              "local",
+              "hosted_demo",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "error_code": {
+            "maxLength": 96,
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "feature_flags": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+                  "type": "string"
+                }
+              ]
+            },
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9-]{0,95}$",
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "generation_count": {
+            "maximum": 88,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "harness_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "mission_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "model_config_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "operation_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "organization_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "outcome": {
+            "enum": [
+              "waiting_for_user",
+              "waiting_for_system",
+              "verified",
+              "safe_refusal",
+              "failed",
+              "cancelled",
+              "unknown"
+            ],
+            "type": "string"
+          },
+          "palace_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "pause_reason": {
+            "enum": [
+              "approval",
+              "budget",
+              "clarification",
+              "human_review",
+              "system"
+            ],
+            "type": "string"
+          },
+          "plan_revision_count": {
+            "maximum": 3,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "privacy_classification": {
+            "const": "analytics_safe",
+            "type": "string"
+          },
+          "reconciliation_poll_count": {
+            "maximum": 3,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "run_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1",
+            "type": "string"
+          },
+          "tool_call_count": {
+            "maximum": 24,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "tool_registry_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "environment",
+          "data_origin",
+          "privacy_classification",
+          "app_version",
+          "organization_alias",
+          "mission_alias",
+          "run_alias",
+          "$ai_session_id",
+          "$ai_trace_id",
+          "$ai_span_name",
+          "$ai_latency",
+          "$ai_is_error",
+          "outcome",
+          "generation_count",
+          "tool_call_count",
+          "plan_revision_count",
+          "clarification_pause_count",
+          "reconciliation_poll_count",
+          "active_runtime_ms",
+          "budget_exhausted"
+        ],
+        "type": "object"
+      },
+      "propertySchemaHash": "bee9ca632f84f225fbd2043ad72cfdf46ce8b4ed2888b50687ec64c874ad8d27",
+      "schemaVersion": "evidence-event-contract@1"
+    },
+    {
+      "allowedProperties": [
+        "actor_alias",
+        "app_version",
+        "attempt_alias",
+        "browser_session_alias",
+        "context_manifest_hash",
+        "data_origin",
+        "environment",
+        "execution_alias",
+        "feature_flags",
+        "field_class",
+        "material",
+        "mission_alias",
+        "operation_alias",
+        "organization_alias",
+        "override_kind",
+        "palace_alias",
+        "plan_alias",
+        "privacy_classification",
+        "resource_alias",
+        "run_alias",
+        "schema_version",
+        "tool_registry_hash"
+      ],
+      "category": "product",
+      "event": "agent overridden",
+      "propertySchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "actor_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "app_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "attempt_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "browser_session_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "context_manifest_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "data_origin": {
+            "enum": [
+              "fixture",
+              "live",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "environment": {
+            "enum": [
+              "test",
+              "local",
+              "hosted_demo",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "execution_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "feature_flags": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+                  "type": "string"
+                }
+              ]
+            },
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9-]{0,95}$",
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "field_class": {
+            "enum": [
+              "trigger",
+              "condition",
+              "action",
+              "constraint",
+              "rollback",
+              "other"
+            ],
+            "type": "string"
+          },
+          "material": {
+            "type": "boolean"
+          },
+          "mission_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "operation_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "organization_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "override_kind": {
+            "enum": [
+              "plan_edited",
+              "plan_rejected",
+              "manual_correction"
+            ],
+            "type": "string"
+          },
+          "palace_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "plan_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "privacy_classification": {
+            "const": "analytics_safe",
+            "type": "string"
+          },
+          "resource_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "run_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1",
+            "type": "string"
+          },
+          "tool_registry_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "environment",
+          "data_origin",
+          "privacy_classification",
+          "app_version",
+          "organization_alias",
+          "mission_alias",
+          "override_kind",
+          "field_class",
+          "material"
+        ],
+        "type": "object"
+      },
+      "propertySchemaHash": "1c88ac1aed42f2f802609cee6bbe49c451847faabb4e397dce05aa415fb23dc7",
+      "schemaVersion": "evidence-event-contract@1"
+    },
+    {
+      "allowedProperties": [
+        "actor_alias",
+        "app_version",
+        "assessment_slug",
+        "attempt_alias",
+        "browser_session_alias",
+        "context_manifest_hash",
+        "correct_count",
+        "data_origin",
+        "environment",
+        "execution_alias",
+        "feature_flags",
+        "item_count",
+        "mission_alias",
+        "operation_alias",
+        "organization_alias",
+        "palace_alias",
+        "plan_alias",
+        "privacy_classification",
+        "resource_alias",
+        "response_recording_consented",
+        "run_alias",
+        "schema_version",
+        "tool_registry_hash"
+      ],
+      "category": "product",
+      "event": "assessment submitted",
+      "propertySchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "actor_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "app_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "assessment_slug": {
+            "maxLength": 96,
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "attempt_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "browser_session_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "context_manifest_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "correct_count": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "data_origin": {
+            "enum": [
+              "fixture",
+              "live",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "environment": {
+            "enum": [
+              "test",
+              "local",
+              "hosted_demo",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "execution_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "feature_flags": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+                  "type": "string"
+                }
+              ]
+            },
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9-]{0,95}$",
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "item_count": {
+            "maximum": 9007199254740991,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "mission_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "operation_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "organization_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "palace_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "plan_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "privacy_classification": {
+            "const": "analytics_safe",
+            "type": "string"
+          },
+          "resource_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "response_recording_consented": {
+            "type": "boolean"
+          },
+          "run_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1",
+            "type": "string"
+          },
+          "tool_registry_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "environment",
+          "data_origin",
+          "privacy_classification",
+          "app_version",
+          "organization_alias",
+          "assessment_slug",
+          "item_count",
+          "correct_count",
+          "response_recording_consented"
+        ],
+        "type": "object"
+      },
+      "propertySchemaHash": "51dc36d04586bbadb06b57294162627bfb82e34dab906e971f58bef885eea874",
+      "schemaVersion": "evidence-event-contract@1"
+    },
+    {
+      "allowedProperties": [
+        "actor_alias",
+        "app_version",
+        "attempt_alias",
+        "browser_session_alias",
+        "clarification_reason",
+        "context_manifest_hash",
+        "data_origin",
+        "environment",
+        "execution_alias",
+        "feature_flags",
+        "mission_alias",
+        "operation_alias",
+        "organization_alias",
+        "palace_alias",
+        "plan_alias",
+        "privacy_classification",
+        "question_count",
+        "resource_alias",
+        "run_alias",
+        "schema_version",
+        "tool_registry_hash"
+      ],
+      "category": "product",
+      "event": "clarification requested",
+      "propertySchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "actor_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "app_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "attempt_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "browser_session_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "clarification_reason": {
+            "enum": [
+              "safety",
+              "feasibility",
+              "preference_conflict"
+            ],
+            "type": "string"
+          },
+          "context_manifest_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "data_origin": {
+            "enum": [
+              "fixture",
+              "live",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "environment": {
+            "enum": [
+              "test",
+              "local",
+              "hosted_demo",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "execution_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "feature_flags": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+                  "type": "string"
+                }
+              ]
+            },
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9-]{0,95}$",
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "mission_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "operation_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "organization_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "palace_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "plan_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "privacy_classification": {
+            "const": "analytics_safe",
+            "type": "string"
+          },
+          "question_count": {
+            "maximum": 9007199254740991,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "resource_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "run_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1",
+            "type": "string"
+          },
+          "tool_registry_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "environment",
+          "data_origin",
+          "privacy_classification",
+          "app_version",
+          "organization_alias",
+          "mission_alias",
+          "clarification_reason",
+          "question_count"
+        ],
+        "type": "object"
+      },
+      "propertySchemaHash": "291da012cdd032693f81a1a44fa445aebdb8d4a5833e5478a3677932157a25fe",
+      "schemaVersion": "evidence-event-contract@1"
+    },
+    {
+      "allowedProperties": [
+        "actor_alias",
+        "app_version",
+        "attempt_alias",
+        "browser_session_alias",
+        "context_manifest_hash",
+        "data_origin",
+        "environment",
+        "evidence_count",
+        "execution_alias",
+        "feature_flags",
+        "gateway_status",
+        "mission_alias",
+        "operation_alias",
+        "organization_alias",
+        "palace_alias",
+        "plan_alias",
+        "privacy_classification",
+        "resource_alias",
+        "run_alias",
+        "schema_version",
+        "tool_registry_hash"
+      ],
+      "category": "product",
+      "event": "execution observed",
+      "propertySchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "actor_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "app_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "attempt_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "browser_session_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "context_manifest_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "data_origin": {
+            "enum": [
+              "fixture",
+              "live",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "environment": {
+            "enum": [
+              "test",
+              "local",
+              "hosted_demo",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "evidence_count": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "execution_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "feature_flags": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+                  "type": "string"
+                }
+              ]
+            },
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9-]{0,95}$",
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "gateway_status": {
+            "enum": [
+              "accepted",
+              "committed",
+              "rejected",
+              "unknown"
+            ],
+            "type": "string"
+          },
+          "mission_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "operation_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "organization_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "palace_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "plan_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "privacy_classification": {
+            "const": "analytics_safe",
+            "type": "string"
+          },
+          "resource_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "run_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1",
+            "type": "string"
+          },
+          "tool_registry_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "environment",
+          "data_origin",
+          "privacy_classification",
+          "app_version",
+          "organization_alias",
+          "mission_alias",
+          "execution_alias",
+          "gateway_status",
+          "evidence_count"
+        ],
+        "type": "object"
+      },
+      "propertySchemaHash": "34cd02a606a07951e4807380887738a6d68691860b279b764857133e3f57e2b7",
+      "schemaVersion": "evidence-event-contract@1"
+    },
+    {
+      "allowedProperties": [
+        "actor_alias",
+        "app_version",
+        "assertion_count",
+        "attempt_alias",
+        "browser_session_alias",
+        "context_manifest_hash",
+        "data_origin",
+        "environment",
+        "execution_alias",
+        "failed_assertion_count",
+        "feature_flags",
+        "mission_alias",
+        "operation_alias",
+        "organization_alias",
+        "palace_alias",
+        "passed",
+        "plan_alias",
+        "privacy_classification",
+        "resource_alias",
+        "run_alias",
+        "schema_version",
+        "tool_registry_hash"
+      ],
+      "category": "product",
+      "event": "execution verified",
+      "propertySchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "actor_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "app_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "assertion_count": {
+            "maximum": 9007199254740991,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "attempt_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "browser_session_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "context_manifest_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "data_origin": {
+            "enum": [
+              "fixture",
+              "live",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "environment": {
+            "enum": [
+              "test",
+              "local",
+              "hosted_demo",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "execution_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "failed_assertion_count": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "feature_flags": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+                  "type": "string"
+                }
+              ]
+            },
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9-]{0,95}$",
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "mission_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "operation_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "organization_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "palace_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "passed": {
+            "type": "boolean"
+          },
+          "plan_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "privacy_classification": {
+            "const": "analytics_safe",
+            "type": "string"
+          },
+          "resource_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "run_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1",
+            "type": "string"
+          },
+          "tool_registry_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "environment",
+          "data_origin",
+          "privacy_classification",
+          "app_version",
+          "organization_alias",
+          "mission_alias",
+          "execution_alias",
+          "passed",
+          "assertion_count",
+          "failed_assertion_count"
+        ],
+        "type": "object"
+      },
+      "propertySchemaHash": "bc4e0181436991e64cfb69f829acec98433d62b3bd9cdac8d4e445769bb53066",
+      "schemaVersion": "evidence-event-contract@1"
+    },
+    {
+      "allowedProperties": [
+        "actor_alias",
+        "app_version",
+        "attempt_alias",
+        "browser_session_alias",
+        "context_manifest_hash",
+        "data_origin",
+        "environment",
+        "executable_steps_completed",
+        "execution_alias",
+        "feature_flags",
+        "guide_slug",
+        "mission_alias",
+        "operation_alias",
+        "organization_alias",
+        "palace_alias",
+        "plan_alias",
+        "privacy_classification",
+        "resource_alias",
+        "run_alias",
+        "schema_version",
+        "tool_registry_hash"
+      ],
+      "category": "product",
+      "event": "guide completed",
+      "propertySchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "actor_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "app_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "attempt_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "browser_session_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "context_manifest_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "data_origin": {
+            "enum": [
+              "fixture",
+              "live",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "environment": {
+            "enum": [
+              "test",
+              "local",
+              "hosted_demo",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "executable_steps_completed": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "execution_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "feature_flags": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+                  "type": "string"
+                }
+              ]
+            },
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9-]{0,95}$",
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "guide_slug": {
+            "maxLength": 96,
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "mission_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "operation_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "organization_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "palace_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "plan_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "privacy_classification": {
+            "const": "analytics_safe",
+            "type": "string"
+          },
+          "resource_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "run_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1",
+            "type": "string"
+          },
+          "tool_registry_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "environment",
+          "data_origin",
+          "privacy_classification",
+          "app_version",
+          "organization_alias",
+          "guide_slug",
+          "executable_steps_completed"
+        ],
+        "type": "object"
+      },
+      "propertySchemaHash": "ecb0227c62511cd5978034113ec0c230370bfaa4c2d5a2004c3562502f988166",
+      "schemaVersion": "evidence-event-contract@1"
+    },
+    {
+      "allowedProperties": [
+        "actor_alias",
+        "app_version",
+        "attempt_alias",
+        "browser_session_alias",
+        "cancellation_source",
+        "context_manifest_hash",
+        "data_origin",
+        "environment",
+        "execution_alias",
+        "feature_flags",
+        "mission_alias",
+        "operation_alias",
+        "organization_alias",
+        "palace_alias",
+        "phase",
+        "plan_alias",
+        "privacy_classification",
+        "resource_alias",
+        "run_alias",
+        "schema_version",
+        "tool_registry_hash"
+      ],
+      "category": "product",
+      "event": "mission cancelled",
+      "propertySchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "actor_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "app_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "attempt_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "browser_session_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "cancellation_source": {
+            "enum": [
+              "user",
+              "system",
+              "budget"
+            ],
+            "type": "string"
+          },
+          "context_manifest_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "data_origin": {
+            "enum": [
+              "fixture",
+              "live",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "environment": {
+            "enum": [
+              "test",
+              "local",
+              "hosted_demo",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "execution_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "feature_flags": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+                  "type": "string"
+                }
+              ]
+            },
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9-]{0,95}$",
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "mission_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "operation_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "organization_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "palace_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "phase": {
+            "enum": [
+              "understand",
+              "plan",
+              "validate",
+              "approve",
+              "execute",
+              "reconcile",
+              "observe",
+              "verify"
+            ],
+            "type": "string"
+          },
+          "plan_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "privacy_classification": {
+            "const": "analytics_safe",
+            "type": "string"
+          },
+          "resource_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "run_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1",
+            "type": "string"
+          },
+          "tool_registry_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "environment",
+          "data_origin",
+          "privacy_classification",
+          "app_version",
+          "organization_alias",
+          "mission_alias",
+          "phase",
+          "cancellation_source"
+        ],
+        "type": "object"
+      },
+      "propertySchemaHash": "b531a3f9335b40ad40b4a302d84ded4d0595362bd11c3ef8a3973ec58181719e",
+      "schemaVersion": "evidence-event-contract@1"
+    },
+    {
+      "allowedProperties": [
+        "actor_alias",
+        "app_version",
+        "attempt_alias",
+        "browser_session_alias",
+        "context_manifest_hash",
+        "data_origin",
+        "duration_ms",
+        "environment",
+        "execution_alias",
+        "feature_flags",
+        "mission_alias",
+        "operation_alias",
+        "organization_alias",
+        "palace_alias",
+        "plan_alias",
+        "privacy_classification",
+        "reconciliation_count",
+        "resource_alias",
+        "run_alias",
+        "schema_version",
+        "tool_call_count",
+        "tool_registry_hash"
+      ],
+      "category": "product",
+      "event": "mission completed",
+      "propertySchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "actor_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "app_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "attempt_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "browser_session_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "context_manifest_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "data_origin": {
+            "enum": [
+              "fixture",
+              "live",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "duration_ms": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "environment": {
+            "enum": [
+              "test",
+              "local",
+              "hosted_demo",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "execution_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "feature_flags": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+                  "type": "string"
+                }
+              ]
+            },
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9-]{0,95}$",
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "mission_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "operation_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "organization_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "palace_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "plan_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "privacy_classification": {
+            "const": "analytics_safe",
+            "type": "string"
+          },
+          "reconciliation_count": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "resource_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "run_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1",
+            "type": "string"
+          },
+          "tool_call_count": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "tool_registry_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "environment",
+          "data_origin",
+          "privacy_classification",
+          "app_version",
+          "organization_alias",
+          "mission_alias",
+          "duration_ms",
+          "tool_call_count",
+          "reconciliation_count"
+        ],
+        "type": "object"
+      },
+      "propertySchemaHash": "9e249a5af977cb01c393111f4068a3f75792401271cc77f8a9db40c368402372",
+      "schemaVersion": "evidence-event-contract@1"
+    },
+    {
+      "allowedProperties": [
+        "actor_alias",
+        "app_version",
+        "attempt_alias",
+        "browser_session_alias",
+        "context_manifest_hash",
+        "data_origin",
+        "environment",
+        "execution_alias",
+        "feature_flags",
+        "mission_alias",
+        "objective_class",
+        "operation_alias",
+        "organization_alias",
+        "palace_alias",
+        "plan_alias",
+        "privacy_classification",
+        "resource_alias",
+        "run_alias",
+        "schema_version",
+        "source_surface",
+        "tool_registry_hash"
+      ],
+      "category": "product",
+      "event": "mission created",
+      "propertySchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "actor_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "app_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "attempt_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "browser_session_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "context_manifest_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "data_origin": {
+            "enum": [
+              "fixture",
+              "live",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "environment": {
+            "enum": [
+              "test",
+              "local",
+              "hosted_demo",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "execution_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "feature_flags": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+                  "type": "string"
+                }
+              ]
+            },
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9-]{0,95}$",
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "mission_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "objective_class": {
+            "enum": [
+              "homecoming_routine",
+              "scheduled_hauler_access"
+            ],
+            "type": "string"
+          },
+          "operation_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "organization_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "palace_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "plan_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "privacy_classification": {
+            "const": "analytics_safe",
+            "type": "string"
+          },
+          "resource_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "run_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1",
+            "type": "string"
+          },
+          "source_surface": {
+            "enum": [
+              "control_room",
+              "mission_workspace",
+              "api",
+              "mcp",
+              "fixture"
+            ],
+            "type": "string"
+          },
+          "tool_registry_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "environment",
+          "data_origin",
+          "privacy_classification",
+          "app_version",
+          "organization_alias",
+          "mission_alias",
+          "source_surface",
+          "objective_class"
+        ],
+        "type": "object"
+      },
+      "propertySchemaHash": "d5b9bacc9396065038f5293be247705697880bded5ac6979313270e782c1bbc3",
+      "schemaVersion": "evidence-event-contract@1"
+    },
+    {
+      "allowedProperties": [
+        "actor_alias",
+        "app_version",
+        "attempt_alias",
+        "browser_session_alias",
+        "context_manifest_hash",
+        "data_origin",
+        "environment",
+        "execution_alias",
+        "failure_class",
+        "feature_flags",
+        "mission_alias",
+        "operation_alias",
+        "organization_alias",
+        "palace_alias",
+        "phase",
+        "plan_alias",
+        "privacy_classification",
+        "resource_alias",
+        "retryable",
+        "run_alias",
+        "schema_version",
+        "tool_registry_hash"
+      ],
+      "category": "product",
+      "event": "mission failed",
+      "propertySchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "actor_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "app_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "attempt_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "browser_session_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "context_manifest_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "data_origin": {
+            "enum": [
+              "fixture",
+              "live",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "environment": {
+            "enum": [
+              "test",
+              "local",
+              "hosted_demo",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "execution_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "failure_class": {
+            "enum": [
+              "authorization",
+              "policy",
+              "validation",
+              "model",
+              "tool",
+              "gateway",
+              "verification",
+              "budget",
+              "unknown"
+            ],
+            "type": "string"
+          },
+          "feature_flags": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+                  "type": "string"
+                }
+              ]
+            },
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9-]{0,95}$",
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "mission_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "operation_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "organization_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "palace_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "phase": {
+            "enum": [
+              "understand",
+              "plan",
+              "validate",
+              "approve",
+              "execute",
+              "reconcile",
+              "observe",
+              "verify"
+            ],
+            "type": "string"
+          },
+          "plan_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "privacy_classification": {
+            "const": "analytics_safe",
+            "type": "string"
+          },
+          "resource_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "retryable": {
+            "type": "boolean"
+          },
+          "run_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1",
+            "type": "string"
+          },
+          "tool_registry_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "environment",
+          "data_origin",
+          "privacy_classification",
+          "app_version",
+          "organization_alias",
+          "mission_alias",
+          "failure_class",
+          "phase",
+          "retryable"
+        ],
+        "type": "object"
+      },
+      "propertySchemaHash": "61c8c4b012c5dd755a69ecc31ca2f2ec99013a8813703b50cf804aad1a304b2b",
+      "schemaVersion": "evidence-event-contract@1"
+    },
+    {
+      "allowedProperties": [
+        "actor_alias",
+        "app_version",
+        "attempt_alias",
+        "attempt_count",
+        "attempt_transport",
+        "browser_session_alias",
+        "context_manifest_hash",
+        "data_origin",
+        "environment",
+        "execution_alias",
+        "feature_flags",
+        "mission_alias",
+        "operation_alias",
+        "organization_alias",
+        "palace_alias",
+        "plan_alias",
+        "privacy_classification",
+        "reconciliation_budget_ms",
+        "resource_alias",
+        "retryable",
+        "run_alias",
+        "schema_version",
+        "tool_registry_hash",
+        "unknown_reason"
+      ],
+      "category": "product",
+      "event": "operation outcome unknown",
+      "propertySchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "actor_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "app_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "attempt_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "attempt_count": {
+            "maximum": 9007199254740991,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "attempt_transport": {
+            "enum": [
+              "http",
+              "mcp",
+              "worker",
+              "gateway"
+            ],
+            "type": "string"
+          },
+          "browser_session_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "context_manifest_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "data_origin": {
+            "enum": [
+              "fixture",
+              "live",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "environment": {
+            "enum": [
+              "test",
+              "local",
+              "hosted_demo",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "execution_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "feature_flags": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+                  "type": "string"
+                }
+              ]
+            },
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9-]{0,95}$",
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "mission_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "operation_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "organization_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "palace_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "plan_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "privacy_classification": {
+            "const": "analytics_safe",
+            "type": "string"
+          },
+          "reconciliation_budget_ms": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "resource_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "retryable": {
+            "const": true,
+            "type": "boolean"
+          },
+          "run_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1",
+            "type": "string"
+          },
+          "tool_registry_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "unknown_reason": {
+            "enum": [
+              "timeout",
+              "connection_lost",
+              "callback_missing",
+              "worker_restart",
+              "malformed_result"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "environment",
+          "data_origin",
+          "privacy_classification",
+          "app_version",
+          "organization_alias",
+          "mission_alias",
+          "operation_alias",
+          "attempt_alias",
+          "attempt_transport",
+          "unknown_reason",
+          "attempt_count",
+          "reconciliation_budget_ms",
+          "retryable"
+        ],
+        "type": "object"
+      },
+      "propertySchemaHash": "00bf2d9205cd3824424cb5b4e798020966ec73f76001a82d829b43def3a5a261",
+      "schemaVersion": "evidence-event-contract@1"
+    },
+    {
+      "allowedProperties": [
+        "actor_alias",
+        "app_version",
+        "attempt_alias",
+        "attempt_count",
+        "browser_session_alias",
+        "context_manifest_hash",
+        "data_origin",
+        "duration_ms",
+        "environment",
+        "execution_alias",
+        "feature_flags",
+        "mission_alias",
+        "operation_alias",
+        "organization_alias",
+        "palace_alias",
+        "plan_alias",
+        "privacy_classification",
+        "resolution",
+        "resource_alias",
+        "run_alias",
+        "schema_version",
+        "tool_registry_hash"
+      ],
+      "category": "product",
+      "event": "operation reconciled",
+      "propertySchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "actor_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "app_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "attempt_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "attempt_count": {
+            "maximum": 9007199254740991,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "browser_session_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "context_manifest_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "data_origin": {
+            "enum": [
+              "fixture",
+              "live",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "duration_ms": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "environment": {
+            "enum": [
+              "test",
+              "local",
+              "hosted_demo",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "execution_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "feature_flags": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+                  "type": "string"
+                }
+              ]
+            },
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9-]{0,95}$",
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "mission_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "operation_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "organization_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "palace_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "plan_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "privacy_classification": {
+            "const": "analytics_safe",
+            "type": "string"
+          },
+          "resolution": {
+            "enum": [
+              "committed",
+              "absent_retrying",
+              "still_unknown",
+              "failed"
+            ],
+            "type": "string"
+          },
+          "resource_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "run_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1",
+            "type": "string"
+          },
+          "tool_registry_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "environment",
+          "data_origin",
+          "privacy_classification",
+          "app_version",
+          "organization_alias",
+          "mission_alias",
+          "operation_alias",
+          "resolution",
+          "attempt_count",
+          "duration_ms"
+        ],
+        "type": "object"
+      },
+      "propertySchemaHash": "9676cea768e89359c20ecaa2ac631e2e6391d0bfee6ca143dba0090ac4779421",
+      "schemaVersion": "evidence-event-contract@1"
+    },
+    {
+      "allowedProperties": [
+        "actor_alias",
+        "app_version",
+        "attempt_alias",
+        "browser_session_alias",
+        "context_manifest_hash",
+        "data_origin",
+        "environment",
+        "execution_alias",
+        "feature_flags",
+        "mission_alias",
+        "operation_alias",
+        "operation_kind",
+        "organization_alias",
+        "palace_alias",
+        "plan_alias",
+        "privacy_classification",
+        "resource_alias",
+        "run_alias",
+        "schema_version",
+        "tool_registry_hash"
+      ],
+      "category": "product",
+      "event": "operation requested",
+      "propertySchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "actor_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "app_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "attempt_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "browser_session_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "context_manifest_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "data_origin": {
+            "enum": [
+              "fixture",
+              "live",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "environment": {
+            "enum": [
+              "test",
+              "local",
+              "hosted_demo",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "execution_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "feature_flags": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+                  "type": "string"
+                }
+              ]
+            },
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9-]{0,95}$",
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "mission_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "operation_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "operation_kind": {
+            "anyOf": [
+              {
+                "const": "replace_homecoming_routine",
+                "type": "string"
+              },
+              {
+                "const": "replace_scheduled_hauler_access_routine",
+                "type": "string"
+              },
+              {
+                "const": "restore_routine_version",
+                "type": "string"
+              }
+            ]
+          },
+          "organization_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "palace_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "plan_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "privacy_classification": {
+            "const": "analytics_safe",
+            "type": "string"
+          },
+          "resource_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "run_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1",
+            "type": "string"
+          },
+          "tool_registry_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "environment",
+          "data_origin",
+          "privacy_classification",
+          "app_version",
+          "organization_alias",
+          "mission_alias",
+          "operation_alias",
+          "operation_kind"
+        ],
+        "type": "object"
+      },
+      "propertySchemaHash": "0ba68e126f8dc52b51afeacd9749109752a16b136f658af70e8bd599e7b96705",
+      "schemaVersion": "evidence-event-contract@1"
+    },
+    {
+      "allowedProperties": [
+        "actor_alias",
+        "app_version",
+        "approval_surface",
+        "attempt_alias",
+        "browser_session_alias",
+        "context_manifest_hash",
+        "data_origin",
+        "environment",
+        "execution_alias",
+        "feature_flags",
+        "mission_alias",
+        "operation_alias",
+        "organization_alias",
+        "palace_alias",
+        "plan_alias",
+        "plan_revision",
+        "privacy_classification",
+        "resource_alias",
+        "run_alias",
+        "schema_version",
+        "tool_registry_hash"
+      ],
+      "category": "product",
+      "event": "plan approved",
+      "propertySchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "actor_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "app_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "approval_surface": {
+            "enum": [
+              "mission_workspace",
+              "api"
+            ],
+            "type": "string"
+          },
+          "attempt_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "browser_session_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "context_manifest_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "data_origin": {
+            "enum": [
+              "fixture",
+              "live",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "environment": {
+            "enum": [
+              "test",
+              "local",
+              "hosted_demo",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "execution_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "feature_flags": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+                  "type": "string"
+                }
+              ]
+            },
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9-]{0,95}$",
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "mission_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "operation_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "organization_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "palace_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "plan_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "plan_revision": {
+            "maximum": 9007199254740991,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "privacy_classification": {
+            "const": "analytics_safe",
+            "type": "string"
+          },
+          "resource_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "run_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1",
+            "type": "string"
+          },
+          "tool_registry_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "environment",
+          "data_origin",
+          "privacy_classification",
+          "app_version",
+          "organization_alias",
+          "mission_alias",
+          "plan_alias",
+          "plan_revision",
+          "approval_surface"
+        ],
+        "type": "object"
+      },
+      "propertySchemaHash": "576ecd498e32be92a5fa7374ba9310f56e0cfb906d7d12686c18b3c020e1d8ec",
+      "schemaVersion": "evidence-event-contract@1"
+    },
+    {
+      "allowedProperties": [
+        "action_count",
+        "actor_alias",
+        "app_version",
+        "attempt_alias",
+        "browser_session_alias",
+        "context_manifest_hash",
+        "context_source_count",
+        "data_origin",
+        "environment",
+        "execution_alias",
+        "feature_flags",
+        "mission_alias",
+        "operation_alias",
+        "organization_alias",
+        "palace_alias",
+        "plan_alias",
+        "plan_revision",
+        "privacy_classification",
+        "resource_alias",
+        "run_alias",
+        "schema_version",
+        "tool_registry_hash"
+      ],
+      "category": "product",
+      "event": "plan proposed",
+      "propertySchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "action_count": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "actor_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "app_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "attempt_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "browser_session_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "context_manifest_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "context_source_count": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "data_origin": {
+            "enum": [
+              "fixture",
+              "live",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "environment": {
+            "enum": [
+              "test",
+              "local",
+              "hosted_demo",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "execution_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "feature_flags": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+                  "type": "string"
+                }
+              ]
+            },
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9-]{0,95}$",
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "mission_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "operation_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "organization_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "palace_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "plan_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "plan_revision": {
+            "maximum": 9007199254740991,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "privacy_classification": {
+            "const": "analytics_safe",
+            "type": "string"
+          },
+          "resource_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "run_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1",
+            "type": "string"
+          },
+          "tool_registry_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "environment",
+          "data_origin",
+          "privacy_classification",
+          "app_version",
+          "organization_alias",
+          "mission_alias",
+          "plan_alias",
+          "plan_revision",
+          "action_count",
+          "context_source_count"
+        ],
+        "type": "object"
+      },
+      "propertySchemaHash": "bf0de27f96515cd874b4dde856937a6d90d6e4d8a573c59cb8386e52bf236ca6",
+      "schemaVersion": "evidence-event-contract@1"
+    },
+    {
+      "allowedProperties": [
+        "actor_alias",
+        "app_version",
+        "attempt_alias",
+        "browser_session_alias",
+        "context_manifest_hash",
+        "data_origin",
+        "environment",
+        "execution_alias",
+        "failed_scenario_count",
+        "feature_flags",
+        "mission_alias",
+        "operation_alias",
+        "organization_alias",
+        "palace_alias",
+        "passed",
+        "plan_alias",
+        "plan_revision",
+        "privacy_classification",
+        "resource_alias",
+        "run_alias",
+        "scenario_count",
+        "schema_version",
+        "tool_registry_hash"
+      ],
+      "category": "product",
+      "event": "plan simulated",
+      "propertySchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "actor_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "app_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "attempt_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "browser_session_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "context_manifest_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "data_origin": {
+            "enum": [
+              "fixture",
+              "live",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "environment": {
+            "enum": [
+              "test",
+              "local",
+              "hosted_demo",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "execution_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "failed_scenario_count": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "feature_flags": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+                  "type": "string"
+                }
+              ]
+            },
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9-]{0,95}$",
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "mission_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "operation_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "organization_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "palace_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "passed": {
+            "type": "boolean"
+          },
+          "plan_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "plan_revision": {
+            "maximum": 9007199254740991,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "privacy_classification": {
+            "const": "analytics_safe",
+            "type": "string"
+          },
+          "resource_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "run_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "scenario_count": {
+            "maximum": 9007199254740991,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "schema_version": {
+            "const": "1",
+            "type": "string"
+          },
+          "tool_registry_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "environment",
+          "data_origin",
+          "privacy_classification",
+          "app_version",
+          "organization_alias",
+          "mission_alias",
+          "plan_alias",
+          "plan_revision",
+          "scenario_count",
+          "failed_scenario_count",
+          "passed"
+        ],
+        "type": "object"
+      },
+      "propertySchemaHash": "98f422460915366da6b1ea6935d051dbca83e0649c884418e6f4bd7fa2a7119b",
+      "schemaVersion": "evidence-event-contract@1"
+    },
+    {
+      "allowedProperties": [
+        "activation_source",
+        "actor_alias",
+        "app_version",
+        "attempt_alias",
+        "browser_session_alias",
+        "context_manifest_hash",
+        "data_origin",
+        "environment",
+        "execution_alias",
+        "feature_flags",
+        "mission_alias",
+        "operation_alias",
+        "organization_alias",
+        "palace_alias",
+        "plan_alias",
+        "privacy_classification",
+        "resource_alias",
+        "routine_version",
+        "run_alias",
+        "schema_version",
+        "tool_registry_hash"
+      ],
+      "category": "product",
+      "event": "routine activated",
+      "propertySchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "activation_source": {
+            "enum": [
+              "manual",
+              "mission_lease"
+            ],
+            "type": "string"
+          },
+          "actor_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "app_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+            "type": "string"
+          },
+          "attempt_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "browser_session_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "context_manifest_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "data_origin": {
+            "enum": [
+              "fixture",
+              "live",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "environment": {
+            "enum": [
+              "test",
+              "local",
+              "hosted_demo",
+              "evaluation"
+            ],
+            "type": "string"
+          },
+          "execution_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "feature_flags": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@+~-]*$",
+                  "type": "string"
+                }
+              ]
+            },
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9-]{0,95}$",
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "mission_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "operation_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "organization_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "palace_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "plan_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "privacy_classification": {
+            "const": "analytics_safe",
+            "type": "string"
+          },
+          "resource_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "routine_version": {
+            "maximum": 9007199254740991,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "run_alias": {
+            "pattern": "^tpa_[a-z][a-z0-9_]{0,31}_v1_[A-Za-z0-9_-]{43}$",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1",
+            "type": "string"
+          },
+          "tool_registry_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "environment",
+          "data_origin",
+          "privacy_classification",
+          "app_version",
+          "organization_alias",
+          "mission_alias",
+          "operation_alias",
+          "resource_alias",
+          "routine_version",
+          "activation_source"
+        ],
+        "type": "object"
+      },
+      "propertySchemaHash": "1f2b3ad4702450bae63f9ee2cc5f644e6afb4e4ee45979e153703c455bf03b5a",
+      "schemaVersion": "evidence-event-contract@1"
+    }
+  ],
+  "generatedFrom": [
+    "packages/observability/src/contracts.ts#projectEvidenceEventRegistry"
+  ],
+  "schemaVersion": "evidence-event-registry@1"
+}

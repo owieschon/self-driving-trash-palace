@@ -1,0 +1,316 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "executions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "completedAt": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "deadline": {
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+            "type": "string"
+          },
+          "evidenceIds": {
+            "items": {
+              "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "id": {
+            "pattern": "^exe_[a-z0-9][a-z0-9_-]{7,63}$",
+            "type": "string"
+          },
+          "milestones": {
+            "items": {
+              "oneOf": [
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "commandId": {
+                      "anyOf": [
+                        {
+                          "pattern": "^gcmd_[a-z0-9][a-z0-9_-]{7,63}$",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "evidenceId": {
+                      "type": "null"
+                    },
+                    "failure": {
+                      "type": "null"
+                    },
+                    "name": {
+                      "enum": [
+                        "preheat",
+                        "verified_arrival",
+                        "pathway_lighting",
+                        "unlock",
+                        "relock",
+                        "access_window",
+                        "verified_hauler_identity",
+                        "service_hatch_unlock",
+                        "service_hatch_relock",
+                        "residential_hatch_guard"
+                      ],
+                      "type": "string"
+                    },
+                    "resolvedAt": {
+                      "type": "null"
+                    },
+                    "status": {
+                      "const": "pending",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "commandId",
+                    "status",
+                    "evidenceId",
+                    "resolvedAt",
+                    "failure"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "commandId": {
+                      "anyOf": [
+                        {
+                          "pattern": "^gcmd_[a-z0-9][a-z0-9_-]{7,63}$",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "evidenceId": {
+                      "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                      "type": "string"
+                    },
+                    "failure": {
+                      "type": "null"
+                    },
+                    "name": {
+                      "enum": [
+                        "preheat",
+                        "verified_arrival",
+                        "pathway_lighting",
+                        "unlock",
+                        "relock",
+                        "access_window",
+                        "verified_hauler_identity",
+                        "service_hatch_unlock",
+                        "service_hatch_relock",
+                        "residential_hatch_guard"
+                      ],
+                      "type": "string"
+                    },
+                    "resolvedAt": {
+                      "format": "date-time",
+                      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                      "type": "string"
+                    },
+                    "status": {
+                      "const": "completed",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "commandId",
+                    "status",
+                    "evidenceId",
+                    "resolvedAt",
+                    "failure"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "commandId": {
+                      "anyOf": [
+                        {
+                          "pattern": "^gcmd_[a-z0-9][a-z0-9_-]{7,63}$",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "evidenceId": {
+                      "anyOf": [
+                        {
+                          "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "failure": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "code": {
+                          "pattern": "^[A-Z][A-Z0-9_]{2,63}$",
+                          "type": "string"
+                        },
+                        "message": {
+                          "maxLength": 500,
+                          "minLength": 1,
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "type": "object"
+                    },
+                    "name": {
+                      "enum": [
+                        "preheat",
+                        "verified_arrival",
+                        "pathway_lighting",
+                        "unlock",
+                        "relock",
+                        "access_window",
+                        "verified_hauler_identity",
+                        "service_hatch_unlock",
+                        "service_hatch_relock",
+                        "residential_hatch_guard"
+                      ],
+                      "type": "string"
+                    },
+                    "resolvedAt": {
+                      "format": "date-time",
+                      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                      "type": "string"
+                    },
+                    "status": {
+                      "const": "failed",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "commandId",
+                    "status",
+                    "evidenceId",
+                    "resolvedAt",
+                    "failure"
+                  ],
+                  "type": "object"
+                }
+              ]
+            },
+            "maxItems": 5,
+            "minItems": 5,
+            "type": "array"
+          },
+          "missionId": {
+            "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+            "type": "string"
+          },
+          "operationId": {
+            "pattern": "^op_[a-z0-9][a-z0-9_-]{7,63}$",
+            "type": "string"
+          },
+          "organizationId": {
+            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+            "type": "string"
+          },
+          "programKind": {
+            "enum": [
+              "night_shift_homecoming",
+              "scheduled_hauler_access"
+            ],
+            "type": "string"
+          },
+          "routineId": {
+            "pattern": "^rtn_[a-z0-9][a-z0-9_-]{7,63}$",
+            "type": "string"
+          },
+          "routineVersionId": {
+            "pattern": "^rtv_[a-z0-9][a-z0-9_-]{7,63}$",
+            "type": "string"
+          },
+          "schemaVersion": {
+            "const": "execution@2",
+            "default": "execution@2",
+            "type": "string"
+          },
+          "startedAt": {
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "scheduled",
+              "running",
+              "observed",
+              "failed"
+            ],
+            "type": "string"
+          },
+          "triggeredByEvidenceId": {
+            "pattern": "^evd_[a-z0-9][a-z0-9_-]{7,63}$",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schemaVersion",
+          "id",
+          "organizationId",
+          "missionId",
+          "operationId",
+          "routineId",
+          "routineVersionId",
+          "status",
+          "triggeredByEvidenceId",
+          "evidenceIds",
+          "startedAt",
+          "deadline",
+          "milestones",
+          "updatedAt",
+          "completedAt"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "executions"
+  ],
+  "type": "object"
+}

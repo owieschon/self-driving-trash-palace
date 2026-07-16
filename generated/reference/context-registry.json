@@ -1,0 +1,734 @@
+{
+  "generatedFrom": [
+    "packages/agent/src/context.ts",
+    "packages/agent/src/context-contracts.ts",
+    "packages/agent/src/context-routing.ts"
+  ],
+  "policyHash": "75ae92458b4e0fd28d1babe5df42dba0f66667c8ff689a9981640661e2de3b75",
+  "routing": [
+    {
+      "budget": {
+        "maxAuthoredBytes": 96000,
+        "maxContractBytes": 1000000,
+        "maxOptionalSources": 2,
+        "maxRuntimeBytes": 48000,
+        "maxRuntimeSnapshots": 6,
+        "maxToolContracts": 12,
+        "maxTotalBytes": 1250000
+      },
+      "phase": "understand",
+      "risk": "read",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "skill.homecoming"
+        ],
+        "toolNames": [
+          "capabilities.list",
+          "crews.list",
+          "executions.list",
+          "knowledge.search",
+          "missions.cancel",
+          "palaces.get",
+          "routines.get",
+          "routines.list"
+        ]
+      }
+    },
+    {
+      "budget": {
+        "maxAuthoredBytes": 128000,
+        "maxContractBytes": 1200000,
+        "maxOptionalSources": 3,
+        "maxRuntimeBytes": 64000,
+        "maxRuntimeSnapshots": 8,
+        "maxToolContracts": 15,
+        "maxTotalBytes": 1500000
+      },
+      "phase": "understand",
+      "risk": "reversible-write",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "concept.missions-plans-operations",
+          "skill.homecoming"
+        ],
+        "toolNames": [
+          "capabilities.list",
+          "crews.list",
+          "executions.list",
+          "knowledge.search",
+          "missions.cancel",
+          "palaces.get",
+          "routines.get",
+          "routines.list"
+        ]
+      }
+    },
+    {
+      "budget": {
+        "maxAuthoredBytes": 160000,
+        "maxContractBytes": 1400000,
+        "maxOptionalSources": 4,
+        "maxRuntimeBytes": 96000,
+        "maxRuntimeSnapshots": 10,
+        "maxToolContracts": 15,
+        "maxTotalBytes": 1750000
+      },
+      "phase": "understand",
+      "risk": "consequential-write",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "concept.missions-plans-operations",
+          "concept.unknown-outcomes",
+          "skill.homecoming"
+        ],
+        "toolNames": [
+          "capabilities.list",
+          "crews.list",
+          "executions.list",
+          "knowledge.search",
+          "missions.cancel",
+          "palaces.get",
+          "routines.get",
+          "routines.list"
+        ]
+      }
+    },
+    {
+      "budget": {
+        "maxAuthoredBytes": 96000,
+        "maxContractBytes": 1000000,
+        "maxOptionalSources": 2,
+        "maxRuntimeBytes": 48000,
+        "maxRuntimeSnapshots": 6,
+        "maxToolContracts": 12,
+        "maxTotalBytes": 1250000
+      },
+      "phase": "plan",
+      "risk": "read",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "skill.homecoming",
+          "skill.homecoming.planning"
+        ],
+        "toolNames": [
+          "capabilities.list",
+          "crews.list",
+          "knowledge.search",
+          "missions.cancel",
+          "palaces.get",
+          "routines.get",
+          "routines.list"
+        ]
+      }
+    },
+    {
+      "budget": {
+        "maxAuthoredBytes": 128000,
+        "maxContractBytes": 1200000,
+        "maxOptionalSources": 3,
+        "maxRuntimeBytes": 64000,
+        "maxRuntimeSnapshots": 8,
+        "maxToolContracts": 15,
+        "maxTotalBytes": 1500000
+      },
+      "phase": "plan",
+      "risk": "reversible-write",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "concept.missions-plans-operations",
+          "skill.homecoming",
+          "skill.homecoming.planning"
+        ],
+        "toolNames": [
+          "capabilities.list",
+          "crews.list",
+          "knowledge.search",
+          "missions.cancel",
+          "palaces.get",
+          "plans.propose",
+          "routines.get",
+          "routines.list"
+        ]
+      }
+    },
+    {
+      "budget": {
+        "maxAuthoredBytes": 160000,
+        "maxContractBytes": 1400000,
+        "maxOptionalSources": 4,
+        "maxRuntimeBytes": 96000,
+        "maxRuntimeSnapshots": 10,
+        "maxToolContracts": 15,
+        "maxTotalBytes": 1750000
+      },
+      "phase": "plan",
+      "risk": "consequential-write",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "concept.missions-plans-operations",
+          "concept.unknown-outcomes",
+          "skill.homecoming",
+          "skill.homecoming.planning"
+        ],
+        "toolNames": [
+          "capabilities.list",
+          "crews.list",
+          "knowledge.search",
+          "missions.cancel",
+          "palaces.get",
+          "plans.propose",
+          "routines.get",
+          "routines.list"
+        ]
+      }
+    },
+    {
+      "budget": {
+        "maxAuthoredBytes": 96000,
+        "maxContractBytes": 1000000,
+        "maxOptionalSources": 2,
+        "maxRuntimeBytes": 48000,
+        "maxRuntimeSnapshots": 6,
+        "maxToolContracts": 12,
+        "maxTotalBytes": 1250000
+      },
+      "phase": "validate",
+      "risk": "read",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "skill.homecoming",
+          "skill.homecoming.simulation"
+        ],
+        "toolNames": [
+          "capabilities.list",
+          "crews.list",
+          "knowledge.search",
+          "missions.cancel",
+          "palaces.get",
+          "routines.get",
+          "routines.list"
+        ]
+      }
+    },
+    {
+      "budget": {
+        "maxAuthoredBytes": 128000,
+        "maxContractBytes": 1200000,
+        "maxOptionalSources": 3,
+        "maxRuntimeBytes": 64000,
+        "maxRuntimeSnapshots": 8,
+        "maxToolContracts": 15,
+        "maxTotalBytes": 1500000
+      },
+      "phase": "validate",
+      "risk": "reversible-write",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "concept.missions-plans-operations",
+          "skill.homecoming",
+          "skill.homecoming.simulation"
+        ],
+        "toolNames": [
+          "capabilities.list",
+          "crews.list",
+          "knowledge.search",
+          "missions.cancel",
+          "palaces.get",
+          "plans.request_approval",
+          "plans.simulate",
+          "plans.validate",
+          "routines.get",
+          "routines.list"
+        ]
+      }
+    },
+    {
+      "budget": {
+        "maxAuthoredBytes": 160000,
+        "maxContractBytes": 1400000,
+        "maxOptionalSources": 4,
+        "maxRuntimeBytes": 96000,
+        "maxRuntimeSnapshots": 10,
+        "maxToolContracts": 15,
+        "maxTotalBytes": 1750000
+      },
+      "phase": "validate",
+      "risk": "consequential-write",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "concept.missions-plans-operations",
+          "concept.unknown-outcomes",
+          "skill.homecoming",
+          "skill.homecoming.simulation"
+        ],
+        "toolNames": [
+          "capabilities.list",
+          "crews.list",
+          "knowledge.search",
+          "missions.cancel",
+          "palaces.get",
+          "plans.request_approval",
+          "plans.simulate",
+          "plans.validate",
+          "routines.get",
+          "routines.list"
+        ]
+      }
+    },
+    {
+      "budget": {
+        "maxAuthoredBytes": 96000,
+        "maxContractBytes": 1000000,
+        "maxOptionalSources": 2,
+        "maxRuntimeBytes": 48000,
+        "maxRuntimeSnapshots": 6,
+        "maxToolContracts": 12,
+        "maxTotalBytes": 1250000
+      },
+      "phase": "approve",
+      "risk": "read",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "skill.homecoming",
+          "skill.shared.approval"
+        ],
+        "toolNames": [
+          "missions.cancel"
+        ]
+      }
+    },
+    {
+      "budget": {
+        "maxAuthoredBytes": 128000,
+        "maxContractBytes": 1200000,
+        "maxOptionalSources": 3,
+        "maxRuntimeBytes": 64000,
+        "maxRuntimeSnapshots": 8,
+        "maxToolContracts": 15,
+        "maxTotalBytes": 1500000
+      },
+      "phase": "approve",
+      "risk": "reversible-write",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "concept.missions-plans-operations",
+          "skill.homecoming",
+          "skill.shared.approval"
+        ],
+        "toolNames": [
+          "missions.cancel"
+        ]
+      }
+    },
+    {
+      "budget": {
+        "maxAuthoredBytes": 160000,
+        "maxContractBytes": 1400000,
+        "maxOptionalSources": 4,
+        "maxRuntimeBytes": 96000,
+        "maxRuntimeSnapshots": 10,
+        "maxToolContracts": 15,
+        "maxTotalBytes": 1750000
+      },
+      "phase": "approve",
+      "risk": "consequential-write",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "concept.missions-plans-operations",
+          "concept.unknown-outcomes",
+          "skill.homecoming",
+          "skill.shared.approval"
+        ],
+        "toolNames": [
+          "missions.cancel"
+        ]
+      }
+    },
+    {
+      "budget": {
+        "maxAuthoredBytes": 96000,
+        "maxContractBytes": 1000000,
+        "maxOptionalSources": 2,
+        "maxRuntimeBytes": 48000,
+        "maxRuntimeSnapshots": 6,
+        "maxToolContracts": 12,
+        "maxTotalBytes": 1250000
+      },
+      "phase": "execute",
+      "risk": "read",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "skill.homecoming",
+          "skill.shared.approval"
+        ],
+        "toolNames": [
+          "missions.cancel",
+          "operations.get"
+        ]
+      }
+    },
+    {
+      "budget": {
+        "maxAuthoredBytes": 128000,
+        "maxContractBytes": 1200000,
+        "maxOptionalSources": 3,
+        "maxRuntimeBytes": 64000,
+        "maxRuntimeSnapshots": 8,
+        "maxToolContracts": 15,
+        "maxTotalBytes": 1500000
+      },
+      "phase": "execute",
+      "risk": "reversible-write",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "concept.missions-plans-operations",
+          "skill.homecoming",
+          "skill.shared.approval"
+        ],
+        "toolNames": [
+          "missions.cancel",
+          "operations.get"
+        ]
+      }
+    },
+    {
+      "budget": {
+        "maxAuthoredBytes": 160000,
+        "maxContractBytes": 1400000,
+        "maxOptionalSources": 4,
+        "maxRuntimeBytes": 96000,
+        "maxRuntimeSnapshots": 10,
+        "maxToolContracts": 15,
+        "maxTotalBytes": 1750000
+      },
+      "phase": "execute",
+      "risk": "consequential-write",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "concept.missions-plans-operations",
+          "concept.unknown-outcomes",
+          "skill.homecoming",
+          "skill.shared.approval"
+        ],
+        "toolNames": [
+          "missions.cancel",
+          "operations.get",
+          "plans.activate"
+        ]
+      }
+    },
+    {
+      "budget": {
+        "maxAuthoredBytes": 96000,
+        "maxContractBytes": 1000000,
+        "maxOptionalSources": 2,
+        "maxRuntimeBytes": 48000,
+        "maxRuntimeSnapshots": 6,
+        "maxToolContracts": 12,
+        "maxTotalBytes": 1250000
+      },
+      "phase": "reconcile",
+      "risk": "read",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "skill.homecoming",
+          "skill.shared.reconciliation"
+        ],
+        "toolNames": [
+          "knowledge.search",
+          "missions.cancel",
+          "operations.get",
+          "routines.get",
+          "routines.list"
+        ]
+      }
+    },
+    {
+      "budget": {
+        "maxAuthoredBytes": 128000,
+        "maxContractBytes": 1200000,
+        "maxOptionalSources": 3,
+        "maxRuntimeBytes": 64000,
+        "maxRuntimeSnapshots": 8,
+        "maxToolContracts": 15,
+        "maxTotalBytes": 1500000
+      },
+      "phase": "reconcile",
+      "risk": "reversible-write",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "concept.missions-plans-operations",
+          "skill.homecoming",
+          "skill.shared.reconciliation"
+        ],
+        "toolNames": [
+          "knowledge.search",
+          "missions.cancel",
+          "operations.get",
+          "routines.get",
+          "routines.list"
+        ]
+      }
+    },
+    {
+      "budget": {
+        "maxAuthoredBytes": 160000,
+        "maxContractBytes": 1400000,
+        "maxOptionalSources": 4,
+        "maxRuntimeBytes": 96000,
+        "maxRuntimeSnapshots": 10,
+        "maxToolContracts": 15,
+        "maxTotalBytes": 1750000
+      },
+      "phase": "reconcile",
+      "risk": "consequential-write",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "concept.missions-plans-operations",
+          "concept.unknown-outcomes",
+          "skill.homecoming",
+          "skill.shared.reconciliation"
+        ],
+        "toolNames": [
+          "knowledge.search",
+          "missions.cancel",
+          "operations.get",
+          "routines.get",
+          "routines.list"
+        ]
+      }
+    },
+    {
+      "budget": {
+        "maxAuthoredBytes": 96000,
+        "maxContractBytes": 1000000,
+        "maxOptionalSources": 2,
+        "maxRuntimeBytes": 48000,
+        "maxRuntimeSnapshots": 6,
+        "maxToolContracts": 12,
+        "maxTotalBytes": 1250000
+      },
+      "phase": "observe",
+      "risk": "read",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "skill.homecoming",
+          "skill.shared.verification"
+        ],
+        "toolNames": [
+          "executions.list",
+          "missions.cancel",
+          "verification.get_evidence"
+        ]
+      }
+    },
+    {
+      "budget": {
+        "maxAuthoredBytes": 128000,
+        "maxContractBytes": 1200000,
+        "maxOptionalSources": 3,
+        "maxRuntimeBytes": 64000,
+        "maxRuntimeSnapshots": 8,
+        "maxToolContracts": 15,
+        "maxTotalBytes": 1500000
+      },
+      "phase": "observe",
+      "risk": "reversible-write",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "concept.missions-plans-operations",
+          "skill.homecoming",
+          "skill.shared.verification"
+        ],
+        "toolNames": [
+          "executions.list",
+          "missions.cancel",
+          "verification.get_evidence"
+        ]
+      }
+    },
+    {
+      "budget": {
+        "maxAuthoredBytes": 160000,
+        "maxContractBytes": 1400000,
+        "maxOptionalSources": 4,
+        "maxRuntimeBytes": 96000,
+        "maxRuntimeSnapshots": 10,
+        "maxToolContracts": 15,
+        "maxTotalBytes": 1750000
+      },
+      "phase": "observe",
+      "risk": "consequential-write",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "concept.missions-plans-operations",
+          "concept.unknown-outcomes",
+          "skill.homecoming",
+          "skill.shared.verification"
+        ],
+        "toolNames": [
+          "executions.list",
+          "missions.cancel",
+          "verification.get_evidence"
+        ]
+      }
+    },
+    {
+      "budget": {
+        "maxAuthoredBytes": 96000,
+        "maxContractBytes": 1000000,
+        "maxOptionalSources": 2,
+        "maxRuntimeBytes": 48000,
+        "maxRuntimeSnapshots": 6,
+        "maxToolContracts": 12,
+        "maxTotalBytes": 1250000
+      },
+      "phase": "verify",
+      "risk": "read",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "skill.homecoming",
+          "skill.shared.verification"
+        ],
+        "toolNames": [
+          "executions.list",
+          "knowledge.search",
+          "missions.cancel",
+          "routines.get",
+          "routines.list",
+          "verification.get_evidence"
+        ]
+      }
+    },
+    {
+      "budget": {
+        "maxAuthoredBytes": 128000,
+        "maxContractBytes": 1200000,
+        "maxOptionalSources": 3,
+        "maxRuntimeBytes": 64000,
+        "maxRuntimeSnapshots": 8,
+        "maxToolContracts": 15,
+        "maxTotalBytes": 1500000
+      },
+      "phase": "verify",
+      "risk": "reversible-write",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "concept.missions-plans-operations",
+          "skill.homecoming",
+          "skill.shared.verification"
+        ],
+        "toolNames": [
+          "executions.list",
+          "knowledge.search",
+          "missions.cancel",
+          "routines.get",
+          "routines.list",
+          "verification.get_evidence"
+        ]
+      }
+    },
+    {
+      "budget": {
+        "maxAuthoredBytes": 160000,
+        "maxContractBytes": 1400000,
+        "maxOptionalSources": 4,
+        "maxRuntimeBytes": 96000,
+        "maxRuntimeSnapshots": 10,
+        "maxToolContracts": 15,
+        "maxTotalBytes": 1750000
+      },
+      "phase": "verify",
+      "risk": "consequential-write",
+      "selection": {
+        "sourceIds": [
+          "concept.context-authority",
+          "concept.missions-plans-operations",
+          "concept.unknown-outcomes",
+          "skill.homecoming",
+          "skill.shared.verification"
+        ],
+        "toolNames": [
+          "executions.list",
+          "knowledge.search",
+          "missions.cancel",
+          "routines.get",
+          "routines.list",
+          "verification.get_evidence"
+        ]
+      }
+    }
+  ],
+  "schemaVersion": "context-reference-registry@1",
+  "schemas": [
+    {
+      "name": "context-bundle",
+      "path": "generated/reference/contexts/context-bundle.schema.json",
+      "sha256": "50e072dfd780736705be274598c54457417c82037a7c4b5cd71e81df95f1e256"
+    },
+    {
+      "name": "context-compile-input",
+      "path": "generated/reference/contexts/context-compile-input.schema.json",
+      "sha256": "e32c35e415d36369974d43e47d1becd72051fada9a3e8db9bfb4da86f6454f61"
+    },
+    {
+      "name": "context-request",
+      "path": "generated/reference/contexts/context-request.schema.json",
+      "sha256": "2967f25a9f492227fbcf249b49165cdd28299af79f4ae31134ba1d408466b983"
+    },
+    {
+      "name": "exact-tool-contract-section",
+      "path": "generated/reference/contexts/exact-tool-contract-section.schema.json",
+      "sha256": "aad8ab464e949c047cb7cfd10241558d8626bcaf938a26351ba429dad8177c69"
+    },
+    {
+      "name": "host-policy-section",
+      "path": "generated/reference/contexts/host-policy-section.schema.json",
+      "sha256": "96c45c1bac2c8aa4f16b18f538b1e61bf85d3811f47d4e41246ca43717a1b5e9"
+    },
+    {
+      "name": "internal-context-receipt",
+      "path": "generated/reference/contexts/internal-context-receipt.schema.json",
+      "sha256": "0ce9b44e96d989814584b334d934bd344082b4908582aab4087f0a6bedd749b4"
+    },
+    {
+      "name": "knowledge-manifest",
+      "path": "generated/reference/contexts/knowledge-manifest.schema.json",
+      "sha256": "d2d9e6a6df24c30ce1fff2e2f1ad8edc9be6f5d8e908b0364250817a0e2c05e2"
+    },
+    {
+      "name": "public-context-receipt",
+      "path": "generated/reference/contexts/public-context-receipt.schema.json",
+      "sha256": "230fdcdf90eaebcfeac671ecb909381537a237f3b0a30519917966caf9d8dc1b"
+    },
+    {
+      "name": "runtime-context-snapshot",
+      "path": "generated/reference/contexts/runtime-context-snapshot.schema.json",
+      "sha256": "0c88ed8658b82d3e1a189a2b70c1ce6c44734c61a41fcd04a4f3dcf97f478cad"
+    }
+  ],
+  "toolRegistryHash": "dbef1bf6f07ff52178b334e27584a13aabc737a93fe5aafc1bd334b6f96f0797"
+}

@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "bundleHash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "bundleId": {
+      "maxLength": 160,
+      "minLength": 8,
+      "pattern": "^(?:bundle|evidence|mission|receipt|request|run|trace)_[a-z0-9][a-z0-9_-]+$",
+      "type": "string"
+    },
+    "createdAt": {
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+      "type": "string"
+    },
+    "excludedSources": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+            "type": "string"
+          },
+          "reason": {
+            "enum": [
+              "not-requested",
+              "not-authorized",
+              "not-public",
+              "incompatible",
+              "stale",
+              "poisoned",
+              "cross-tenant",
+              "budget-exceeded"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "reason"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "internalEvidenceUri": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "manifestHash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "privateTraceCorrelation": {
+      "maxLength": 160,
+      "minLength": 8,
+      "pattern": "^(?:bundle|evidence|mission|receipt|request|run|trace)_[a-z0-9][a-z0-9_-]+$",
+      "type": "string"
+    },
+    "receiptId": {
+      "maxLength": 160,
+      "minLength": 8,
+      "pattern": "^(?:bundle|evidence|mission|receipt|request|run|trace)_[a-z0-9][a-z0-9_-]+$",
+      "type": "string"
+    },
+    "redactionCounts": {
+      "additionalProperties": {
+        "maximum": 9007199254740991,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "propertyNames": {
+        "maxLength": 128,
+        "minLength": 1,
+        "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+        "type": "string"
+      },
+      "type": "object"
+    },
+    "requestId": {
+      "maxLength": 160,
+      "minLength": 8,
+      "pattern": "^(?:bundle|evidence|mission|receipt|request|run|trace)_[a-z0-9][a-z0-9_-]+$",
+      "type": "string"
+    },
+    "runtimeVersions": {
+      "additionalProperties": false,
+      "properties": {
+        "api": {
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$",
+          "type": "string"
+        },
+        "app": {
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$",
+          "type": "string"
+        },
+        "compiler": {
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$",
+          "type": "string"
+        },
+        "policy": {
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$",
+          "type": "string"
+        },
+        "toolRegistry": {
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "app",
+        "api",
+        "compiler",
+        "toolRegistry",
+        "policy"
+      ],
+      "type": "object"
+    },
+    "schemaVersion": {
+      "const": "1.0.0",
+      "type": "string"
+    },
+    "selectedSources": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+            "type": "string"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "enum": [
+                  "mandatory-policy-support",
+                  "mandatory-dependency",
+                  "program-skill",
+                  "homecoming-skill",
+                  "optional-public-reference",
+                  "optional-dependency"
+                ],
+                "type": "string"
+              },
+              {
+                "enum": [
+                  "exact-contract",
+                  "runtime-state"
+                ],
+                "type": "string"
+              }
+            ]
+          },
+          "sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "sha256",
+          "reason"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "receiptId",
+    "requestId",
+    "bundleId",
+    "bundleHash",
+    "manifestHash",
+    "createdAt",
+    "selectedSources",
+    "excludedSources",
+    "runtimeVersions",
+    "redactionCounts",
+    "internalEvidenceUri"
+  ],
+  "type": "object"
+}

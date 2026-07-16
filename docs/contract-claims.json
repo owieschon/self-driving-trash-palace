@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "1.0.0",
+  "contracts": [
+    {
+      "id": "contract.mission-identities",
+      "userFacing": true,
+      "claimIds": ["TP-MODEL-001", "TP-MODEL-002", "TP-MODEL-003"],
+      "sourceIds": ["concept.missions-plans-operations"]
+    },
+    {
+      "id": "contract.unknown-outcome-recovery",
+      "userFacing": true,
+      "claimIds": ["TP-RELIABILITY-001", "TP-RELIABILITY-002"],
+      "sourceIds": ["concept.unknown-outcomes"]
+    },
+    {
+      "id": "contract.frozen-context-authority",
+      "userFacing": true,
+      "claimIds": ["TP-CONTEXT-001", "TP-CONTEXT-002", "TP-CONTEXT-003", "TP-CONTEXT-004"],
+      "sourceIds": ["concept.context-authority"]
+    },
+    {
+      "id": "contract.bounded-retrieval",
+      "userFacing": true,
+      "claimIds": ["TP-KNOWLEDGE-001", "TP-KNOWLEDGE-002"],
+      "sourceIds": ["concept.context-authority"]
+    },
+    {
+      "id": "contract.evidence-improvement",
+      "userFacing": true,
+      "claimIds": ["TP-EVIDENCE-001", "TP-EVIDENCE-002", "TP-EVIDENCE-003", "TP-EVIDENCE-004"],
+      "sourceIds": ["concept.evidence-improvement"]
+    },
+    {
+      "id": "contract.homecoming-procedure",
+      "userFacing": true,
+      "claimIds": ["TP-PROCEDURE-001", "TP-PROCEDURE-002", "TP-PROCEDURE-003"],
+      "sourceIds": ["procedure.operate-homecoming-mission"]
+    },
+    {
+      "id": "contract.lost-response-recovery",
+      "userFacing": true,
+      "claimIds": ["TP-INCIDENT-001", "TP-INCIDENT-002"],
+      "sourceIds": ["incident.two-routines-one-timeout"]
+    }
+  ]
+}

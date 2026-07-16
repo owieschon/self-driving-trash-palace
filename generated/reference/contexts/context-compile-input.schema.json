@@ -1,0 +1,743 @@
+{
+  "$defs": {
+    "__schema0": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "#/$defs/__schema0"
+          },
+          "type": "array"
+        },
+        {
+          "additionalProperties": {
+            "$ref": "#/$defs/__schema0"
+          },
+          "propertyNames": {
+            "type": "string"
+          },
+          "type": "object"
+        }
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "audience": {
+      "const": "caretaker",
+      "type": "string"
+    },
+    "catalog": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": "1.0.0",
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "audiences": {
+                "items": {
+                  "enum": [
+                    "customer",
+                    "developer",
+                    "caretaker",
+                    "external-agent"
+                  ],
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              "canonicalUri": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "claimIds": {
+                "items": {
+                  "pattern": "^TP-[A-Z0-9]+-[0-9]{3}$",
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "dependsOn": {
+                "items": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "id": {
+                "maxLength": 128,
+                "minLength": 1,
+                "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+                "type": "string"
+              },
+              "instructionRole": {
+                "enum": [
+                  "procedure",
+                  "reference",
+                  "untrusted_evidence"
+                ],
+                "type": "string"
+              },
+              "owner": {
+                "maxLength": 120,
+                "minLength": 1,
+                "type": "string"
+              },
+              "publishable": {
+                "type": "boolean"
+              },
+              "retention": {
+                "enum": [
+                  "versioned",
+                  "ephemeral"
+                ],
+                "type": "string"
+              },
+              "risk": {
+                "enum": [
+                  "read",
+                  "reversible-write",
+                  "consequential-write"
+                ],
+                "type": "string"
+              },
+              "sensitivity": {
+                "enum": [
+                  "public",
+                  "internal",
+                  "confidential"
+                ],
+                "type": "string"
+              },
+              "sha256": {
+                "pattern": "^[a-f0-9]{64}$",
+                "type": "string"
+              },
+              "tasks": {
+                "items": {
+                  "maxLength": 120,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              "tenantScoped": {
+                "type": "boolean"
+              },
+              "verifiedAgainst": {
+                "additionalProperties": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "propertyNames": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              "version": {
+                "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$",
+                "type": "string"
+              },
+              "visibility": {
+                "enum": [
+                  "public",
+                  "internal",
+                  "tenant"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "owner",
+              "claimIds",
+              "dependsOn",
+              "audiences",
+              "tasks",
+              "risk",
+              "visibility",
+              "sensitivity",
+              "tenantScoped",
+              "publishable",
+              "instructionRole",
+              "retention",
+              "verifiedAgainst",
+              "version",
+              "canonicalUri",
+              "sha256"
+            ],
+            "type": "object"
+          },
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "sources"
+      ],
+      "type": "object"
+    },
+    "contextScope": {
+      "default": "phase",
+      "enum": [
+        "phase",
+        "mission"
+      ],
+      "type": "string"
+    },
+    "grantedPermissions": {
+      "items": {
+        "enum": [
+          "palace:read",
+          "crew:read",
+          "capability:read",
+          "routine:read",
+          "routine:draft",
+          "routine:validate",
+          "routine:simulate",
+          "routine:approve",
+          "routine:activate",
+          "recovery:propose",
+          "operation:reconcile",
+          "verification:read",
+          "knowledge:read",
+          "mission:cancel"
+        ],
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "internalEvidenceUri": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "manifest": {
+      "additionalProperties": false,
+      "properties": {
+        "api": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            "version": {
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "version",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "app": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            "version": {
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "version",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "artifacts": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "canonicalUri": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "id": {
+                "maxLength": 128,
+                "minLength": 1,
+                "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+                "type": "string"
+              },
+              "sha256": {
+                "pattern": "^[a-f0-9]{64}$",
+                "type": "string"
+              },
+              "version": {
+                "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "version",
+              "sha256",
+              "canonicalUri"
+            ],
+            "type": "object"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "bundle": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            "version": {
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "version",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "compiler": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            "version": {
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "version",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+          "type": "string"
+        },
+        "manifestId": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+          "type": "string"
+        },
+        "policy": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            "version": {
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "version",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "schema": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            "version": {
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "version",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "schemaVersion": {
+          "const": "1.0.0",
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "canonicalUri": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "id": {
+                "maxLength": 128,
+                "minLength": 1,
+                "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+                "type": "string"
+              },
+              "sha256": {
+                "pattern": "^[a-f0-9]{64}$",
+                "type": "string"
+              },
+              "version": {
+                "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "version",
+              "sha256",
+              "canonicalUri"
+            ],
+            "type": "object"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "toolRegistry": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            "version": {
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "version",
+            "sha256"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "manifestId",
+        "schema",
+        "bundle",
+        "compiler",
+        "app",
+        "api",
+        "toolRegistry",
+        "policy",
+        "sources",
+        "artifacts",
+        "createdAt"
+      ],
+      "type": "object"
+    },
+    "missionRef": {
+      "maxLength": 160,
+      "minLength": 8,
+      "pattern": "^(?:bundle|evidence|mission|receipt|request|run|trace)_[a-z0-9][a-z0-9_-]+$",
+      "type": "string"
+    },
+    "optionalSourceIds": {
+      "items": {
+        "maxLength": 128,
+        "minLength": 1,
+        "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "phase": {
+      "enum": [
+        "understand",
+        "plan",
+        "validate",
+        "approve",
+        "execute",
+        "reconcile",
+        "observe",
+        "verify"
+      ],
+      "type": "string"
+    },
+    "privateTraceCorrelation": {
+      "maxLength": 160,
+      "minLength": 8,
+      "pattern": "^(?:bundle|evidence|mission|receipt|request|run|trace)_[a-z0-9][a-z0-9_-]+$",
+      "type": "string"
+    },
+    "programKind": {
+      "default": "night_shift_homecoming",
+      "enum": [
+        "night_shift_homecoming",
+        "scheduled_hauler_access"
+      ],
+      "type": "string"
+    },
+    "publicEvidenceUri": {
+      "type": "string"
+    },
+    "publicOnly": {
+      "type": "boolean"
+    },
+    "requestId": {
+      "maxLength": 160,
+      "minLength": 8,
+      "pattern": "^(?:bundle|evidence|mission|receipt|request|run|trace)_[a-z0-9][a-z0-9_-]+$",
+      "type": "string"
+    },
+    "risk": {
+      "enum": [
+        "read",
+        "reversible-write",
+        "consequential-write"
+      ],
+      "type": "string"
+    },
+    "runRef": {
+      "maxLength": 160,
+      "minLength": 8,
+      "pattern": "^(?:bundle|evidence|mission|receipt|request|run|trace)_[a-z0-9][a-z0-9_-]+$",
+      "type": "string"
+    },
+    "runtimeSnapshots": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "expiresAt": {
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+            "type": "string"
+          },
+          "observedAt": {
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+            "type": "string"
+          },
+          "requiredPermission": {
+            "enum": [
+              "palace:read",
+              "crew:read",
+              "capability:read",
+              "routine:read",
+              "routine:draft",
+              "routine:validate",
+              "routine:simulate",
+              "routine:approve",
+              "routine:activate",
+              "recovery:propose",
+              "operation:reconcile",
+              "verification:read",
+              "knowledge:read",
+              "mission:cancel"
+            ],
+            "type": "string"
+          },
+          "snapshotId": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+            "type": "string"
+          },
+          "state": {
+            "$ref": "#/$defs/__schema0"
+          },
+          "stateKind": {
+            "enum": [
+              "palace",
+              "crew",
+              "capabilities",
+              "routines",
+              "executions",
+              "mission",
+              "plan",
+              "operation",
+              "verification_evidence"
+            ],
+            "type": "string"
+          },
+          "tenantScopeHash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "snapshotId",
+          "stateKind",
+          "requiredPermission",
+          "tenantScopeHash",
+          "observedAt",
+          "state"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "schemaVersion": {
+      "const": "1.0.0",
+      "type": "string"
+    },
+    "sourceContents": {
+      "additionalProperties": {
+        "maxLength": 50000,
+        "minLength": 1,
+        "type": "string"
+      },
+      "propertyNames": {
+        "maxLength": 128,
+        "minLength": 1,
+        "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+        "type": "string"
+      },
+      "type": "object"
+    },
+    "sourceDateEpoch": {
+      "pattern": "^(?:0|[1-9][0-9]{0,11})$",
+      "type": "string"
+    },
+    "sourceTenantScopeHashes": {
+      "additionalProperties": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "default": {},
+      "propertyNames": {
+        "maxLength": 128,
+        "minLength": 1,
+        "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+        "type": "string"
+      },
+      "type": "object"
+    },
+    "tenantScopeHash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "requestId",
+    "missionRef",
+    "runRef",
+    "audience",
+    "phase",
+    "programKind",
+    "risk",
+    "contextScope",
+    "publicOnly",
+    "optionalSourceIds",
+    "manifest",
+    "catalog",
+    "sourceContents",
+    "sourceTenantScopeHashes",
+    "grantedPermissions",
+    "tenantScopeHash",
+    "runtimeSnapshots",
+    "internalEvidenceUri",
+    "publicEvidenceUri"
+  ],
+  "type": "object"
+}

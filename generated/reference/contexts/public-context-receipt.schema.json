@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "citations": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "claimIds": {
+            "items": {
+              "pattern": "^TP-[A-Z0-9]+-[0-9]{3}$",
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array"
+          },
+          "title": {
+            "maxLength": 320,
+            "minLength": 1,
+            "type": "string"
+          },
+          "uri": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "uri",
+          "claimIds"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "createdAt": {
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+      "type": "string"
+    },
+    "evidenceUri": {
+      "type": "string"
+    },
+    "receiptId": {
+      "maxLength": 160,
+      "minLength": 8,
+      "pattern": "^(?:bundle|evidence|mission|receipt|request|run|trace)_[a-z0-9][a-z0-9_-]+$",
+      "type": "string"
+    },
+    "redactionSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "fieldsRemoved": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "valuesMasked": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "fieldsRemoved",
+        "valuesMasked"
+      ],
+      "type": "object"
+    },
+    "safeVersions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "component": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+            "type": "string"
+          },
+          "version": {
+            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "component",
+          "version"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "schemaVersion": {
+      "const": "1.0.0",
+      "type": "string"
+    },
+    "selectionRationale": {
+      "items": {
+        "maxLength": 320,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 12,
+      "minItems": 1,
+      "type": "array"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "receiptId",
+    "createdAt",
+    "safeVersions",
+    "citations",
+    "selectionRationale",
+    "evidenceUri",
+    "redactionSummary"
+  ],
+  "type": "object"
+}

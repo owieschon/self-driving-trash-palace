@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "limit": {
+      "default": 20,
+      "maximum": 100,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "missionId": {
+      "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+      "type": "string"
+    },
+    "routineId": {
+      "pattern": "^rtn_[a-z0-9][a-z0-9_-]{7,63}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "limit"
+  ],
+  "type": "object"
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@trash-palace/integration",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run --root ../.. packages/integration/src",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@trash-palace/application": "workspace:*",
+    "@trash-palace/connectors": "workspace:*",
+    "@trash-palace/core": "workspace:*",
+    "@trash-palace/db": "workspace:*",
+    "@trash-palace/gateway-simulator": "workspace:*",
+    "@trash-palace/testkit": "workspace:*",
+    "@trash-palace/worker": "workspace:*",
+    "drizzle-orm": "0.45.2",
+    "pg": "8.22.0"
+  },
+  "devDependencies": {
+    "@types/pg": "8.20.0"
+  }
+}

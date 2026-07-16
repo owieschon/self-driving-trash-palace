@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "live-validation-readiness@1",
+  "mode": "baseline",
+  "status": "Blocked",
+  "networkRequestsMade": 0,
+  "secretValuesRetained": false,
+  "blockers": [
+    {
+      "code": "operator_approval_missing",
+      "resolved": false
+    },
+    {
+      "code": "budget_approval_missing",
+      "resolved": false
+    },
+    {
+      "code": "model_credential_not_confirmed",
+      "resolved": false
+    },
+    {
+      "code": "live_runner_not_implemented",
+      "resolved": false
+    }
+  ],
+  "claims": {
+    "liveModel": "Blocked",
+    "posthogIngestion": "Blocked",
+    "liveLoop": "Blocked"
+  }
+}

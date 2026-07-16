@@ -1,0 +1,165 @@
+{
+  "schemaVersion": "1.0.0",
+  "claims": [
+    {
+      "id": "TP-MODEL-001",
+      "sourceId": "concept.missions-plans-operations",
+      "locator": "claim:TP-MODEL-001",
+      "owner": "TrashPal maintainers",
+      "visibility": "public",
+      "status": "current"
+    },
+    {
+      "id": "TP-MODEL-002",
+      "sourceId": "concept.missions-plans-operations",
+      "locator": "claim:TP-MODEL-002",
+      "owner": "TrashPal maintainers",
+      "visibility": "public",
+      "status": "current"
+    },
+    {
+      "id": "TP-MODEL-003",
+      "sourceId": "concept.missions-plans-operations",
+      "locator": "claim:TP-MODEL-003",
+      "owner": "TrashPal maintainers",
+      "visibility": "public",
+      "status": "current"
+    },
+    {
+      "id": "TP-RELIABILITY-001",
+      "sourceId": "concept.unknown-outcomes",
+      "locator": "claim:TP-RELIABILITY-001",
+      "owner": "TrashPal maintainers",
+      "visibility": "public",
+      "status": "current"
+    },
+    {
+      "id": "TP-RELIABILITY-002",
+      "sourceId": "concept.unknown-outcomes",
+      "locator": "claim:TP-RELIABILITY-002",
+      "owner": "TrashPal maintainers",
+      "visibility": "public",
+      "status": "current"
+    },
+    {
+      "id": "TP-CONTEXT-001",
+      "sourceId": "concept.context-authority",
+      "locator": "claim:TP-CONTEXT-001",
+      "owner": "TrashPal maintainers",
+      "visibility": "public",
+      "status": "current"
+    },
+    {
+      "id": "TP-CONTEXT-002",
+      "sourceId": "concept.context-authority",
+      "locator": "claim:TP-CONTEXT-002",
+      "owner": "TrashPal maintainers",
+      "visibility": "public",
+      "status": "current"
+    },
+    {
+      "id": "TP-CONTEXT-003",
+      "sourceId": "concept.context-authority",
+      "locator": "claim:TP-CONTEXT-003",
+      "owner": "TrashPal maintainers",
+      "visibility": "public",
+      "status": "current"
+    },
+    {
+      "id": "TP-CONTEXT-004",
+      "sourceId": "concept.context-authority",
+      "locator": "claim:TP-CONTEXT-004",
+      "owner": "TrashPal maintainers",
+      "visibility": "public",
+      "status": "current"
+    },
+    {
+      "id": "TP-KNOWLEDGE-001",
+      "sourceId": "concept.context-authority",
+      "locator": "claim:TP-KNOWLEDGE-001",
+      "owner": "TrashPal maintainers",
+      "visibility": "public",
+      "status": "current"
+    },
+    {
+      "id": "TP-KNOWLEDGE-002",
+      "sourceId": "concept.context-authority",
+      "locator": "claim:TP-KNOWLEDGE-002",
+      "owner": "TrashPal maintainers",
+      "visibility": "public",
+      "status": "current"
+    },
+    {
+      "id": "TP-EVIDENCE-001",
+      "sourceId": "concept.evidence-improvement",
+      "locator": "claim:TP-EVIDENCE-001",
+      "owner": "TrashPal maintainers",
+      "visibility": "public",
+      "status": "current"
+    },
+    {
+      "id": "TP-EVIDENCE-002",
+      "sourceId": "concept.evidence-improvement",
+      "locator": "claim:TP-EVIDENCE-002",
+      "owner": "TrashPal maintainers",
+      "visibility": "public",
+      "status": "current"
+    },
+    {
+      "id": "TP-EVIDENCE-003",
+      "sourceId": "concept.evidence-improvement",
+      "locator": "claim:TP-EVIDENCE-003",
+      "owner": "TrashPal maintainers",
+      "visibility": "public",
+      "status": "current"
+    },
+    {
+      "id": "TP-EVIDENCE-004",
+      "sourceId": "concept.evidence-improvement",
+      "locator": "claim:TP-EVIDENCE-004",
+      "owner": "TrashPal maintainers",
+      "visibility": "public",
+      "status": "current"
+    },
+    {
+      "id": "TP-PROCEDURE-001",
+      "sourceId": "procedure.operate-homecoming-mission",
+      "locator": "claim:TP-PROCEDURE-001",
+      "owner": "TrashPal maintainers",
+      "visibility": "public",
+      "status": "current"
+    },
+    {
+      "id": "TP-PROCEDURE-002",
+      "sourceId": "procedure.operate-homecoming-mission",
+      "locator": "claim:TP-PROCEDURE-002",
+      "owner": "TrashPal maintainers",
+      "visibility": "public",
+      "status": "current"
+    },
+    {
+      "id": "TP-PROCEDURE-003",
+      "sourceId": "procedure.operate-homecoming-mission",
+      "locator": "claim:TP-PROCEDURE-003",
+      "owner": "TrashPal maintainers",
+      "visibility": "public",
+      "status": "current"
+    },
+    {
+      "id": "TP-INCIDENT-001",
+      "sourceId": "incident.two-routines-one-timeout",
+      "locator": "claim:TP-INCIDENT-001",
+      "owner": "TrashPal maintainers",
+      "visibility": "public",
+      "status": "current"
+    },
+    {
+      "id": "TP-INCIDENT-002",
+      "sourceId": "incident.two-routines-one-timeout",
+      "locator": "claim:TP-INCIDENT-002",
+      "owner": "TrashPal maintainers",
+      "visibility": "public",
+      "status": "current"
+    }
+  ]
+}

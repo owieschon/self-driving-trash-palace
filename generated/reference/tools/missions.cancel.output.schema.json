@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "missionId": {
+      "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+      "type": "string"
+    },
+    "state": {
+      "additionalProperties": false,
+      "properties": {
+        "phase": {
+          "enum": [
+            "understand",
+            "plan",
+            "validate",
+            "approve",
+            "execute",
+            "reconcile",
+            "observe",
+            "verify"
+          ],
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "queued",
+            "running",
+            "waiting_for_user",
+            "waiting_for_system",
+            "succeeded",
+            "failed",
+            "cancelled"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "phase"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "missionId",
+    "state"
+  ],
+  "type": "object"
+}

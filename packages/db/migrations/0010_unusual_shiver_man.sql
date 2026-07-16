@@ -1,0 +1,7 @@
+ALTER TYPE "public"."evidence_type" ADD VALUE 'tool_invocation_reconciliation';--> statement-breakpoint
+ALTER TABLE "evidence" DROP CONSTRAINT "evidence_authority_shape";--> statement-breakpoint
+ALTER TABLE "evidence" ADD CONSTRAINT "evidence_authority_shape" CHECK (
+        ("evidence"."authority" = 'identity_telemetry' AND "evidence"."type" = 'identity_arrival' AND "evidence"."authority_provider_event_id" IS NOT NULL AND "evidence"."authority_callback_id" IS NULL AND "evidence"."authority_command_id" IS NULL AND "evidence"."application_rule_id" IS NULL AND "evidence"."application_rule_version" IS NULL)
+        OR ("evidence"."authority" = 'gateway_callback' AND "evidence"."type" IN ('device_command', 'temperature_observation', 'lighting_observation', 'lock_observation', 'gateway_delivery') AND "evidence"."authority_provider_event_id" IS NULL AND "evidence"."authority_callback_id" IS NOT NULL AND "evidence"."authority_command_id" IS NOT NULL AND "evidence"."application_rule_id" IS NULL AND "evidence"."application_rule_version" IS NULL)
+        OR ("evidence"."authority" = 'application' AND "evidence"."type" IN ('battery_projection', 'routine_state', 'tenant_access_audit', 'tool_invocation_reconciliation') AND "evidence"."authority_provider_event_id" IS NULL AND "evidence"."authority_callback_id" IS NULL AND "evidence"."authority_command_id" IS NULL AND "evidence"."application_rule_id" IS NOT NULL AND "evidence"."application_rule_version" > 0)
+      );

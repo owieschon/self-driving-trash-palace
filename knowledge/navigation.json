@@ -1,0 +1,414 @@
+{
+  "schemaVersion": "1.0.0",
+  "sections": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "items": [
+        {
+          "sourceId": "overview.trash-palace",
+          "label": "TrashPal"
+        }
+      ]
+    },
+    {
+      "id": "getting-started",
+      "title": "Getting started",
+      "items": [
+        {
+          "sourceId": "getting-started.start-here",
+          "label": "Start here"
+        },
+        {
+          "sourceId": "getting-started.run-locally",
+          "label": "Run TrashPal locally"
+        },
+        {
+          "sourceId": "getting-started.improve-first-automation",
+          "label": "Improve your first automation"
+        }
+      ]
+    },
+    {
+      "id": "concepts",
+      "title": "Concepts",
+      "items": [
+        {
+          "sourceId": "concept.missions-plans-operations",
+          "label": "From a resident goal to one durable change"
+        },
+        {
+          "sourceId": "concept.unknown-outcomes",
+          "label": "When a change outcome is unknown"
+        },
+        {
+          "sourceId": "concept.context-authority",
+          "label": "Context and authority"
+        },
+        {
+          "sourceId": "concept.evidence-improvement",
+          "label": "Evidence and improvement"
+        }
+      ]
+    },
+    {
+      "id": "guides",
+      "title": "Guides",
+      "items": [
+        {
+          "sourceId": "procedure.use-caretaker",
+          "label": "Use Caretaker for one bounded automation"
+        },
+        {
+          "sourceId": "procedure.operate-homecoming-mission",
+          "label": "Create, approve, and verify a routine"
+        },
+        {
+          "sourceId": "procedure.review-control",
+          "label": "Review, approve, reject, or cancel safely"
+        },
+        {
+          "sourceId": "procedure.schedule-hauler-access",
+          "label": "Schedule safe hauler access"
+        },
+        {
+          "sourceId": "procedure.inspect-evidence",
+          "label": "Inspect receipts and durable evidence"
+        },
+        {
+          "sourceId": "incident.two-routines-one-timeout",
+          "label": "Recover an uncertain operation"
+        },
+        {
+          "sourceId": "procedure.troubleshoot-mission",
+          "label": "Troubleshoot an automation"
+        },
+        {
+          "sourceId": "procedure.build-http-mcp",
+          "label": "Build with HTTP and MCP"
+        }
+      ]
+    },
+    {
+      "id": "posthog-ai",
+      "title": "PostHog AI",
+      "items": [
+        {
+          "sourceId": "posthog-ai.instrument-workflow",
+          "label": "Instrument an agentic workflow"
+        },
+        {
+          "sourceId": "posthog-ai.export-evidence",
+          "label": "Export agent evidence to PostHog"
+        }
+      ]
+    },
+    {
+      "id": "resources",
+      "title": "Resources",
+      "items": [
+        {
+          "sourceId": "resource.evaluation-methodology",
+          "label": "Evaluation methodology and limitations"
+        },
+        {
+          "sourceId": "resource.executable-contracts",
+          "label": "Executable API, MCP, and event reference"
+        }
+      ]
+    }
+  ],
+  "learningPaths": [
+    {
+      "id": "use",
+      "title": "Use TrashPal",
+      "steps": [
+        {
+          "sourceId": "overview.trash-palace",
+          "prerequisiteSourceIds": [],
+          "nextSourceId": "getting-started.start-here",
+          "terminal": false
+        },
+        {
+          "sourceId": "getting-started.start-here",
+          "prerequisiteSourceIds": ["overview.trash-palace"],
+          "nextSourceId": "getting-started.improve-first-automation",
+          "terminal": false
+        },
+        {
+          "sourceId": "getting-started.improve-first-automation",
+          "prerequisiteSourceIds": ["getting-started.start-here"],
+          "nextSourceId": "getting-started.run-locally",
+          "terminal": false
+        },
+        {
+          "sourceId": "getting-started.run-locally",
+          "prerequisiteSourceIds": [
+            "getting-started.start-here",
+            "getting-started.improve-first-automation"
+          ],
+          "nextSourceId": "concept.missions-plans-operations",
+          "terminal": false
+        },
+        {
+          "sourceId": "concept.missions-plans-operations",
+          "prerequisiteSourceIds": ["getting-started.improve-first-automation"],
+          "nextSourceId": "concept.unknown-outcomes",
+          "terminal": false
+        },
+        {
+          "sourceId": "concept.unknown-outcomes",
+          "prerequisiteSourceIds": ["concept.missions-plans-operations"],
+          "nextSourceId": "concept.context-authority",
+          "terminal": false
+        },
+        {
+          "sourceId": "concept.context-authority",
+          "prerequisiteSourceIds": ["concept.unknown-outcomes"],
+          "nextSourceId": "concept.evidence-improvement",
+          "terminal": false
+        },
+        {
+          "sourceId": "concept.evidence-improvement",
+          "prerequisiteSourceIds": ["concept.context-authority"],
+          "nextSourceId": "procedure.use-caretaker",
+          "terminal": false
+        },
+        {
+          "sourceId": "procedure.use-caretaker",
+          "prerequisiteSourceIds": [
+            "concept.missions-plans-operations",
+            "concept.unknown-outcomes",
+            "concept.context-authority",
+            "concept.evidence-improvement"
+          ],
+          "nextSourceId": "procedure.operate-homecoming-mission",
+          "terminal": false
+        },
+        {
+          "sourceId": "procedure.operate-homecoming-mission",
+          "prerequisiteSourceIds": [
+            "concept.missions-plans-operations",
+            "concept.unknown-outcomes",
+            "concept.context-authority",
+            "concept.evidence-improvement"
+          ],
+          "nextSourceId": "procedure.review-control",
+          "terminal": false
+        },
+        {
+          "sourceId": "procedure.review-control",
+          "prerequisiteSourceIds": [
+            "concept.missions-plans-operations",
+            "concept.context-authority",
+            "procedure.operate-homecoming-mission"
+          ],
+          "nextSourceId": "procedure.schedule-hauler-access",
+          "terminal": false
+        },
+        {
+          "sourceId": "procedure.schedule-hauler-access",
+          "prerequisiteSourceIds": [
+            "concept.context-authority",
+            "concept.missions-plans-operations",
+            "concept.unknown-outcomes",
+            "procedure.review-control"
+          ],
+          "nextSourceId": "procedure.inspect-evidence",
+          "terminal": false
+        },
+        {
+          "sourceId": "procedure.inspect-evidence",
+          "prerequisiteSourceIds": ["concept.evidence-improvement", "procedure.review-control"],
+          "nextSourceId": "incident.two-routines-one-timeout",
+          "terminal": false
+        },
+        {
+          "sourceId": "incident.two-routines-one-timeout",
+          "prerequisiteSourceIds": [
+            "concept.unknown-outcomes",
+            "procedure.operate-homecoming-mission"
+          ],
+          "nextSourceId": "procedure.troubleshoot-mission",
+          "terminal": false
+        },
+        {
+          "sourceId": "procedure.troubleshoot-mission",
+          "prerequisiteSourceIds": [
+            "concept.unknown-outcomes",
+            "concept.evidence-improvement",
+            "incident.two-routines-one-timeout"
+          ],
+          "nextSourceId": null,
+          "terminal": true
+        }
+      ]
+    },
+    {
+      "id": "build",
+      "title": "Build on TrashPal",
+      "steps": [
+        {
+          "sourceId": "overview.trash-palace",
+          "prerequisiteSourceIds": [],
+          "nextSourceId": "getting-started.start-here",
+          "terminal": false
+        },
+        {
+          "sourceId": "getting-started.start-here",
+          "prerequisiteSourceIds": ["overview.trash-palace"],
+          "nextSourceId": "getting-started.improve-first-automation",
+          "terminal": false
+        },
+        {
+          "sourceId": "getting-started.improve-first-automation",
+          "prerequisiteSourceIds": ["getting-started.start-here"],
+          "nextSourceId": "getting-started.run-locally",
+          "terminal": false
+        },
+        {
+          "sourceId": "getting-started.run-locally",
+          "prerequisiteSourceIds": [
+            "getting-started.start-here",
+            "getting-started.improve-first-automation"
+          ],
+          "nextSourceId": "concept.missions-plans-operations",
+          "terminal": false
+        },
+        {
+          "sourceId": "concept.missions-plans-operations",
+          "prerequisiteSourceIds": ["getting-started.improve-first-automation"],
+          "nextSourceId": "concept.unknown-outcomes",
+          "terminal": false
+        },
+        {
+          "sourceId": "concept.unknown-outcomes",
+          "prerequisiteSourceIds": ["concept.missions-plans-operations"],
+          "nextSourceId": "concept.context-authority",
+          "terminal": false
+        },
+        {
+          "sourceId": "concept.context-authority",
+          "prerequisiteSourceIds": ["concept.unknown-outcomes"],
+          "nextSourceId": "concept.evidence-improvement",
+          "terminal": false
+        },
+        {
+          "sourceId": "concept.evidence-improvement",
+          "prerequisiteSourceIds": ["concept.context-authority"],
+          "nextSourceId": "procedure.use-caretaker",
+          "terminal": false
+        },
+        {
+          "sourceId": "procedure.use-caretaker",
+          "prerequisiteSourceIds": [
+            "concept.missions-plans-operations",
+            "concept.unknown-outcomes",
+            "concept.context-authority",
+            "concept.evidence-improvement"
+          ],
+          "nextSourceId": "procedure.operate-homecoming-mission",
+          "terminal": false
+        },
+        {
+          "sourceId": "procedure.operate-homecoming-mission",
+          "prerequisiteSourceIds": [
+            "concept.missions-plans-operations",
+            "concept.unknown-outcomes",
+            "concept.context-authority",
+            "concept.evidence-improvement"
+          ],
+          "nextSourceId": "procedure.review-control",
+          "terminal": false
+        },
+        {
+          "sourceId": "procedure.review-control",
+          "prerequisiteSourceIds": [
+            "concept.missions-plans-operations",
+            "concept.context-authority",
+            "procedure.operate-homecoming-mission"
+          ],
+          "nextSourceId": "procedure.schedule-hauler-access",
+          "terminal": false
+        },
+        {
+          "sourceId": "procedure.schedule-hauler-access",
+          "prerequisiteSourceIds": [
+            "concept.context-authority",
+            "concept.missions-plans-operations",
+            "concept.unknown-outcomes",
+            "procedure.review-control"
+          ],
+          "nextSourceId": "procedure.inspect-evidence",
+          "terminal": false
+        },
+        {
+          "sourceId": "procedure.inspect-evidence",
+          "prerequisiteSourceIds": ["concept.evidence-improvement", "procedure.review-control"],
+          "nextSourceId": "incident.two-routines-one-timeout",
+          "terminal": false
+        },
+        {
+          "sourceId": "incident.two-routines-one-timeout",
+          "prerequisiteSourceIds": [
+            "concept.unknown-outcomes",
+            "procedure.operate-homecoming-mission"
+          ],
+          "nextSourceId": "procedure.troubleshoot-mission",
+          "terminal": false
+        },
+        {
+          "sourceId": "procedure.troubleshoot-mission",
+          "prerequisiteSourceIds": [
+            "concept.unknown-outcomes",
+            "concept.evidence-improvement",
+            "incident.two-routines-one-timeout"
+          ],
+          "nextSourceId": "procedure.build-http-mcp",
+          "terminal": false
+        },
+        {
+          "sourceId": "procedure.build-http-mcp",
+          "prerequisiteSourceIds": [
+            "concept.missions-plans-operations",
+            "concept.context-authority",
+            "procedure.troubleshoot-mission"
+          ],
+          "nextSourceId": "posthog-ai.instrument-workflow",
+          "terminal": false
+        },
+        {
+          "sourceId": "posthog-ai.instrument-workflow",
+          "prerequisiteSourceIds": ["concept.evidence-improvement", "procedure.build-http-mcp"],
+          "nextSourceId": "posthog-ai.export-evidence",
+          "terminal": false
+        },
+        {
+          "sourceId": "posthog-ai.export-evidence",
+          "prerequisiteSourceIds": [
+            "concept.evidence-improvement",
+            "posthog-ai.instrument-workflow"
+          ],
+          "nextSourceId": "resource.evaluation-methodology",
+          "terminal": false
+        },
+        {
+          "sourceId": "resource.evaluation-methodology",
+          "prerequisiteSourceIds": [
+            "concept.context-authority",
+            "concept.evidence-improvement",
+            "posthog-ai.export-evidence"
+          ],
+          "nextSourceId": "resource.executable-contracts",
+          "terminal": false
+        },
+        {
+          "sourceId": "resource.executable-contracts",
+          "prerequisiteSourceIds": ["concept.context-authority", "resource.evaluation-methodology"],
+          "nextSourceId": null,
+          "terminal": true
+        }
+      ]
+    }
+  ]
+}

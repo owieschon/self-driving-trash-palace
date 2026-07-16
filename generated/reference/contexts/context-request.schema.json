@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "audience": {
+      "const": "caretaker",
+      "type": "string"
+    },
+    "contextScope": {
+      "default": "phase",
+      "enum": [
+        "phase",
+        "mission"
+      ],
+      "type": "string"
+    },
+    "contractPins": {
+      "additionalProperties": false,
+      "properties": {
+        "api": {
+          "additionalProperties": false,
+          "properties": {
+            "sha256": {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            "version": {
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "version",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "app": {
+          "additionalProperties": false,
+          "properties": {
+            "sha256": {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            "version": {
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "version",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "policy": {
+          "additionalProperties": false,
+          "properties": {
+            "sha256": {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            "version": {
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "version",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "toolRegistry": {
+          "additionalProperties": false,
+          "properties": {
+            "sha256": {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            "version": {
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "version",
+            "sha256"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "app",
+        "api",
+        "toolRegistry",
+        "policy"
+      ],
+      "type": "object"
+    },
+    "createdAt": {
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+      "type": "string"
+    },
+    "mandatorySourceIds": {
+      "items": {
+        "maxLength": 128,
+        "minLength": 1,
+        "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "missionRef": {
+      "maxLength": 160,
+      "minLength": 8,
+      "pattern": "^(?:bundle|evidence|mission|receipt|request|run|trace)_[a-z0-9][a-z0-9_-]+$",
+      "type": "string"
+    },
+    "optionalSourceIds": {
+      "items": {
+        "maxLength": 128,
+        "minLength": 1,
+        "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "phase": {
+      "enum": [
+        "understand",
+        "plan",
+        "validate",
+        "approve",
+        "execute",
+        "reconcile",
+        "observe",
+        "verify"
+      ],
+      "type": "string"
+    },
+    "programKind": {
+      "default": "night_shift_homecoming",
+      "enum": [
+        "night_shift_homecoming",
+        "scheduled_hauler_access"
+      ],
+      "type": "string"
+    },
+    "publicOnly": {
+      "type": "boolean"
+    },
+    "requestId": {
+      "maxLength": 160,
+      "minLength": 8,
+      "pattern": "^(?:bundle|evidence|mission|receipt|request|run|trace)_[a-z0-9][a-z0-9_-]+$",
+      "type": "string"
+    },
+    "requiredToolNames": {
+      "items": {
+        "enum": [
+          "palaces.get",
+          "crews.list",
+          "capabilities.list",
+          "routines.list",
+          "routines.get",
+          "executions.list",
+          "knowledge.search",
+          "plans.propose",
+          "plans.validate",
+          "plans.simulate",
+          "plans.request_approval",
+          "plans.activate",
+          "operations.get",
+          "verification.get_evidence",
+          "missions.cancel"
+        ],
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "risk": {
+      "enum": [
+        "read",
+        "reversible-write",
+        "consequential-write"
+      ],
+      "type": "string"
+    },
+    "runRef": {
+      "maxLength": 160,
+      "minLength": 8,
+      "pattern": "^(?:bundle|evidence|mission|receipt|request|run|trace)_[a-z0-9][a-z0-9_-]+$",
+      "type": "string"
+    },
+    "schemaVersion": {
+      "const": "1.0.0",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "requestId",
+    "missionRef",
+    "runRef",
+    "audience",
+    "phase",
+    "programKind",
+    "risk",
+    "contextScope",
+    "publicOnly",
+    "mandatorySourceIds",
+    "requiredToolNames",
+    "optionalSourceIds",
+    "contractPins",
+    "createdAt"
+  ],
+  "type": "object"
+}

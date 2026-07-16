@@ -1,0 +1,511 @@
+{
+  "artifacts": [
+    {
+      "bytes": 19780,
+      "owners": [
+        "packages/agent/src/context.ts",
+        "packages/agent/src/context-contracts.ts",
+        "packages/agent/src/context-routing.ts"
+      ],
+      "path": "generated/reference/context-registry.json",
+      "sha256": "49f7facb88dbabc71b56092b0f698b8c50b44cd3f5319a2cf3dccbf352f0237c"
+    },
+    {
+      "bytes": 32583,
+      "owners": [
+        "packages/agent/src/context.ts",
+        "packages/agent/src/context-contracts.ts",
+        "packages/agent/src/context-routing.ts"
+      ],
+      "path": "generated/reference/contexts/context-bundle.schema.json",
+      "sha256": "82e70272a1ea0144b545fe9660952a3221418161bb3108e3e69a009affe1d368"
+    },
+    {
+      "bytes": 20056,
+      "owners": [
+        "packages/agent/src/context.ts",
+        "packages/agent/src/context-contracts.ts",
+        "packages/agent/src/context-routing.ts"
+      ],
+      "path": "generated/reference/contexts/context-compile-input.schema.json",
+      "sha256": "0102f8b7522a4d07b9a1e4cd804f334559c2db5e360bc4ae410d699e7b66be83"
+    },
+    {
+      "bytes": 5541,
+      "owners": [
+        "packages/agent/src/context.ts",
+        "packages/agent/src/context-contracts.ts",
+        "packages/agent/src/context-routing.ts"
+      ],
+      "path": "generated/reference/contexts/context-request.schema.json",
+      "sha256": "3dfc9b5ae9a255fb5113c74ab796908e7d3c4e28120f83defe7375ba61579410"
+    },
+    {
+      "bytes": 10064,
+      "owners": [
+        "packages/agent/src/context.ts",
+        "packages/agent/src/context-contracts.ts",
+        "packages/agent/src/context-routing.ts"
+      ],
+      "path": "generated/reference/contexts/exact-tool-contract-section.schema.json",
+      "sha256": "e003dffa339b0f2b0d20795bf5ddbb67a82faecff0d74d86dbdd31868d2cdaba"
+    },
+    {
+      "bytes": 7394,
+      "owners": [
+        "packages/agent/src/context.ts",
+        "packages/agent/src/context-contracts.ts",
+        "packages/agent/src/context-routing.ts"
+      ],
+      "path": "generated/reference/contexts/host-policy-section.schema.json",
+      "sha256": "45ef2e3ad8e72c8b5fc0ce96cb71d4544db4c6e67e05254490a5c22db53ee7f9"
+    },
+    {
+      "bytes": 5273,
+      "owners": [
+        "packages/agent/src/context.ts",
+        "packages/agent/src/context-contracts.ts",
+        "packages/agent/src/context-routing.ts"
+      ],
+      "path": "generated/reference/contexts/internal-context-receipt.schema.json",
+      "sha256": "065539fdbbcdf074b1d4827384b5f65f40ba799d114a7af6004d396da91be693"
+    },
+    {
+      "bytes": 7167,
+      "owners": [
+        "packages/agent/src/context.ts",
+        "packages/agent/src/context-contracts.ts",
+        "packages/agent/src/context-routing.ts"
+      ],
+      "path": "generated/reference/contexts/knowledge-manifest.schema.json",
+      "sha256": "e6f9e2ba282cfd6b4e594139386397f2f1cf3da10dc782d038bf16771ac29378"
+    },
+    {
+      "bytes": 2982,
+      "owners": [
+        "packages/agent/src/context.ts",
+        "packages/agent/src/context-contracts.ts",
+        "packages/agent/src/context-routing.ts"
+      ],
+      "path": "generated/reference/contexts/public-context-receipt.schema.json",
+      "sha256": "7f715949624d751e1c982222b8534daa1221e4e0f89cb6292ca08fd633d24fa6"
+    },
+    {
+      "bytes": 3205,
+      "owners": [
+        "packages/agent/src/context.ts",
+        "packages/agent/src/context-contracts.ts",
+        "packages/agent/src/context-routing.ts"
+      ],
+      "path": "generated/reference/contexts/runtime-context-snapshot.schema.json",
+      "sha256": "32ce0a9ae144fa33a8660333462c97233ba8b2357bc76703fd7af6da2b485244"
+    },
+    {
+      "bytes": 107037,
+      "owners": [
+        "packages/observability/src/contracts.ts#projectEvidenceEventRegistry"
+      ],
+      "path": "generated/reference/event-registry.json",
+      "sha256": "bbce9bd97864a47aa8a4775e13c5895510c6e63ea8b988d59d2e1260543d89eb"
+    },
+    {
+      "bytes": 840839,
+      "owners": [
+        "packages/mcp/src/contract.ts#projectMcpToolCatalog"
+      ],
+      "path": "generated/reference/mcp-catalog.json",
+      "sha256": "71841dc0bd42f74c11ade3c9d60c3bdab02401bcdb6166bdcb850e89ff7edfa4"
+    },
+    {
+      "bytes": 17018,
+      "owners": [
+        "packages/core/src/missions.ts#MissionStateSchema",
+        "packages/core/src/missions.ts#resolveMissionTransition"
+      ],
+      "path": "generated/reference/mission-state-machine.json",
+      "sha256": "0695461e5d5f7392e43ba65eaa1075312b69d377e5ecd4597356fffc997125b7"
+    },
+    {
+      "bytes": 1125919,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY",
+        "apps/web/src/server/api-contracts.ts#WEB_API_SCHEMA_PROJECTIONS",
+        "apps/web/src/server/http-boundary.ts"
+      ],
+      "path": "generated/reference/openapi.json",
+      "sha256": "4b32dc9a2514a545783cc1232960000a9413ab7934583708497819c1a647cc7b"
+    },
+    {
+      "bytes": 15331,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tool-registry.json",
+      "sha256": "99985ee83592d0120aa2e96097de0f479659d6ade63912c30978d14560f28d05"
+    },
+    {
+      "bytes": 274,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/capabilities.list.input.schema.json",
+      "sha256": "ad0e5b5e2d467e3cf7d9503785923584c680a23c2f9499348c31ead9f670dfd4"
+    },
+    {
+      "bytes": 3183,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/capabilities.list.output.schema.json",
+      "sha256": "89499972ed10f8400b6a99631b98b4a98d34005344ef7b4de5c8d9f2d5c4b058"
+    },
+    {
+      "bytes": 26635,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/capabilities.list.result.schema.json",
+      "sha256": "0ce2e6828932d1412b0db55203e3c301524338830abaea719844ece17218d998"
+    },
+    {
+      "bytes": 366,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/crews.list.input.schema.json",
+      "sha256": "061b79abb325aa0947559003e6d94302b04c71d628c55bf5fe40d5c8e80a15a7"
+    },
+    {
+      "bytes": 5828,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/crews.list.output.schema.json",
+      "sha256": "69dabfe5958446c054e94801cfaa164c62c970eb65a714aaf2ca1cc7bffcad00"
+    },
+    {
+      "bytes": 37824,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/crews.list.result.schema.json",
+      "sha256": "78e9bbba7c2b22aadcce60b2f28a454b082ee53f5d89f0c20fd8bf2cbd25af28"
+    },
+    {
+      "bytes": 481,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/executions.list.input.schema.json",
+      "sha256": "237b65d8e80e3537502a42685f8750d5199c42746c16348a2d9d9d0701dbf2cd"
+    },
+    {
+      "bytes": 11588,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/executions.list.output.schema.json",
+      "sha256": "68f3d1e04f8a10c83acdb8f5580a99b65c13f5fe3a0721226f833cd7cc26c1bb"
+    },
+    {
+      "bytes": 57726,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/executions.list.result.schema.json",
+      "sha256": "3979aaf8ea5552695c7089b6bd50fff1e64cbc31597aba0879b419671bfe720a"
+    },
+    {
+      "bytes": 619,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/knowledge.search.input.schema.json",
+      "sha256": "167bad7fe7ac01132ecbacbf5085083d41b627d71763320151b9589298ad9556"
+    },
+    {
+      "bytes": 951,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/knowledge.search.output.schema.json",
+      "sha256": "3cb44671cd4cc091ef1272be3a9c4df64c26ac0b5dfc5ebc51da792486e11985"
+    },
+    {
+      "bytes": 17149,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/knowledge.search.result.schema.json",
+      "sha256": "42578731c315752d4c80bc76346e54a59052492a0481f08acf2f273385d5ae78"
+    },
+    {
+      "bytes": 382,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/missions.cancel.input.schema.json",
+      "sha256": "2e5359e022bc8b69b82927fecaae2eb68b7e068d902164e796a743941d8cd615"
+    },
+    {
+      "bytes": 1012,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/missions.cancel.output.schema.json",
+      "sha256": "1a281d96f211d956e7a9367b9ea99dc10d1a00b813a84b94fa788317a89d170a"
+    },
+    {
+      "bytes": 17486,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/missions.cancel.result.schema.json",
+      "sha256": "540e979eb2a2c78711a26e011d36e65f03e365351a768ca27d3f2df01130be6a"
+    },
+    {
+      "bytes": 279,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/operations.get.input.schema.json",
+      "sha256": "36e555811087ca4f805a37bd52d39167d97b6c47741facb0434a3111e1d12f8f"
+    },
+    {
+      "bytes": 11012,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/operations.get.output.schema.json",
+      "sha256": "ba029f226672a63560ad59293f9da77d327e2141a65e0bb3c24d5d85b03cf257"
+    },
+    {
+      "bytes": 56664,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/operations.get.result.schema.json",
+      "sha256": "f447d0759e6b5fcf617eaa06f291734a4f6fa26023d1706c7e335098bf450278"
+    },
+    {
+      "bytes": 274,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/palaces.get.input.schema.json",
+      "sha256": "ad0e5b5e2d467e3cf7d9503785923584c680a23c2f9499348c31ead9f670dfd4"
+    },
+    {
+      "bytes": 1459,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/palaces.get.output.schema.json",
+      "sha256": "d5d4be81198661b97117c889724afd6a3e956ccc9f6e47ce0488959e658bbe7c"
+    },
+    {
+      "bytes": 18867,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/palaces.get.result.schema.json",
+      "sha256": "10b0b6bd5b1f553ba059b41f1051b6bcbea9b74cd100fa24f0cbb5278507beb3"
+    },
+    {
+      "bytes": 528,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/plans.activate.input.schema.json",
+      "sha256": "d20ad4532cb5df8349de04ad42363595b4757871327b0b58e1e408c55aff2272"
+    },
+    {
+      "bytes": 3957,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/plans.activate.output.schema.json",
+      "sha256": "a9b4378856e2ecd3c09e7bc52b986e35ebcb63eb03d4a463f6f962e2c9ace547"
+    },
+    {
+      "bytes": 29131,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/plans.activate.result.schema.json",
+      "sha256": "630e02c8f11e41376f7b7216f754cc08db1835d0c9229cb4717c0cbeae170cab"
+    },
+    {
+      "bytes": 18554,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/plans.propose.input.schema.json",
+      "sha256": "2dacdad6b07a545b343b4b2c5c701e450195284b85082ccbd2241de09b07d762"
+    },
+    {
+      "bytes": 24511,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/plans.propose.output.schema.json",
+      "sha256": "82114c053977dc5607cce36a49a95236f097401f44c750cc7accebbcbca2d374"
+    },
+    {
+      "bytes": 106947,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/plans.propose.result.schema.json",
+      "sha256": "5b3e8440be838603cab3621f2b5d2b265b3bc087b402043f40e8f05d0b11cc8d"
+    },
+    {
+      "bytes": 270,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/plans.request_approval.input.schema.json",
+      "sha256": "e8d0222118edbefda5bda2085fb1d821f43e62a67fb7a0d6baf566992967602e"
+    },
+    {
+      "bytes": 374,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/plans.request_approval.output.schema.json",
+      "sha256": "3c737fcea7e62a3dcdefb79b989a221aab402a0420067b1817cf9ea8ec75cefe"
+    },
+    {
+      "bytes": 14622,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/plans.request_approval.result.schema.json",
+      "sha256": "5dce8805992280298a865f21ae2ff8a50557cd99e73320a8519b1c181403896b"
+    },
+    {
+      "bytes": 636,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/plans.simulate.input.schema.json",
+      "sha256": "648c86f1baa9cf2f13017748ba54b86c8c2a8e37d6121b5c3f27e303612c3757"
+    },
+    {
+      "bytes": 1063,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/plans.simulate.output.schema.json",
+      "sha256": "bdbba722cdc0a226d4a02cd52539eb7b7ee0db25db2bcb6dead27d820bd2a06b"
+    },
+    {
+      "bytes": 17665,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/plans.simulate.result.schema.json",
+      "sha256": "c06e32ea04509a57835e6dd02dc4d36ff2f69c9dc8dcec2ae29199fc509e626b"
+    },
+    {
+      "bytes": 270,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/plans.validate.input.schema.json",
+      "sha256": "e8d0222118edbefda5bda2085fb1d821f43e62a67fb7a0d6baf566992967602e"
+    },
+    {
+      "bytes": 888,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/plans.validate.output.schema.json",
+      "sha256": "f6f0724a8ecdf093a2368f835bdcc1c2b632de4092658ad3cdeb0b0acb3d871b"
+    },
+    {
+      "bytes": 16948,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/plans.validate.result.schema.json",
+      "sha256": "f94efb5098a8429d49884279c056185fb8a949d4214c77f55e3c8fcfd6d37e34"
+    },
+    {
+      "bytes": 376,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/routines.get.input.schema.json",
+      "sha256": "8ee8eb6926b90f404add1e2d325a04c7ce61ae2b78ecd590333a86981f23129c"
+    },
+    {
+      "bytes": 16061,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/routines.get.output.schema.json",
+      "sha256": "0dc7243e34f9947d7af3a1aca890287671859a4be7fa96b2fb14d390952ca4a3"
+    },
+    {
+      "bytes": 76087,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/routines.get.result.schema.json",
+      "sha256": "5b4f9836744c0a2aaef5ec176c6e298b5eaaae9c2726620ae9da168fd877c498"
+    },
+    {
+      "bytes": 504,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/routines.list.input.schema.json",
+      "sha256": "4d464905ef37367609c93bbdeba1af0078ad00fa3a1df00581dcd3b7d7a14e7c"
+    },
+    {
+      "bytes": 17073,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/routines.list.output.schema.json",
+      "sha256": "18000504bc4456c731af820ff83de96081c30b07c3763f260fd0f98e323ec1a0"
+    },
+    {
+      "bytes": 79321,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/routines.list.result.schema.json",
+      "sha256": "bd05b80b0861da6950c452a305720e0b20414beeae95cb342df0eea9c24f95fd"
+    },
+    {
+      "bytes": 276,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/verification.get_evidence.input.schema.json",
+      "sha256": "b71ae5c5e67ecdbce72aeee769328399c44e9e05973d0d8493a2b098089a80cb"
+    },
+    {
+      "bytes": 26140,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/verification.get_evidence.output.schema.json",
+      "sha256": "bca9d05fb1b99110bcc89c116131043d17dd936d3792bef9de88ec97f904d018"
+    },
+    {
+      "bytes": 115362,
+      "owners": [
+        "packages/core/src/tools.ts#TOOL_REGISTRY"
+      ],
+      "path": "generated/reference/tools/verification.get_evidence.result.schema.json",
+      "sha256": "c3dc57d5feec920c528a78dcb36b77cb982143db3661f2dc65e88369e9db6d3f"
+    }
+  ],
+  "generatedAt": "2026-07-15T03:50:50.000Z",
+  "generatorVersion": "1.0.0",
+  "schemaVersion": "generated-reference-manifest@1",
+  "sourceDateEpoch": "1784087450"
+}

@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "capabilities": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "constraints": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "propertyNames": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "deviceId": {
+            "pattern": "^dev_[a-z0-9][a-z0-9_-]{7,63}$",
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "id": {
+            "pattern": "^cap_[a-z0-9][a-z0-9_-]{7,63}$",
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "lock_desired_state",
+              "pathway_lighting",
+              "temperature_target",
+              "battery_projection",
+              "service_hatch_access",
+              "residential_hatch_lock_state"
+            ],
+            "type": "string"
+          },
+          "organizationId": {
+            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "organizationId",
+          "deviceId",
+          "kind",
+          "enabled",
+          "constraints"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "devices": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "health": {
+            "enum": [
+              "online",
+              "degraded",
+              "offline"
+            ],
+            "type": "string"
+          },
+          "id": {
+            "pattern": "^dev_[a-z0-9][a-z0-9_-]{7,63}$",
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "lock",
+              "service_hatch_lock",
+              "residential_hatch_lock",
+              "pathway_light",
+              "thermostat",
+              "battery_meter"
+            ],
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 120,
+            "minLength": 1,
+            "type": "string"
+          },
+          "organizationId": {
+            "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+            "type": "string"
+          },
+          "palaceId": {
+            "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+            "type": "string"
+          },
+          "version": {
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "organizationId",
+          "palaceId",
+          "kind",
+          "name",
+          "health",
+          "version"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "devices",
+    "capabilities"
+  ],
+  "type": "object"
+}

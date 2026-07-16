@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actionId": {
+      "pattern": "^act_[a-z0-9][a-z0-9_-]{7,63}$",
+      "type": "string"
+    },
+    "expectedVersion": {
+      "exclusiveMinimum": 0,
+      "maximum": 9007199254740991,
+      "type": "integer"
+    },
+    "planId": {
+      "pattern": "^pln_[a-z0-9][a-z0-9_-]{7,63}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "planId",
+    "actionId",
+    "expectedVersion"
+  ],
+  "type": "object"
+}

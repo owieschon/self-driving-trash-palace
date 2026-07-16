@@ -1,0 +1,1 @@
+ALTER TYPE "public"."outbox_topic" ADD VALUE 'execution.identity-arrival' BEFORE 'mission.resume';

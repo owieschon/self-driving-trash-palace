@@ -1,0 +1,337 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "attempts": {
+      "items": {
+        "oneOf": [
+          {
+            "additionalProperties": false,
+            "properties": {
+              "commandId": {
+                "pattern": "^gcmd_[a-z0-9][a-z0-9_-]{7,63}$",
+                "type": "string"
+              },
+              "completedAt": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "error": {
+                "anyOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "code": {
+                        "pattern": "^[A-Z][A-Z0-9_]{2,63}$",
+                        "type": "string"
+                      },
+                      "message": {
+                        "maxLength": 500,
+                        "minLength": 1,
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "code",
+                      "message"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "generation": {
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991,
+                "type": "integer"
+              },
+              "id": {
+                "pattern": "^att_[a-z0-9][a-z0-9_-]{7,63}$",
+                "type": "string"
+              },
+              "operationId": {
+                "pattern": "^op_[a-z0-9][a-z0-9_-]{7,63}$",
+                "type": "string"
+              },
+              "organizationId": {
+                "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                "type": "string"
+              },
+              "retryable": {
+                "type": "boolean"
+              },
+              "sequence": {
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991,
+                "type": "integer"
+              },
+              "startedAt": {
+                "format": "date-time",
+                "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "pending",
+                  "succeeded",
+                  "unknown",
+                  "failed"
+                ],
+                "type": "string"
+              },
+              "transport": {
+                "const": "gateway",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "organizationId",
+              "operationId",
+              "sequence",
+              "status",
+              "retryable",
+              "error",
+              "startedAt",
+              "completedAt",
+              "transport",
+              "commandId",
+              "generation"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "completedAt": {
+                "anyOf": [
+                  {
+                    "format": "date-time",
+                    "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "error": {
+                "anyOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "code": {
+                        "pattern": "^[A-Z][A-Z0-9_]{2,63}$",
+                        "type": "string"
+                      },
+                      "message": {
+                        "maxLength": 500,
+                        "minLength": 1,
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "code",
+                      "message"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "id": {
+                "pattern": "^att_[a-z0-9][a-z0-9_-]{7,63}$",
+                "type": "string"
+              },
+              "operationId": {
+                "pattern": "^op_[a-z0-9][a-z0-9_-]{7,63}$",
+                "type": "string"
+              },
+              "organizationId": {
+                "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                "type": "string"
+              },
+              "retryable": {
+                "type": "boolean"
+              },
+              "sequence": {
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991,
+                "type": "integer"
+              },
+              "startedAt": {
+                "format": "date-time",
+                "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "pending",
+                  "succeeded",
+                  "unknown",
+                  "failed"
+                ],
+                "type": "string"
+              },
+              "transport": {
+                "enum": [
+                  "http",
+                  "mcp",
+                  "worker"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "organizationId",
+              "operationId",
+              "sequence",
+              "status",
+              "retryable",
+              "error",
+              "startedAt",
+              "completedAt",
+              "transport"
+            ],
+            "type": "object"
+          }
+        ]
+      },
+      "type": "array"
+    },
+    "operation": {
+      "additionalProperties": false,
+      "properties": {
+        "approvalId": {
+          "pattern": "^apr_[a-z0-9][a-z0-9_-]{7,63}$",
+          "type": "string"
+        },
+        "committedAt": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "createdAt": {
+          "format": "date-time",
+          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+          "type": "string"
+        },
+        "id": {
+          "pattern": "^op_[a-z0-9][a-z0-9_-]{7,63}$",
+          "type": "string"
+        },
+        "missionId": {
+          "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+          "type": "string"
+        },
+        "organizationId": {
+          "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+          "type": "string"
+        },
+        "outcome": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "deactivatedRoutineId": {
+                  "anyOf": [
+                    {
+                      "pattern": "^rtn_[a-z0-9][a-z0-9_-]{7,63}$",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "routineId": {
+                  "pattern": "^rtn_[a-z0-9][a-z0-9_-]{7,63}$",
+                  "type": "string"
+                },
+                "routineVersionId": {
+                  "pattern": "^rtv_[a-z0-9][a-z0-9_-]{7,63}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "routineId",
+                "routineVersionId",
+                "deactivatedRoutineId"
+              ],
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "payloadHash": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "planActionId": {
+          "pattern": "^act_[a-z0-9][a-z0-9_-]{7,63}$",
+          "type": "string"
+        },
+        "planId": {
+          "pattern": "^pln_[a-z0-9][a-z0-9_-]{7,63}$",
+          "type": "string"
+        },
+        "serverCreated": {
+          "const": true,
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "pending",
+            "claimed",
+            "committed",
+            "failed",
+            "cancelled"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "organizationId",
+        "missionId",
+        "planId",
+        "planActionId",
+        "approvalId",
+        "payloadHash",
+        "serverCreated",
+        "status",
+        "outcome",
+        "createdAt",
+        "committedAt"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "operation",
+    "attempts"
+  ],
+  "type": "object"
+}

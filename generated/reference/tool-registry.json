@@ -1,0 +1,353 @@
+{
+  "generatedFrom": [
+    "packages/core/src/tools.ts#TOOL_REGISTRY"
+  ],
+  "schemaVersion": "tool-registry-reference@1",
+  "toolRegistryHash": "dbef1bf6f07ff52178b334e27584a13aabc737a93fe5aafc1bd334b6f96f0797",
+  "tools": [
+    {
+      "allowedPhases": [
+        "understand",
+        "plan",
+        "validate"
+      ],
+      "contractHash": "4a3aeabf64bfc1f4c953d3ef235bee4596a46a71f53a9f0fe5b2a1dd379addd9",
+      "inputSchemaHash": "2adeb075d6d41fd660fb7cb686e1bc81fa5eb8c731944f7fe281e327bcd6f184",
+      "inputSchemaPath": "generated/reference/tools/capabilities.list.input.schema.json",
+      "name": "capabilities.list",
+      "outputSchemaHash": "5b0e4babb9e0f9b5d86d0536e9c9c7bed4c0ea8c75bdff6e762b4bdd90e80ad2",
+      "outputSchemaPath": "generated/reference/tools/capabilities.list.output.schema.json",
+      "permission": "capability:read",
+      "readOnly": true,
+      "resultSchemaHash": "5a2704f7bc670a21821e5f8ccaa80cfba54e61deb704ce829623096cfe915056",
+      "resultSchemaPath": "generated/reference/tools/capabilities.list.result.schema.json",
+      "risk": "read",
+      "route": {
+        "authentication": "session_or_bearer",
+        "method": "POST",
+        "path": "/api/v1/tools/capabilities.list"
+      }
+    },
+    {
+      "allowedPhases": [
+        "understand",
+        "plan",
+        "validate"
+      ],
+      "contractHash": "67408cde225adef852a7c08f43285e20fd9523ef4fdd4182480051e4fd44d61e",
+      "inputSchemaHash": "8b380ce09e9739e4b48869f20d191d8c500f3fde2d2ca7f32cf8f2a8e699160e",
+      "inputSchemaPath": "generated/reference/tools/crews.list.input.schema.json",
+      "name": "crews.list",
+      "outputSchemaHash": "2208f83665815bf705e91ad5d235d138311dab30a1ee5d42bfe884dea3485874",
+      "outputSchemaPath": "generated/reference/tools/crews.list.output.schema.json",
+      "permission": "crew:read",
+      "readOnly": true,
+      "resultSchemaHash": "f066cbf82c1bef7e9f192baedbf6df090b7c925c61e3336dfeaa7e93b26a42bf",
+      "resultSchemaPath": "generated/reference/tools/crews.list.result.schema.json",
+      "risk": "read",
+      "route": {
+        "authentication": "session_or_bearer",
+        "method": "POST",
+        "path": "/api/v1/tools/crews.list"
+      }
+    },
+    {
+      "allowedPhases": [
+        "understand",
+        "observe",
+        "verify"
+      ],
+      "contractHash": "f44d81ab849a9b7ceeddc1cfd1b43a444534ab23339733f2219a3dc4781c3675",
+      "inputSchemaHash": "de511eb183e27257088ad6e730c739003e4557c4a0ce5a80dd612d01dc937561",
+      "inputSchemaPath": "generated/reference/tools/executions.list.input.schema.json",
+      "name": "executions.list",
+      "outputSchemaHash": "db1083b8d1d0e29a92964da56275f67476ba1e61afa3db97578c607466777d14",
+      "outputSchemaPath": "generated/reference/tools/executions.list.output.schema.json",
+      "permission": "routine:read",
+      "readOnly": true,
+      "resultSchemaHash": "1cd7886e01c9a16f8cc5195445585d66fb98b336e5b3c417aceb6ea97ddd274d",
+      "resultSchemaPath": "generated/reference/tools/executions.list.result.schema.json",
+      "risk": "read",
+      "route": {
+        "authentication": "session_or_bearer",
+        "method": "POST",
+        "path": "/api/v1/tools/executions.list"
+      }
+    },
+    {
+      "allowedPhases": [
+        "understand",
+        "plan",
+        "validate",
+        "reconcile",
+        "verify"
+      ],
+      "contractHash": "c0b03bd5d3c549ed85dd9d0bc5c0b61956edb12941b2b6b8f9bf6cb20d4d06c5",
+      "inputSchemaHash": "74b97e380019c1e1932c15a30078ab3b534439ae2d38671e11d2a3124fdac010",
+      "inputSchemaPath": "generated/reference/tools/knowledge.search.input.schema.json",
+      "name": "knowledge.search",
+      "outputSchemaHash": "22ad204867da6dc814e62616fa260aa9767324b3d412aa8f2f32ee0fb9c0341a",
+      "outputSchemaPath": "generated/reference/tools/knowledge.search.output.schema.json",
+      "permission": "knowledge:read",
+      "readOnly": true,
+      "resultSchemaHash": "600fa43d16b98bd4dbd09dadc46508797268c935d654a15a440ea0aeb60cdf12",
+      "resultSchemaPath": "generated/reference/tools/knowledge.search.result.schema.json",
+      "risk": "read",
+      "route": {
+        "authentication": "session_or_bearer",
+        "method": "POST",
+        "path": "/api/v1/tools/knowledge.search"
+      }
+    },
+    {
+      "allowedPhases": [
+        "understand",
+        "plan",
+        "validate",
+        "approve",
+        "execute",
+        "reconcile",
+        "observe",
+        "verify"
+      ],
+      "contractHash": "4d3bef5d77c6975b12f2866e77769e9125eb73ea424e7e2910e51290382e9fc3",
+      "inputSchemaHash": "5131bde03cc6c8ab0def0185f2b49942aa6649ae083a247140a7c0d372731d23",
+      "inputSchemaPath": "generated/reference/tools/missions.cancel.input.schema.json",
+      "name": "missions.cancel",
+      "outputSchemaHash": "9ca6ca111627fc48baf65913d5d5313ddddea94551f763ba9df88a59df371ff3",
+      "outputSchemaPath": "generated/reference/tools/missions.cancel.output.schema.json",
+      "permission": "mission:cancel",
+      "readOnly": false,
+      "resultSchemaHash": "cddaef468c8642cd8ab275761d3c3f8961f99b8be0b0ddc9860569e4b68388b9",
+      "resultSchemaPath": "generated/reference/tools/missions.cancel.result.schema.json",
+      "risk": "control",
+      "route": {
+        "authentication": "session_or_bearer",
+        "method": "POST",
+        "path": "/api/v1/tools/missions.cancel"
+      }
+    },
+    {
+      "allowedPhases": [
+        "execute",
+        "reconcile"
+      ],
+      "contractHash": "f638a9a42c64b07b5c3c0fa0ef4c2ee637c1c619e1d62d88e3235cc4b87bc5a4",
+      "inputSchemaHash": "9ebeda976ec4f2043f16f5c36b60c5410b37fb2dd786c6b852ce45a56037d0ab",
+      "inputSchemaPath": "generated/reference/tools/operations.get.input.schema.json",
+      "name": "operations.get",
+      "outputSchemaHash": "06f9acebe5bacc6157d3228211b2243f2299b273dec78527478f759c74e0a114",
+      "outputSchemaPath": "generated/reference/tools/operations.get.output.schema.json",
+      "permission": "operation:reconcile",
+      "readOnly": true,
+      "resultSchemaHash": "4bde927426893a984e52502b7c174d13217dedbeda11695c28727317e314c0a8",
+      "resultSchemaPath": "generated/reference/tools/operations.get.result.schema.json",
+      "risk": "read",
+      "route": {
+        "authentication": "session_or_bearer",
+        "method": "POST",
+        "path": "/api/v1/tools/operations.get"
+      }
+    },
+    {
+      "allowedPhases": [
+        "understand",
+        "plan",
+        "validate"
+      ],
+      "contractHash": "aa5ec797fbd8e7dada7f66283495407a7d6f86208c8b537d3cd76c32defee74e",
+      "inputSchemaHash": "2adeb075d6d41fd660fb7cb686e1bc81fa5eb8c731944f7fe281e327bcd6f184",
+      "inputSchemaPath": "generated/reference/tools/palaces.get.input.schema.json",
+      "name": "palaces.get",
+      "outputSchemaHash": "76e07d0692899df10714492cf36037d2043c1731d220c4f69dfbca6cf7de6ada",
+      "outputSchemaPath": "generated/reference/tools/palaces.get.output.schema.json",
+      "permission": "palace:read",
+      "readOnly": true,
+      "resultSchemaHash": "ed58cc9a311ae11a0a32db8e6206c370161032bf55e12f49951c9c7d4593e1a9",
+      "resultSchemaPath": "generated/reference/tools/palaces.get.result.schema.json",
+      "risk": "read",
+      "route": {
+        "authentication": "session_or_bearer",
+        "method": "POST",
+        "path": "/api/v1/tools/palaces.get"
+      }
+    },
+    {
+      "allowedPhases": [
+        "execute"
+      ],
+      "contractHash": "375f2618bf993b10fc69c0595f56e5303715145c9e78ac8dd4bbfc61e324d19d",
+      "inputSchemaHash": "516bb6a1dcf8f054d1bc01efd7caed4eae549b1859a067586ff410ff1c1c5118",
+      "inputSchemaPath": "generated/reference/tools/plans.activate.input.schema.json",
+      "name": "plans.activate",
+      "outputSchemaHash": "aeade9fddf5084a1a51d7ef4d2e51a883c33a3a4e20208b4ea9266d9aa569625",
+      "outputSchemaPath": "generated/reference/tools/plans.activate.output.schema.json",
+      "permission": "routine:activate",
+      "readOnly": false,
+      "resultSchemaHash": "598207fb6c2f98af04217cbc57f50cb5dbf6f9dd2c41ee6c01d98ac737a01b27",
+      "resultSchemaPath": "generated/reference/tools/plans.activate.result.schema.json",
+      "risk": "consequential",
+      "route": {
+        "authentication": "session_or_bearer",
+        "method": "POST",
+        "path": "/api/v1/tools/plans.activate"
+      }
+    },
+    {
+      "allowedPhases": [
+        "plan"
+      ],
+      "contractHash": "e6d054f99f33eb5b3165975dc9cf27329f85af082658cfee924a62c27fbc0fc2",
+      "inputSchemaHash": "1c51c530670241ad92971da02da3484b8db4cd81c9ab8054eee99796c4eede13",
+      "inputSchemaPath": "generated/reference/tools/plans.propose.input.schema.json",
+      "name": "plans.propose",
+      "outputSchemaHash": "2ebc6e749ad38c258764603d991e89ea6fc112993c8a611aea31b0e7cdb44a11",
+      "outputSchemaPath": "generated/reference/tools/plans.propose.output.schema.json",
+      "permission": "routine:draft",
+      "readOnly": false,
+      "resultSchemaHash": "b76954f9efd1a73f5276c77ea3d85cbc66794561b91f492ffbc6700af124ed2c",
+      "resultSchemaPath": "generated/reference/tools/plans.propose.result.schema.json",
+      "risk": "proposal",
+      "route": {
+        "authentication": "session_or_bearer",
+        "method": "POST",
+        "path": "/api/v1/tools/plans.propose"
+      }
+    },
+    {
+      "allowedPhases": [
+        "validate"
+      ],
+      "contractHash": "b594d852cd4b19896d3854434a41e5d5a6d1e0cd4e623213503cdea7e362ae33",
+      "inputSchemaHash": "0330e40a1851d0ee04b1cace30ef7854f0e38e11814355f44213611fbce24f57",
+      "inputSchemaPath": "generated/reference/tools/plans.request_approval.input.schema.json",
+      "name": "plans.request_approval",
+      "outputSchemaHash": "8a19ec20e357a56eb6c8cd7eee60ff1211237885fd0fbaf0b0d3f640507b348c",
+      "outputSchemaPath": "generated/reference/tools/plans.request_approval.output.schema.json",
+      "permission": "routine:draft",
+      "readOnly": false,
+      "resultSchemaHash": "222ad75fd00a7aac11d372ebde34648709dc6e38bba61eb9b4ac598169097719",
+      "resultSchemaPath": "generated/reference/tools/plans.request_approval.result.schema.json",
+      "risk": "pause",
+      "route": {
+        "authentication": "session_or_bearer",
+        "method": "POST",
+        "path": "/api/v1/tools/plans.request_approval"
+      }
+    },
+    {
+      "allowedPhases": [
+        "validate"
+      ],
+      "contractHash": "81461bf0c36f3d91c1e12ac6938a1d887c7e5620ab5e2eeaddf63e3d1ed102ac",
+      "inputSchemaHash": "236b682f2672b9475c0ba01ae132cec80087d88f8425e47ff103aa343d705580",
+      "inputSchemaPath": "generated/reference/tools/plans.simulate.input.schema.json",
+      "name": "plans.simulate",
+      "outputSchemaHash": "6e285b30749f71d7d5652570d46e29015dd383c70c1b4225376bf2abf62ef565",
+      "outputSchemaPath": "generated/reference/tools/plans.simulate.output.schema.json",
+      "permission": "routine:simulate",
+      "readOnly": false,
+      "resultSchemaHash": "f7d16521c5b8334d6819941d47fd5ef905ca856a9e844b08e66a94db688ac509",
+      "resultSchemaPath": "generated/reference/tools/plans.simulate.result.schema.json",
+      "risk": "proposal",
+      "route": {
+        "authentication": "session_or_bearer",
+        "method": "POST",
+        "path": "/api/v1/tools/plans.simulate"
+      }
+    },
+    {
+      "allowedPhases": [
+        "validate"
+      ],
+      "contractHash": "755f39f01042cd18e9a5783527bad7bc0f53483b3352a59ecd71fe92e7fd0b89",
+      "inputSchemaHash": "0330e40a1851d0ee04b1cace30ef7854f0e38e11814355f44213611fbce24f57",
+      "inputSchemaPath": "generated/reference/tools/plans.validate.input.schema.json",
+      "name": "plans.validate",
+      "outputSchemaHash": "ccebb05b1820d37f5f5ded8f242e0c3aef33aed1997032242f08abe6f1d51eee",
+      "outputSchemaPath": "generated/reference/tools/plans.validate.output.schema.json",
+      "permission": "routine:validate",
+      "readOnly": false,
+      "resultSchemaHash": "75ffec393382d2ac076974aeec352a300e9b515ab5010a46abb08048f28acf0c",
+      "resultSchemaPath": "generated/reference/tools/plans.validate.result.schema.json",
+      "risk": "proposal",
+      "route": {
+        "authentication": "session_or_bearer",
+        "method": "POST",
+        "path": "/api/v1/tools/plans.validate"
+      }
+    },
+    {
+      "allowedPhases": [
+        "understand",
+        "plan",
+        "validate",
+        "reconcile",
+        "verify"
+      ],
+      "contractHash": "90bd2f06a64aec7a1cc8f61cab4cdcafbb3f400698458bcba0e5f5c20ee265b5",
+      "inputSchemaHash": "c5b6e421cef4fc33cc683c76a7ad8215bc3ddf385fd85b0b0fbc8891105fbda5",
+      "inputSchemaPath": "generated/reference/tools/routines.get.input.schema.json",
+      "name": "routines.get",
+      "outputSchemaHash": "9b0c23aa6223896a7464310d484c82078097e062942f170e01c11ac245862328",
+      "outputSchemaPath": "generated/reference/tools/routines.get.output.schema.json",
+      "permission": "routine:read",
+      "readOnly": true,
+      "resultSchemaHash": "18a643a9dbc6afb5cf17a18b2e6b6ab16a64450303d6845b709a7549dc33890e",
+      "resultSchemaPath": "generated/reference/tools/routines.get.result.schema.json",
+      "risk": "read",
+      "route": {
+        "authentication": "session_or_bearer",
+        "method": "POST",
+        "path": "/api/v1/tools/routines.get"
+      }
+    },
+    {
+      "allowedPhases": [
+        "understand",
+        "plan",
+        "validate",
+        "reconcile",
+        "verify"
+      ],
+      "contractHash": "3eed45c3202ce025f13c43b34c5914db19d069f8857cb4adf751ef655a238831",
+      "inputSchemaHash": "6e3bad5dd82a05f55800248be2f3a7edf8e453da511bc8e31814f09be05ae0c2",
+      "inputSchemaPath": "generated/reference/tools/routines.list.input.schema.json",
+      "name": "routines.list",
+      "outputSchemaHash": "4bfed24582c644c5efae3b2852e339825e8cd8b1ddbafdb855753944a1ae50d6",
+      "outputSchemaPath": "generated/reference/tools/routines.list.output.schema.json",
+      "permission": "routine:read",
+      "readOnly": true,
+      "resultSchemaHash": "cc862af064c3cfaa99eda0b8f4b134cd3fb83fb0339df1e2e5f7316bc2bf26dc",
+      "resultSchemaPath": "generated/reference/tools/routines.list.result.schema.json",
+      "risk": "read",
+      "route": {
+        "authentication": "session_or_bearer",
+        "method": "POST",
+        "path": "/api/v1/tools/routines.list"
+      }
+    },
+    {
+      "allowedPhases": [
+        "observe",
+        "verify"
+      ],
+      "contractHash": "7b60c9812669d970a09b7e0f244d5f28ab89b9196b573ce2695dd6e845ec6e2f",
+      "inputSchemaHash": "2adcecb683c661aedfd4d1c61d7a81dd605422f2ac0c91ee2ad21ff3f5b52501",
+      "inputSchemaPath": "generated/reference/tools/verification.get_evidence.input.schema.json",
+      "name": "verification.get_evidence",
+      "outputSchemaHash": "263efb87c49467c28ebadf97088c1fa58d887e4bc269ee7e796df8c8f7099880",
+      "outputSchemaPath": "generated/reference/tools/verification.get_evidence.output.schema.json",
+      "permission": "verification:read",
+      "readOnly": true,
+      "resultSchemaHash": "7e78e968b30ff6c4f8ab2f79ff3c097a7879122e963c61bec9094ec8c6638061",
+      "resultSchemaPath": "generated/reference/tools/verification.get_evidence.result.schema.json",
+      "risk": "read",
+      "route": {
+        "authentication": "session_or_bearer",
+        "method": "POST",
+        "path": "/api/v1/tools/verification.get_evidence"
+      }
+    }
+  ]
+}
