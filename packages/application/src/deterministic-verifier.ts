@@ -383,14 +383,10 @@ function assertApprovedBindings(input: {
     throw new ConflictError('Verification plan is not bound to its exact approval')
   }
   if (
-    mission.contextReceiptId === null ||
-    mission.runId === null ||
-    contextReceipt.id !== mission.contextReceiptId ||
     contextReceipt.organizationId !== mission.organizationId ||
-    contextReceipt.missionId !== mission.id ||
-    contextReceipt.runId !== mission.runId
+    contextReceipt.missionId !== mission.id
   ) {
-    throw new ConflictError('Verification plan is not bound to the mission context receipt')
+    throw new ConflictError('Verification plan is not bound to a mission context receipt')
   }
   if (Date.parse(contextReceipt.createdAt) > Date.parse(plan.createdAt)) {
     throw new ConflictError('Verification context receipt was created after the approved plan')

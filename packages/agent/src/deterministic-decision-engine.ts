@@ -209,16 +209,18 @@ export class DeterministicCaretakerDecisionEngine implements CaretakerDecisionEn
           ),
         )
       }
+      const operationId = liveState.operation.operationId
+      if (operationId === null) {
+        throw new Error('An operation requiring reconciliation must have a durable operation ID')
+      }
       return Promise.resolve(
-        parse(request, {
-          schemaVersion: 'caretaker-decision@1',
-          kind: 'pause',
-          reason:
-            'The existing logical operation is unknown and its durable reconciler owns resolution.',
-          evidenceIds: evidenceFor(request, 'operation.id', 'operation.status'),
-          pauseReason: 'waiting_for_reconciliation',
-          resumeWhen: 'The durable operation reconciler records a terminal resolution.',
-        }),
+        invokeTool(
+          request,
+          'operations.get',
+          { operationId },
+          'Reconcile the existing logical operation before considering another activation.',
+          evidenceFor(request, 'operation.id', 'operation.status'),
+        ),
       )
     }
 

@@ -125,7 +125,7 @@
     min-width: 0;
     overflow: visible;
   }
-  .learn-layout aside button {
+  .learn-layout aside > div {
     width: 100%;
     min-width: 0;
     white-space: normal;

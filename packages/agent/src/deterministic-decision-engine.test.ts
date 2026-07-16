@@ -243,7 +243,7 @@ describe('deterministic Caretaker decision observations', () => {
     ).resolves.toMatchObject({ kind: 'invoke_tool', toolName: 'plans.activate' })
   })
 
-  it('yields immediately to the durable operation reconciler', async () => {
+  it('reconciles an existing uncertain operation instead of activating the plan again', async () => {
     const base = decisionRequest()
     const request = CaretakerDecisionRequestSchema.parse({
       ...base,
@@ -286,8 +286,9 @@ describe('deterministic Caretaker decision observations', () => {
     await expect(
       new DeterministicCaretakerDecisionEngine().decide(request, activation([])),
     ).resolves.toMatchObject({
-      kind: 'pause',
-      pauseReason: 'waiting_for_reconciliation',
+      kind: 'invoke_tool',
+      toolName: 'operations.get',
+      input: { operationId: 'op_reconcile01' },
     })
   })
 

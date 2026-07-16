@@ -323,6 +323,10 @@ export interface ExecutionRepository {
 
 export interface ContextReceiptRepository {
   get(receiptId: ContextReceiptId): Promise<ContextReceipt | null>
+  findLatestForMissionAtOrBefore(
+    missionId: MissionId,
+    createdAt: string,
+  ): Promise<ContextReceipt | null>
   insert(receipt: ContextReceipt): Promise<void>
 }
 

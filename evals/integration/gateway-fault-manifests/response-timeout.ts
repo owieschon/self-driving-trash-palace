@@ -50,10 +50,10 @@ export const RESPONSE_TIMEOUT_GATEWAY_FAULT_MANIFEST =
         totalCount: 2,
         activationTransport: {
           sequence: 1,
-          transport: 'mcp',
+          transport: 'worker',
           status: 'unknown',
           retryable: true,
-          errorCode: 'TOOL_RESPONSE_LOST',
+          errorCode: 'APPLICATION_RESPONSE_LOST',
         },
         gatewayTransport: {
           sequence: 2,

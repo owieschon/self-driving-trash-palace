@@ -1,6 +1,12 @@
 import { describe, expect, it } from 'vitest'
 
-import type { PlanActionId } from '@trash-palace/core'
+import {
+  ContextReceiptIdSchema,
+  ContextReceiptSchema,
+  MissionSchema,
+  RunIdSchema,
+  type PlanActionId,
+} from '@trash-palace/core'
 
 import { ConflictError } from '../errors.js'
 import type { MissionExecutionContext } from '../mission-fence.js'
@@ -132,6 +138,41 @@ describe('plan validation and simulation hooks', () => {
 })
 
 describe('verifier-owned mission success', () => {
+  it('verifies against the planning receipt after later Caretaker runs refresh mission context', async () => {
+    const fixture = makeProductionVerificationFixture()
+    const resumedRunId = RunIdSchema.parse('run_verification_resume')
+    const resumedReceiptId = ContextReceiptIdSchema.parse('ctx_verification_resume')
+    const resumedMission = MissionSchema.parse({
+      ...fixture.material.mission,
+      runId: resumedRunId,
+      contextReceiptId: resumedReceiptId,
+      updatedAt: '2026-08-14T05:46:23.000Z',
+    })
+    const resumedReceipt = ContextReceiptSchema.parse({
+      ...fixture.material.contextReceipt,
+      id: resumedReceiptId,
+      runId: resumedRunId,
+      createdAt: '2026-08-14T05:46:23.000Z',
+    })
+    const store = new InMemoryApplicationStore({
+      ...fixture.seed,
+      missions: [resumedMission],
+      contextReceipts: [...(fixture.seed.contextReceipts ?? []), resumedReceipt],
+    })
+
+    const result = await new VerificationService(
+      store,
+      new MutableClock(new Date('2026-08-14T06:01:00.000Z')),
+      new SequentialIdGenerator(),
+    ).run({
+      organizationId: IDS.organization,
+      missionId: resumedMission.id,
+    })
+
+    expect(result.verification.status).toBe('passed')
+    expect(result.mission.state).toEqual({ status: 'succeeded', phase: 'verify' })
+  })
+
   it('reads the verification snapshot sequentially on a single transaction', async () => {
     const fixture = makeProductionVerificationFixture()
     const store = new InMemoryApplicationStore(fixture.seed)

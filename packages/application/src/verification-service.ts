@@ -76,12 +76,12 @@ export class VerificationService {
       }
       const approval = await repositories.approvals.findForPlan(plan.id)
       if (approval === null) throw new ConflictError('Verification requires the exact approval')
-      if (mission.contextReceiptId === null) {
-        throw new ConflictError('Verification requires the mission context receipt')
-      }
-      const contextReceipt = await repositories.contextReceipts.get(mission.contextReceiptId)
+      const contextReceipt = await repositories.contextReceipts.findLatestForMissionAtOrBefore(
+        mission.id,
+        plan.createdAt,
+      )
       if (contextReceipt === null) {
-        throw new ConflictError('Verification requires the mission context receipt')
+        throw new ConflictError('Verification requires the context receipt used to create the plan')
       }
       const operations = await repositories.operations.listForMission(mission.id)
       const executions = await repositories.executions.listForMission(mission.id)

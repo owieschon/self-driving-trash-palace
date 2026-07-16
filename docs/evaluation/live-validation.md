@@ -4,7 +4,7 @@ This runbook defines the approvals and evidence required before any paid model r
 
 ## Current state
 
-Live model behavior, PostHog ingestion, and a completed self-improving loop are **Blocked**. The retained [blocked receipt](../../evals/reports/live-validation-blocked.json) records zero network requests and no secret values.
+Live model behavior and a completed self-improving loop are **Blocked**. PostHog ingestion is **Ingestion-verified** for one content-free evaluation batch: the [live receipt](../../evals/reports/posthog-ingestion-live.json) records a product event and correlated AI span/trace pair observed server-side in the approved US project. It does not prove model behavior or a completed improvement loop. The earlier [blocked receipt](../../evals/reports/live-validation-blocked.json) remains the pre-authorization snapshot.
 
 The repository implements the case catalog, promotion scorer, fail-closed preflight, and generic
 runner contract. It does not implement the credentialed production case executor or its invocation
@@ -53,4 +53,4 @@ The runner must abort before its first request when approval, budget, model conf
 
 Retain sanitized trace, context receipt, plan and approval bindings, tool and operation receipts, verifier assertions, latency, token count, cost, and evaluator output. Never retain raw credentials, authorization headers, private prompts, private PostHog links, customer data, usernames, or home-directory paths.
 
-Review every failure and a sampled 20% of successful promotion runs. Freeze promotion thresholds only after the baseline is measured. PostHog ingestion remains **Blocked** until the approved project shows the expected sanitized event and trace hierarchy. The self-improving loop remains **Blocked** until a real post-change observation window closes.
+Review every failure and a sampled 20% of successful promotion runs. Freeze promotion thresholds only after the baseline is measured. The retained PostHog receipt proves only transport, sanitization, server-side arrival, and trace correlation for its named evaluation batch. The self-improving loop remains **Blocked** until a real post-change observation window closes.

@@ -4665,6 +4665,25 @@ export class PgTenantRepositories {
         .limit(1)
       return row ? mapContextReceipt(row) : null
     },
+    findLatestForMissionAtOrBefore: async (
+      inputMissionId: MissionId,
+      inputCreatedAt: string,
+    ): Promise<ContextReceipt | null> => {
+      const missionId = MissionIdSchema.parse(inputMissionId)
+      const [row] = await this.executor
+        .select()
+        .from(contextReceipts)
+        .where(
+          and(
+            eq(contextReceipts.organizationId, this.organizationId),
+            eq(contextReceipts.missionId, missionId),
+            lte(contextReceipts.createdAt, date(inputCreatedAt)),
+          ),
+        )
+        .orderBy(desc(contextReceipts.createdAt), desc(contextReceipts.id))
+        .limit(1)
+      return row ? mapContextReceipt(row) : null
+    },
     insert: async (input: ContextReceipt): Promise<void> => {
       const receipt = ContextReceiptSchema.parse(input)
       this.assertTenant(receipt.organizationId)

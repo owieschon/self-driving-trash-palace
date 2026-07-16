@@ -64,7 +64,7 @@ export type CanonicalGatewayFaultInjection = z.infer<typeof CanonicalGatewayFaul
 const AttemptExpectationSchema = z
   .object({
     sequence: z.number().int().positive(),
-    transport: z.enum(['mcp', 'gateway']),
+    transport: z.enum(['mcp', 'worker', 'gateway']),
     status: z.enum(['succeeded', 'unknown', 'failed']),
     retryable: z.boolean(),
     errorCode: z
@@ -276,10 +276,10 @@ export const GatewayFaultDurableOutcomeManifestSchema = z
     const state = manifest.expectedDurableState
     if (
       state.attempts.activationTransport.sequence !== 1 ||
-      state.attempts.activationTransport.transport !== 'mcp' ||
+      state.attempts.activationTransport.transport !== 'worker' ||
       state.attempts.activationTransport.status !== 'unknown' ||
       !state.attempts.activationTransport.retryable ||
-      state.attempts.activationTransport.errorCode !== 'TOOL_RESPONSE_LOST'
+      state.attempts.activationTransport.errorCode !== 'APPLICATION_RESPONSE_LOST'
     ) {
       context.addIssue({
         code: 'custom',

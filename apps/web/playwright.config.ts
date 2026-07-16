@@ -10,7 +10,8 @@ export default defineConfig({
     trace: 'retain-on-failure',
   },
   webServer: {
-    command: 'pnpm --filter @trash-palace/web start --port 3210',
+    command:
+      'pnpm --filter @trash-palace/web build && pnpm --filter @trash-palace/web start --port 3210',
     url: 'http://127.0.0.1:3210',
     reuseExistingServer: false,
     timeout: 120_000,

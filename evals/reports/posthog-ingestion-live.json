@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "posthog-ingestion-live@1",
+  "status": "verified",
+  "projectId": 508977,
+  "region": "us",
+  "startedAt": "2026-07-16T01:34:59.913Z",
+  "completedAt": "2026-07-16T01:35:00.193Z",
+  "eventNames": ["mission created", "$ai_span", "$ai_trace"],
+  "insertIds": [
+    "tpi_v1_hllCi330FiL5l3ro5bHtIEhaymvQ_6bTCMtg7-dEgWg",
+    "tpi_v1_z-nik9iwVqGC89Zcp9wZdWyGvPFv0THmjicccWrTi88",
+    "tpi_v1_N_UTdn9E1VKy5xqedp6oKxcmtLuqqAK7wZWyPQxcBr8"
+  ],
+  "traceAlias": "tpa_run_v1_FEbDPuNF3D8ZgWcH7FkUWDwzVd79UIvf9ee021TuCMM",
+  "submission": {
+    "schemaVersion": "1",
+    "target": "posthog_us",
+    "receivedCount": 3,
+    "submittedCount": 3,
+    "duplicateCount": 0,
+    "disabledCount": 0,
+    "rejectedCount": 0,
+    "captureFailedCount": 0,
+    "deliveryUnknownCount": 0,
+    "flushStatus": "succeeded",
+    "results": [
+      {
+        "index": 0,
+        "insertId": "tpi_v1_hllCi330FiL5l3ro5bHtIEhaymvQ_6bTCMtg7-dEgWg",
+        "status": "submitted"
+      },
+      {
+        "index": 1,
+        "insertId": "tpi_v1_z-nik9iwVqGC89Zcp9wZdWyGvPFv0THmjicccWrTi88",
+        "status": "submitted"
+      },
+      {
+        "index": 2,
+        "insertId": "tpi_v1_N_UTdn9E1VKy5xqedp6oKxcmtLuqqAK7wZWyPQxcBr8",
+        "status": "submitted"
+      }
+    ]
+  },
+  "shutdown": {
+    "schemaVersion": "1",
+    "status": "succeeded",
+    "flushStatus": "succeeded",
+    "clientStatus": "succeeded"
+  },
+  "serverObservation": {
+    "verifiedAt": "2026-07-16T01:36:35Z",
+    "queryMethod": "PostHog MCP execute-sql",
+    "queryWindow": "1 hour",
+    "observedCount": 3,
+    "eventCounts": {
+      "$ai_span": 1,
+      "$ai_trace": 1,
+      "mission created": 1
+    },
+    "uniqueInsertIdCount": 3,
+    "organizationAliasCount": 1,
+    "aiTraceAliasCount": 1,
+    "eachInsertIdObservedExactlyOnce": true,
+    "spanAndTraceShareTraceAlias": true
+  },
+  "privacy": {
+    "secretValuesRetained": false,
+    "rawIdentifiersRetained": false,
+    "promptsRetained": false,
+    "customerDataRetained": false
+  },
+  "claims": {
+    "posthogIngestion": "PostHog-ingestion-verified",
+    "liveModel": "Blocked",
+    "liveLoop": "Blocked"
+  }
+}

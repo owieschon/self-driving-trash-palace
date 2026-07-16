@@ -11,7 +11,7 @@ This page sets the claim boundary for the retained pre-visual, pre-deployment ev
 | The complete composed network Quest passes from a clean host | Network-verified       | [Credential-free Quest receipt](../../evals/reports/credential-free-quest.json)                           |
 | Real model project discovery and tool choice are reliable    | Blocked                | Requires approved credentials, a paid budget, a frozen configuration, and repeated live runs              |
 | Live latency, tokens, cost, and provider stability are known | Blocked                | Requires the same credentialed baseline                                                                   |
-| Sanitized events and traces arrive in PostHog                | Blocked                | Local allowlists and transport code are not server-side ingestion evidence                                |
+| Sanitized events and traces arrive in PostHog                | Ingestion-verified     | [Server-observed live receipt](../../evals/reports/posthog-ingestion-live.json)                           |
 | A self-improving loop produced a beneficial result           | Blocked                | Requires a real signal, report, investigation, reviewed change, delivery, and declared post-change window |
 | The product controls real connected hardware                 | Out of scope           | Gateway behavior is a deterministic simulator                                                             |
 | Visual browser UX and accessibility meet release gates       | Deferred               | Visual design, browser journey review, and deployment occur after the non-visual core                     |

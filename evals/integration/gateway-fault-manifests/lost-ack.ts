@@ -49,10 +49,10 @@ export const LOST_ACK_GATEWAY_FAULT_MANIFEST = GatewayFaultDurableOutcomeManifes
       totalCount: 2,
       activationTransport: {
         sequence: 1,
-        transport: 'mcp',
+        transport: 'worker',
         status: 'unknown',
         retryable: true,
-        errorCode: 'TOOL_RESPONSE_LOST',
+        errorCode: 'APPLICATION_RESPONSE_LOST',
       },
       gatewayTransport: {
         sequence: 2,

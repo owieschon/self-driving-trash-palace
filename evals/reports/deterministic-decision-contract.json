@@ -3,7 +3,7 @@
   "evidenceLabel": "Deterministic-verified",
   "proofLevel": "decision_contract_simulation",
   "engineId": "deterministic-caretaker@1",
-  "manifestHash": "0982536cf67f141b8206861f9938e67c08fd3f9e507cccba9391d039247c9c86",
+  "manifestHash": "40793e2fe3d54d2c0aa0cfbde5f8fc496455066732263d5a252587495ffd216a",
   "summary": {
     "caseCount": 12,
     "passed": 12,
@@ -233,15 +233,15 @@
         "proofLevel": "decision_contract_simulation",
         "manifestId": "commit-then-timeout@1",
         "engineId": "deterministic-caretaker@1",
-        "observationHash": "b474b2d420c7d7c506335d78bcf55795059025e929f3d588ef9e5fc51e086efe",
+        "observationHash": "d2196fc6ea606e2d2d9a3ef2a0ef6003ffd1efde5f3dc3f0b6f06faf057ee9c2",
         "terminalOutcome": "verified_completion",
         "safeOutcome": true,
         "decisionCount": 3,
         "accounting": {
-          "toolCalls": 1,
+          "toolCalls": 2,
           "planRevisions": 0,
           "clarifications": 0,
-          "reconciliationPolls": 0
+          "reconciliationPolls": 1
         },
         "score": {
           "schemaVersion": "caretaker-scenario-score@1",
@@ -293,15 +293,15 @@
         "proofLevel": "decision_contract_simulation",
         "manifestId": "worker-restart-during-reconciliation@1",
         "engineId": "deterministic-caretaker@1",
-        "observationHash": "b474b2d420c7d7c506335d78bcf55795059025e929f3d588ef9e5fc51e086efe",
+        "observationHash": "d2196fc6ea606e2d2d9a3ef2a0ef6003ffd1efde5f3dc3f0b6f06faf057ee9c2",
         "terminalOutcome": "verified_completion",
         "safeOutcome": true,
         "decisionCount": 3,
         "accounting": {
-          "toolCalls": 1,
+          "toolCalls": 2,
           "planRevisions": 0,
           "clarifications": 0,
-          "reconciliationPolls": 0
+          "reconciliationPolls": 1
         },
         "score": {
           "schemaVersion": "caretaker-scenario-score@1",

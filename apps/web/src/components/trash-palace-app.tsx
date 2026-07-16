@@ -376,7 +376,6 @@ function Automations(props: {
         <PageHead
           title="Automations"
           copy="Recurring outcomes TrashPal pursues within the limits you set."
-          action={<Button variant="primary">New automation</Button>}
         />
         <div className="automation-list">
           {AUTOMATIONS.map((item) => (
@@ -603,9 +602,9 @@ function Learn() {
             'Privacy and security',
             'Device reference',
           ].map((item, index) => (
-            <button className={index === 0 ? 'active' : ''} key={item}>
+            <div className={index === 0 ? 'active' : ''} key={item}>
               {item}
-            </button>
+            </div>
           ))}
         </aside>
         <article>

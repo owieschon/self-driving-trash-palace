@@ -7,6 +7,7 @@ test('presents TrashPal as a reusable household automation product', async ({ pa
   await page.getByRole('button', { name: 'Automations' }).click()
   await expect(page.getByText('Night Shift Homecoming')).toBeVisible()
   await expect(page.getByText('Scheduled Hauler Access')).toBeVisible()
+  await expect(page.getByRole('button', { name: 'New automation' })).toHaveCount(0)
   await page.getByRole('button', { name: /Scheduled Hauler Access/ }).click()
   await expect(page.getByText('Review the exact effect before TrashPal acts')).toBeVisible()
   await expect(page.getByText('Assigned hauler tag')).toBeVisible()
@@ -83,6 +84,7 @@ for (const width of [390, 768, 1440]) {
     await page.goto('/')
     await page.getByRole('button', { name: 'Learn' }).click()
     await expect(page.getByText('Give TrashPal a job, not unlimited control')).toBeVisible()
+    await expect(page.getByRole('button', { name: 'Connect a home' })).toHaveCount(0)
     const overflow = await page.evaluate(
       () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
     )

@@ -1170,7 +1170,7 @@ describe('Caretaker lifecycle host', () => {
     ).toHaveLength(1)
   })
 
-  it('yields an unknown activation to the durable reconciler', async () => {
+  it('reconciles an unknown activation without replaying plans.activate', async () => {
     const current = liveState('approved')
     const test = await fixture({
       state: { status: 'running', phase: 'execute' },
@@ -1180,12 +1180,12 @@ describe('Caretaker lifecycle host', () => {
     })
 
     await expect(test.host.resume(activation(test.context))).resolves.toMatchObject({
-      kind: 'paused',
-      reason: 'system',
+      kind: 'retry',
+      reason: 'tool_pending',
     })
-    expect(await pendingToolNames(test.store)).toEqual(['plans.activate'])
-    expect(test.tools.executions).toHaveLength(1)
-    expect((await test.store.snapshot()).caretakerRunCheckpoints.at(-1)?.kind).toBe('external_wait')
+    expect(await pendingToolNames(test.store)).toEqual(['plans.activate', 'operations.get'])
+    expect(test.tools.executions).toHaveLength(2)
+    expect((await test.store.snapshot()).caretakerRunCheckpoints.at(-1)?.kind).toBe('tool_wait')
   })
 
   it('allows activation after an accepted-pending approval request', async () => {
@@ -1267,7 +1267,7 @@ describe('Caretaker lifecycle host', () => {
     expect((await test.store.snapshot()).caretakerRunCheckpoints.at(-1)?.kind).toBe('host_failed')
   })
 
-  it('turns a durable accepted-pending result into a system reconciliation wait', async () => {
+  it('polls a durable accepted-pending operation without replaying plans.activate', async () => {
     const test = await fixture({
       state: { status: 'running', phase: 'execute' },
       live: liveState('approved'),
@@ -1275,14 +1275,14 @@ describe('Caretaker lifecycle host', () => {
     })
 
     await expect(test.host.resume(activation(test.context))).resolves.toMatchObject({
-      kind: 'paused',
-      reason: 'system',
+      kind: 'retry',
+      reason: 'tool_pending',
     })
 
-    expect(await pendingToolNames(test.store)).toEqual(['plans.activate'])
+    expect(await pendingToolNames(test.store)).toEqual(['plans.activate', 'operations.get'])
     expect((await test.store.snapshot()).caretakerRuns[0]).toMatchObject({
-      pendingToolCall: null,
-      counters: { toolCallCount: 1, reconciliationPollCount: 0 },
+      pendingToolCall: { toolName: 'operations.get' },
+      counters: { toolCallCount: 2, reconciliationPollCount: 1 },
     })
   })
 

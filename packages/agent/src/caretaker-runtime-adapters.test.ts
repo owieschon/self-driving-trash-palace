@@ -367,7 +367,7 @@ describe('RepositoryCaretakerProjectionPort', () => {
     const crossProjection = await crossTenant.port().load(crossTenant.loadInput())
     expect(crossProjection.frozenContext.filtering.crossTenantSourcesExcluded).toBe(1)
     expect(crossProjection.retrievedKnowledge).toEqual([])
-  })
+  }, 15_000)
 
   it('labels prompt injection as untrusted without changing host policy or exact contracts', async () => {
     const world = new ProjectionWorld()

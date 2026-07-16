@@ -14,6 +14,7 @@
     "docs-impact:check": "tsx scripts/verify-docs-impact.ts",
     "evidence:report": "tsx evals/evidence/duplicate-routine-report-cli.ts",
     "eval:model:preflight": "tsx evals/live/preflight-cli.ts",
+    "eval:posthog:ingestion": "tsx evals/live/posthog-ingestion-cli.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint . --max-warnings=0",

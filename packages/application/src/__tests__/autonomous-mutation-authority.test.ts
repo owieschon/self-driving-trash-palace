@@ -243,7 +243,7 @@ describe('reference-bound system mutations', () => {
       transport: 'mcp',
       status: 'unknown',
       retryable: true,
-      error: { code: 'TOOL_RESPONSE_LOST', message: 'The committed response was lost' },
+      error: { code: 'APPLICATION_RESPONSE_LOST', message: 'The committed response was lost' },
       startedAt: '2026-08-14T05:34:00.000Z',
       completedAt: '2026-08-14T05:34:00.000Z',
     })

@@ -1431,6 +1431,22 @@ function createTenantRepositories(
       async get(receiptId) {
         return owned(state.contextReceipts.get(receiptId), owns)
       },
+      async findLatestForMissionAtOrBefore(missionId, createdAt) {
+        const cutoff = Date.parse(createdAt)
+        const candidates = [...state.contextReceipts.values()]
+          .filter(
+            (receipt) =>
+              owns(receipt) &&
+              receipt.missionId === missionId &&
+              Date.parse(receipt.createdAt) <= cutoff,
+          )
+          .sort(
+            (left, right) =>
+              Date.parse(right.createdAt) - Date.parse(left.createdAt) ||
+              right.id.localeCompare(left.id),
+          )
+        return clone(candidates[0] ?? null)
+      },
       async insert(input) {
         const receipt = ContextReceiptSchema.parse(input)
         assertOwns(receipt)
