@@ -1,6 +1,6 @@
 # TrashPal
 
-TrashPal is a full-stack reference SaaS for trusted automations in connected raccoon homes. Rocky uses it to coordinate access, lighting, comfort, and energy at Sacred Dumpster Palace. Its Caretaker agent proposes changes within explicit limits; the application owns approval, durable execution, recovery, and verification.
+TrashPal is a full-stack reference SaaS for trusted automations in connected raccoon homes. Rocky the raccoon uses it to coordinate access, lighting, comfort, and energy at his Sacred Dumpster Trash Palace. Its Caretaker agent proposes changes within explicit limits; the application owns approval, durable execution, recovery, and verification.
 
 Start with the [product overview](knowledge/index.md), then [improve your first automation](knowledge/getting-started/improve-your-first-automation.md) without credentials or paid model calls.
 
