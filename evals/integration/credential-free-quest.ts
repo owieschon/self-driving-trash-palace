@@ -27,7 +27,7 @@ const ORIGIN = 'http://127.0.0.1:3300'
 const MCP_ENDPOINT = `${ORIGIN}/api/mcp`
 const MAX_CAPTURE_BYTES = 8 * 1024 * 1024
 const LOCAL_SERVICE_PROBE_TIMEOUT_MILLISECONDS = 15_000
-const LOCAL_WORKFLOW_TIMEOUT_MILLISECONDS = 240_000
+const LOCAL_WORKFLOW_TIMEOUT_MILLISECONDS = 90_000
 const ENERGY_FIRST = ClarificationChoiceIdSchema.parse('energy_first')
 const REQUIRED_QUEST_EVIDENCE_EVENTS = Object.freeze([
   'mission created',

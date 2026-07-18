@@ -64,7 +64,7 @@ export function translateDatabaseError(error: unknown): Error {
   if (error instanceof DatabaseRepositoryError) return error
   if (!(error instanceof Error)) return new DatabaseRepositoryError(String(error))
   const postgresError = findPostgreSqlError(error)
-  if (postgresError.code === '40001') {
+  if (postgresError.code === '40001' || postgresError.code === '40P01') {
     return new OptimisticConcurrencyError('Concurrent state change requires a retry')
   }
   if (

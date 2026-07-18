@@ -23,6 +23,7 @@ import {
   CaretakerRunCheckpointSchema,
   CaretakerRunRecordSchema,
   OpaqueMissionFenceToken,
+  OptimisticConcurrencyError,
   hashCaretakerTaskLedger,
   type CaretakerRunSnapshot,
   type MissionExecutionContext,
@@ -153,6 +154,42 @@ describe('CaretakerMissionRunnerAdapter', () => {
     )
     expect(calls).toEqual([IDS.priorRun])
     expect(world.contextReceipt?.runId).toBe(IDS.priorRun)
+  })
+
+  it('re-drives terminal completion with the same durable activation after contention', async () => {
+    const world = new WorkerAdapterWorld()
+    world.installRun('paused', 'reconcile')
+    world.freeze(IDS.priorRun)
+    world.mission = MissionSchema.parse({
+      ...world.mission,
+      state: { status: 'succeeded', phase: 'verify' },
+      version: world.mission.version + 1,
+      updatedAt: LATER,
+    })
+    const calls: Parameters<
+      ConstructorParameters<typeof CaretakerMissionRunnerAdapter>[0]['host']['resume']
+    >[0][] = []
+    const runner = world.runner(async (input) => {
+      calls.push(input)
+      if (calls.length < 3) throw new OptimisticConcurrencyError('Caretaker run')
+      return {
+        kind: 'completed',
+        runId: RunIdSchema.parse(input.requestedRunId),
+        runVersion: 10,
+        verifierEvidenceIds: [IDS.evidence],
+      }
+    })
+
+    await expect(runner.resume({ mission: world.mission, context: world.context })).resolves.toBe(
+      'completed_checkpoint',
+    )
+    expect(calls).toHaveLength(3)
+    expect(calls.map(({ requestedRunId }) => requestedRunId)).toEqual([
+      IDS.priorRun,
+      IDS.priorRun,
+      IDS.priorRun,
+    ])
+    expect(new Set(calls.map(({ activationKey }) => activationKey)).size).toBe(1)
   })
 
   it('maps every durable terminal host result to a completed worker checkpoint', async () => {

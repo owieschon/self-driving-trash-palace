@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest'
 
-import { isRetryableTransactionError } from './errors.js'
+import {
+  OptimisticConcurrencyError,
+  isRetryableTransactionError,
+  translateDatabaseError,
+} from './errors.js'
 
 describe('database transaction error classification', () => {
   it.each(['40001', '40P01'])(
@@ -21,4 +25,13 @@ describe('database transaction error classification', () => {
     ).toBe(false)
     expect(isRetryableTransactionError(new Error('application failure'))).toBe(false)
   })
+
+  it.each(['40001', '40P01'])(
+    'translates exhausted PostgreSQL transaction failure %s into a retryable conflict',
+    (code) => {
+      const postgres = Object.assign(new Error('database rejected transaction'), { code })
+
+      expect(translateDatabaseError(postgres)).toBeInstanceOf(OptimisticConcurrencyError)
+    },
+  )
 })

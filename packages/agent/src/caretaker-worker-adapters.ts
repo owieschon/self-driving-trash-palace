@@ -32,8 +32,33 @@ import { hashHostPolicyContract } from './host-policy.js'
 
 type HostClarificationInput = Parameters<CaretakerHumanPausePort['requestClarification']>[0]
 
+const TERMINAL_ACTIVATION_RETRY_DELAYS_MILLISECONDS = Object.freeze([
+  10, 25, 50, 100, 250, 500,
+] as const)
+
 export class CaretakerWorkerAdapterIntegrityError extends Error {
   public override readonly name = 'CaretakerWorkerAdapterIntegrityError'
+}
+
+/**
+ * Re-drives a terminal activation after the database transaction retry budget is exhausted.
+ * The caller must retain the same durable run and activation identities across every attempt.
+ */
+export async function runTerminalCaretakerActivationWithRetry<Result>(
+  operation: () => Promise<Result>,
+  signal: AbortSignal,
+  wait: (delayMilliseconds: number, signal: AbortSignal) => Promise<void> = waitForRetry,
+): Promise<Result> {
+  for (let attempt = 0; ; attempt += 1) {
+    signal.throwIfAborted()
+    try {
+      return await operation()
+    } catch (error) {
+      const delay = TERMINAL_ACTIVATION_RETRY_DELAYS_MILLISECONDS[attempt]
+      if (delay === undefined || !isOptimisticConcurrencyFailure(error)) throw error
+      await wait(delay, signal)
+    }
+  }
 }
 
 /**
@@ -141,19 +166,50 @@ export class CaretakerMissionRunnerAdapter implements MissionRunnerPort {
         prepared.latestRun?.checkpoint.occurredAt,
       ])
 
-    const result = await this.dependencies.host.resume({
+    const activation = {
       context: input.context,
       requestedRunId: runId,
       missionId: prepared.mission.id,
       activationKey,
       activatedAt,
-    })
+    }
+    const resumeHost = () => this.dependencies.host.resume(activation)
+    const result = isTerminalMission(prepared.mission)
+      ? await runTerminalCaretakerActivationWithRetry(resumeHost, input.context.signal)
+      : await resumeHost()
     input.context.signal.throwIfAborted()
     if (result.runId !== runId) {
       throw integrity('Caretaker host returned another durable run identity')
     }
     return mapHostResult(result)
   }
+}
+
+function isTerminalMission(mission: Mission): boolean {
+  return ['succeeded', 'failed', 'cancelled'].includes(mission.state.status)
+}
+
+function isOptimisticConcurrencyFailure(error: unknown): boolean {
+  return error instanceof Error && error.name === 'OptimisticConcurrencyError'
+}
+
+function waitForRetry(delayMilliseconds: number, signal: AbortSignal): Promise<void> {
+  return new Promise<void>((resolve, reject) => {
+    const timeout = setTimeout(finish, delayMilliseconds)
+    signal.addEventListener('abort', abort, { once: true })
+
+    function finish(): void {
+      signal.removeEventListener('abort', abort)
+      resolve()
+    }
+
+    function abort(): void {
+      clearTimeout(timeout)
+      reject(
+        signal.reason instanceof Error ? signal.reason : new Error('Caretaker activation aborted'),
+      )
+    }
+  })
 }
 
 export interface CaretakerClarificationChoiceProjectorPort {
