@@ -867,7 +867,7 @@ function knowledgeCall(callId: string): CaretakerPendingToolCall {
 function successfulKnowledgeResult(
   pending: CaretakerPendingToolCall,
   excerpt: string,
-  version = '1.0.0',
+  version = '1.1.0',
 ) {
   return parseToolResult('knowledge.search', {
     schemaVersion: 'tool-result@1',
