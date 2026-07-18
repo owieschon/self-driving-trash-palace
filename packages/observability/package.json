@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@trash-palace/core": "workspace:*",
-    "posthog-node": "5.40.0",
+    "posthog-node": "5.44.0",
     "zod": "4.4.3"
   }
 }
