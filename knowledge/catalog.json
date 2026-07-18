@@ -2,6 +2,132 @@
   "schemaVersion": "1.0.0",
   "sources": [
     {
+      "id": "decision.runtime-truth",
+      "owner": "TrashPal maintainers",
+      "claimIds": [],
+      "dependsOn": ["concept.context-authority"],
+      "audiences": ["developer", "external-agent"],
+      "tasks": ["understand which system owns each kind of truth"],
+      "risk": "read",
+      "visibility": "public",
+      "sensitivity": "public",
+      "tenantScoped": false,
+      "publishable": true,
+      "instructionRole": "reference",
+      "retention": "versioned",
+      "verifiedAgainst": {
+        "buildSpec": "1.1"
+      },
+      "version": "1.0.1",
+      "canonicalUri": "docs/decisions/0001-separate-runtime-truth-from-explanation.md",
+      "sha256": "a9356b2370ec934dbe0621538724a24e090ff1f75a6867e75bc79e946b3a0dc8"
+    },
+    {
+      "id": "evaluation.limitations",
+      "owner": "TrashPal maintainers",
+      "claimIds": [],
+      "dependsOn": ["evaluation.methodology"],
+      "audiences": ["developer", "external-agent"],
+      "tasks": ["understand the current evidence boundary"],
+      "risk": "read",
+      "visibility": "public",
+      "sensitivity": "public",
+      "tenantScoped": false,
+      "publishable": true,
+      "instructionRole": "reference",
+      "retention": "versioned",
+      "verifiedAgainst": {
+        "buildSpec": "1.1"
+      },
+      "version": "1.0.0",
+      "canonicalUri": "docs/evaluation/limitations.md",
+      "sha256": "6b8ed6b572023f16327056d5694a53a7c4e0723fe2a3f9886e78f853fc00ebfc"
+    },
+    {
+      "id": "evaluation.live-validation",
+      "owner": "TrashPal maintainers",
+      "claimIds": [],
+      "dependsOn": ["evaluation.methodology", "evaluation.limitations"],
+      "audiences": ["developer", "external-agent"],
+      "tasks": ["run credentialed validation within its approval boundary"],
+      "risk": "read",
+      "visibility": "public",
+      "sensitivity": "public",
+      "tenantScoped": false,
+      "publishable": true,
+      "instructionRole": "procedure",
+      "retention": "versioned",
+      "verifiedAgainst": {
+        "buildSpec": "1.1"
+      },
+      "version": "1.0.0",
+      "canonicalUri": "docs/evaluation/live-validation.md",
+      "sha256": "8c90615af323851c274ed1cfe01ad54ddd60013e3b64c05ab2abb6b1b517ec3a"
+    },
+    {
+      "id": "evaluation.methodology",
+      "owner": "TrashPal maintainers",
+      "claimIds": [],
+      "dependsOn": ["resource.evaluation-methodology"],
+      "audiences": ["developer", "external-agent"],
+      "tasks": ["understand the evaluation evidence layers"],
+      "risk": "read",
+      "visibility": "public",
+      "sensitivity": "public",
+      "tenantScoped": false,
+      "publishable": true,
+      "instructionRole": "reference",
+      "retention": "versioned",
+      "verifiedAgainst": {
+        "buildSpec": "1.1"
+      },
+      "version": "1.0.1",
+      "canonicalUri": "docs/evaluation/methodology.md",
+      "sha256": "ecdd7c58587a84d1f6ff09f84930429991d2821ca4b1a0a813141f480d42a678"
+    },
+    {
+      "id": "operations.continuous-integration",
+      "owner": "TrashPal maintainers",
+      "claimIds": [],
+      "dependsOn": ["resource.executable-contracts"],
+      "audiences": ["developer", "external-agent"],
+      "tasks": ["understand the checks that protect main"],
+      "risk": "read",
+      "visibility": "public",
+      "sensitivity": "public",
+      "tenantScoped": false,
+      "publishable": true,
+      "instructionRole": "reference",
+      "retention": "versioned",
+      "verifiedAgainst": {
+        "buildSpec": "1.1"
+      },
+      "version": "1.0.0",
+      "canonicalUri": "docs/operations/continuous-integration.md",
+      "sha256": "ea944500693201740e6ae7c120b65551a52a27cbbf758ea7f2a57864c37b99e3"
+    },
+    {
+      "id": "example.http-mcp",
+      "owner": "TrashPal maintainers",
+      "claimIds": [],
+      "dependsOn": ["procedure.build-http-mcp"],
+      "audiences": ["developer", "external-agent"],
+      "tasks": ["exercise the HTTP and MCP projections"],
+      "risk": "read",
+      "visibility": "public",
+      "sensitivity": "public",
+      "tenantScoped": false,
+      "publishable": true,
+      "instructionRole": "procedure",
+      "retention": "versioned",
+      "verifiedAgainst": {
+        "buildSpec": "1.1"
+      },
+      "version": "1.0.0",
+      "canonicalUri": "examples/http-and-mcp.md",
+      "sha256": "b215a1bb4e74b2f87238547714df0b229e4935af510014c39f48283896906db4"
+    },
+    {
       "id": "concept.context-authority",
       "owner": "TrashPal maintainers",
       "claimIds": [
@@ -14,7 +140,10 @@
       ],
       "dependsOn": [],
       "audiences": ["developer", "caretaker", "external-agent"],
-      "tasks": ["assemble bounded agent context", "assess documentation impact"],
+      "tasks": [
+        "understand what Pal can use and what requires a member decision",
+        "assess documentation impact"
+      ],
       "risk": "consequential-write",
       "visibility": "public",
       "sensitivity": "public",
@@ -26,9 +155,9 @@
         "buildSpec": "1.1",
         "sourceLock": "1.0.0"
       },
-      "version": "1.0.0",
+      "version": "1.1.0",
       "canonicalUri": "knowledge/concepts/context-authority.md",
-      "sha256": "c96d505684d49271e64067a120dd7197d9378c4866f28282ae877ee757bb4730"
+      "sha256": "27314a721e157cb2693746499b09fa6e83d1eb42e3e5380862f763be92063411"
     },
     {
       "id": "concept.evidence-improvement",
@@ -36,7 +165,7 @@
       "claimIds": ["TP-EVIDENCE-001", "TP-EVIDENCE-002", "TP-EVIDENCE-003", "TP-EVIDENCE-004"],
       "dependsOn": ["concept.context-authority"],
       "audiences": ["customer", "developer", "caretaker", "external-agent"],
-      "tasks": ["interpret context receipts and improvement evidence"],
+      "tasks": ["understand what Activity and evidence can establish"],
       "risk": "read",
       "visibility": "public",
       "sensitivity": "public",
@@ -48,17 +177,17 @@
         "buildSpec": "1.1",
         "sourceLock": "1.0.0"
       },
-      "version": "1.1.0",
+      "version": "1.1.1",
       "canonicalUri": "knowledge/concepts/evidence-and-improvement.md",
-      "sha256": "ca36a337467cce7a869f87edf6f9164acac315e097766da51e9007f4df578800"
+      "sha256": "74f3d2a20c8e125f58b1a05f1f10c0fafc0910d720b9c91e62d7d6c7afb8dc23"
     },
     {
       "id": "concept.missions-plans-operations",
       "owner": "TrashPal maintainers",
-      "claimIds": ["TP-MODEL-001", "TP-MODEL-002", "TP-MODEL-003"],
+      "claimIds": ["TP-MODEL-001", "TP-MODEL-002", "TP-MODEL-003", "TP-PRODUCT-001"],
       "dependsOn": [],
       "audiences": ["customer", "developer", "caretaker", "external-agent"],
-      "tasks": ["distinguish mission, plan, operation, and attempt identities"],
+      "tasks": ["understand how a member goal becomes a proposal, operation, and result"],
       "risk": "read",
       "visibility": "public",
       "sensitivity": "public",
@@ -69,17 +198,17 @@
       "verifiedAgainst": {
         "buildSpec": "1.1"
       },
-      "version": "1.1.0",
+      "version": "1.2.0",
       "canonicalUri": "knowledge/concepts/missions-plans-and-operations.md",
-      "sha256": "22e58c98b1691fd38b78016d5924e5fe27e09ba9769bcfdc4bb1515f2ebc6900"
+      "sha256": "1d22f49cb1fb05cb7b0468181a2f35a1eab237040f170aebbc974e22175220f3"
     },
     {
       "id": "concept.unknown-outcomes",
       "owner": "TrashPal maintainers",
-      "claimIds": ["TP-RELIABILITY-001", "TP-RELIABILITY-002"],
+      "claimIds": ["TP-RELIABILITY-001", "TP-RELIABILITY-002", "TP-PRODUCT-002"],
       "dependsOn": ["concept.missions-plans-operations"],
       "audiences": ["customer", "developer", "caretaker", "external-agent"],
-      "tasks": ["recover an operation after a lost mutation response"],
+      "tasks": ["understand what to do when TrashPal is still checking the result"],
       "risk": "consequential-write",
       "visibility": "public",
       "sensitivity": "public",
@@ -90,38 +219,17 @@
       "verifiedAgainst": {
         "buildSpec": "1.1"
       },
-      "version": "1.0.0",
+      "version": "1.1.0",
       "canonicalUri": "knowledge/concepts/unknown-outcomes.md",
-      "sha256": "4b74a59d595f5a8fca3c8909afe4f8a42d6d493cb50f022b4c37860bdf4ef8dc"
-    },
-    {
-      "id": "getting-started.improve-first-automation",
-      "owner": "TrashPal maintainers",
-      "claimIds": [],
-      "dependsOn": ["getting-started.start-here"],
-      "audiences": ["customer", "developer", "caretaker", "external-agent"],
-      "tasks": ["run the credential-free duplicate-routine improvement study"],
-      "risk": "read",
-      "visibility": "public",
-      "sensitivity": "public",
-      "tenantScoped": false,
-      "publishable": true,
-      "instructionRole": "procedure",
-      "retention": "versioned",
-      "verifiedAgainst": {
-        "buildSpec": "1.1"
-      },
-      "version": "2.0.0",
-      "canonicalUri": "knowledge/getting-started/improve-your-first-automation.md",
-      "sha256": "8a26a47818e9c602db71b05b101e5722c7e48f5f7ed89d8b8ad17c4ecbf98cd2"
+      "sha256": "79b1d1a7f086ac64872ed17c760d12e219000c666ef6354af28b03be50d8b1aa"
     },
     {
       "id": "getting-started.run-locally",
       "owner": "TrashPal maintainers",
       "claimIds": [],
-      "dependsOn": ["getting-started.start-here", "getting-started.improve-first-automation"],
-      "audiences": ["customer", "developer", "caretaker", "external-agent"],
-      "tasks": ["start and stop the credential-free local topology"],
+      "dependsOn": ["getting-started.start-here"],
+      "audiences": ["developer", "caretaker", "external-agent"],
+      "tasks": ["run the credential-free local reference stack"],
       "risk": "reversible-write",
       "visibility": "public",
       "sensitivity": "public",
@@ -132,9 +240,9 @@
       "verifiedAgainst": {
         "buildSpec": "1.1"
       },
-      "version": "1.0.0",
+      "version": "1.1.0",
       "canonicalUri": "knowledge/getting-started/run-locally.md",
-      "sha256": "4ccd2c85b653ae5347d92c2f5f227a1ab9a6161813bc40bf8b09f24c64e2b694"
+      "sha256": "3439f5d618827f52316841baf81c3af2436f71ad4efd21cfea668dc27e0f234f"
     },
     {
       "id": "getting-started.start-here",
@@ -142,7 +250,7 @@
       "claimIds": [],
       "dependsOn": ["overview.trash-palace"],
       "audiences": ["customer", "developer", "caretaker", "external-agent"],
-      "tasks": ["choose and complete a credential-free learning track"],
+      "tasks": ["orient a Palace workspace and prepare a first proposal with Pal"],
       "risk": "read",
       "visibility": "public",
       "sensitivity": "public",
@@ -154,9 +262,9 @@
         "buildSpec": "1.1",
         "sourceLock": "1.0.0"
       },
-      "version": "1.1.0",
+      "version": "1.3.0",
       "canonicalUri": "knowledge/getting-started/start-here.md",
-      "sha256": "4e97d87b59b3f0a73fc65e43e36e1f9d6a2e37319d3b74d73a6d19f856410036"
+      "sha256": "591386eae2c033e81f0396967c9ae503329ca572c4e9fce0b6dcd745f7ed10b7"
     },
     {
       "id": "procedure.build-http-mcp",
@@ -193,7 +301,7 @@
         "concept.unknown-outcomes"
       ],
       "audiences": ["customer", "developer", "caretaker", "external-agent"],
-      "tasks": ["create, approve, and verify one homecoming routine"],
+      "tasks": ["prepare, approve, and check one Pal proposal"],
       "risk": "consequential-write",
       "visibility": "public",
       "sensitivity": "public",
@@ -204,9 +312,9 @@
       "verifiedAgainst": {
         "buildSpec": "1.1"
       },
-      "version": "1.2.0",
+      "version": "1.4.0",
       "canonicalUri": "knowledge/guides/create-approve-and-verify-a-routine.md",
-      "sha256": "559c1d67521b6a6c415f5ae57e0c89db45d1b28371f01e03a70b8c3e4b1cece1"
+      "sha256": "ac0d54025f503dcc0a21c612010963ac3e3bb3ccd07375934008552c0c680334"
     },
     {
       "id": "procedure.inspect-evidence",
@@ -214,7 +322,7 @@
       "claimIds": [],
       "dependsOn": ["concept.evidence-improvement", "procedure.review-control"],
       "audiences": ["customer", "developer", "caretaker", "external-agent"],
-      "tasks": ["inspect context, tool, operation, verifier, and analytics receipts"],
+      "tasks": ["read Activity and decide what happened"],
       "risk": "read",
       "visibility": "public",
       "sensitivity": "public",
@@ -225,9 +333,9 @@
       "verifiedAgainst": {
         "buildSpec": "1.1"
       },
-      "version": "1.0.0",
+      "version": "1.1.0",
       "canonicalUri": "knowledge/guides/inspect-receipts-and-evidence.md",
-      "sha256": "362531457f0f01ed85a16f9c4adafe1f901869213cf67f6e093e3c9b711e9233"
+      "sha256": "58f4c3c66534338bec7a0cefffb01880d87dc5da4ea25f8c23d9ee804270a5bc"
     },
     {
       "id": "incident.two-routines-one-timeout",
@@ -235,7 +343,7 @@
       "claimIds": ["TP-INCIDENT-001", "TP-INCIDENT-002"],
       "dependsOn": ["concept.unknown-outcomes", "procedure.operate-homecoming-mission"],
       "audiences": ["customer", "developer", "caretaker", "external-agent"],
-      "tasks": ["recover an operation after a lost mutation response"],
+      "tasks": ["recover an approved change while TrashPal is still checking the result"],
       "risk": "consequential-write",
       "visibility": "public",
       "sensitivity": "public",
@@ -246,9 +354,9 @@
       "verifiedAgainst": {
         "buildSpec": "1.1"
       },
-      "version": "1.2.0",
+      "version": "1.3.0",
       "canonicalUri": "knowledge/guides/recover-an-uncertain-operation.md",
-      "sha256": "d85fafa9b594e7e1583d90ddb5c6d540dbd0b7e42243a7a0ccc20dce62386bcf"
+      "sha256": "b063647057d7e7ec604c730c0924a0ad3db2d46110bb7298c036b3fa4e567449"
     },
     {
       "id": "procedure.review-control",
@@ -260,7 +368,7 @@
         "procedure.operate-homecoming-mission"
       ],
       "audiences": ["customer", "developer", "caretaker", "external-agent"],
-      "tasks": ["clarify, approve, reject, or cancel a consequential plan"],
+      "tasks": ["review, approve, reject, or cancel a Pal proposal"],
       "risk": "consequential-write",
       "visibility": "public",
       "sensitivity": "public",
@@ -271,9 +379,9 @@
       "verifiedAgainst": {
         "buildSpec": "1.1"
       },
-      "version": "1.0.0",
+      "version": "1.1.1",
       "canonicalUri": "knowledge/guides/review-approve-or-cancel.md",
-      "sha256": "ca9639d723c66317ab0e26e22a99b5cceae3df5bc663cb1f111786280e5f0f75"
+      "sha256": "b72aa3da2c3bd2296c17beb201175253e389af7f46fb9d7190efdd1b3192482a"
     },
     {
       "id": "procedure.schedule-hauler-access",
@@ -285,8 +393,8 @@
         "concept.unknown-outcomes",
         "procedure.review-control"
       ],
-      "audiences": ["developer", "caretaker", "external-agent"],
-      "tasks": ["schedule and verify constrained service-hatch access"],
+      "audiences": ["customer", "developer", "caretaker", "external-agent"],
+      "tasks": ["schedule safe hauler access with Pal"],
       "risk": "consequential-write",
       "visibility": "public",
       "sensitivity": "public",
@@ -297,9 +405,9 @@
       "verifiedAgainst": {
         "buildSpec": "1.1"
       },
-      "version": "1.0.0",
+      "version": "1.1.0",
       "canonicalUri": "knowledge/guides/schedule-hauler-access.md",
-      "sha256": "a050460ab2a8102902cfddb28716e2c8e91af36604d6c867c41da2a2b1f387e5"
+      "sha256": "f00fc8da17916e53db079775dcf1c51fe4b4a973a576757e4d6e8c201b0c0d5d"
     },
     {
       "id": "procedure.troubleshoot-mission",
@@ -311,7 +419,7 @@
         "incident.two-routines-one-timeout"
       ],
       "audiences": ["customer", "developer", "caretaker", "external-agent"],
-      "tasks": ["troubleshoot one mission from durable state"],
+      "tasks": ["find the next safe action for a Palace automation"],
       "risk": "read",
       "visibility": "public",
       "sensitivity": "public",
@@ -322,9 +430,9 @@
       "verifiedAgainst": {
         "buildSpec": "1.1"
       },
-      "version": "1.0.0",
+      "version": "1.1.1",
       "canonicalUri": "knowledge/guides/troubleshoot-a-mission.md",
-      "sha256": "05537774e4775ba2bdbf3c13381d4401bda0dc768fd772bdb7718b89ebe01789"
+      "sha256": "225436c37e9c13faae44a744953219c122e633f3dc057d50712520fed0770e01"
     },
     {
       "id": "procedure.use-caretaker",
@@ -337,7 +445,7 @@
         "concept.evidence-improvement"
       ],
       "audiences": ["customer", "developer", "caretaker", "external-agent"],
-      "tasks": ["use Caretaker for one bounded homecoming mission"],
+      "tasks": ["set a goal for Pal and prepare one bounded proposal"],
       "risk": "consequential-write",
       "visibility": "public",
       "sensitivity": "public",
@@ -348,37 +456,19 @@
       "verifiedAgainst": {
         "buildSpec": "1.1"
       },
-      "version": "1.0.0",
+      "version": "1.2.0",
       "canonicalUri": "knowledge/guides/use-caretaker.md",
-      "sha256": "f2fcd8772347287fc50e33852d139bd16afb9f76e148723fba34faeb7479ea00"
-    },
-    {
-      "id": "overview.trash-palace",
-      "owner": "TrashPal maintainers",
-      "claimIds": [],
-      "dependsOn": [],
-      "audiences": ["customer", "developer", "caretaker", "external-agent"],
-      "tasks": ["understand what TrashPal demonstrates"],
-      "risk": "read",
-      "visibility": "public",
-      "sensitivity": "public",
-      "tenantScoped": false,
-      "publishable": true,
-      "instructionRole": "reference",
-      "retention": "versioned",
-      "verifiedAgainst": {
-        "buildSpec": "1.1",
-        "sourceLock": "1.0.0"
-      },
-      "version": "1.0.0",
-      "canonicalUri": "knowledge/index.md",
-      "sha256": "7f66de4322d0163b8a22fc6cdc9b6148e6715d5d1a5691f63a1d021d262b5274"
+      "sha256": "6521b494e1cb874c2941832108999952980700d1cbb20a8e496c757176bb8aa7"
     },
     {
       "id": "posthog-ai.export-evidence",
       "owner": "TrashPal maintainers",
       "claimIds": [],
-      "dependsOn": ["concept.evidence-improvement"],
+      "dependsOn": [
+        "concept.evidence-improvement",
+        "posthog-ai.instrument-workflow",
+        "posthog-ai.validate-improvement-metric"
+      ],
       "audiences": ["developer", "caretaker", "external-agent"],
       "tasks": ["export analytics-safe agent evidence to PostHog"],
       "risk": "reversible-write",
@@ -394,7 +484,7 @@
       },
       "version": "1.1.0",
       "canonicalUri": "knowledge/posthog-ai/export-agent-evidence-to-posthog.md",
-      "sha256": "bdd027626f4d16b9172ab3b69a41c38d318c813d30b7260c2dfb96e48ad736e6"
+      "sha256": "b866efc7b91d6893244fa0068acaa457ef302802eb51bd62fd4884d301f3a070"
     },
     {
       "id": "posthog-ai.instrument-workflow",
@@ -416,7 +506,50 @@
       },
       "version": "1.0.0",
       "canonicalUri": "knowledge/posthog-ai/instrument-an-agentic-workflow.md",
-      "sha256": "e4a6f6383f8d5015bc996f0507c0da9d9b10cfd489e5822e70275de764103a56"
+      "sha256": "4e0d94fed64521e9ad94632dd439ca6ebbb12ca544747ccbe4d515a519b36f8c"
+    },
+    {
+      "id": "posthog-ai.validate-improvement-metric",
+      "owner": "TrashPal maintainers",
+      "claimIds": [],
+      "dependsOn": ["concept.evidence-improvement", "posthog-ai.instrument-workflow"],
+      "audiences": ["developer", "caretaker", "external-agent"],
+      "tasks": ["validate the duplicate-routine improvement metric"],
+      "risk": "read",
+      "visibility": "public",
+      "sensitivity": "public",
+      "tenantScoped": false,
+      "publishable": true,
+      "instructionRole": "procedure",
+      "retention": "versioned",
+      "verifiedAgainst": {
+        "buildSpec": "1.1"
+      },
+      "version": "1.0.0",
+      "canonicalUri": "knowledge/posthog-ai/validate-an-improvement-metric.md",
+      "sha256": "34e9950bd9a88b5f34b7ab9df03409ee17f47a88c08b63054e69a9203b025d32"
+    },
+    {
+      "id": "overview.trash-palace",
+      "owner": "TrashPal maintainers",
+      "claimIds": [],
+      "dependsOn": [],
+      "audiences": ["customer", "developer", "caretaker", "external-agent"],
+      "tasks": ["understand TrashPal, Pal, and the right Help path"],
+      "risk": "read",
+      "visibility": "public",
+      "sensitivity": "public",
+      "tenantScoped": false,
+      "publishable": true,
+      "instructionRole": "reference",
+      "retention": "versioned",
+      "verifiedAgainst": {
+        "buildSpec": "1.1",
+        "sourceLock": "1.0.0"
+      },
+      "version": "1.2.0",
+      "canonicalUri": "knowledge/README.md",
+      "sha256": "53987bd2745212893df1ed55e7b9c1794dad43331a63d39b6d9bb53c7b71d8a2"
     },
     {
       "id": "resource.evaluation-methodology",
@@ -428,7 +561,7 @@
         "posthog-ai.export-evidence"
       ],
       "audiences": ["developer", "caretaker", "external-agent"],
-      "tasks": ["evaluate Caretaker and interpret current limitations"],
+      "tasks": ["evaluate Pal and interpret current limitations"],
       "risk": "read",
       "visibility": "public",
       "sensitivity": "public",
@@ -439,7 +572,7 @@
       "verifiedAgainst": {
         "buildSpec": "1.1"
       },
-      "version": "1.0.0",
+      "version": "1.0.1",
       "canonicalUri": "knowledge/resources/evaluation-methodology-and-limitations.md",
       "sha256": "2082f30d81b13eb268fc2424a10cf453d343a3028c478f9fa058632bc68547d5"
     },
@@ -462,7 +595,28 @@
       },
       "version": "1.1.0",
       "canonicalUri": "knowledge/resources/executable-contracts.md",
-      "sha256": "211c3019b9d292574fb6fb94229fefa35c9bc9908ccea5d0b21c445339bedc4a"
+      "sha256": "f62108b53a9e8ba3ddf31b36aafd1b52edf7ea8b52955524dbf8d4ff92405e0a"
+    },
+    {
+      "id": "resource.trustworthy-docs",
+      "owner": "TrashPal maintainers",
+      "claimIds": [],
+      "dependsOn": ["concept.context-authority", "resource.executable-contracts"],
+      "audiences": ["developer", "caretaker", "external-agent"],
+      "tasks": ["design trustworthy documentation for people and agents"],
+      "risk": "read",
+      "visibility": "public",
+      "sensitivity": "public",
+      "tenantScoped": false,
+      "publishable": true,
+      "instructionRole": "reference",
+      "retention": "versioned",
+      "verifiedAgainst": {
+        "buildSpec": "1.1"
+      },
+      "version": "1.0.1",
+      "canonicalUri": "knowledge/resources/trustworthy-docs-for-humans-and-agents.md",
+      "sha256": "5aa1eb4a5b3f03d357147677c39697e6c57fb6fbee2f31d0a0ba244193dde336"
     },
     {
       "id": "skill.hauler-access.planning",

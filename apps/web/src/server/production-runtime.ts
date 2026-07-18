@@ -15,11 +15,13 @@ import {
   KnowledgeSearchService,
   MissionLeaseService,
   MissionBootstrapService,
+  MissionProgressService,
   HomecomingPlanningEvidenceProjector,
   ReferenceHomecomingBatteryForecast,
   OperationService,
   PersistentSessionService,
   PlanService,
+  PalaceWorkspaceService,
   RepositoryToolInvocationPolicy,
   SYSTEM_CLOCK,
   SeededSessionService,
@@ -54,8 +56,10 @@ import { AnalyticsAliaser, SafeApplicationEvidenceAdapter } from '@trash-palace/
 
 import { createHttpApiRuntime, type HttpApiRuntime } from './api-runtime.js'
 import { createManagementRoutes } from './management-routes.js'
+import { createMissionProgressRoute } from './mission-progress-route.js'
 import { createInternalIngressRoutes } from './internal-ingress-routes.js'
 import { createManagedHttpApiRuntime, type ManagedHttpApiRuntime } from './managed-runtime.js'
+import { createPalaceWorkspaceRoute } from './palace-workspace-route.js'
 import {
   parseWebServerConfiguration,
   type WebDomainClockConfiguration,
@@ -133,6 +137,8 @@ export function createProductionHttpApiRuntime(
     observability,
   )
   const humanTasks = new HumanTaskService(unitOfWork)
+  const palaceWorkspace = new PalaceWorkspaceService(unitOfWork, clocks.security, programs)
+  const missionProgress = new MissionProgressService(unitOfWork, clocks.security)
   const homecomingPlanningEvidence = new HomecomingPlanningEvidenceProjector(
     new ReferenceHomecomingBatteryForecast(),
     {
@@ -271,6 +277,16 @@ export function createProductionHttpApiRuntime(
       clarifications,
       missions: missionBootstrap,
       devBootstrap: configuration.devBootstrap,
+    }),
+    missionProgress: createMissionProgressRoute({
+      allowedOrigin: configuration.allowedOrigin,
+      sessions,
+      progress: missionProgress,
+    }),
+    palaceWorkspace: createPalaceWorkspaceRoute({
+      allowedOrigin: configuration.allowedOrigin,
+      sessions,
+      workspace: palaceWorkspace,
     }),
     tools: {
       allowedOrigin: configuration.allowedOrigin,

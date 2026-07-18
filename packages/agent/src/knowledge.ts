@@ -40,6 +40,26 @@ export const KnowledgeSectionIdSchema = z.enum([
 ])
 export const KnowledgeTrackSchema = z.enum(['use', 'build'])
 
+/**
+ * Help tracks are a discovery projection over the canonical corpus. They decide
+ * ordering and labels in the product, never whether a public source is readable.
+ */
+export const KnowledgeHelpTrackSchema = z.enum([
+  'start',
+  'automations',
+  'troubleshoot',
+  'understand_pal',
+  'developer',
+  'api_mcp',
+])
+
+export const KnowledgeHelpAudienceSchema = z.enum([
+  'customer',
+  'developer',
+  'pal',
+  'external-agent',
+])
+
 export const KNOWLEDGE_SECTIONS = [
   { id: 'overview', title: 'Overview' },
   { id: 'getting-started', title: 'Getting started' },
@@ -52,6 +72,39 @@ export const KNOWLEDGE_SECTIONS = [
 export const KNOWLEDGE_LEARNING_PATHS = [
   { id: 'use', title: 'Use TrashPal' },
   { id: 'build', title: 'Build on TrashPal' },
+] as const
+
+export const KNOWLEDGE_HELP_TRACKS = [
+  {
+    id: 'start',
+    title: 'Start using TrashPal',
+    audience: ['customer'],
+  },
+  {
+    id: 'automations',
+    title: 'Manage automations',
+    audience: ['customer'],
+  },
+  {
+    id: 'troubleshoot',
+    title: 'Troubleshoot',
+    audience: ['customer'],
+  },
+  {
+    id: 'understand_pal',
+    title: 'Understand Pal',
+    audience: ['customer', 'developer'],
+  },
+  {
+    id: 'developer',
+    title: 'Developer docs',
+    audience: ['developer', 'external-agent'],
+  },
+  {
+    id: 'api_mcp',
+    title: 'API and MCP reference',
+    audience: ['developer', 'external-agent'],
+  },
 ] as const
 
 export const KnowledgeNavigationItemSchema = z
@@ -86,11 +139,31 @@ export const KnowledgeLearningPathSchema = z
   })
   .strict()
 
+export const KnowledgeHelpTrackItemSchema = z
+  .object({
+    sourceId: StableIdSchema,
+    label: z.string().min(1).max(120),
+    prerequisiteSourceIds: uniqueArray(StableIdSchema, 'Help prerequisites'),
+    nextSourceId: StableIdSchema.nullable(),
+    terminal: z.boolean(),
+  })
+  .strict()
+
+export const KnowledgeHelpTrackDefinitionSchema = z
+  .object({
+    id: KnowledgeHelpTrackSchema,
+    title: z.string().min(1).max(80),
+    audience: uniqueArray(KnowledgeHelpAudienceSchema, 'Help track audiences').min(1),
+    items: z.array(KnowledgeHelpTrackItemSchema).min(1),
+  })
+  .strict()
+
 export const KnowledgeNavigationSchema = z
   .object({
     schemaVersion: z.literal(SCHEMA_VERSION),
     sections: z.array(KnowledgeNavigationSectionSchema).length(KNOWLEDGE_SECTIONS.length),
     learningPaths: z.array(KnowledgeLearningPathSchema).length(KNOWLEDGE_LEARNING_PATHS.length),
+    helpTracks: z.array(KnowledgeHelpTrackDefinitionSchema).length(KNOWLEDGE_HELP_TRACKS.length),
   })
   .strict()
 
@@ -195,6 +268,11 @@ export type KnowledgeValidationCode =
   | 'INVALID_NAVIGATION_NEXT_SOURCE'
   | 'INVALID_NAVIGATION_PREREQUISITE'
   | 'INVALID_NAVIGATION_SECTION_ORDER'
+  | 'INVALID_HELP_TRACK_ORDER'
+  | 'INVALID_HELP_TRACK_SOURCE'
+  | 'INVALID_HELP_TRACK_NEXT_SOURCE'
+  | 'INVALID_HELP_TRACK_TERMINAL'
+  | 'HELP_TRACK_COVERAGE_MISMATCH'
   | 'INVALID_NAVIGATION_SOURCE'
   | 'INVALID_NAVIGATION_TERMINAL'
   | 'INVALID_LEARNING_PATH_ORDER'
@@ -356,6 +434,20 @@ export function validateKnowledgeClaims(
 
 function isHumanKnowledgeSource(source: KnowledgeSourceRecord): boolean {
   return source.canonicalUri.startsWith('knowledge/') && source.canonicalUri.endsWith('.md')
+}
+
+/**
+ * Help can project selected public Markdown outside knowledge/ without teaching
+ * packaged agent instructions or generated artifacts as reader documentation.
+ */
+export function isHelpKnowledgeSource(source: KnowledgeSourceRecord): boolean {
+  return (
+    isHumanKnowledgeSource(source) ||
+    source.canonicalUri === 'examples/http-and-mcp.md' ||
+    source.canonicalUri.startsWith('docs/evaluation/') ||
+    source.canonicalUri === 'docs/operations/continuous-integration.md' ||
+    source.canonicalUri === 'docs/decisions/0001-separate-runtime-truth-from-explanation.md'
+  )
 }
 
 export function validateKnowledgeNavigation(
@@ -561,6 +653,92 @@ export function validateKnowledgeNavigation(
       'NAVIGATION_COVERAGE_MISMATCH',
       `Knowledge learning paths do not cover categorized sources: ${missingFromPaths.join(', ')}`,
     )
+  }
+
+  navigation.helpTracks.forEach((track, index) => {
+    const expected = KNOWLEDGE_HELP_TRACKS[index]
+    if (
+      !expected ||
+      track.id !== expected.id ||
+      track.title !== expected.title ||
+      track.audience.join(',') !== expected.audience.join(',')
+    ) {
+      throw new KnowledgeValidationError(
+        'INVALID_HELP_TRACK_ORDER',
+        `Help track ${index + 1} must be ${expected?.title ?? 'absent'}`,
+      )
+    }
+  })
+
+  const helpItemIds = new Set<string>()
+  const helpItems = navigation.helpTracks.flatMap((track) => track.items)
+  for (const item of helpItems) {
+    if (helpItemIds.has(item.sourceId)) {
+      throw new KnowledgeValidationError(
+        'DUPLICATE_NAVIGATION_SOURCE',
+        `Help source ${item.sourceId} appears more than once`,
+        item.sourceId,
+      )
+    }
+
+    const source = byId.get(item.sourceId)
+    if (!source || !isHelpKnowledgeSource(source)) {
+      throw new KnowledgeValidationError(
+        'INVALID_HELP_TRACK_SOURCE',
+        `Help source ${item.sourceId} must be a cataloged public Markdown page`,
+        item.sourceId,
+      )
+    }
+    helpItemIds.add(item.sourceId)
+  }
+
+  const helpSourceIds = new Set(
+    catalog.sources.filter(isHelpKnowledgeSource).map((source) => source.id),
+  )
+  const missingHelpSources = [...helpSourceIds].filter((id) => !helpItemIds.has(id)).sort()
+  const unexpectedHelpSources = [...helpItemIds].filter((id) => !helpSourceIds.has(id)).sort()
+  if (missingHelpSources.length > 0 || unexpectedHelpSources.length > 0) {
+    throw new KnowledgeValidationError(
+      'HELP_TRACK_COVERAGE_MISMATCH',
+      `Help tracks differ from public Markdown sources (missing: ${missingHelpSources.join(', ') || 'none'}; unexpected: ${unexpectedHelpSources.join(', ') || 'none'})`,
+    )
+  }
+
+  for (const track of navigation.helpTracks) {
+    const byItemId = new Map(track.items.map((item) => [item.sourceId, item]))
+    for (const [index, item] of track.items.entries()) {
+      for (const prerequisiteId of item.prerequisiteSourceIds) {
+        if (!helpItemIds.has(prerequisiteId)) {
+          throw new KnowledgeValidationError(
+            'INVALID_NAVIGATION_PREREQUISITE',
+            `Help track ${track.id} source ${item.sourceId} references unknown prerequisite ${prerequisiteId}`,
+            item.sourceId,
+          )
+        }
+      }
+      if (item.nextSourceId !== null && !byItemId.has(item.nextSourceId)) {
+        throw new KnowledgeValidationError(
+          'INVALID_HELP_TRACK_NEXT_SOURCE',
+          `Help track ${track.id} source ${item.sourceId} points outside its track`,
+          item.sourceId,
+        )
+      }
+      const expectedNextSourceId = track.items[index + 1]?.sourceId ?? null
+      if (item.nextSourceId !== expectedNextSourceId) {
+        throw new KnowledgeValidationError(
+          'INVALID_HELP_TRACK_NEXT_SOURCE',
+          `Help track ${track.id} source ${item.sourceId} must point to ${expectedNextSourceId ?? 'the terminal state'}`,
+          item.sourceId,
+        )
+      }
+      if (item.terminal !== (expectedNextSourceId === null)) {
+        throw new KnowledgeValidationError(
+          'INVALID_HELP_TRACK_TERMINAL',
+          `Help track ${track.id} source ${item.sourceId} has an invalid terminal marker`,
+          item.sourceId,
+        )
+      }
+    }
   }
 
   return { catalog, navigation }

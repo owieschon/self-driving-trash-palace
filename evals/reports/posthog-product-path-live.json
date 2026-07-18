@@ -1,0 +1,531 @@
+{
+  "schemaVersion": "posthog-product-path-live@1",
+  "status": "verified",
+  "projectId": 508977,
+  "region": "us",
+  "source": "composed-local-product-path",
+  "startedAt": "2026-07-16T03:37:08.262Z",
+  "completedAt": "2026-07-16T03:37:08.469Z",
+  "eventNames": ["$ai_span", "$ai_trace", "mission created"],
+  "insertIds": [
+    "tpi_v1_4mXav0U7USDXVaascefGBYVFqXB5Julxv4IsbylpFqg",
+    "tpi_v1_l7r4al_uTBizr_upYjjxng_qaI6zqtZ902zmSEgB6YI",
+    "tpi_v1_zZkSawEG5yUEorsVClMAsb3GzjztNEQ-hED8CYlIuw8",
+    "tpi_v1_ui6KlNT6FfYdvx7Jmdcc98RSyLKt5fleGDOp7MhvmsA",
+    "tpi_v1_jzfDiIInMyBsHggJViRpFUYhwXVzJREXc866L-478G4",
+    "tpi_v1_ykS1JqmhXnG5kqSnn2vKmX9wjlDwLJHPHoCnyqDtacU",
+    "tpi_v1_NwQ0iaK7wTaA_qDH7X6bS6PS_XJFLpMSUqYzev7KTA4",
+    "tpi_v1_ZSngqDAyTZfyP6g3H3LIPvtgMGMBwpqiJhr8CzvRQ4o",
+    "tpi_v1_TitJna1kMnQK-ry8JyvtqMIRWQIMoz7uTC1Soc6PaAw",
+    "tpi_v1_XqoKZ8Wnf16vfRmOCuYz_7eCAboOLitAqEiM_mAPJDk",
+    "tpi_v1_skvUBvWbwEF9E4BAIgQBT_6kez1Blrik-U2FfR0Wysc",
+    "tpi_v1_MFuW9_rf31EuRZ_-5yC6vR0jFOHSaaSiSiWZPFp2YKk",
+    "tpi_v1_5KiXFZrCH3Rbl8UF_Ho1fWgVg3ZB4mTb0ccT4D7-NyY",
+    "tpi_v1_lyqIo5HQCZmTROyfP7K8bbc4pKoNTyoaxzwoj1ULFpE",
+    "tpi_v1_R1RE4AXRT5f-2o674FobfvjWw54os3RY3AClF47npjE",
+    "tpi_v1_gzngGPK4yaEGuQRE3J6YfqFBW2X2KIhpIp3XSN865KU",
+    "tpi_v1_9DdzCIpBHj4-FdbmD9PZWwHCNJ_vTURpFyqxDaiivRE",
+    "tpi_v1_EM9l-3s4x4dA5sCqPDxlfAUXtR_Y96hGyPAOkcW2gFk",
+    "tpi_v1_EqF_NiQIY8mOIDgUpHKeAnd2oGSSTr7JkwSg5oaPg60",
+    "tpi_v1_fygs23zorD8rlCfYPraWXpC4GUjHokJ4TRRHowZ3gaY",
+    "tpi_v1_2lXrnh4ClybgHTOg0nldesjMg3BTPZfzZIUl1i3iPMk",
+    "tpi_v1_XOb65-1rruCHWEMGXsABHWsQ4Rd0dZ12zpDvlTiP2Bc",
+    "tpi_v1_ZJrsz4mzCpdLzizYx2VlQSNf3q0anwbdL1EvmueLHlI",
+    "tpi_v1_KosbLTWb6WTSMnyV-1_yUuE7f2M5zGAl8Gj7f-_i8kw",
+    "tpi_v1_iFsxB3PmNfiNU2-Gsqe5fW8O_haiZXvDizRLuKHMdok",
+    "tpi_v1_5EfCW3jM105jb7MluM9ZZIqi3FdzlGDIAK1Kpb8W374",
+    "tpi_v1_6vXa4ROV7prYIQgVGb5jXwmccPq9e0jVwIj7bIMHr0I",
+    "tpi_v1_fhNDtLPxiQoFhF_Xt60e_txmB93F_p5eHjsZdN9CpL8",
+    "tpi_v1_UuMV1BDsGyKfR-dSCa3yaF5j8f0f77J4xAILyBcG_qo",
+    "tpi_v1_YQPOThoBBt9Pa1llqrQRGIJLw9R1dGYaxm4kRx7zMpY",
+    "tpi_v1_Xx-0MzLU0cpnUrnpE_9oxhtt5BKQXlAQMzaKk6yVlOg",
+    "tpi_v1_k1ZpSSzGTU5dF-SLPITyZ5-C1D6dDfCF_Ira2ihGACs",
+    "tpi_v1_WPDfyHjzSxegsGakhLfklqMTdH_GElwlh_ssUJKoflo",
+    "tpi_v1_r_tVsLg71Lclxz7FMyyO-RGm9OlfOwFFvOixMC6gh9g",
+    "tpi_v1_ok9z7imodp4EoWbh44FKCdqz8eHAkL-Ocz9VJK-t6hU",
+    "tpi_v1_C0Ag-d0F69XP1g5eDQa8YyVrmP9hkQZ1nPXwbk47y2E",
+    "tpi_v1_-_KXon8ysq-QeDZKDrtKydDKgrqcOiRUPMiWjW0vGBU",
+    "tpi_v1_mZVXqwADJbO_2GD8rEyOmgZfD7ec6t-hu7Yr2JbF06Y",
+    "tpi_v1_UVNHe32yKbLjnZaDClDoQvpPUnb-_jqK_-HNCWml4rg",
+    "tpi_v1_KwNdiTgKtiFKfcHPbIb_vT9I3FXuIq3lsz4OtzgVqkg",
+    "tpi_v1_zsFUCMUksMBuzKy4qFKGfcK8SlTVpWMvmC7oSLd91K8",
+    "tpi_v1_BiKTtJWkDJ7Tys2SkmeV9jnwN4BoA3jkGrWGLAbup6s",
+    "tpi_v1_qAc4zXNcEXgV-9IT34C3uLBFTRHZoJjmohRs8nZJ9Sg",
+    "tpi_v1_aSO-HdjrteLgw-WUm0dJKvBe_gJe0ivyFc54HOWdyvU",
+    "tpi_v1_8ThrifzMZy10wqLxIzgDN2Eob_hsUtS1flHL1oJMuUE",
+    "tpi_v1_Yae4ssjohSxktbkRhtywaKxMivlTp3v5ke4F3DRzcvY",
+    "tpi_v1_HDgSaF_073Ck14USE31E1-EE-a7LVxjotPHObM2l6hM",
+    "tpi_v1_C4U-KwPnCzUTeHhC1uSJI7Hie34SaHZPQONyYocr6tQ",
+    "tpi_v1_vBC7uSQFuzMrfgGKzr8TKs0D4OHuqEkRDoQ5XXPfGPQ",
+    "tpi_v1_xJJSI-VGS9HrP4pR-cnhtpY173sM2pawu1R6EvQc_DI",
+    "tpi_v1_JdUwO38QC9WW5j_n_FdDN_IxTRCA-BgCWpISzO7qIEc",
+    "tpi_v1_U-Zl1esIGB8RncCgKF4pByzb7mUiEhgKzHmtqhf_Wu8",
+    "tpi_v1_eeIAs06uufX4MEcGzvBjvs61qxBHFf7VhtAueB05CrI",
+    "tpi_v1_aiii6AA9Rt_y45hpb4Fu1TvD01ghf59t9w1JpDJh-x0",
+    "tpi_v1_wsXgsFXtQ2nO3OwFVUTJI_N9BBp3OTB13ikXqliTJIQ",
+    "tpi_v1_o8fQzqf85tmMzhUiWjYhpdLosnJBJux12ulucCr8Qh8",
+    "tpi_v1_IAbK252lUEYXdSSBZwdGlQcxNK19tizrtkeMRMLoVns",
+    "tpi_v1_jNmv5xTwpTKNDbYBB00Lp-mUhvzUlIP_E1SXeyGWWlo",
+    "tpi_v1_FnuDZwY5V5UOal9e_4bs-6gKhj5EPt1M-Rp_0gie9dQ",
+    "tpi_v1_HbLh-2uvfX2oZ5S171Za2zLl0YNTM5MB1Tw69p7Dxzw",
+    "tpi_v1_70HElAhWr0whMfj3hj3SaED7vJ1t7xO-xHPpxLxx3_o",
+    "tpi_v1_ZBZGKFKpaKGVfAH2IdQ_gLdWMVysSGSohSkNVd6UDTY",
+    "tpi_v1_gJS5CuUKupxYBCo_uIL345VqFiCRCwjrr9OaOrGog1Y",
+    "tpi_v1_jajQmEjWR4cKOjHeTwrAfpFtOUBhOn2L_9PY3PhtO7s",
+    "tpi_v1_EzwbHsVMJynvO7L9fg5hV-SyBSS5KD1yyZNOZ-gGuEc",
+    "tpi_v1_ANHXltf8p4Sy4N4PeNvpy0ynWCjfKpMp-0mpd_Fz4u4",
+    "tpi_v1_p8PbJLePZz_MTJXcRaU5IV4NjGCFh85m2IUOr8pAnpk",
+    "tpi_v1_vZlsoOJLN64UbKqyhSLcDkz3foVT4FoOJPP-p8AyE48",
+    "tpi_v1_WrvAjy91rpxn8h14H50m7KM2MSSzCTBJPDyzdyp0NrE",
+    "tpi_v1_dNAr5lJrkgbITdHa2Ekzp4J7Os0Ntn39Y20Nks1Z6hI",
+    "tpi_v1_7Ld7Qrwt09EVAjF85gmgp87lO2nc0AQ32hRAARDVGiI",
+    "tpi_v1_S0PfuKmKTR155vRbHMP2dF8OmHY6ajInI_L7B5Xe4Ko",
+    "tpi_v1_jbvI3cA68mr0gajtWnNNOqQske35k1F_El3Se9Cm-bc",
+    "tpi_v1_rodmRwu3ZZi4LKCLpZZzCyEcGHeyqLtSHe9m7cG6C-4",
+    "tpi_v1_fNEWAjYzZbFFvFbiUMly8XWYLGUAos_I2i54K4lxhG0",
+    "tpi_v1_JcO9JJxQJR0m4HwmFZZTyhujQl2UM3Zb9fiuBNUSr3Y"
+  ],
+  "excludedNonEvaluationCount": 76,
+  "timestampProjection": {
+    "kind": "fixture-order-rebased-for-ingestion",
+    "projectedCount": 76,
+    "originalMinimum": "2026-08-14T10:27:33.960Z",
+    "originalMaximum": "2026-08-14T10:36:26.040Z",
+    "projectedMinimum": "2026-07-16T03:37:08.212Z",
+    "projectedMaximum": "2026-07-16T03:37:08.287Z"
+  },
+  "submission": {
+    "schemaVersion": "1",
+    "target": "posthog_us",
+    "receivedCount": 76,
+    "submittedCount": 76,
+    "duplicateCount": 0,
+    "disabledCount": 0,
+    "rejectedCount": 0,
+    "captureFailedCount": 0,
+    "deliveryUnknownCount": 0,
+    "flushStatus": "succeeded",
+    "results": [
+      {
+        "index": 0,
+        "insertId": "tpi_v1_4mXav0U7USDXVaascefGBYVFqXB5Julxv4IsbylpFqg",
+        "status": "submitted"
+      },
+      {
+        "index": 1,
+        "insertId": "tpi_v1_l7r4al_uTBizr_upYjjxng_qaI6zqtZ902zmSEgB6YI",
+        "status": "submitted"
+      },
+      {
+        "index": 2,
+        "insertId": "tpi_v1_zZkSawEG5yUEorsVClMAsb3GzjztNEQ-hED8CYlIuw8",
+        "status": "submitted"
+      },
+      {
+        "index": 3,
+        "insertId": "tpi_v1_ui6KlNT6FfYdvx7Jmdcc98RSyLKt5fleGDOp7MhvmsA",
+        "status": "submitted"
+      },
+      {
+        "index": 4,
+        "insertId": "tpi_v1_jzfDiIInMyBsHggJViRpFUYhwXVzJREXc866L-478G4",
+        "status": "submitted"
+      },
+      {
+        "index": 5,
+        "insertId": "tpi_v1_ykS1JqmhXnG5kqSnn2vKmX9wjlDwLJHPHoCnyqDtacU",
+        "status": "submitted"
+      },
+      {
+        "index": 6,
+        "insertId": "tpi_v1_NwQ0iaK7wTaA_qDH7X6bS6PS_XJFLpMSUqYzev7KTA4",
+        "status": "submitted"
+      },
+      {
+        "index": 7,
+        "insertId": "tpi_v1_ZSngqDAyTZfyP6g3H3LIPvtgMGMBwpqiJhr8CzvRQ4o",
+        "status": "submitted"
+      },
+      {
+        "index": 8,
+        "insertId": "tpi_v1_TitJna1kMnQK-ry8JyvtqMIRWQIMoz7uTC1Soc6PaAw",
+        "status": "submitted"
+      },
+      {
+        "index": 9,
+        "insertId": "tpi_v1_XqoKZ8Wnf16vfRmOCuYz_7eCAboOLitAqEiM_mAPJDk",
+        "status": "submitted"
+      },
+      {
+        "index": 10,
+        "insertId": "tpi_v1_skvUBvWbwEF9E4BAIgQBT_6kez1Blrik-U2FfR0Wysc",
+        "status": "submitted"
+      },
+      {
+        "index": 11,
+        "insertId": "tpi_v1_MFuW9_rf31EuRZ_-5yC6vR0jFOHSaaSiSiWZPFp2YKk",
+        "status": "submitted"
+      },
+      {
+        "index": 12,
+        "insertId": "tpi_v1_5KiXFZrCH3Rbl8UF_Ho1fWgVg3ZB4mTb0ccT4D7-NyY",
+        "status": "submitted"
+      },
+      {
+        "index": 13,
+        "insertId": "tpi_v1_lyqIo5HQCZmTROyfP7K8bbc4pKoNTyoaxzwoj1ULFpE",
+        "status": "submitted"
+      },
+      {
+        "index": 14,
+        "insertId": "tpi_v1_R1RE4AXRT5f-2o674FobfvjWw54os3RY3AClF47npjE",
+        "status": "submitted"
+      },
+      {
+        "index": 15,
+        "insertId": "tpi_v1_gzngGPK4yaEGuQRE3J6YfqFBW2X2KIhpIp3XSN865KU",
+        "status": "submitted"
+      },
+      {
+        "index": 16,
+        "insertId": "tpi_v1_9DdzCIpBHj4-FdbmD9PZWwHCNJ_vTURpFyqxDaiivRE",
+        "status": "submitted"
+      },
+      {
+        "index": 17,
+        "insertId": "tpi_v1_EM9l-3s4x4dA5sCqPDxlfAUXtR_Y96hGyPAOkcW2gFk",
+        "status": "submitted"
+      },
+      {
+        "index": 18,
+        "insertId": "tpi_v1_EqF_NiQIY8mOIDgUpHKeAnd2oGSSTr7JkwSg5oaPg60",
+        "status": "submitted"
+      },
+      {
+        "index": 19,
+        "insertId": "tpi_v1_fygs23zorD8rlCfYPraWXpC4GUjHokJ4TRRHowZ3gaY",
+        "status": "submitted"
+      },
+      {
+        "index": 20,
+        "insertId": "tpi_v1_2lXrnh4ClybgHTOg0nldesjMg3BTPZfzZIUl1i3iPMk",
+        "status": "submitted"
+      },
+      {
+        "index": 21,
+        "insertId": "tpi_v1_XOb65-1rruCHWEMGXsABHWsQ4Rd0dZ12zpDvlTiP2Bc",
+        "status": "submitted"
+      },
+      {
+        "index": 22,
+        "insertId": "tpi_v1_ZJrsz4mzCpdLzizYx2VlQSNf3q0anwbdL1EvmueLHlI",
+        "status": "submitted"
+      },
+      {
+        "index": 23,
+        "insertId": "tpi_v1_KosbLTWb6WTSMnyV-1_yUuE7f2M5zGAl8Gj7f-_i8kw",
+        "status": "submitted"
+      },
+      {
+        "index": 24,
+        "insertId": "tpi_v1_iFsxB3PmNfiNU2-Gsqe5fW8O_haiZXvDizRLuKHMdok",
+        "status": "submitted"
+      },
+      {
+        "index": 25,
+        "insertId": "tpi_v1_5EfCW3jM105jb7MluM9ZZIqi3FdzlGDIAK1Kpb8W374",
+        "status": "submitted"
+      },
+      {
+        "index": 26,
+        "insertId": "tpi_v1_6vXa4ROV7prYIQgVGb5jXwmccPq9e0jVwIj7bIMHr0I",
+        "status": "submitted"
+      },
+      {
+        "index": 27,
+        "insertId": "tpi_v1_fhNDtLPxiQoFhF_Xt60e_txmB93F_p5eHjsZdN9CpL8",
+        "status": "submitted"
+      },
+      {
+        "index": 28,
+        "insertId": "tpi_v1_UuMV1BDsGyKfR-dSCa3yaF5j8f0f77J4xAILyBcG_qo",
+        "status": "submitted"
+      },
+      {
+        "index": 29,
+        "insertId": "tpi_v1_YQPOThoBBt9Pa1llqrQRGIJLw9R1dGYaxm4kRx7zMpY",
+        "status": "submitted"
+      },
+      {
+        "index": 30,
+        "insertId": "tpi_v1_Xx-0MzLU0cpnUrnpE_9oxhtt5BKQXlAQMzaKk6yVlOg",
+        "status": "submitted"
+      },
+      {
+        "index": 31,
+        "insertId": "tpi_v1_k1ZpSSzGTU5dF-SLPITyZ5-C1D6dDfCF_Ira2ihGACs",
+        "status": "submitted"
+      },
+      {
+        "index": 32,
+        "insertId": "tpi_v1_WPDfyHjzSxegsGakhLfklqMTdH_GElwlh_ssUJKoflo",
+        "status": "submitted"
+      },
+      {
+        "index": 33,
+        "insertId": "tpi_v1_r_tVsLg71Lclxz7FMyyO-RGm9OlfOwFFvOixMC6gh9g",
+        "status": "submitted"
+      },
+      {
+        "index": 34,
+        "insertId": "tpi_v1_ok9z7imodp4EoWbh44FKCdqz8eHAkL-Ocz9VJK-t6hU",
+        "status": "submitted"
+      },
+      {
+        "index": 35,
+        "insertId": "tpi_v1_C0Ag-d0F69XP1g5eDQa8YyVrmP9hkQZ1nPXwbk47y2E",
+        "status": "submitted"
+      },
+      {
+        "index": 36,
+        "insertId": "tpi_v1_-_KXon8ysq-QeDZKDrtKydDKgrqcOiRUPMiWjW0vGBU",
+        "status": "submitted"
+      },
+      {
+        "index": 37,
+        "insertId": "tpi_v1_mZVXqwADJbO_2GD8rEyOmgZfD7ec6t-hu7Yr2JbF06Y",
+        "status": "submitted"
+      },
+      {
+        "index": 38,
+        "insertId": "tpi_v1_UVNHe32yKbLjnZaDClDoQvpPUnb-_jqK_-HNCWml4rg",
+        "status": "submitted"
+      },
+      {
+        "index": 39,
+        "insertId": "tpi_v1_KwNdiTgKtiFKfcHPbIb_vT9I3FXuIq3lsz4OtzgVqkg",
+        "status": "submitted"
+      },
+      {
+        "index": 40,
+        "insertId": "tpi_v1_zsFUCMUksMBuzKy4qFKGfcK8SlTVpWMvmC7oSLd91K8",
+        "status": "submitted"
+      },
+      {
+        "index": 41,
+        "insertId": "tpi_v1_BiKTtJWkDJ7Tys2SkmeV9jnwN4BoA3jkGrWGLAbup6s",
+        "status": "submitted"
+      },
+      {
+        "index": 42,
+        "insertId": "tpi_v1_qAc4zXNcEXgV-9IT34C3uLBFTRHZoJjmohRs8nZJ9Sg",
+        "status": "submitted"
+      },
+      {
+        "index": 43,
+        "insertId": "tpi_v1_aSO-HdjrteLgw-WUm0dJKvBe_gJe0ivyFc54HOWdyvU",
+        "status": "submitted"
+      },
+      {
+        "index": 44,
+        "insertId": "tpi_v1_8ThrifzMZy10wqLxIzgDN2Eob_hsUtS1flHL1oJMuUE",
+        "status": "submitted"
+      },
+      {
+        "index": 45,
+        "insertId": "tpi_v1_Yae4ssjohSxktbkRhtywaKxMivlTp3v5ke4F3DRzcvY",
+        "status": "submitted"
+      },
+      {
+        "index": 46,
+        "insertId": "tpi_v1_HDgSaF_073Ck14USE31E1-EE-a7LVxjotPHObM2l6hM",
+        "status": "submitted"
+      },
+      {
+        "index": 47,
+        "insertId": "tpi_v1_C4U-KwPnCzUTeHhC1uSJI7Hie34SaHZPQONyYocr6tQ",
+        "status": "submitted"
+      },
+      {
+        "index": 48,
+        "insertId": "tpi_v1_vBC7uSQFuzMrfgGKzr8TKs0D4OHuqEkRDoQ5XXPfGPQ",
+        "status": "submitted"
+      },
+      {
+        "index": 49,
+        "insertId": "tpi_v1_xJJSI-VGS9HrP4pR-cnhtpY173sM2pawu1R6EvQc_DI",
+        "status": "submitted"
+      },
+      {
+        "index": 50,
+        "insertId": "tpi_v1_JdUwO38QC9WW5j_n_FdDN_IxTRCA-BgCWpISzO7qIEc",
+        "status": "submitted"
+      },
+      {
+        "index": 51,
+        "insertId": "tpi_v1_U-Zl1esIGB8RncCgKF4pByzb7mUiEhgKzHmtqhf_Wu8",
+        "status": "submitted"
+      },
+      {
+        "index": 52,
+        "insertId": "tpi_v1_eeIAs06uufX4MEcGzvBjvs61qxBHFf7VhtAueB05CrI",
+        "status": "submitted"
+      },
+      {
+        "index": 53,
+        "insertId": "tpi_v1_aiii6AA9Rt_y45hpb4Fu1TvD01ghf59t9w1JpDJh-x0",
+        "status": "submitted"
+      },
+      {
+        "index": 54,
+        "insertId": "tpi_v1_wsXgsFXtQ2nO3OwFVUTJI_N9BBp3OTB13ikXqliTJIQ",
+        "status": "submitted"
+      },
+      {
+        "index": 55,
+        "insertId": "tpi_v1_o8fQzqf85tmMzhUiWjYhpdLosnJBJux12ulucCr8Qh8",
+        "status": "submitted"
+      },
+      {
+        "index": 56,
+        "insertId": "tpi_v1_IAbK252lUEYXdSSBZwdGlQcxNK19tizrtkeMRMLoVns",
+        "status": "submitted"
+      },
+      {
+        "index": 57,
+        "insertId": "tpi_v1_jNmv5xTwpTKNDbYBB00Lp-mUhvzUlIP_E1SXeyGWWlo",
+        "status": "submitted"
+      },
+      {
+        "index": 58,
+        "insertId": "tpi_v1_FnuDZwY5V5UOal9e_4bs-6gKhj5EPt1M-Rp_0gie9dQ",
+        "status": "submitted"
+      },
+      {
+        "index": 59,
+        "insertId": "tpi_v1_HbLh-2uvfX2oZ5S171Za2zLl0YNTM5MB1Tw69p7Dxzw",
+        "status": "submitted"
+      },
+      {
+        "index": 60,
+        "insertId": "tpi_v1_70HElAhWr0whMfj3hj3SaED7vJ1t7xO-xHPpxLxx3_o",
+        "status": "submitted"
+      },
+      {
+        "index": 61,
+        "insertId": "tpi_v1_ZBZGKFKpaKGVfAH2IdQ_gLdWMVysSGSohSkNVd6UDTY",
+        "status": "submitted"
+      },
+      {
+        "index": 62,
+        "insertId": "tpi_v1_gJS5CuUKupxYBCo_uIL345VqFiCRCwjrr9OaOrGog1Y",
+        "status": "submitted"
+      },
+      {
+        "index": 63,
+        "insertId": "tpi_v1_jajQmEjWR4cKOjHeTwrAfpFtOUBhOn2L_9PY3PhtO7s",
+        "status": "submitted"
+      },
+      {
+        "index": 64,
+        "insertId": "tpi_v1_EzwbHsVMJynvO7L9fg5hV-SyBSS5KD1yyZNOZ-gGuEc",
+        "status": "submitted"
+      },
+      {
+        "index": 65,
+        "insertId": "tpi_v1_ANHXltf8p4Sy4N4PeNvpy0ynWCjfKpMp-0mpd_Fz4u4",
+        "status": "submitted"
+      },
+      {
+        "index": 66,
+        "insertId": "tpi_v1_p8PbJLePZz_MTJXcRaU5IV4NjGCFh85m2IUOr8pAnpk",
+        "status": "submitted"
+      },
+      {
+        "index": 67,
+        "insertId": "tpi_v1_vZlsoOJLN64UbKqyhSLcDkz3foVT4FoOJPP-p8AyE48",
+        "status": "submitted"
+      },
+      {
+        "index": 68,
+        "insertId": "tpi_v1_WrvAjy91rpxn8h14H50m7KM2MSSzCTBJPDyzdyp0NrE",
+        "status": "submitted"
+      },
+      {
+        "index": 69,
+        "insertId": "tpi_v1_dNAr5lJrkgbITdHa2Ekzp4J7Os0Ntn39Y20Nks1Z6hI",
+        "status": "submitted"
+      },
+      {
+        "index": 70,
+        "insertId": "tpi_v1_7Ld7Qrwt09EVAjF85gmgp87lO2nc0AQ32hRAARDVGiI",
+        "status": "submitted"
+      },
+      {
+        "index": 71,
+        "insertId": "tpi_v1_S0PfuKmKTR155vRbHMP2dF8OmHY6ajInI_L7B5Xe4Ko",
+        "status": "submitted"
+      },
+      {
+        "index": 72,
+        "insertId": "tpi_v1_jbvI3cA68mr0gajtWnNNOqQske35k1F_El3Se9Cm-bc",
+        "status": "submitted"
+      },
+      {
+        "index": 73,
+        "insertId": "tpi_v1_rodmRwu3ZZi4LKCLpZZzCyEcGHeyqLtSHe9m7cG6C-4",
+        "status": "submitted"
+      },
+      {
+        "index": 74,
+        "insertId": "tpi_v1_fNEWAjYzZbFFvFbiUMly8XWYLGUAos_I2i54K4lxhG0",
+        "status": "submitted"
+      },
+      {
+        "index": 75,
+        "insertId": "tpi_v1_JcO9JJxQJR0m4HwmFZZTyhujQl2UM3Zb9fiuBNUSr3Y",
+        "status": "submitted"
+      }
+    ]
+  },
+  "shutdown": {
+    "schemaVersion": "1",
+    "status": "succeeded",
+    "flushStatus": "succeeded",
+    "clientStatus": "succeeded"
+  },
+  "serverObservation": {
+    "method": "posthog_mcp_hogql",
+    "observedAt": "2026-07-16T03:40:18Z",
+    "projectId": 508977,
+    "timeWindow": {
+      "start": "2026-07-16T03:36:00Z",
+      "end": "2026-07-16T03:39:00Z"
+    },
+    "filters": {
+      "environment": "evaluation",
+      "dataOrigin": "evaluation",
+      "appVersion": "0.0.0"
+    },
+    "eventCount": 76,
+    "uniqueInsertIdCount": 76,
+    "eventCounts": {
+      "$ai_span": 74,
+      "$ai_trace": 1,
+      "mission created": 1
+    }
+  },
+  "privacy": {
+    "secretValuesRetained": false,
+    "rawIdentifiersRetained": false,
+    "promptsRetained": false,
+    "customerDataRetained": false,
+    "fixtureEvidenceOnly": true
+  },
+  "claims": {
+    "productPathTransport": "Verified for one composed evaluation mission",
+    "productionTraffic": "Blocked",
+    "liveModel": "Blocked",
+    "liveLoop": "Blocked"
+  }
+}

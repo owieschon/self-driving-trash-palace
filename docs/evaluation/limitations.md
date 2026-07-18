@@ -4,17 +4,17 @@ This page sets the claim boundary for the retained pre-visual, pre-deployment ev
 
 ## Current claim ledger
 
-| Claim                                                        | Status                 | Evidence or missing evidence                                                                              |
-| ------------------------------------------------------------ | ---------------------- | --------------------------------------------------------------------------------------------------------- |
-| Twelve provider-neutral decision cases meet their manifests  | Deterministic-verified | [Executable retained report](../../evals/reports/deterministic-decision-contract.json)                    |
-| Broken and corrected fixtures discriminate the local metric  | Deterministic-verified | [Executable duplicate-routine report](../../evals/reports/duplicate-routine-controls.json)                |
-| The complete composed network Quest passes from a clean host | Network-verified       | [Credential-free Quest receipt](../../evals/reports/credential-free-quest.json)                           |
-| Real model project discovery and tool choice are reliable    | Blocked                | Requires approved credentials, a paid budget, a frozen configuration, and repeated live runs              |
-| Live latency, tokens, cost, and provider stability are known | Blocked                | Requires the same credentialed baseline                                                                   |
-| Sanitized events and traces arrive in PostHog                | Ingestion-verified     | [Server-observed live receipt](../../evals/reports/posthog-ingestion-live.json)                           |
-| A self-improving loop produced a beneficial result           | Blocked                | Requires a real signal, report, investigation, reviewed change, delivery, and declared post-change window |
-| The product controls real connected hardware                 | Out of scope           | Gateway behavior is a deterministic simulator                                                             |
-| Visual browser UX and accessibility meet release gates       | Deferred               | Visual design, browser journey review, and deployment occur after the non-visual core                     |
+| Claim                                                        | Status                 | Evidence or missing evidence                                                                                                                                              |
+| ------------------------------------------------------------ | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Twelve provider-neutral decision cases meet their manifests  | Deterministic-verified | [Executable retained report](../../evals/reports/deterministic-decision-contract.json)                                                                                    |
+| Broken and corrected fixtures discriminate the local metric  | Deterministic-verified | [Executable duplicate-routine report](../../evals/reports/duplicate-routine-controls.json)                                                                                |
+| The complete composed network Quest passes from a clean host | Network-verified       | [Credential-free Quest receipt](../../evals/reports/credential-free-quest.json)                                                                                           |
+| Real model project discovery and tool choice are reliable    | Blocked                | [One bounded credentialed decision](../../evals/reports/claude-live-smoke.json) selected `palaces.get` correctly; repeated corpus evidence does not exist                 |
+| Live latency, tokens, cost, and provider stability are known | Blocked                | The current receipt retains one successful sample; one sample cannot establish a latency baseline or provider stability                                                   |
+| Sanitized events and traces arrive in PostHog                | Ingestion-verified     | [Synthetic transport receipt](../../evals/reports/posthog-ingestion-live.json) and [composed product-path receipt](../../evals/reports/posthog-product-path-live.json)    |
+| A self-improving loop produced a beneficial result           | Blocked                | Requires a real signal, report, investigation, reviewed change, delivery, and declared post-change window                                                                 |
+| The product controls real connected hardware                 | Out of scope           | Gateway behavior is a deterministic simulator                                                                                                                             |
+| Browser journeys and automated accessibility checks pass     | Browser-checked        | Eight Chromium journeys cover primary flows, responsive widths, keyboard focus, reduced motion, and contrast; no production deployment or full assistive-technology audit |
 
 `Pending` means the repository has not retained evidence for the broad claim. `Blocked` means an external approval, credential, paid action, or observation window is required. Neither status is a failure of the credential-free core.
 
@@ -24,7 +24,7 @@ The deterministic corpus uses synthetic decision-contract environments. It is de
 
 ## Important analytics boundary
 
-A local JSONL event proves that an allowlisted payload was produced. A client flush proves only that the SDK returned. Only server-side observation in an approved PostHog project can earn **PostHog-ingestion-verified**.
+A local JSONL event proves that an allowlisted payload was produced. A client flush proves only that the SDK returned. Only server-side observation in an approved PostHog project can earn **PostHog-ingestion-verified**. The retained product-path receipt earns that label for one composed Scheduled Hauler Access evaluation mission, not for production traffic or every possible mission.
 
 Likewise, deterministic pre/post fixture measurements can validate a metric implementation, but they cannot earn **Live-loop-verified**. Read [how local evidence becomes an improvement claim](../../knowledge/concepts/evidence-and-improvement.md) before interpreting a report.
 

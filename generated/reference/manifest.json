@@ -126,14 +126,14 @@
       "sha256": "0695461e5d5f7392e43ba65eaa1075312b69d377e5ecd4597356fffc997125b7"
     },
     {
-      "bytes": 1125919,
+      "bytes": 1147009,
       "owners": [
         "packages/core/src/tools.ts#TOOL_REGISTRY",
         "apps/web/src/server/api-contracts.ts#WEB_API_SCHEMA_PROJECTIONS",
         "apps/web/src/server/http-boundary.ts"
       ],
       "path": "generated/reference/openapi.json",
-      "sha256": "4b32dc9a2514a545783cc1232960000a9413ab7934583708497819c1a647cc7b"
+      "sha256": "79ad2a850f7415921c2c0ece46c7eed09e56e42d8a7e7da45ad527bda6802678"
     },
     {
       "bytes": 15331,
@@ -504,8 +504,8 @@
       "sha256": "c3dc57d5feec920c528a78dcb36b77cb982143db3661f2dc65e88369e9db6d3f"
     }
   ],
-  "generatedAt": "2026-07-15T03:50:50.000Z",
+  "generatedAt": "2026-07-16T16:50:58.000Z",
   "generatorVersion": "1.0.0",
   "schemaVersion": "generated-reference-manifest@1",
-  "sourceDateEpoch": "1784087450"
+  "sourceDateEpoch": "1784220658"
 }

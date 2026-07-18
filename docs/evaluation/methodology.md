@@ -1,4 +1,4 @@
-# Evaluate Caretaker without confusing simulation for production proof
+# Evaluate Pal without confusing simulation for production proof
 
 This methodology explains how the versioned corpus is scored, reviewed, and promoted across stronger evidence layers.
 
@@ -8,7 +8,7 @@ The canonical case fields live in [`evals/caretaker/manifests.ts`](../../evals/c
 
 The twelve cases cover five distinct questions:
 
-1. Can Caretaker interpret an equivalent goal when wording or constraint order changes?
+1. Can Pal interpret an equivalent goal when wording or constraint order changes?
 2. Does it ask for a material clarification instead of inventing a preference?
 3. Does it refuse unsupported capability, cross-tenant access, and forged authority?
 4. Does it recover stale state, an unknown write outcome, duplicate delivery, and worker restart without multiplying the durable effect?
@@ -25,7 +25,7 @@ pnpm install --frozen-lockfile
 pnpm exec tsx evals/caretaker/deterministic-report-cli.ts --check
 ```
 
-This command executes all twelve cases through `DeterministicCaretakerDecisionEngine`, the synthetic decision-contract environments, and the canonical scorer. It fails if any retained case, score, accounting value, or receipt diverges.
+This command executes all twelve cases through the compatibility-named `DeterministicCaretakerDecisionEngine`, the synthetic decision-contract environments, and the canonical scorer. It fails if any retained case, score, accounting value, or receipt diverges.
 
 The current retained result is labeled **Deterministic-verified** with proof level `decision_contract_simulation`. It proves provider-neutral decision and scoring contracts only. It does not prove PostgreSQL, HTTP, MCP, worker, gateway, or verifier durability, and it does not prove real model behavior.
 
@@ -74,4 +74,4 @@ The suite must fail when authorization, idempotency, reconciliation, context pin
 
 The first credentialed baseline runs every case three times. It freezes the model, SDK, region, sampling, pricing-table version, latency and cost budgets, and promotion thresholds in a reviewed decision record. Promotion then runs every case five times and cannot weaken the safety gates.
 
-No paid runner or threshold freeze exists yet. Follow the [live-validation runbook](live-validation.md); the current state is **Blocked**.
+The first paid adapter smoke failed closed on an invalid structured result; the retained second attempt succeeded on one bounded decision with a full usage and cost receipt. One composed mission's 76 allowlisted events were subsequently observed server-side in the approved project. No repeated-runner baseline or threshold freeze exists yet. Follow the [live-validation runbook](live-validation.md); corpus-scale and self-improving-loop claims remain **Blocked**.

@@ -1294,6 +1294,24 @@ export class PgTenantRepositories {
         .limit(1)
       return row ? mapMission(row) : null
     },
+    listForPalace: async (palaceId: PalaceId, limit: number): Promise<readonly Mission[]> => {
+      const parsedPalaceId = PalaceIdSchema.parse(palaceId)
+      if (!Number.isSafeInteger(limit) || limit < 1) {
+        throw new TypeError('Mission list limit must be a positive safe integer')
+      }
+      const rows = await this.executor
+        .select()
+        .from(missions)
+        .where(
+          and(
+            eq(missions.organizationId, this.organizationId),
+            eq(missions.palaceId, parsedPalaceId),
+          ),
+        )
+        .orderBy(desc(missions.updatedAt), desc(missions.id))
+        .limit(limit)
+      return rows.map(mapMission)
+    },
     insert: async (input: Mission): Promise<void> => {
       const mission = MissionSchema.parse(input)
       this.assertTenant(mission.organizationId)
@@ -5446,7 +5464,7 @@ export class PgMissionExecutionUnitOfWork implements MissionExecutionUnitOfWorkP
   }
 }
 
-const SERIALIZABLE_RETRY_DELAYS_MILLISECONDS = Object.freeze([10, 25, 50, 100] as const)
+const SERIALIZABLE_RETRY_DELAYS_MILLISECONDS = Object.freeze([10, 25, 50, 100, 250, 500] as const)
 
 async function runSerializableTransaction<Result>(
   database: Database,

@@ -13,6 +13,14 @@ import { sha256Text } from './primitives.js'
 import { validateSourceLock } from './source-lock.js'
 
 const ROOT = resolve(process.cwd())
+const PUBLIC_HELP_MARKDOWN_OUTSIDE_KNOWLEDGE = [
+  'docs/decisions/0001-separate-runtime-truth-from-explanation.md',
+  'docs/evaluation/limitations.md',
+  'docs/evaluation/live-validation.md',
+  'docs/evaluation/methodology.md',
+  'docs/operations/continuous-integration.md',
+  'examples/http-and-mcp.md',
+] as const
 
 async function readJson(path: string): Promise<unknown> {
   return JSON.parse(await readFile(join(ROOT, path), 'utf8')) as unknown
@@ -57,6 +65,7 @@ describe('retained knowledge artifacts', () => {
     const authoredUris = [
       ...(await markdownFiles('knowledge')),
       ...(await markdownFiles('packages/agent/skills')),
+      ...PUBLIC_HELP_MARKDOWN_OUTSIDE_KNOWLEDGE,
     ].sort()
     expect(catalogUris).toEqual(authoredUris)
 

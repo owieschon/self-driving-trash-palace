@@ -121,8 +121,21 @@ export function getCaretakerHostPolicyContract(): HostPolicyContract {
   })
 }
 
+/**
+ * Public Pal view of the one host policy. The contract ID remains stable while frozen context
+ * receipts and persistence adapters still bind the historical Caretaker identifier.
+ */
+export function getPalHostPolicyContract(): HostPolicyContract {
+  return getCaretakerHostPolicyContract()
+}
+
 export function hashHostPolicyContract(): string {
   return sha256(getCaretakerHostPolicyContract())
+}
+
+/** The Pal alias must hash to the exact existing policy and cannot widen its tool set. */
+export function hashPalHostPolicyContract(): string {
+  return hashHostPolicyContract()
 }
 
 export function projectHostPolicy(expectedContractHash: string): HostPolicySection {
@@ -147,4 +160,9 @@ export function projectHostPolicy(expectedContractHash: string): HostPolicySecti
       tools: contract.tools,
     },
   })
+}
+
+/** Projects the same host-owned authority for the public Pal identity. */
+export function projectPalHostPolicy(expectedContractHash: string): HostPolicySection {
+  return projectHostPolicy(expectedContractHash)
 }

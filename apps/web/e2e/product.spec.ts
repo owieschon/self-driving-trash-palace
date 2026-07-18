@@ -1,100 +1,65 @@
 import { expect, test, type Page } from '@playwright/test'
 
-test('presents TrashPal as a reusable household automation product', async ({ page }) => {
+test('orients a first-time member toward a clear, inspectable first action', async ({ page }) => {
+  await mockConnectedWorkspace(page)
   await page.goto('/')
-  await expect(page.getByRole('button', { name: 'TrashPal', exact: true })).toBeVisible()
-  await expect(page.getByText('Set the outcome once. Keep the limits visible.')).toBeVisible()
-  await page.getByRole('button', { name: 'Automations' }).click()
+
+  await expect(page.getByRole('heading', { name: 'Welcome to TrashPal' })).toBeVisible()
+  await expect(page.getByText(/A Palace is one connected home/)).toBeVisible()
+  await page.getByRole('button', { name: 'I’ll look around first' }).click()
+
+  await expect(page.getByRole('heading', { name: 'Good morning, Rocky' })).toBeVisible()
+  await expect(page.getByText('What would you like Pal to take care of?')).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Automations', exact: true })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Workspace', exact: true })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Help', exact: true })).toBeVisible()
+})
+
+test('keeps supported automations and their control boundary discoverable', async ({ page }) => {
+  await mockConnectedWorkspace(page)
+  await page.goto('/automations')
+
+  await expect(page.getByRole('heading', { name: 'Automations' })).toBeVisible()
   await expect(page.getByText('Night Shift Homecoming')).toBeVisible()
   await expect(page.getByText('Scheduled Hauler Access')).toBeVisible()
-  await expect(page.getByRole('button', { name: 'New automation' })).toHaveCount(0)
-  await page.getByRole('button', { name: /Scheduled Hauler Access/ }).click()
-  await expect(page.getByText('Review the exact effect before TrashPal acts')).toBeVisible()
-  await expect(page.getByText('Assigned hauler tag')).toBeVisible()
+  await expect(page.getByRole('button', { name: 'New automation' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Search TrashPal' })).toHaveCount(0)
+  await expect(page.getByRole('button', { name: 'Rocky account' })).toHaveCount(0)
+
+  await page.getByRole('button', { name: 'Review and customize Scheduled Hauler Access' }).click()
+  await expect(page).toHaveURL(/\/automations\/scheduled_hauler_access$/)
+  await expect(page.getByText('Choose the outcome. Review the plan before Pal acts.')).toBeVisible()
+  await expect(page.getByText('Nothing changes yet.')).toBeVisible()
 })
 
-test('executes Hauler Access through the authenticated product API', async ({ page }) => {
-  await page.route('**/api/v1/auth/dev-session', async (route) =>
-    route.fulfill({
-      status: 201,
-      contentType: 'application/json',
-      body: JSON.stringify({ session: { csrfToken: 'csrf_test' } }),
-    }),
-  )
-  let requestBody: unknown
-  await page.route('**/api/v1/missions', async (route) => {
-    requestBody = route.request().postDataJSON()
-    await route.fulfill({
-      status: 201,
-      contentType: 'application/json',
-      body: JSON.stringify({ mission: { id: 'mis_hauler', state: { status: 'queued' } } }),
-    })
-  })
-  await openHaulerReview(page)
-  await page.getByRole('button', { name: 'Approve change' }).click()
-  await expect(page.getByText('Change recorded')).toBeVisible()
-  expect(requestBody).toMatchObject({
-    constraints: {
-      serviceHatchOnly: true,
-      residentialHatchMustRemainLocked: true,
-      finalServiceHatchState: 'locked',
-    },
-  })
-})
-
-test('preserves unknown outcomes instead of claiming failure or retrying', async ({ page }) => {
-  await page.route('**/api/v1/auth/dev-session', async (route) =>
-    route.fulfill({
-      status: 201,
-      contentType: 'application/json',
-      body: JSON.stringify({ session: { csrfToken: 'csrf_test' } }),
-    }),
-  )
-  let calls = 0
-  await page.route('**/api/v1/missions', async (route) => {
-    calls += 1
-    await route.abort('connectionreset')
-  })
-  await openHaulerReview(page)
-  await page.getByRole('button', { name: 'Approve change' }).click()
-  await expect(page.getByText('Outcome unknown')).toBeVisible()
-  await expect(page.getByText(/before any retry/)).toBeVisible()
-  expect(calls).toBe(1)
-})
-
-test('renders denied sessions and supports reject and cancel without mutation', async ({
+test('renders Workspace and Activity without manufacturing a device result or activity record', async ({
   page,
 }) => {
-  await page.route('**/api/v1/auth/dev-session', async (route) =>
-    route.fulfill({ status: 404, contentType: 'application/json', body: '{}' }),
-  )
-  await openHaulerReview(page)
-  await page.getByRole('button', { name: 'Approve change' }).click()
-  await expect(page.getByText('Change not applied')).toBeVisible()
-  await expect(page.getByText(/signed-in TrashPal session/)).toBeVisible()
-  await page.getByRole('button', { name: 'Close' }).click()
-  await page.getByRole('button', { name: /Night Shift Homecoming/ }).click()
-  await page.getByRole('button', { name: 'Reject' }).click()
-  await expect(page.getByText('Change rejected')).toBeVisible()
+  await mockConnectedWorkspace(page)
+  await page.goto('/setup')
+
+  await expect(page.getByRole('heading', { name: 'Workspace' })).toBeVisible()
+  await expect(page.getByText('Current workspace information')).toBeVisible()
+  await expect(
+    page.locator('.house-sections').getByText('Rocky’s Palace', { exact: true }),
+  ).toBeVisible()
+
+  await page.getByRole('button', { name: 'Activity', exact: true }).click()
+  await expect(page).toHaveURL(/\/activity$/)
+  await expect(page.getByText('No recent Palace activity')).toBeVisible()
+  await expect(
+    page.locator('.change-notice').getByText('This Palace has no recent requests to show.'),
+  ).toBeVisible()
+  await expect(page.locator('.activity-list')).toHaveCount(0)
 })
 
-for (const width of [390, 768, 1440]) {
-  test(`keeps the knowledge path usable at ${width}px`, async ({ page }) => {
-    await page.setViewportSize({ width, height: 900 })
-    await page.goto('/')
-    await page.getByRole('button', { name: 'Learn' }).click()
-    await expect(page.getByText('Give TrashPal a job, not unlimited control')).toBeVisible()
-    await expect(page.getByRole('button', { name: 'Connect a home' })).toHaveCount(0)
-    const overflow = await page.evaluate(
-      () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
-    )
-    expect(overflow).toBe(false)
-  })
-}
-
-test('supports keyboard focus, reduced motion, theme contrast, and reload', async ({ page }) => {
+test('keeps keyboard focus, reduced motion, theme contrast, and reload usable', async ({
+  page,
+}) => {
+  await mockConnectedWorkspace(page)
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.goto('/')
+  await page.getByRole('button', { name: 'I’ll look around first' }).click()
   await page.keyboard.press('Tab')
   expect(
     await page.evaluate(() => ['BUTTON', 'A'].includes(document.activeElement?.tagName ?? '')),
@@ -107,13 +72,57 @@ test('supports keyboard focus, reduced motion, theme contrast, and reload', asyn
   await expect.poll(() => page.locator('html').getAttribute('data-theme')).toBe('dark')
   expect(await contrastRatio(page, 'body')).toBeGreaterThanOrEqual(4.5)
   await page.reload()
-  await expect(page.getByText('Good evening, Rocky')).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Good morning, Rocky' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Welcome to TrashPal' })).toHaveCount(0)
 })
 
-async function openHaulerReview(page: Page) {
-  await page.goto('/')
-  await page.getByRole('button', { name: 'Automations' }).click()
-  await page.getByRole('button', { name: /Scheduled Hauler Access/ }).click()
+async function mockConnectedWorkspace(page: Page) {
+  await page.route('**/api/v1/palaces/**/workspace', async (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({
+        schemaVersion: 'palace-workspace@1',
+        member: {
+          id: 'usr_e2e_workspace',
+          organizationId: 'org_e2e_workspace',
+          displayName: 'Rocky',
+          role: 'owner',
+          grants: [],
+        },
+        palace: {
+          id: 'pal_e2e_workspace',
+          organizationId: 'org_e2e_workspace',
+          name: 'Rocky’s Palace',
+          timezone: 'America/New_York',
+        },
+        presentation: {
+          observedAt: '2026-07-16T12:00:00.000Z',
+          timezone: 'America/New_York',
+          dayPeriod: 'morning',
+        },
+        attention: [],
+        capabilityIdeas: [
+          {
+            programKind: 'night_shift_homecoming',
+            label: 'Night Shift Homecoming',
+            description: 'Prepare the Palace for a verified arrival.',
+            availability: 'ready',
+            requiredCapabilities: ['temperature_target'],
+          },
+          {
+            programKind: 'scheduled_hauler_access',
+            label: 'Scheduled Hauler Access',
+            description: 'Give an assigned hauler limited service access.',
+            availability: 'ready',
+            requiredCapabilities: ['service_hatch'],
+          },
+        ],
+        activeAutomations: [],
+        activity: [],
+      }),
+    }),
+  )
 }
 
 async function contrastRatio(page: Page, selector: string): Promise<number> {

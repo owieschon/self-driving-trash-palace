@@ -69,6 +69,31 @@ const PROMPT_FIELD =
 const TRACKED_CREDENTIAL_COMPONENT =
   /^(?:\.env(?:\..*)?|credentials?(?:\..*)?|id_[^.]+|.*\.(?:key|pem|p12))$/i
 const CREDENTIAL_TEST_SOURCE_COMPONENT = /^credentials?(?:\.[a-z0-9_-]+)*\.test\.(?:[cm]?[jt]sx?)$/i
+const TRACKED_TEST_SOURCE = /(?:^|\/)[^/]+\.(?:integration\.)?(?:spec|test)\.[^.]+$/
+const fixture = (...parts: readonly string[]) => parts.join('')
+const KNOWN_TEST_FIXTURE_VALUES = [
+  fixture('/Users/', 'alice/private/issue.json'),
+  fixture('/Users/', 'alice/private/report.json'),
+  fixture('/Users/', 'alice/Desktop/trace.png'),
+  fixture('/Users/', 'rocky/.config'),
+  fixture('/home/', 'rocky/trash-palace'),
+  fixture('/home/', 'rocky'),
+  fixture('Bearer ', 'synthetic-publication-token-123456'),
+  fixture('Bearer ', 'delegated.token.value_1234567890'),
+  fixture('Bearer ', 'delegated-token-value'),
+  fixture('Bearer ', 'phx_', 'secret_should_never_reach_receipt'),
+  fixture('Bearer ', 'secret-value-123456'),
+  fixture('phc_', 'unsanitizedvalue1234'),
+  fixture('phx_', '1234567890abcdefghijkl'),
+  fixture('index', '@example.invalid'),
+  fixture('identity', '@example.invalid'),
+  fixture('rocky', '@example.com'),
+  fixture('caretaker', '@example.com'),
+  fixture('https://operator:secret', '@trash-palace.example'),
+  fixture('https://operator:secret', '@trash-palace.example/api/mcp'),
+  fixture('https://us.posthog.com/project/', 'private-project/ai-observability/traces/1'),
+  fixture('https://us.posthog.com/project/', '12345/ai/traces/private'),
+] as const
 
 export type PublicationFindingReason =
   | RedactionReason
@@ -171,19 +196,23 @@ function scanText(path: string, text: string, strict: boolean): PublicationFindi
 }
 
 function scanTrackedSource(path: string, text: string): PublicationFinding[] {
-  const isTest = /(?:^|\/)[^/]+\.(?:integration\.)?(?:spec|test)\.[^.]+$/.test(path)
+  const scannedText = TRACKED_TEST_SOURCE.test(path)
+    ? [...KNOWN_TEST_FIXTURE_VALUES]
+        .sort((a, b) => b.length - a.length)
+        .reduce((current, fixture) => current.replaceAll(fixture, '[KNOWN_TEST_FIXTURE]'), text)
+    : text
   const homePath = /\/(?:Users|home)\/(?!node(?:\/|\b))[A-Za-z0-9._-]+(?:\/[^\s"'`]+)*/
-  const quotedCredential =
-    /["'`](?:ph[ctx]_[A-Za-z0-9_-]{12,}|sk-(?:ant-|proj-)?[A-Za-z0-9_-]{12,}|github_pat_[A-Za-z0-9_]{12,}|gh[pousr]_[A-Za-z0-9]{12,}|AKIA[A-Z0-9]{16})/
-  const bearerValue = /["'`]Bearer\s+([A-Za-z0-9._~+/-]{12,}=*)/.exec(text)?.[1]
-  const containsBearerCredential =
-    bearerValue !== undefined && !/^(?:authentication|credential|token)$/i.test(bearerValue)
-  const findings = scanText(path, text, false)
+  const credentialToken =
+    /\b(?:ph[ctx]_[A-Za-z0-9_-]{12,}|sk-(?:ant-|proj-)?[A-Za-z0-9_-]{12,}|github_pat_[A-Za-z0-9_]{12,}|gh[pousr]_[A-Za-z0-9]{12,}|AKIA[A-Z0-9]{16})\b/
+  const containsBearerCredential = [
+    ...scannedText.matchAll(/\bBearer\s+([A-Za-z0-9._~+/-]{12,}=*)/g),
+  ].some((match) => match[1] !== undefined && !/^authentication$/i.test(match[1]))
+  const findings = scanText(path, scannedText, false)
   return findings.filter((finding) => {
     if (finding.reason === 'credential')
-      return !isTest && (quotedCredential.test(text) || containsBearerCredential)
-    if (finding.reason === 'home_path') return !isTest && homePath.test(text)
-    if (finding.reason === 'email' || finding.reason === 'private_posthog_link') return !isTest
+      return credentialToken.test(scannedText) || containsBearerCredential
+    if (finding.reason === 'home_path') return homePath.test(scannedText)
+    if (finding.reason === 'email' || finding.reason === 'private_posthog_link') return true
     return false
   })
 }

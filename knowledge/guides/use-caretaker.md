@@ -1,32 +1,42 @@
-# Use Caretaker for one bounded automation
+# Set a goal for Pal
 
-This guide shows what Caretaker owns, what the host owns, and where a human must decide.
+Use this guide to give Pal a supported outcome and the safety rules it must preserve while preparing a proposal. Pal is not a general-purpose chatbot: it works from the Palace state, available automation controls, and the limits you set.
 
-Before starting, distinguish [missions, plans, operations, and attempts](../concepts/missions-plans-and-operations.md), separate [unknown outcomes from failures](../concepts/unknown-outcomes.md), understand [context authority](../concepts/context-authority.md), and know [what evidence can prove](../concepts/evidence-and-improvement.md).
+Before you start, [get oriented in your Palace workspace](../getting-started/start-here.md).
 
-## Give it an outcome, not a script
+For the deeper model, see [how a goal becomes an automation](../concepts/missions-plans-and-operations.md), [what Pal can use and what it cannot decide](../concepts/context-authority.md), [what proves a result](../concepts/evidence-and-improvement.md), and [what it means when TrashPal is still checking the result](../concepts/unknown-outcomes.md).
 
-Rocky's request states the outcome, constraints, and success criteria. Caretaker inspects permission-filtered state, loads the focused homecoming skill, identifies conflicts, and proposes a typed plan. It does not receive shell, filesystem, arbitrary code, or unrestricted web access.
+## 1. Choose a supported outcome
 
-## Expect one of four useful outcomes
+Open **Automations** and choose the supported outcome that best matches the work you want done. Start with the result you want, not a list of device commands.
 
-| Caretaker result           | What it means                                                                      |
-| -------------------------- | ---------------------------------------------------------------------------------- |
-| Plan ready for review      | Current state, capabilities, simulations, and material assumptions support a plan. |
-| Clarification required     | A material constraint cannot be satisfied or inferred safely.                      |
-| Safe refusal               | Capability or authority cannot support the requested outcome.                      |
-| Evidence-backed escalation | Recovery or a hard invariant requires human judgment.                              |
+If the available automation controls do not support your request, Pal cannot turn it into an executable proposal. Choose an available outcome or adjust the request within its visible controls.
 
-Caretaker may draft and validate. It cannot approve its own plan, enlarge its tenant or scopes, or declare mission success. The host binds human approval to the exact plan, and the independent verifier owns success.
+## 2. State the limits that cannot move
 
-## Check its provider-neutral behavior
+Add the safety rules that must stay true, such as a verified member requirement, a restricted device, a time window, or an energy limit. Preferences can shape a proposal. They do not give Pal permission to weaken a safety rule.
 
-```bash
-pnpm exec tsx evals/caretaker/deterministic-report-cli.ts --check
-```
+For example, a member can ask for a home that is ready after a verified arrival while keeping the saved energy limit. Pal can inspect the permitted Palace state and prepare a proposal.
 
-This is a decision-contract simulation, not a live-model run. Read the retained receipt before using a stronger label.
+## 3. Prepare a proposal
+
+Choose **Prepare proposal**. Pal may begin working, ask one bounded question, or return an exact proposal for review. It cannot approve its own proposal, broaden its access, or mark a result verified.
+
+## Expect one of four useful states
+
+| Palace workspace state  | What it means                                                               | What you do next                                                      |
+| ----------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| **working**             | Pal is preparing, running, or reconciling the request.                      | Wait or open **Activity**.                                            |
+| **needs input**         | Pal needs one bounded decision before it can continue.                      | Answer the listed clarification.                                      |
+| **needs approval**      | Pal prepared an exact proposal that would change an automation or boundary. | Review the proposal.                                                  |
+| **checking the result** | TrashPal has not verified the requested outcome yet.                        | Open **Activity** to check its status, then wait for the next update. |
+
+Pal can inspect, propose, clarify, and reconcile. Approval stays with a member. The application and retained evidence determine whether a result is verified.
+
+## Recovery
+
+If the workspace stays on **checking the result** after a network problem, do not submit a duplicate request. Follow [recover an uncertain operation](recover-an-uncertain-operation.md) to reconcile the existing request.
 
 ## Next step
 
-[Create, approve, and verify the homecoming routine](create-approve-and-verify-a-routine.md).
+[Prepare, approve, and check a proposal](create-approve-and-verify-a-routine.md).

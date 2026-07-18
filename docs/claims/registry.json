@@ -160,6 +160,22 @@
       "owner": "TrashPal maintainers",
       "visibility": "public",
       "status": "current"
+    },
+    {
+      "id": "TP-PRODUCT-001",
+      "sourceId": "concept.missions-plans-operations",
+      "locator": "claim:TP-PRODUCT-001",
+      "owner": "TrashPal maintainers",
+      "visibility": "public",
+      "status": "current"
+    },
+    {
+      "id": "TP-PRODUCT-002",
+      "sourceId": "concept.unknown-outcomes",
+      "locator": "claim:TP-PRODUCT-002",
+      "owner": "TrashPal maintainers",
+      "visibility": "public",
+      "status": "current"
     }
   ]
 }

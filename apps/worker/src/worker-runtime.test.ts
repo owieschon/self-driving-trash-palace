@@ -32,6 +32,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { composePgBossWorkerGraph, composePgBossWorkerRuntime } from './composition.js'
 import type { HeartbeatPort } from './heartbeat.js'
 import type { OutboxPumpPort } from './outbox-pump.js'
+import { PalEventSupervisor, type PalSupervisionPort } from './pal-supervision.js'
 import type {
   QueueSuccessorOptions,
   WorkerJobMetadata,
@@ -165,6 +166,10 @@ function createHarness(
     readonly onDispatch?: (reference: GatewayDispatchReference) => void
     readonly onEffectReconciliation?: (reference: GatewayEffectReconciliationReference) => void
     readonly onDeadline?: (reference: ExecutionDeadlineReference) => void
+    readonly onProductEvidenceDeliveryFailure?: (error: unknown) => void
+    readonly palSupervision?: PalSupervisionPort
+    readonly productEvidenceSweep?: () => Promise<number>
+    readonly verificationResult?: Awaited<ReturnType<VerificationService['run']>>
   } = {},
 ) {
   const queue = new FakeWorkerQueue()
@@ -191,11 +196,11 @@ function createHarness(
   const operationReconciliation = vi.fn(
     async (_input: Parameters<OperationService['reconcile']>[0]) => undefined as never,
   )
-  const verification = vi.fn(
-    async (_input: Parameters<VerificationService['run']>[0]) => undefined as never,
-  )
+  const verification = vi.fn(async (_input: Parameters<VerificationService['run']>[0]) => {
+    return input.verificationResult ?? (undefined as never)
+  })
   const outboxSweep = vi.fn(async () => undefined as never)
-  const productEvidenceSweep = vi.fn(async () => 0)
+  const productEvidenceSweep = vi.fn(input.productEvidenceSweep ?? (async () => 0))
   const leaseAcquire = vi.fn(async () => {
     throw new Error('Mission lease is unused in this test')
   })
@@ -203,6 +208,9 @@ function createHarness(
     queue,
     outbox: { dispatchBatch: outboxSweep },
     productEvidence: { deliverPending: productEvidenceSweep },
+    ...(input.onProductEvidenceDeliveryFailure === undefined
+      ? {}
+      : { onProductEvidenceDeliveryFailure: input.onProductEvidenceDeliveryFailure }),
     gatewayDispatch: { dispatch: gatewayDispatch },
     gatewayEffectReconciliation: { reconcile: gatewayEffectReconciliation },
     executionDeadline: { evaluate: executionDeadline },
@@ -223,6 +231,7 @@ function createHarness(
         throw new Error('Mission runner is unused in this test')
       },
     },
+    ...(input.palSupervision === undefined ? {} : { palSupervision: input.palSupervision }),
     serviceContextFor: () => serviceContext,
     outboxPump,
     outboxPumpIntervalMilliseconds: 25,
@@ -286,6 +295,67 @@ describe('worker runtime', () => {
 
     expect(harness.outboxSweep).toHaveBeenCalledTimes(2)
     expect(harness.productEvidenceSweep).toHaveBeenCalledOnce()
+  })
+
+  it('keeps the worker pump alive when observational evidence delivery fails', async () => {
+    const observedFailure = vi.fn()
+    const harness = createHarness({
+      onProductEvidenceDeliveryFailure: observedFailure,
+      productEvidenceSweep: async () => {
+        throw new Error('analytics transport unavailable')
+      },
+    })
+
+    await harness.runtime.start()
+    await expect(harness.outboxPump.sweep!()).resolves.toBeUndefined()
+    await harness.runtime.stop()
+
+    expect(observedFailure).toHaveBeenCalledOnce()
+    expect(observedFailure).toHaveBeenCalledWith(
+      expect.objectContaining({
+        message: 'analytics transport unavailable',
+      }),
+    )
+    expect(harness.outboxSweep).toHaveBeenCalledTimes(2)
+  })
+
+  it('observes Pal only after an existing durable mission event, not on a timer or model poll', async () => {
+    const pal = new PalEventSupervisor()
+    const observe = vi.spyOn(pal, 'observe')
+    const harness = createHarness({
+      palSupervision: pal,
+      verificationResult: {
+        mission: { programKind: 'night_shift_homecoming', version: 1 },
+        verification: { status: 'passed' },
+      } as never,
+    })
+
+    await harness.runtime.start()
+    expect(observe).not.toHaveBeenCalled()
+
+    await handler(harness.queue, 'mission.verify')(
+      { organizationId, missionId },
+      new AbortController().signal,
+      { jobId: 'job_verify_pal_001' },
+    )
+
+    expect(observe).toHaveBeenCalledWith(
+      expect.objectContaining({
+        kind: 'mission_verification',
+        eventId: 'worker:job_verify_pal_001',
+        programKind: 'night_shift_homecoming',
+        missionVersion: 1,
+        status: 'passed',
+      }),
+    )
+    const observed = observe.mock.settledResults[0]
+    if (observed?.type !== 'fulfilled') throw new Error('Expected Pal observation to resolve')
+    expect(observed.value).toMatchObject({
+      kind: 'no_action',
+      supervisorModelCallCount: 0,
+      createdMissionCount: 0,
+    })
+    await harness.runtime.stop()
   })
 
   it('composes the pg-boss production runtime without opening the queue', async () => {

@@ -11,4 +11,4 @@ This index routes maintainers to the one artifact that answers each evaluation q
 | Does the broken/corrected metric contract discriminate?     | [Retained duplicate-routine report](../../evals/reports/duplicate-routine-controls.json) |
 | Why is live validation still blocked?                       | [Retained blocked receipt](../../evals/reports/live-validation-blocked.json)             |
 
-Run evidence belongs in `evals/reports`; this directory owns evaluation procedure and interpretation. Product behavior remains owned by executable contracts and the [public knowledge path](../../knowledge/index.md).
+Run evidence belongs in `evals/reports`; this directory owns evaluation procedure and interpretation. Product behavior remains owned by executable contracts and the [public knowledge path](../../knowledge/README.md).

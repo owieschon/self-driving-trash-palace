@@ -1,33 +1,41 @@
-# Create, approve, and verify a routine
+# Prepare, approve, and check a proposal
 
-Use this guide to move one homecoming goal from current state to a verified outcome without transferring approval or success authority to Caretaker.
+Use this guide to move one Palace goal from a proposal to an evidence-backed result. It keeps the member's decision separate from the work Pal performs afterward.
 
-## Before you start
+Before you start, [set a goal for Pal](use-caretaker.md).
 
-This procedure assumes you can distinguish [missions, plans, operations, and attempts](../concepts/missions-plans-and-operations.md), can [handle an unknown operation outcome](../concepts/unknown-outcomes.md), know [which context may grant authority](../concepts/context-authority.md), and know [what each evidence artifact can prove](../concepts/evidence-and-improvement.md).
+For the records behind this flow, see [how a goal becomes an automation](../concepts/missions-plans-and-operations.md). For Pal's authority boundary, see [what Pal can use and what it cannot decide](../concepts/context-authority.md). If a result is still pending, use [what it means when TrashPal is still checking the result](../concepts/unknown-outcomes.md) and [what proves a result](../concepts/evidence-and-improvement.md).
 
-## Follow the operation
+## 1. Prepare the proposal
 
-1. Load the compiler-generated host policy, exact tool contracts, and current permission-filtered state.
-2. Inspect palace, crew, capability, routine, and execution evidence before proposing a change.
-3. Identify material conflicts and simulate the candidate against access, timing, energy, and failure constraints.
+Choose a supported automation and give Pal the outcome and safety rules that matter. Pal checks the current Palace state and prepares an exact proposal. If a material detail is missing, TrashPal shows **needs input** and waits for your answer instead of guessing.
 
 <!-- claim:TP-PROCEDURE-001 -->
 
-4. Ask one bounded clarification when a material constraint cannot be satisfied or inferred safely. Persist the answer and create a new immutable plan revision.
+Each material change creates a new proposal revision. An answer can inform the next revision, but it does not alter a proposal that is already awaiting approval.
+
+## 2. Approve or reject the exact change
+
+When the Palace workspace shows **needs approval**, review the proposal's actions, protected resources, safety rules, and success checks. Confirm that it changes the intended automation without creating a duplicate one.
 
 <!-- claim:TP-PROCEDURE-002 -->
 
-5. Request approval for the canonical plan hash and protected resource versions. End the activation. Resume only after the host records a valid human approval and creates the operation for the approved action.
-6. Activate the existing operation. If the result is unknown, reconcile that operation before any retry.
-7. Observe external evidence until the declared deadline, then run deterministic predicates.
+Approve only the proposal you reviewed. TrashPal binds the decision to that exact proposal revision and records one logical operation for the approved action. Rejecting a proposal leaves the existing automation unchanged.
+
+## 3. Check the result honestly
+
+After approval, the workspace can show **checking the result** while TrashPal waits for provider evidence or reconciles an uncertain response. Keep following the same request. Do not create a replacement just because a response was lost.
 
 <!-- claim:TP-PROCEDURE-003 -->
 
-8. Report success only when the independent verifier sets the mission terminal state. Explain failed predicates or request bounded corrective work without overwriting the evidence.
+The result is verified only after retained evidence satisfies the required checks.
 
-Stop at a safe pause when authority, evidence, compatibility, or budget is missing. Preserve the task ledger and receipt needed for the next run.
+If a check fails, **Activity** shows a failed status so you can decide whether to make a new bounded request.
+
+## Recovery
+
+If an operation has already started or its outcome is uncertain, [recover the uncertain operation](recover-an-uncertain-operation.md) instead of trying the same change again.
 
 ## Next step
 
-[Review, approve, reject, or cancel safely](review-approve-or-cancel.md).
+[Review or reject a proposal](review-approve-or-cancel.md).

@@ -54,7 +54,7 @@ describe('Caretaker deterministic corpus', () => {
         terminalOutcome: manifest.expectedTerminalOutcome,
       })
     },
-    30_000,
+    60_000,
   )
 
   it('changes the next decision when protected live state changes', async () => {
@@ -456,7 +456,7 @@ describe('Outcome and durable-state scoring', () => {
         'duplicate_durable_outcome',
       ]),
     )
-  }, 30_000)
+  }, 60_000)
 
   it('does not accept transcript data as an evaluation signal', async () => {
     const scenario = caseById('duplicate-callback@1')

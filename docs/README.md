@@ -2,16 +2,16 @@
 
 This index routes maintainers to implementation constraints, decisions, security analysis, and operational procedures.
 
-Customer and agent-facing product knowledge has one canonical home in the [public overview](../knowledge/index.md). The files below explain how the repository is built and governed; they are not alternate product guides.
+Customer and agent-facing product knowledge has one canonical home in the [public overview](../knowledge/README.md). The files below explain how the repository is built and governed; they are not alternate product guides.
 
-The typed [navigation manifest](../knowledge/navigation.json) declares the six categories and the ordered Use and Build learning graphs. Every node resolves through the same [knowledge catalog](../knowledge/catalog.json) that agent context uses, so a human link and an agent source ID cannot silently name different content.
+The typed [navigation manifest](../knowledge/navigation.json) declares six customer-first Help tracks, with developer and API material kept public and directly reachable. It also retains ordered Use and Build learning graphs. Every node resolves through the same [knowledge catalog](../knowledge/catalog.json) that agent context uses, so a human link and an agent source ID cannot silently name different content.
 
 ## Build and provenance
 
 - [Build specification](BUILD_SPEC.md) defines the approved implementation boundary.
 - [Source lock](SOURCE_LOCK.json) records reviewed external conventions and the claims they affect.
 - [Claim registry](claims/registry.json) binds stable claim IDs to canonical knowledge sources.
-- [Contract-to-claim registry](contract-claims.json) maps public contract families to the exact claims and canonical source owners checked by `docs-impact.json`.
+- [Contract-to-claim registry](contract-claims.json) maps public contract families to the exact claims and canonical source owners checked by the [retained impact assessment](impact/initial-product-contracts.json).
 
 ## Decisions and security
 

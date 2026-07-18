@@ -112,6 +112,7 @@ function escalate(
  * number or a transcript position. Production model adapters implement the same engine interface.
  */
 export class DeterministicCaretakerDecisionEngine implements CaretakerDecisionEngine {
+  /** Durable compatibility identity; the Pal alias is the public runtime surface. */
   readonly id = 'deterministic-caretaker@1'
 
   public async decide(
@@ -469,3 +470,6 @@ export class DeterministicCaretakerDecisionEngine implements CaretakerDecisionEn
     )
   }
 }
+
+/** Public name for the one deterministic bounded-decision implementation. */
+export { DeterministicCaretakerDecisionEngine as DeterministicPalDecisionEngine }

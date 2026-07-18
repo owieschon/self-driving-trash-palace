@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "claude-live-smoke@1",
+  "evidenceLabel": "Blocked",
+  "scope": "One bounded credentialed adapter decision was attempted; corpus accuracy and production-composed behavior remain blocked",
+  "attemptedAt": "2026-07-16T02:51:00.000Z",
+  "adapter": {
+    "sdkVersion": "0.3.169",
+    "model": "claude-sonnet-4-6",
+    "promptVersion": "caretaker-decision-provider@1",
+    "builtInTools": [],
+    "mcpServers": [],
+    "filesystemSettingsSources": []
+  },
+  "result": {
+    "status": "failed_closed",
+    "failureCode": "result_invalid",
+    "usageReceiptRetained": false,
+    "costReceiptRetained": false
+  },
+  "privacy": {
+    "credentialRetained": false,
+    "promptRetained": false,
+    "rawModelOutputRetained": false,
+    "privateReasoningRetained": false,
+    "customerDataRetained": false
+  },
+  "blockedClaims": [
+    "successful credentialed model decision",
+    "corpus-scale recommendation quality",
+    "production-composed agent loop",
+    "live PostHog trace observation"
+  ]
+}

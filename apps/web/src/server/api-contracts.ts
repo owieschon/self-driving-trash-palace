@@ -6,8 +6,10 @@ import {
   ClarificationRequestIdSchema,
   DelegatedPermissionSchema,
   EvidenceIdSchema,
+  IsoDateTimeSchema,
   MissionIdSchema,
   MissionConstraintSchema,
+  MissionProgramKindSchema,
   MissionStateSchema,
   OperationIdSchema,
   OperationSchema,
@@ -16,8 +18,10 @@ import {
   PlanSchema,
   PalaceIdSchema,
   ProductRoleSchema,
+  RoutineIdSchema,
   ToolNameSchema,
   UserIdSchema,
+  VerificationIdSchema,
 } from '@trash-palace/core'
 import { z } from 'zod'
 
@@ -32,6 +36,14 @@ export const WEB_API_ROUTES = {
   getMissionTasks: {
     method: 'GET',
     path: (missionId: string) => `/api/v1/missions/${encodeURIComponent(missionId)}/tasks`,
+  },
+  getMissionProgress: {
+    method: 'GET',
+    path: (missionId: string) => `/api/v1/missions/${encodeURIComponent(missionId)}/progress`,
+  },
+  getPalaceWorkspace: {
+    method: 'GET',
+    path: (palaceId: string) => `/api/v1/palaces/${encodeURIComponent(palaceId)}/workspace`,
   },
   revokeDelegatedToken: {
     method: 'DELETE',
@@ -303,6 +315,273 @@ export const MissionTaskInboxResponseSchema = z
     }
   })
 
+export const PalaceDayPeriodSchema = z.enum(['morning', 'afternoon', 'evening'])
+
+export const PalacePresentationResponseSchema = z
+  .object({
+    observedAt: IsoDateTimeSchema,
+    timezone: z.string().min(1).max(64),
+    dayPeriod: PalaceDayPeriodSchema,
+  })
+  .strict()
+
+const PalaceWorkspaceMemberSchema = z
+  .object({
+    id: UserIdSchema,
+    organizationId: OrganizationIdSchema,
+    displayName: z.string().min(1).max(120),
+    role: ProductRoleSchema.extract(['owner', 'operator', 'viewer']),
+    grants: z.array(z.literal('routine:approve')).max(1),
+  })
+  .strict()
+
+const PalaceWorkspaceIdentitySchema = z
+  .object({
+    id: PalaceIdSchema,
+    organizationId: OrganizationIdSchema,
+    name: z.string().min(1).max(120),
+    timezone: z.string().min(1).max(64),
+  })
+  .strict()
+
+export const WorkspaceAttentionKindSchema = z.enum([
+  'clarification',
+  'approval',
+  'reconciliation',
+  'verification',
+])
+
+const WorkspaceAttentionSchema = z
+  .object({
+    kind: WorkspaceAttentionKindSchema,
+    missionId: MissionIdSchema,
+    label: z.string().min(1).max(240),
+    createdAt: IsoDateTimeSchema,
+  })
+  .strict()
+
+export const CapabilityIdeaAvailabilitySchema = z.enum(['ready', 'needs_connection'])
+
+const CapabilityIdeaSchema = z
+  .object({
+    programKind: MissionProgramKindSchema,
+    label: z.string().min(1).max(120),
+    description: z.string().min(1).max(500),
+    availability: CapabilityIdeaAvailabilitySchema,
+    requiredCapabilities: z.array(z.string().min(1).max(120)).min(1).max(16),
+  })
+  .strict()
+
+export const ActiveAutomationSummarySchema = z
+  .object({
+    routineId: RoutineIdSchema,
+    programKind: MissionProgramKindSchema,
+    name: z.string().min(1).max(120),
+    version: z.number().int().positive(),
+    activeSince: IsoDateTimeSchema,
+  })
+  .strict()
+
+export const WorkspaceActivityStatusSchema = z.enum([
+  'working',
+  'checking_result',
+  'verified',
+  'failed',
+  'cancelled',
+])
+
+const WorkspaceActivitySchema = z
+  .object({
+    id: z.string().min(1).max(120),
+    missionId: MissionIdSchema,
+    summary: z.string().min(1).max(500),
+    status: WorkspaceActivityStatusSchema,
+    occurredAt: IsoDateTimeSchema,
+  })
+  .strict()
+
+export const PalaceWorkspaceResponseSchema = z
+  .object({
+    schemaVersion: z.literal('palace-workspace@1'),
+    member: PalaceWorkspaceMemberSchema,
+    palace: PalaceWorkspaceIdentitySchema,
+    presentation: PalacePresentationResponseSchema,
+    attention: z.array(WorkspaceAttentionSchema).max(32),
+    capabilityIdeas: z.array(CapabilityIdeaSchema).max(16),
+    activeAutomations: z.array(ActiveAutomationSummarySchema).max(64),
+    activity: z.array(WorkspaceActivitySchema).max(100),
+  })
+  .strict()
+  .superRefine((workspace, context) => {
+    if (workspace.member.organizationId !== workspace.palace.organizationId) {
+      context.addIssue({
+        code: 'custom',
+        path: ['palace', 'organizationId'],
+        message: 'A Palace workspace must bind the member and Palace to one organization',
+      })
+    }
+    if (workspace.presentation.timezone !== workspace.palace.timezone) {
+      context.addIssue({
+        code: 'custom',
+        path: ['presentation', 'timezone'],
+        message: 'Palace presentation time must use the Palace timezone',
+      })
+    }
+  })
+
+export const MissionDisplayStateSchema = z.enum([
+  'working',
+  'needs_input',
+  'needs_approval',
+  'applying',
+  'checking_result',
+  'verified',
+  'failed',
+  'cancelled',
+])
+
+export const MissionProgressActionSchema = z.enum([
+  'answer_clarification',
+  'approve_proposal',
+  'reject_proposal',
+  'view_activity',
+])
+
+const MissionProgressTaskSchema = z
+  .discriminatedUnion('kind', [
+    z
+      .object({
+        kind: z.literal('clarification'),
+        requestId: ClarificationRequestIdSchema,
+      })
+      .strict(),
+    z
+      .object({
+        kind: z.literal('approval'),
+        approvalId: ApprovalIdSchema,
+        planId: PlanIdSchema,
+        expiresAt: IsoDateTimeSchema,
+      })
+      .strict(),
+  ])
+  .nullable()
+
+const MissionProgressOperationSchema = z
+  .object({
+    id: OperationIdSchema,
+    missionId: MissionIdSchema,
+    status: OperationSchema.shape.status,
+  })
+  .strict()
+  .nullable()
+
+const MissionProgressVerificationSchema = z
+  .object({
+    id: VerificationIdSchema,
+    missionId: MissionIdSchema,
+    status: z.enum(['passed', 'failed']),
+    completedAt: IsoDateTimeSchema,
+    summary: z.string().min(1).max(500),
+  })
+  .strict()
+  .nullable()
+
+export const MissionProgressResponseSchema = z
+  .object({
+    schemaVersion: z.literal('mission-progress@1'),
+    mission: z
+      .object({
+        id: MissionIdSchema,
+        palaceId: PalaceIdSchema,
+        organizationId: OrganizationIdSchema,
+        programKind: MissionProgramKindSchema.nullable(),
+        objective: z.string().min(1).max(2_000),
+        state: MissionStateSchema,
+        version: z.number().int().nonnegative(),
+      })
+      .strict(),
+    displayState: MissionDisplayStateSchema,
+    pendingTask: MissionProgressTaskSchema,
+    operation: MissionProgressOperationSchema,
+    verification: MissionProgressVerificationSchema,
+    allowedNextActions: z.array(MissionProgressActionSchema).max(4),
+    observedAt: IsoDateTimeSchema,
+  })
+  .strict()
+  .superRefine((progress, context) => {
+    if (progress.operation !== null && progress.operation.missionId !== progress.mission.id) {
+      context.addIssue({
+        code: 'custom',
+        path: ['operation', 'missionId'],
+        message: 'A mission progress operation must belong to the projected mission',
+      })
+    }
+    if (progress.verification !== null && progress.verification.missionId !== progress.mission.id) {
+      context.addIssue({
+        code: 'custom',
+        path: ['verification', 'missionId'],
+        message: 'A mission progress verification must belong to the projected mission',
+      })
+    }
+    if (progress.displayState === 'needs_input' && progress.pendingTask?.kind !== 'clarification') {
+      context.addIssue({
+        code: 'custom',
+        path: ['pendingTask'],
+        message: 'needs_input requires one pending clarification',
+      })
+    }
+    if (progress.displayState === 'needs_approval' && progress.pendingTask?.kind !== 'approval') {
+      context.addIssue({
+        code: 'custom',
+        path: ['pendingTask'],
+        message: 'needs_approval requires one pending approval',
+      })
+    }
+    if (progress.displayState === 'verified' && progress.verification?.status !== 'passed') {
+      context.addIssue({
+        code: 'custom',
+        path: ['verification'],
+        message: 'verified requires passing retained verification evidence',
+      })
+    }
+    if (progress.displayState === 'cancelled' && progress.mission.state.status !== 'cancelled') {
+      context.addIssue({
+        code: 'custom',
+        path: ['mission', 'state'],
+        message: 'cancelled requires a cancelled mission',
+      })
+    }
+  })
+
+export const HelpCatalogAudienceSchema = z.enum(['customer', 'developer', 'pal', 'external-agent'])
+export const HelpCatalogTrackSchema = z.enum([
+  'start',
+  'automations',
+  'troubleshoot',
+  'understand_pal',
+  'developer',
+  'api_mcp',
+])
+
+export const HelpCatalogEntryResponseSchema = z
+  .object({
+    id: z.string().min(1).max(160),
+    audience: z.array(HelpCatalogAudienceSchema).min(1).max(4),
+    task: z.string().min(1).max(240),
+    track: HelpCatalogTrackSchema,
+    prerequisites: z.array(z.string().min(1).max(160)).max(16),
+    nextStep: z
+      .object({
+        label: z.string().min(1).max(120),
+        publicRoute: z.string().regex(/^\/help(?:\/|$)/),
+      })
+      .strict()
+      .nullable(),
+    publicRoute: z.string().regex(/^\/help(?:\/|$)/),
+    searchLabel: z.string().min(1).max(240),
+  })
+  .strict()
+
 export const WEB_API_SCHEMA_PROJECTIONS = [
   {
     operationId: 'getHealth',
@@ -373,6 +652,26 @@ export const WEB_API_SCHEMA_PROJECTIONS = [
     pathParameters: [{ name: 'missionId', schema: MissionIdSchema }],
     requestBodySchema: null,
     responseBodySchema: MissionTaskInboxResponseSchema,
+  },
+  {
+    operationId: 'getMissionProgress',
+    method: 'GET',
+    path: '/api/v1/missions/{missionId}/progress',
+    authentication: 'session',
+    successStatus: 200,
+    pathParameters: [{ name: 'missionId', schema: MissionIdSchema }],
+    requestBodySchema: null,
+    responseBodySchema: MissionProgressResponseSchema,
+  },
+  {
+    operationId: 'getPalaceWorkspace',
+    method: 'GET',
+    path: '/api/v1/palaces/{palaceId}/workspace',
+    authentication: 'session',
+    successStatus: 200,
+    pathParameters: [{ name: 'palaceId', schema: PalaceIdSchema }],
+    requestBodySchema: null,
+    responseBodySchema: PalaceWorkspaceResponseSchema,
   },
   {
     operationId: 'issueDelegatedToken',

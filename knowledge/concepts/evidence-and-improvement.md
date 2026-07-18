@@ -30,4 +30,4 @@ Product events record meaningful state changes. AI generations and spans explain
 
 ## Next step
 
-[Use Caretaker for one bounded automation](../guides/use-caretaker.md).
+[Use Pal for one bounded automation](../guides/use-caretaker.md).

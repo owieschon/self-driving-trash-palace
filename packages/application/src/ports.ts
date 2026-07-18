@@ -189,6 +189,11 @@ export interface CapabilityRepository {
 
 export interface MissionRepository {
   get(missionId: MissionId): Promise<Mission | null>
+  /**
+   * Returns recent records for one Palace inside the current tenant transaction.
+   * Consumers must still validate the Palace binding before presenting a record.
+   */
+  listForPalace(palaceId: PalaceId, limit: number): Promise<readonly Mission[]>
   insert(mission: Mission): Promise<void>
   save(mission: Mission, expectedVersion: number): Promise<boolean>
   appendEvent(event: MissionEvent): Promise<void>

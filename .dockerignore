@@ -1,13 +1,11 @@
-.beads/
-.dolt/
-.git/
-.github/
+.*
 **/.next/
 **/.turbo/
 **/coverage/
 **/dist/
 **/node_modules/
-.codex/
+**/test-results/
+**/playwright-report/
 artifacts/private/
 generated/public-reference/
 *.log
@@ -15,4 +13,3 @@ generated/public-reference/
 .env
 .env.*
 !.env.example
-HANDOFF*

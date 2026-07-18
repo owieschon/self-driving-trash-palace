@@ -496,6 +496,20 @@ function createTenantRepositories(
       async get(id) {
         return owned(state.missions.get(id), owns)
       },
+      async listForPalace(palaceId, limit) {
+        if (!Number.isSafeInteger(limit) || limit < 1) {
+          throw new TypeError('Mission list limit must be a positive safe integer')
+        }
+        return clone(
+          [...state.missions.values()]
+            .filter((mission) => owns(mission) && mission.palaceId === palaceId)
+            .sort(
+              (left, right) =>
+                right.updatedAt.localeCompare(left.updatedAt) || right.id.localeCompare(left.id),
+            )
+            .slice(0, limit),
+        )
+      },
       async insert(mission) {
         assertOwns(mission)
         insertUnique(state.missions, mission.id, mission)

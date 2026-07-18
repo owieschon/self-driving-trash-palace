@@ -22,7 +22,7 @@ export const CANONICAL_LOCAL_SEED = Object.freeze({
   serviceActor: Object.freeze({
     user: UserSchema.parse({
       id: 'usr_caretaker_service',
-      displayName: 'Caretaker service',
+      displayName: 'Pal service',
       createdAt: CREATED_AT,
     }),
     memberships: Object.freeze([
@@ -50,7 +50,7 @@ export const CANONICAL_LOCAL_SEED = Object.freeze({
     organization: OrganizationSchema.parse({
       id: 'org_rocky_roost',
       slug: 'rockys-trash-palace',
-      name: "Rocky's Trash Palace, Inc.",
+      name: 'Rocky’s Palace, Inc.',
       labTenant: true,
       createdAt: CREATED_AT,
     }),
@@ -71,7 +71,7 @@ export const CANONICAL_LOCAL_SEED = Object.freeze({
     palace: PalaceSchema.parse({
       id: 'pal_sacred_dumpster',
       organizationId: 'org_rocky_roost',
-      name: 'Sacred Dumpster Palace',
+      name: 'Rocky’s Palace',
       timezone: 'America/New_York',
       batteryAvailablePercentage: 62,
       createdAt: CREATED_AT,
@@ -365,7 +365,7 @@ export const CANONICAL_LOCAL_SEED = Object.freeze({
     palace: PalaceSchema.parse({
       id: 'pal_mirror_dumpster',
       organizationId: 'org_mirror_nest',
-      name: 'Sacred Dumpster Palace',
+      name: 'Sample Palace',
       timezone: 'America/New_York',
       batteryAvailablePercentage: 71,
       createdAt: CREATED_AT,

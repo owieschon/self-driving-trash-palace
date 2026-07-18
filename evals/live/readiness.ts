@@ -10,7 +10,7 @@ const BlockerSchema = z
       'model_credential_not_confirmed',
       'posthog_configuration_not_confirmed',
       'baseline_not_frozen',
-      'live_runner_not_implemented',
+      'corpus_runner_not_implemented',
     ]),
     resolved: z.boolean(),
   })
@@ -63,7 +63,7 @@ export function buildLiveValidationReadiness(input: LiveValidationReadinessInput
     ...(input.mode === 'promotion'
       ? [{ code: 'baseline_not_frozen' as const, resolved: input.baselineFrozen }]
       : []),
-    { code: 'live_runner_not_implemented' as const, resolved: false },
+    { code: 'corpus_runner_not_implemented' as const, resolved: false },
   ]
 
   return LiveValidationReadinessSchema.parse({

@@ -42,6 +42,12 @@
       "userFacing": true,
       "claimIds": ["TP-INCIDENT-001", "TP-INCIDENT-002"],
       "sourceIds": ["incident.two-routines-one-timeout"]
+    },
+    {
+      "id": "contract.palace-workspace-projection",
+      "userFacing": true,
+      "claimIds": ["TP-PRODUCT-001", "TP-PRODUCT-002"],
+      "sourceIds": ["concept.missions-plans-operations", "concept.unknown-outcomes"]
     }
   ]
 }

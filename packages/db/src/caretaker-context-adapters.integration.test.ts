@@ -818,7 +818,7 @@ function tenantSource(
     content,
     source: {
       id,
-      owner: 'Wizard & Docs',
+      owner: 'Palace Docs Guild',
       claimIds: [],
       dependsOn: [],
       audiences: ['caretaker'] as const,

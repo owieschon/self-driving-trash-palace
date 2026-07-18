@@ -12,6 +12,10 @@ A timeout after a write means the outcome is **unknown**. It does not prove fail
 
 Recover by preserving the same operation identity and reconciling durable state. Return the original outcome when the commit exists. Retry the same operation only when it is definitely absent and the retry budget remains. Pause with evidence when neither conclusion is safe.
 
+<!-- claim:TP-PRODUCT-002 -->
+
+When the outcome is still unknown, the Palace workspace shows **checking the result**. It does not promote an approval, committed operation, or missing response into a verified outcome.
+
 ```text
 write response lost
         |

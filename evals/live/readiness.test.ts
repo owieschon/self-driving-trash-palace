@@ -25,7 +25,7 @@ describe('live-validation credential boundary', () => {
     expect(JSON.stringify(result)).not.toContain('credential-value-never-retained')
   })
 
-  it('cannot become ready until an implemented live runner replaces the boundary', () => {
+  it('cannot become ready until the corpus runner replaces the boundary', () => {
     const result = buildLiveValidationReadiness({
       mode: 'promotion',
       operatorApproved: true,
@@ -37,7 +37,7 @@ describe('live-validation credential boundary', () => {
 
     expect(result.status).toBe('Blocked')
     expect(result.blockers).toContainEqual({
-      code: 'live_runner_not_implemented',
+      code: 'corpus_runner_not_implemented',
       resolved: false,
     })
   })

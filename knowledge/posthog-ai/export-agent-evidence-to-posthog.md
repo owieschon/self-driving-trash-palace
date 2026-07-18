@@ -6,7 +6,7 @@ The exporter accepts only the repository's `SafeEvidenceEvent` contract. It reva
 
 ## Before you start
 
-First establish [what the evidence can prove](../concepts/evidence-and-improvement.md) and [instrument the local workflow](instrument-an-agentic-workflow.md). Export transports safe evidence; it does not strengthen the underlying claim.
+First establish [what the evidence can prove](../concepts/evidence-and-improvement.md), [instrument the local workflow](instrument-an-agentic-workflow.md), and [validate the improvement metric](validate-an-improvement-metric.md). Export transports safe evidence; it does not strengthen the underlying claim.
 
 ## Choose the evidence path
 

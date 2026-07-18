@@ -128,7 +128,11 @@ async function waitFor<Result>(input: {
     await new Promise((resolve) => setTimeout(resolve, 25))
     result = await input.read()
   }
-  if (!input.matches(result)) throw new Error(`Timed out waiting for ${input.label}`)
+  if (!input.matches(result)) {
+    throw new Error(
+      `Timed out waiting for ${input.label}; last observed: ${JSON.stringify(result).slice(0, 2000)}`,
+    )
+  }
   return result
 }
 

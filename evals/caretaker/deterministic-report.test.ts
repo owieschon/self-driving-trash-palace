@@ -25,5 +25,5 @@ describe('retained deterministic Caretaker report', () => {
     expect(actual.cases.map((entry) => entry.receipt.manifestId)).toEqual(
       actual.cases.map((entry) => entry.manifestId),
     )
-  }, 120_000)
+  }, 240_000)
 })

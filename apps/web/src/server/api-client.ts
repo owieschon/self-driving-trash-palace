@@ -193,7 +193,7 @@ export class TrashPalaceApiError extends Error {
     public readonly status: number,
     public readonly problem: unknown,
   ) {
-    super(`Trash Palace API request failed with status ${status}`)
+    super(`TrashPal API request failed with status ${status}`)
     this.name = 'TrashPalaceApiError'
   }
 }

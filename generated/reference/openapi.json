@@ -6044,6 +6044,283 @@
         ],
         "type": "object"
       },
+      "GetMissionProgressResponse": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "allowedNextActions": {
+            "items": {
+              "enum": [
+                "answer_clarification",
+                "approve_proposal",
+                "reject_proposal",
+                "view_activity"
+              ],
+              "type": "string"
+            },
+            "maxItems": 4,
+            "type": "array"
+          },
+          "displayState": {
+            "enum": [
+              "working",
+              "needs_input",
+              "needs_approval",
+              "applying",
+              "checking_result",
+              "verified",
+              "failed",
+              "cancelled"
+            ],
+            "type": "string"
+          },
+          "mission": {
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                "type": "string"
+              },
+              "objective": {
+                "maxLength": 2000,
+                "minLength": 1,
+                "type": "string"
+              },
+              "organizationId": {
+                "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                "type": "string"
+              },
+              "palaceId": {
+                "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                "type": "string"
+              },
+              "programKind": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "night_shift_homecoming",
+                      "scheduled_hauler_access"
+                    ],
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "state": {
+                "additionalProperties": false,
+                "properties": {
+                  "phase": {
+                    "enum": [
+                      "understand",
+                      "plan",
+                      "validate",
+                      "approve",
+                      "execute",
+                      "reconcile",
+                      "observe",
+                      "verify"
+                    ],
+                    "type": "string"
+                  },
+                  "status": {
+                    "enum": [
+                      "queued",
+                      "running",
+                      "waiting_for_user",
+                      "waiting_for_system",
+                      "succeeded",
+                      "failed",
+                      "cancelled"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status",
+                  "phase"
+                ],
+                "type": "object"
+              },
+              "version": {
+                "maximum": 9007199254740991,
+                "minimum": 0,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "id",
+              "palaceId",
+              "organizationId",
+              "programKind",
+              "objective",
+              "state",
+              "version"
+            ],
+            "type": "object"
+          },
+          "observedAt": {
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+            "type": "string"
+          },
+          "operation": {
+            "anyOf": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "id": {
+                    "pattern": "^op_[a-z0-9][a-z0-9_-]{7,63}$",
+                    "type": "string"
+                  },
+                  "missionId": {
+                    "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                    "type": "string"
+                  },
+                  "status": {
+                    "enum": [
+                      "pending",
+                      "claimed",
+                      "committed",
+                      "failed",
+                      "cancelled"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "missionId",
+                  "status"
+                ],
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "pendingTask": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "kind": {
+                        "const": "clarification",
+                        "type": "string"
+                      },
+                      "requestId": {
+                        "pattern": "^clr_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "kind",
+                      "requestId"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "approvalId": {
+                        "pattern": "^apr_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      },
+                      "expiresAt": {
+                        "format": "date-time",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                        "type": "string"
+                      },
+                      "kind": {
+                        "const": "approval",
+                        "type": "string"
+                      },
+                      "planId": {
+                        "pattern": "^pln_[a-z0-9][a-z0-9_-]{7,63}$",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "kind",
+                      "approvalId",
+                      "planId",
+                      "expiresAt"
+                    ],
+                    "type": "object"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "schemaVersion": {
+            "const": "mission-progress@1",
+            "type": "string"
+          },
+          "verification": {
+            "anyOf": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "completedAt": {
+                    "format": "date-time",
+                    "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                    "type": "string"
+                  },
+                  "id": {
+                    "pattern": "^ver_[a-z0-9][a-z0-9_-]{7,63}$",
+                    "type": "string"
+                  },
+                  "missionId": {
+                    "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                    "type": "string"
+                  },
+                  "status": {
+                    "enum": [
+                      "passed",
+                      "failed"
+                    ],
+                    "type": "string"
+                  },
+                  "summary": {
+                    "maxLength": 500,
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "missionId",
+                  "status",
+                  "completedAt",
+                  "summary"
+                ],
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "schemaVersion",
+          "mission",
+          "displayState",
+          "pendingTask",
+          "operation",
+          "verification",
+          "allowedNextActions",
+          "observedAt"
+        ],
+        "type": "object"
+      },
       "GetMissionTasksResponse": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "additionalProperties": false,
@@ -6169,6 +6446,307 @@
           "mission",
           "clarification",
           "approval"
+        ],
+        "type": "object"
+      },
+      "GetPalaceWorkspaceResponse": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "activeAutomations": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "activeSince": {
+                  "format": "date-time",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                  "type": "string"
+                },
+                "name": {
+                  "maxLength": 120,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "programKind": {
+                  "enum": [
+                    "night_shift_homecoming",
+                    "scheduled_hauler_access"
+                  ],
+                  "type": "string"
+                },
+                "routineId": {
+                  "pattern": "^rtn_[a-z0-9][a-z0-9_-]{7,63}$",
+                  "type": "string"
+                },
+                "version": {
+                  "exclusiveMinimum": 0,
+                  "maximum": 9007199254740991,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "routineId",
+                "programKind",
+                "name",
+                "version",
+                "activeSince"
+              ],
+              "type": "object"
+            },
+            "maxItems": 64,
+            "type": "array"
+          },
+          "activity": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "id": {
+                  "maxLength": 120,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "missionId": {
+                  "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                  "type": "string"
+                },
+                "occurredAt": {
+                  "format": "date-time",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                  "type": "string"
+                },
+                "status": {
+                  "enum": [
+                    "working",
+                    "checking_result",
+                    "verified",
+                    "failed",
+                    "cancelled"
+                  ],
+                  "type": "string"
+                },
+                "summary": {
+                  "maxLength": 500,
+                  "minLength": 1,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "missionId",
+                "summary",
+                "status",
+                "occurredAt"
+              ],
+              "type": "object"
+            },
+            "maxItems": 100,
+            "type": "array"
+          },
+          "attention": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "createdAt": {
+                  "format": "date-time",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                  "type": "string"
+                },
+                "kind": {
+                  "enum": [
+                    "clarification",
+                    "approval",
+                    "reconciliation",
+                    "verification"
+                  ],
+                  "type": "string"
+                },
+                "label": {
+                  "maxLength": 240,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "missionId": {
+                  "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "missionId",
+                "label",
+                "createdAt"
+              ],
+              "type": "object"
+            },
+            "maxItems": 32,
+            "type": "array"
+          },
+          "capabilityIdeas": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "availability": {
+                  "enum": [
+                    "ready",
+                    "needs_connection"
+                  ],
+                  "type": "string"
+                },
+                "description": {
+                  "maxLength": 500,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "label": {
+                  "maxLength": 120,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "programKind": {
+                  "enum": [
+                    "night_shift_homecoming",
+                    "scheduled_hauler_access"
+                  ],
+                  "type": "string"
+                },
+                "requiredCapabilities": {
+                  "items": {
+                    "maxLength": 120,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "maxItems": 16,
+                  "minItems": 1,
+                  "type": "array"
+                }
+              },
+              "required": [
+                "programKind",
+                "label",
+                "description",
+                "availability",
+                "requiredCapabilities"
+              ],
+              "type": "object"
+            },
+            "maxItems": 16,
+            "type": "array"
+          },
+          "member": {
+            "additionalProperties": false,
+            "properties": {
+              "displayName": {
+                "maxLength": 120,
+                "minLength": 1,
+                "type": "string"
+              },
+              "grants": {
+                "items": {
+                  "const": "routine:approve",
+                  "type": "string"
+                },
+                "maxItems": 1,
+                "type": "array"
+              },
+              "id": {
+                "pattern": "^usr_[a-z0-9][a-z0-9_-]{7,63}$",
+                "type": "string"
+              },
+              "organizationId": {
+                "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                "type": "string"
+              },
+              "role": {
+                "enum": [
+                  "owner",
+                  "operator",
+                  "viewer"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "organizationId",
+              "displayName",
+              "role",
+              "grants"
+            ],
+            "type": "object"
+          },
+          "palace": {
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+                "type": "string"
+              },
+              "name": {
+                "maxLength": 120,
+                "minLength": 1,
+                "type": "string"
+              },
+              "organizationId": {
+                "pattern": "^org_[a-z0-9][a-z0-9_-]{7,63}$",
+                "type": "string"
+              },
+              "timezone": {
+                "maxLength": 64,
+                "minLength": 1,
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "organizationId",
+              "name",
+              "timezone"
+            ],
+            "type": "object"
+          },
+          "presentation": {
+            "additionalProperties": false,
+            "properties": {
+              "dayPeriod": {
+                "enum": [
+                  "morning",
+                  "afternoon",
+                  "evening"
+                ],
+                "type": "string"
+              },
+              "observedAt": {
+                "format": "date-time",
+                "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+                "type": "string"
+              },
+              "timezone": {
+                "maxLength": 64,
+                "minLength": 1,
+                "type": "string"
+              }
+            },
+            "required": [
+              "observedAt",
+              "timezone",
+              "dayPeriod"
+            ],
+            "type": "object"
+          },
+          "schemaVersion": {
+            "const": "palace-workspace@1",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schemaVersion",
+          "member",
+          "palace",
+          "presentation",
+          "attention",
+          "capabilityIdeas",
+          "activeAutomations",
+          "activity"
         ],
         "type": "object"
       },
@@ -26651,6 +27229,44 @@
         "x-authentication": "session_csrf_recent"
       }
     },
+    "/api/v1/missions/{missionId}/progress": {
+      "get": {
+        "operationId": "getMissionProgress",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "missionId",
+            "required": true,
+            "schema": {
+              "$schema": "https://json-schema.org/draft/2020-12/schema",
+              "pattern": "^mis_[a-z0-9][a-z0-9_-]{7,63}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetMissionProgressResponse"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "default": {
+            "description": "Transport boundary rejection."
+          }
+        },
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "x-authentication": "session"
+      }
+    },
     "/api/v1/missions/{missionId}/tasks": {
       "get": {
         "operationId": "getMissionTasks",
@@ -26672,6 +27288,44 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetMissionTasksResponse"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "default": {
+            "description": "Transport boundary rejection."
+          }
+        },
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "x-authentication": "session"
+      }
+    },
+    "/api/v1/palaces/{palaceId}/workspace": {
+      "get": {
+        "operationId": "getPalaceWorkspace",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "palaceId",
+            "required": true,
+            "schema": {
+              "$schema": "https://json-schema.org/draft/2020-12/schema",
+              "pattern": "^pal_[a-z0-9][a-z0-9_-]{7,63}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetPalaceWorkspaceResponse"
                 }
               }
             },

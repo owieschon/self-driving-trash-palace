@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "1.0.0",
+  "changeId": "change.palace-workspace-contract",
+  "changedContracts": ["contract.palace-workspace-projection"],
+  "affectedClaimIds": ["TP-PRODUCT-001", "TP-PRODUCT-002"],
+  "status": "resolved",
+  "reason": "The Palace workspace projection is represented by the governed impact record and its canonical knowledge sources."
+}

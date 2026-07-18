@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest'
 import {
   KnowledgeSourceMetadataSchema,
   KnowledgeValidationError,
+  KNOWLEDGE_HELP_TRACKS,
   KNOWLEDGE_LEARNING_PATHS,
   KNOWLEDGE_SECTIONS,
   resolvePublicMetadataClosure,
@@ -151,7 +152,7 @@ describe('human knowledge navigation', () => {
   const inputCatalog = catalog(
     sourceIds.map((id) =>
       source(id, {
-        audiences: ['customer', 'developer'],
+        audiences: ['customer', 'developer', 'caretaker', 'external-agent'],
         ...(id === 'guide.complete-task' ? { dependsOn: ['concept.foundation'] } : {}),
       }),
     ),
@@ -178,6 +179,18 @@ describe('human knowledge navigation', () => {
           terminal: index === sourceIds.length - 1,
         })),
       })),
+      helpTracks: KNOWLEDGE_HELP_TRACKS.map((track, index) => ({
+        ...track,
+        items: [
+          {
+            sourceId: sourceIds[index],
+            label: `Help page ${index + 1}`,
+            prerequisiteSourceIds: [],
+            nextSourceId: null,
+            terminal: true,
+          },
+        ],
+      })),
     }
   }
 
@@ -191,6 +204,9 @@ describe('human knowledge navigation', () => {
     expect(
       resolveKnowledgeLearningPath(inputCatalog, navigation(), 'build').map((source) => source.id),
     ).toEqual(sourceIds)
+    expect(parsed.navigation.helpTracks.map((track) => track.title)).toEqual(
+      KNOWLEDGE_HELP_TRACKS.map((track) => track.title),
+    )
   })
 
   it('rejects category order drift, duplicate placement, and incomplete coverage', () => {
@@ -212,6 +228,12 @@ describe('human knowledge navigation', () => {
     const unlistedSource = catalog([...inputCatalog.sources, source('guide.unlisted')])
     expect(() => validateKnowledgeNavigation(unlistedSource, navigation())).toThrow(
       /coverage differs/i,
+    )
+
+    const missingHelpSource = navigation()
+    missingHelpSource.helpTracks[0]!.items[0]!.sourceId = 'guide.unlisted'
+    expect(() => validateKnowledgeNavigation(inputCatalog, missingHelpSource)).toThrow(
+      /help source|help tracks/i,
     )
   })
 

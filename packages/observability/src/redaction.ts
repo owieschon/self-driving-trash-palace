@@ -2,6 +2,7 @@ import type { JsonValue } from './canonical.js'
 
 export type RedactionReason =
   | 'credential'
+  | 'device_name'
   | 'email'
   | 'home_path'
   | 'oversize_text'
@@ -9,6 +10,7 @@ export type RedactionReason =
   | 'private_identifier'
   | 'private_posthog_link'
   | 'prompt_content'
+  | 'physical_location'
   | 'unsupported_value'
 
 export interface RedactionFinding {
@@ -81,6 +83,27 @@ const PRIVATE_IDENTIFIER_FIELDS = new Set([
   'span_id',
   'trace_id',
   'user_id',
+])
+
+const DEVICE_NAME_FIELDS = new Set([
+  'device_display_name',
+  'device_label',
+  'device_name',
+  'device_nickname',
+])
+
+const PHYSICAL_LOCATION_FIELDS = new Set([
+  'address',
+  'city',
+  'device_address',
+  'home_address',
+  'latitude',
+  'location_address',
+  'location_name',
+  'longitude',
+  'postal_code',
+  'street_address',
+  'zip_code',
 ])
 
 const STRING_PATTERNS: readonly {
@@ -162,6 +185,17 @@ function fieldReason(field: string): RedactionReason | undefined {
   if (CREDENTIAL_FIELDS.has(normalized)) {
     return 'credential'
   }
+  if (DEVICE_NAME_FIELDS.has(normalized)) {
+    return 'device_name'
+  }
+  if (
+    PHYSICAL_LOCATION_FIELDS.has(normalized) ||
+    normalized.endsWith('_address') ||
+    normalized.endsWith('_latitude') ||
+    normalized.endsWith('_longitude')
+  ) {
+    return 'physical_location'
+  }
   if (PRIVATE_IDENTIFIER_FIELDS.has(normalized) || normalized.endsWith('_private_id')) {
     return 'private_field'
   }
@@ -171,6 +205,7 @@ function fieldReason(field: string): RedactionReason | undefined {
 function emptyCounts(): Record<RedactionReason, number> {
   return {
     credential: 0,
+    device_name: 0,
     email: 0,
     home_path: 0,
     oversize_text: 0,
@@ -178,6 +213,7 @@ function emptyCounts(): Record<RedactionReason, number> {
     private_identifier: 0,
     private_posthog_link: 0,
     prompt_content: 0,
+    physical_location: 0,
     unsupported_value: 0,
   }
 }

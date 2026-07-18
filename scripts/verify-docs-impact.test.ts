@@ -53,8 +53,9 @@ async function fixture(
           : [{ id: 'concept.test', canonicalUri: 'knowledge/concepts/test.md' }],
     }),
   )
+  await mkdir(join(root, 'docs/impact'), { recursive: true })
   await writeFile(
-    join(root, 'docs-impact.json'),
+    join(root, 'docs/impact/initial-product-contracts.json'),
     json({
       schemaVersion: '1.0.0',
       changeId: 'change.test',

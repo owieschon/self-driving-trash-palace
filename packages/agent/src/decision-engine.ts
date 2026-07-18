@@ -180,6 +180,12 @@ export const CaretakerDecisionSchema = z.union([
   GroundedSummaryDecisionSchema,
 ])
 
+/**
+ * Pal is the public, model-facing name. The durable Caretaker schema version remains compatible
+ * until the controlled terminology migration can update persisted and historical contracts.
+ */
+export const PalDecisionSchema = CaretakerDecisionSchema
+
 export const DecisionBudgetSchema = z
   .object({
     toolCalls: z
@@ -417,6 +423,8 @@ export const CaretakerLiveStateSchema = z
   })
   .strict()
 
+export const PalLiveStateSchema = CaretakerLiveStateSchema
+
 export const ModelSafeAuthoredContextSectionSchema = AuthoredContextSectionSchema.extend({
   authority: z.literal('authored_guidance'),
   sourceAuthority: z.enum(['skill', 'reference', 'evidence']),
@@ -461,6 +469,8 @@ export const CaretakerFrozenContextSchema = CaretakerFrozenContextPayloadSchema.
       })
     }
   })
+
+export const PalFrozenContextSchema = CaretakerFrozenContextSchema
 
 export const CaretakerRetrievedKnowledgeSchema = z
   .object({
@@ -509,6 +519,8 @@ export function createCaretakerFrozenContext(
   const payload = CaretakerFrozenContextPayloadSchema.parse(input)
   return CaretakerFrozenContextSchema.parse({ ...payload, projectionHash: hashToolValue(payload) })
 }
+
+export const createPalFrozenContext = createCaretakerFrozenContext
 
 export const CaretakerDecisionRequestSchema = z
   .object({
@@ -605,9 +617,15 @@ export const CaretakerDecisionRequestSchema = z
     }
   })
 
+export const PalDecisionRequestSchema = CaretakerDecisionRequestSchema
+
 export type CaretakerDecision = z.infer<typeof CaretakerDecisionSchema>
 export type CaretakerDecisionRequest = z.infer<typeof CaretakerDecisionRequestSchema>
 export type CaretakerLiveState = z.infer<typeof CaretakerLiveStateSchema>
+export type PalDecision = CaretakerDecision
+export type PalDecisionRequest = CaretakerDecisionRequest
+export type PalLiveState = CaretakerLiveState
+export type PalFrozenContext = CaretakerFrozenContext
 
 export const DecisionAttemptIdSchema = StableIdSchema
 

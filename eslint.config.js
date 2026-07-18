@@ -60,6 +60,11 @@ export default tseslint.config(
     },
   },
   {
+    files: ['**/*.mjs'],
+    extends: [tseslint.configs.disableTypeChecked],
+    languageOptions: { globals: globals.node },
+  },
+  {
     files: ['apps/web/e2e/**/*.ts'],
     languageOptions: { globals: globals.browser },
     rules: {

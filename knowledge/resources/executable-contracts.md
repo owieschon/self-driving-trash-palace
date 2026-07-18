@@ -29,4 +29,4 @@ The [CI reproducibility check](../../docs/operations/continuous-integration.md) 
 
 ## Finish
 
-The Build path is complete when the retained references match their executable owners and the repository quality gate passes.
+The Build path continues with [the documentation standard for humans and agents](trustworthy-docs-for-humans-and-agents.md) after the retained references match their executable owners and the repository quality gate passes.

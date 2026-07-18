@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "claude-live-smoke@1",
+  "evidenceLabel": "One bounded credentialed decision verified",
+  "scope": "adapter decision only; corpus accuracy and production-composed behavior remain blocked",
+  "startedAt": "2026-07-16T04:52:04.908Z",
+  "completedAt": "2026-07-16T04:52:16.040Z",
+  "requestHash": "444bc31dffc37f42ae23e2fcc39ec4cf163df2d7391f7458cd9aef7f5e318eda",
+  "adapter": {
+    "sdkVersion": "0.3.169",
+    "model": "claude-sonnet-4-6",
+    "promptVersion": "caretaker-decision-provider@1",
+    "builtInTools": [],
+    "mcpServers": [],
+    "filesystemSettingsSources": []
+  },
+  "result": {
+    "status": "succeeded",
+    "decisionKind": "invoke_tool",
+    "selectedTool": "palaces.get",
+    "evidenceReferenceCount": 1,
+    "evidenceReferencesBound": true,
+    "provider": "anthropic",
+    "model": "claude-sonnet-4-6",
+    "inputTokens": 4,
+    "outputTokens": 482,
+    "cacheReadInputTokens": 8410,
+    "cacheCreationInputTokens": 8809,
+    "durationMilliseconds": 10466,
+    "apiDurationMilliseconds": 10451,
+    "totalCostUsd": 0.04279875
+  },
+  "privacy": {
+    "credentialRetained": false,
+    "promptRetained": false,
+    "rawModelOutputRetained": false,
+    "privateReasoningRetained": false,
+    "customerDataRetained": false
+  },
+  "blockedClaims": [
+    "corpus-scale recommendation quality",
+    "production-composed agent loop",
+    "live PostHog trace observation"
+  ]
+}

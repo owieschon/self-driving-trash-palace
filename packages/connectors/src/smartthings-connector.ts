@@ -48,6 +48,7 @@ import type {
 } from './ports.js'
 import { secret } from './ports.js'
 import { SmartThingsTokenManager, type SmartThingsOAuthConfig } from './smartthings-oauth.js'
+import { SmartThingsWebhookSignatureVerifier } from './smartthings-webhook-verifier.js'
 import {
   SmartThingsCommandResponseSchema,
   SmartThingsDevicePageSchema,
@@ -125,7 +126,7 @@ interface SmartThingsConnectorDependencies {
   readonly unlockAuthority: UnlockAuthorityPort
   readonly vault: CredentialVaultPort
   readonly webhookReceipts: WebhookReceiptPort
-  readonly webhookVerifier: WebhookSignatureVerifierPort
+  readonly webhookVerifier?: WebhookSignatureVerifierPort
 }
 
 interface ProviderCommand {
@@ -448,12 +449,17 @@ function sanitizeCommand(command: DeviceCommand): PersistedDeviceCommand {
 
 export class SmartThingsConnector implements DeviceConnectorPort {
   readonly #config: z.infer<typeof SmartThingsConnectorConfigSchema>
-  readonly #dependencies: SmartThingsConnectorDependencies
+  readonly #dependencies: SmartThingsConnectorDependencies & {
+    readonly webhookVerifier: WebhookSignatureVerifierPort
+  }
   readonly #tokens: SmartThingsTokenManager
 
   constructor(config: SmartThingsConnectorConfig, dependencies: SmartThingsConnectorDependencies) {
     this.#config = SmartThingsConnectorConfigSchema.parse(config)
-    this.#dependencies = dependencies
+    this.#dependencies = {
+      ...dependencies,
+      webhookVerifier: dependencies.webhookVerifier ?? new SmartThingsWebhookSignatureVerifier(),
+    }
     this.#tokens = new SmartThingsTokenManager(config.oauth, {
       clock: dependencies.clock,
       fetch: dependencies.fetch,

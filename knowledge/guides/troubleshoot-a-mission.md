@@ -1,23 +1,28 @@
-# Troubleshoot an automation from durable state
+# Troubleshoot an automation
 
-This guide maps a visible symptom to the first authoritative record to inspect.
+Use this guide to find the next safe action from the Palace workspace and **Activity** instead of guessing from a status message.
 
-Before troubleshooting, understand [unknown outcomes](../concepts/unknown-outcomes.md), know [what evidence can prove](../concepts/evidence-and-improvement.md), and follow the [uncertain-operation recovery](recover-an-uncertain-operation.md) procedure.
+For a pending result, start with [what it means when TrashPal is still checking the result](../concepts/unknown-outcomes.md). For the proof behind a completed result, read [what proves a result](../concepts/evidence-and-improvement.md).
 
-| Symptom                              | Inspect first                                       | Continue with                                                                                  |
-| ------------------------------------ | --------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| Mission waits for a person           | Pending clarification or exact approval             | Answer the bounded choice, approve, reject, or let the request expire                          |
-| Mission waits for the system         | Operation status, latest attempt, and outbox state  | Reconcile the same operation; do not create a replacement                                      |
-| Plan cannot activate                 | Approval hash, expiry, and protected versions       | Produce a new plan revision and approval when content or protected state changed               |
-| Gateway reports a timeout            | Command acknowledgement and signed callback history | Separate device delivery uncertainty from application commit uncertainty                       |
-| Caretaker pauses on missing context  | Context receipt exclusions and compatibility        | Repair the source or bundle contract; never silently fall back to `latest`                     |
-| Verifier fails after device evidence | Failed predicate and its evidence references        | Preserve the failed run and request bounded corrective or compensating work                    |
-| Local analytics output is absent     | Evidence mode, sink path, and event allowlist       | Keep export disabled until local capture is correct; then follow the approved export procedure |
+Start with the current status in your Palace workspace. Each status has one safe next step.
 
-For service startup, use `pnpm local:status` and then `pnpm local:logs`. Avoid opening or printing the generated private environment file while diagnosing configuration.
+| What you see                | What it means                                        | What to do next                                                                               |
+| --------------------------- | ---------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| **working**                 | Pal is preparing, running, or reconciling a request. | Wait or open **Activity** for the latest status and update time.                              |
+| **needs input**             | Pal needs one bounded decision.                      | Answer the listed clarification.                                                              |
+| **needs approval**          | A proposal is ready for your decision.               | Review its actions and safety rules, then approve or reject it.                               |
+| **checking the result**     | TrashPal has not verified the requested outcome yet. | Keep following the same request. Do not submit it again.                                      |
+| A result failed             | TrashPal did not verify the requested outcome.       | Open **Activity**, confirm the failed status, and start a new bounded request only if needed. |
+| A device provider timed out | Device delivery and application state may disagree.  | Let TrashPal reconcile the original request before deciding on another one.                   |
 
-The Use path ends when the operator can identify the authoritative next action without guessing from agent prose. The Build path continues to the shared transport contracts.
+## Recovery
 
-## Continue the Build path
+If the problem followed a lost or delayed response, [recover an uncertain operation](recover-an-uncertain-operation.md). That procedure preserves the original operation so a retry cannot multiply the intended change.
 
-[Build with HTTP and MCP](build-with-http-and-mcp.md).
+## Developer help
+
+If you are integrating TrashPal or investigating its runtime contracts, [build with HTTP and MCP](build-with-http-and-mcp.md). Developer docs are part of Help and remain directly available.
+
+## Next step
+
+[Understand what Pal can use and what it cannot decide](../concepts/context-authority.md).

@@ -57,6 +57,37 @@ jobs:
       - name: Build packages
         run: pnpm build
 
+  browser-e2e:
+    name: Browser E2E
+    needs: [quality]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      CI: 'true'
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version-file: .node-version
+
+      - name: Enable pinned pnpm
+        run: corepack enable && corepack prepare pnpm@11.7.0 --activate
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run browser journeys
+        run: pnpm ui:e2e
+
   postgres-integration:
     name: PostgreSQL 17 integration
     runs-on: ubuntu-24.04
@@ -426,11 +457,12 @@ jobs:
     name: Endor Labs
     needs: [quality, postgres-integration]
     if: >-
-      (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
+      vars.ENDOR_NAMESPACE != '' &&
+      ((github.event_name == 'push' && github.ref == 'refs/heads/main') ||
       (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
       (github.event_name == 'pull_request' &&
       github.event.pull_request.head.repo.full_name == github.repository &&
-      github.event.pull_request.user.login != 'dependabot[bot]')
+      github.event.pull_request.user.login != 'dependabot[bot]'))
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     permissions:
@@ -443,15 +475,6 @@ jobs:
       ENDOR_JS_USE_ROOT_DIR_LOCK_FILE: 'true'
 
     steps:
-      - name: Verify Endor configuration
-        env:
-          ENDOR_NAMESPACE: ${{ vars.ENDOR_NAMESPACE }}
-        run: |
-          if [ -z "$ENDOR_NAMESPACE" ]; then
-            echo "::error::Set the ENDOR_NAMESPACE repository variable and authorize owieschon/trash-palace for GitHub Action OIDC in Endor Labs."
-            exit 1
-          fi
-
       - name: Check out repository
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:

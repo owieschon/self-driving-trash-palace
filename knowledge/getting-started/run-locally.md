@@ -2,7 +2,7 @@
 
 This guide starts the credential-free application topology without printing or exporting its generated secrets.
 
-Prerequisites: [start here](start-here.md) and [improve your first automation](improve-your-first-automation.md).
+Prerequisite: [start here](start-here.md).
 
 ## Prerequisites
 
@@ -18,10 +18,9 @@ pnpm install --frozen-lockfile
 
 ## Prepare and start
 
-Generate ignored local configuration, build the application image, and start the services:
+Generate ignored local configuration, build the application image, and start every service:
 
 ```bash
-pnpm local:prepare
 pnpm local:up
 ```
 

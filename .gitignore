@@ -13,14 +13,4 @@ test-results/
 *.tsbuildinfo
 artifacts/private/
 generated/public-reference/
-
-# Local issue-tracker state is not part of the public repository.
-.beads/
-
-# Beads / Dolt files (added by bd init)
-.dolt/
-*.db
-.beads-credential-key
-
-# Claude Code session artifacts
-.claude/dod/
+docs/release/

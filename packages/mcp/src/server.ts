@@ -107,7 +107,7 @@ function createRequestServer(input: {
     {
       name: 'self-driving-trash-palace',
       version: '0.0.0',
-      description: 'Typed, tenant-scoped tools for the Self-Driving Trash Palace reference app.',
+      description: 'Typed, tenant-scoped tools for the TrashPal reference app.',
     },
     {
       capabilities: { tools: { listChanged: false } },

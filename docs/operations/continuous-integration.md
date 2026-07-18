@@ -8,7 +8,9 @@ A green check is trusted evidence only when its toolchain is pinned and its auth
 
 `Quality`, shown under the `CI` workflow, verifies and runs a pinned `actionlint` binary, installs the pinned workspace dependencies, checks documentation impact, formatting, and typed ESLint rules, typechecks, runs the deterministic test suite, and builds every package on Ubuntu 24.04 with Node 22. The root `pnpm check` command invokes `pnpm docs-impact:check`; CI inherits that command instead of maintaining a second validation rule in workflow YAML.
 
-The documentation-impact verifier reads [the retained impact assessment](../../docs-impact.json), resolves each changed contract through the [contract-to-claim registry](../contract-claims.json), and requires the exact affected-claim union. For an `updated` disposition, every canonical source owner must exist in the [knowledge catalog](../../knowledge/catalog.json) and its canonical file must be present. `generated-only` and `no-user-impact` cannot be used for registered user-facing contracts.
+`Browser E2E` runs after `Quality`, installs the Chromium build pinned by the repository's Playwright version, builds the production Next.js surface, and runs the eight browser journeys on Ubuntu 24.04. It covers authenticated approval, preserved unknown outcomes, denial, rejection, cancellation, responsive widths, keyboard focus, reduced motion, contrast, and reload. This is automated browser evidence, not a production deployment or a complete assistive-technology audit.
+
+The documentation-impact verifier reads [the retained impact assessment](../impact/initial-product-contracts.json), resolves each changed contract through the [contract-to-claim registry](../contract-claims.json), and requires the exact affected-claim union. For an `updated` disposition, every canonical source owner must exist in the [knowledge catalog](../../knowledge/catalog.json) and its canonical file must be present. `generated-only` and `no-user-impact` cannot be used for registered user-facing contracts.
 
 `PostgreSQL 17 integration` runs every test file under `packages/db/src` and `packages/integration/src` against PostgreSQL 17.10 on Ubuntu 24.04 with Node 22.23.1 and pnpm 11.7.0. The service uses the same immutable image digest as `compose.yaml`, publishes only to `127.0.0.1:55432`, and uses fixed fictional CI credentials. A machine-readable Vitest receipt checks that every discovered test file ran and that no test was skipped, pending, disabled, or marked todo.
 
@@ -37,11 +39,11 @@ Endor does not run privileged OIDC scans against code from forks or Dependabot. 
 The workflow fails closed until both sides of keyless authentication exist:
 
 1. In Endor Labs, create a tenant namespace for this project.
-2. Under **Settings > Access Control > Auth Policy**, add a **GitHub Action OIDC** policy with the **Code Scanner** role. Endor's documented keyless flow uses `user = owieschon`, which identifies the account rather than this repository. Scope that policy to only this project's Endor namespace. If Endor later documents a repository claim for this flow, replace the account-wide caller claim with `owieschon/trash-palace`.
+2. Under **Settings > Access Control > Auth Policy**, add a **GitHub Action OIDC** policy with the **Code Scanner** role. Endor's documented keyless flow uses `user = owieschon`, which identifies the account rather than this repository. Scope that policy to only this project's Endor namespace. If Endor later documents a repository claim for this flow, replace the account-wide caller claim with `owieschon/self-driving-trash-palace`.
 3. Set the repository variable without storing an API key:
 
    ```bash
-   REPOSITORY=owieschon/trash-palace
+   REPOSITORY=owieschon/self-driving-trash-palace
    ENDOR_NAMESPACE='YOUR_ENDOR_NAMESPACE'
 
    gh variable set ENDOR_NAMESPACE \
@@ -60,6 +62,7 @@ Endor documents the tenant-side policy in [Keyless authentication in GitHub](htt
 Require these status checks on `main` after the first successful run:
 
 - `Quality`
+- `Browser E2E`
 - `PostgreSQL 17 integration`
 - `Public artifact reproducibility`
 - `Credential-free composed Quest`

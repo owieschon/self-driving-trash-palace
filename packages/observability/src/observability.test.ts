@@ -328,6 +328,28 @@ describe('structured publication scrub', () => {
     expect(result.counts.home_path).toBeGreaterThan(0)
   })
 
+  it('removes physical locations and end-user device names from publication payloads', () => {
+    const raw = {
+      deviceName: 'Rocky’s north gate',
+      device_label: 'Service hatch',
+      locationName: 'Riverside Palace',
+      streetAddress: '42 Acorn Lane',
+      latitude: 40.7128,
+      longitude: -74.006,
+    }
+
+    const result = scrubForPublication(raw)
+    const serialized = JSON.stringify(result.value)
+
+    expect(serialized).not.toContain('Rocky’s north gate')
+    expect(serialized).not.toContain('Service hatch')
+    expect(serialized).not.toContain('Riverside Palace')
+    expect(serialized).not.toContain('42 Acorn Lane')
+    expect(serialized).not.toContain('40.7128')
+    expect(result.counts.device_name).toBe(2)
+    expect(result.counts.physical_location).toBe(4)
+  })
+
   it('fails closed when an apparently allowlisted label contains a credential', async () => {
     const syntheticCredential = ['phx', '1234567890abcdefghijkl'].join('_')
     const event = createProductEvidenceEvent({

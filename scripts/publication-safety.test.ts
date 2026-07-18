@@ -129,6 +129,54 @@ describe('public artifact boundary', () => {
     )
   })
 
+  it('allows named fixture values in tests but rejects an unregistered test-file leak', () => {
+    const repository = mkdtempSync(join(tmpdir(), 'trash-palace-publication-'))
+    mkdirSync(join(repository, 'packages'))
+    const unexpectedPath = ['/Users/', 'mallory/private/report.json'].join('')
+    writeFileSync(
+      join(repository, 'packages', 'boundary.test.ts'),
+      `const known = '/Users/alice/private/report.json'\nconst leaked = '${unexpectedPath}'\n`,
+    )
+    git(repository, ['init', '--quiet'])
+    git(repository, ['add', 'packages/boundary.test.ts'])
+
+    expect(verifyPublicationSafety(repository)).toContainEqual({
+      path: 'packages/boundary.test.ts',
+      reason: 'home_path',
+    })
+  })
+
+  it('rejects an unquoted credential token in tracked source', () => {
+    const repository = mkdtempSync(join(tmpdir(), 'trash-palace-publication-'))
+    mkdirSync(join(repository, 'apps'))
+    const leaked = ['phc_', 'unquotedvalue1234567890'].join('')
+    writeFileSync(join(repository, 'apps', 'deploy.sh'), `export POSTHOG_KEY=${leaked}\n`)
+    git(repository, ['init', '--quiet'])
+    git(repository, ['add', 'apps/deploy.sh'])
+
+    expect(verifyPublicationSafety(repository)).toContainEqual({
+      path: 'apps/deploy.sh',
+      reason: 'credential',
+    })
+  })
+
+  it('is not shadowed by an earlier allowlisted Bearer value', () => {
+    const repository = mkdtempSync(join(tmpdir(), 'trash-palace-publication-'))
+    mkdirSync(join(repository, 'apps'))
+    const leaked = ['Bearer ', 'real.secret.value-1234567890'].join('')
+    writeFileSync(
+      join(repository, 'apps', 'client.ts'),
+      `const scheme = 'Bearer authentication'\nconst leaked = '${leaked}'\n`,
+    )
+    git(repository, ['init', '--quiet'])
+    git(repository, ['add', 'apps/client.ts'])
+
+    expect(verifyPublicationSafety(repository)).toContainEqual({
+      path: 'apps/client.ts',
+      reason: 'credential',
+    })
+  })
+
   it.each([
     ['docs/guide.md', 'Bearer synthetic-publication-token-123456', 'credential'],
     ['generated/reference.json', '/Users/alice/private/report.json', 'home_path'],

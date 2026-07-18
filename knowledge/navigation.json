@@ -21,11 +21,7 @@
         },
         {
           "sourceId": "getting-started.run-locally",
-          "label": "Run TrashPal locally"
-        },
-        {
-          "sourceId": "getting-started.improve-first-automation",
-          "label": "Improve your first automation"
+          "label": "Run TrashPal locally (developer)"
         }
       ]
     },
@@ -35,7 +31,7 @@
       "items": [
         {
           "sourceId": "concept.missions-plans-operations",
-          "label": "From a resident goal to one durable change"
+          "label": "From a member goal to one durable change"
         },
         {
           "sourceId": "concept.unknown-outcomes",
@@ -57,7 +53,7 @@
       "items": [
         {
           "sourceId": "procedure.use-caretaker",
-          "label": "Use Caretaker for one bounded automation"
+          "label": "Use Pal for one bounded automation"
         },
         {
           "sourceId": "procedure.operate-homecoming-mission",
@@ -98,6 +94,10 @@
           "label": "Instrument an agentic workflow"
         },
         {
+          "sourceId": "posthog-ai.validate-improvement-metric",
+          "label": "Validate an improvement metric"
+        },
+        {
           "sourceId": "posthog-ai.export-evidence",
           "label": "Export agent evidence to PostHog"
         }
@@ -114,6 +114,10 @@
         {
           "sourceId": "resource.executable-contracts",
           "label": "Executable API, MCP, and event reference"
+        },
+        {
+          "sourceId": "resource.trustworthy-docs",
+          "label": "Trustworthy docs for humans and agents"
         }
       ]
     }
@@ -132,27 +136,12 @@
         {
           "sourceId": "getting-started.start-here",
           "prerequisiteSourceIds": ["overview.trash-palace"],
-          "nextSourceId": "getting-started.improve-first-automation",
-          "terminal": false
-        },
-        {
-          "sourceId": "getting-started.improve-first-automation",
-          "prerequisiteSourceIds": ["getting-started.start-here"],
-          "nextSourceId": "getting-started.run-locally",
-          "terminal": false
-        },
-        {
-          "sourceId": "getting-started.run-locally",
-          "prerequisiteSourceIds": [
-            "getting-started.start-here",
-            "getting-started.improve-first-automation"
-          ],
           "nextSourceId": "concept.missions-plans-operations",
           "terminal": false
         },
         {
           "sourceId": "concept.missions-plans-operations",
-          "prerequisiteSourceIds": ["getting-started.improve-first-automation"],
+          "prerequisiteSourceIds": ["getting-started.start-here"],
           "nextSourceId": "concept.unknown-outcomes",
           "terminal": false
         },
@@ -257,27 +246,18 @@
         {
           "sourceId": "getting-started.start-here",
           "prerequisiteSourceIds": ["overview.trash-palace"],
-          "nextSourceId": "getting-started.improve-first-automation",
-          "terminal": false
-        },
-        {
-          "sourceId": "getting-started.improve-first-automation",
-          "prerequisiteSourceIds": ["getting-started.start-here"],
           "nextSourceId": "getting-started.run-locally",
           "terminal": false
         },
         {
           "sourceId": "getting-started.run-locally",
-          "prerequisiteSourceIds": [
-            "getting-started.start-here",
-            "getting-started.improve-first-automation"
-          ],
+          "prerequisiteSourceIds": ["getting-started.start-here"],
           "nextSourceId": "concept.missions-plans-operations",
           "terminal": false
         },
         {
           "sourceId": "concept.missions-plans-operations",
-          "prerequisiteSourceIds": ["getting-started.improve-first-automation"],
+          "prerequisiteSourceIds": ["getting-started.run-locally"],
           "nextSourceId": "concept.unknown-outcomes",
           "terminal": false
         },
@@ -380,6 +360,15 @@
         {
           "sourceId": "posthog-ai.instrument-workflow",
           "prerequisiteSourceIds": ["concept.evidence-improvement", "procedure.build-http-mcp"],
+          "nextSourceId": "posthog-ai.validate-improvement-metric",
+          "terminal": false
+        },
+        {
+          "sourceId": "posthog-ai.validate-improvement-metric",
+          "prerequisiteSourceIds": [
+            "concept.evidence-improvement",
+            "posthog-ai.instrument-workflow"
+          ],
           "nextSourceId": "posthog-ai.export-evidence",
           "terminal": false
         },
@@ -387,7 +376,8 @@
           "sourceId": "posthog-ai.export-evidence",
           "prerequisiteSourceIds": [
             "concept.evidence-improvement",
-            "posthog-ai.instrument-workflow"
+            "posthog-ai.instrument-workflow",
+            "posthog-ai.validate-improvement-metric"
           ],
           "nextSourceId": "resource.evaluation-methodology",
           "terminal": false
@@ -405,6 +395,252 @@
         {
           "sourceId": "resource.executable-contracts",
           "prerequisiteSourceIds": ["concept.context-authority", "resource.evaluation-methodology"],
+          "nextSourceId": "resource.trustworthy-docs",
+          "terminal": false
+        },
+        {
+          "sourceId": "resource.trustworthy-docs",
+          "prerequisiteSourceIds": [
+            "concept.context-authority",
+            "resource.evaluation-methodology",
+            "resource.executable-contracts"
+          ],
+          "nextSourceId": null,
+          "terminal": true
+        }
+      ]
+    }
+  ],
+  "helpTracks": [
+    {
+      "id": "start",
+      "title": "Start using TrashPal",
+      "audience": ["customer"],
+      "items": [
+        {
+          "sourceId": "overview.trash-palace",
+          "label": "What is TrashPal?",
+          "prerequisiteSourceIds": [],
+          "nextSourceId": "getting-started.start-here",
+          "terminal": false
+        },
+        {
+          "sourceId": "getting-started.start-here",
+          "label": "Set up your Palace workspace",
+          "prerequisiteSourceIds": ["overview.trash-palace"],
+          "nextSourceId": "concept.missions-plans-operations",
+          "terminal": false
+        },
+        {
+          "sourceId": "concept.missions-plans-operations",
+          "label": "How a goal becomes an automation",
+          "prerequisiteSourceIds": ["getting-started.start-here"],
+          "nextSourceId": null,
+          "terminal": true
+        }
+      ]
+    },
+    {
+      "id": "automations",
+      "title": "Manage automations",
+      "audience": ["customer"],
+      "items": [
+        {
+          "sourceId": "procedure.use-caretaker",
+          "label": "Set a goal for Pal",
+          "prerequisiteSourceIds": ["concept.missions-plans-operations"],
+          "nextSourceId": "procedure.operate-homecoming-mission",
+          "terminal": false
+        },
+        {
+          "sourceId": "procedure.operate-homecoming-mission",
+          "label": "Prepare, approve, and check a proposal",
+          "prerequisiteSourceIds": ["procedure.use-caretaker"],
+          "nextSourceId": "procedure.review-control",
+          "terminal": false
+        },
+        {
+          "sourceId": "procedure.review-control",
+          "label": "Review or reject a proposal",
+          "prerequisiteSourceIds": ["procedure.operate-homecoming-mission"],
+          "nextSourceId": "procedure.schedule-hauler-access",
+          "terminal": false
+        },
+        {
+          "sourceId": "procedure.schedule-hauler-access",
+          "label": "Schedule hauler access safely",
+          "prerequisiteSourceIds": ["procedure.review-control"],
+          "nextSourceId": "procedure.inspect-evidence",
+          "terminal": false
+        },
+        {
+          "sourceId": "procedure.inspect-evidence",
+          "label": "Read Activity and evidence",
+          "prerequisiteSourceIds": ["procedure.review-control"],
+          "nextSourceId": null,
+          "terminal": true
+        }
+      ]
+    },
+    {
+      "id": "troubleshoot",
+      "title": "Troubleshoot",
+      "audience": ["customer"],
+      "items": [
+        {
+          "sourceId": "concept.unknown-outcomes",
+          "label": "When TrashPal is still checking the result",
+          "prerequisiteSourceIds": ["concept.missions-plans-operations"],
+          "nextSourceId": "incident.two-routines-one-timeout",
+          "terminal": false
+        },
+        {
+          "sourceId": "incident.two-routines-one-timeout",
+          "label": "Recover an uncertain operation",
+          "prerequisiteSourceIds": ["concept.unknown-outcomes"],
+          "nextSourceId": "procedure.troubleshoot-mission",
+          "terminal": false
+        },
+        {
+          "sourceId": "procedure.troubleshoot-mission",
+          "label": "Troubleshoot an automation",
+          "prerequisiteSourceIds": ["incident.two-routines-one-timeout"],
+          "nextSourceId": null,
+          "terminal": true
+        }
+      ]
+    },
+    {
+      "id": "understand_pal",
+      "title": "Understand Pal",
+      "audience": ["customer", "developer"],
+      "items": [
+        {
+          "sourceId": "concept.context-authority",
+          "label": "What Pal can use and what it cannot decide",
+          "prerequisiteSourceIds": ["concept.missions-plans-operations"],
+          "nextSourceId": "concept.evidence-improvement",
+          "terminal": false
+        },
+        {
+          "sourceId": "concept.evidence-improvement",
+          "label": "What proves a result",
+          "prerequisiteSourceIds": ["concept.context-authority"],
+          "nextSourceId": null,
+          "terminal": true
+        }
+      ]
+    },
+    {
+      "id": "developer",
+      "title": "Developer docs",
+      "audience": ["developer", "external-agent"],
+      "items": [
+        {
+          "sourceId": "getting-started.run-locally",
+          "label": "Run TrashPal locally",
+          "prerequisiteSourceIds": [],
+          "nextSourceId": "procedure.build-http-mcp",
+          "terminal": false
+        },
+        {
+          "sourceId": "procedure.build-http-mcp",
+          "label": "Build with HTTP and MCP",
+          "prerequisiteSourceIds": [
+            "concept.missions-plans-operations",
+            "concept.context-authority"
+          ],
+          "nextSourceId": "example.http-mcp",
+          "terminal": false
+        },
+        {
+          "sourceId": "example.http-mcp",
+          "label": "Exercise the HTTP and MCP projections",
+          "prerequisiteSourceIds": ["procedure.build-http-mcp"],
+          "nextSourceId": "posthog-ai.instrument-workflow",
+          "terminal": false
+        },
+        {
+          "sourceId": "posthog-ai.instrument-workflow",
+          "label": "Instrument an agentic workflow",
+          "prerequisiteSourceIds": ["procedure.build-http-mcp", "concept.evidence-improvement"],
+          "nextSourceId": "posthog-ai.validate-improvement-metric",
+          "terminal": false
+        },
+        {
+          "sourceId": "posthog-ai.validate-improvement-metric",
+          "label": "Validate an improvement metric",
+          "prerequisiteSourceIds": ["posthog-ai.instrument-workflow"],
+          "nextSourceId": "posthog-ai.export-evidence",
+          "terminal": false
+        },
+        {
+          "sourceId": "posthog-ai.export-evidence",
+          "label": "Export agent evidence to PostHog",
+          "prerequisiteSourceIds": ["posthog-ai.validate-improvement-metric"],
+          "nextSourceId": "resource.evaluation-methodology",
+          "terminal": false
+        },
+        {
+          "sourceId": "resource.evaluation-methodology",
+          "label": "Evaluate Pal and understand its limits",
+          "prerequisiteSourceIds": ["posthog-ai.export-evidence"],
+          "nextSourceId": "evaluation.methodology",
+          "terminal": false
+        },
+        {
+          "sourceId": "evaluation.methodology",
+          "label": "Evaluation methodology",
+          "prerequisiteSourceIds": ["resource.evaluation-methodology"],
+          "nextSourceId": "evaluation.limitations",
+          "terminal": false
+        },
+        {
+          "sourceId": "evaluation.limitations",
+          "label": "Current limitations",
+          "prerequisiteSourceIds": ["evaluation.methodology"],
+          "nextSourceId": "evaluation.live-validation",
+          "terminal": false
+        },
+        {
+          "sourceId": "evaluation.live-validation",
+          "label": "Live-validation boundary",
+          "prerequisiteSourceIds": ["evaluation.limitations"],
+          "nextSourceId": "operations.continuous-integration",
+          "terminal": false
+        },
+        {
+          "sourceId": "operations.continuous-integration",
+          "label": "Continuous integration",
+          "prerequisiteSourceIds": ["resource.executable-contracts"],
+          "nextSourceId": "resource.trustworthy-docs",
+          "terminal": false
+        },
+        {
+          "sourceId": "resource.trustworthy-docs",
+          "label": "Maintain docs for people and agents",
+          "prerequisiteSourceIds": ["concept.context-authority"],
+          "nextSourceId": "decision.runtime-truth",
+          "terminal": false
+        },
+        {
+          "sourceId": "decision.runtime-truth",
+          "label": "Runtime truth and explanation",
+          "prerequisiteSourceIds": ["resource.trustworthy-docs"],
+          "nextSourceId": null,
+          "terminal": true
+        }
+      ]
+    },
+    {
+      "id": "api_mcp",
+      "title": "API and MCP reference",
+      "audience": ["developer", "external-agent"],
+      "items": [
+        {
+          "sourceId": "resource.executable-contracts",
+          "label": "Executable API, MCP, and event reference",
+          "prerequisiteSourceIds": ["concept.context-authority"],
           "nextSourceId": null,
           "terminal": true
         }

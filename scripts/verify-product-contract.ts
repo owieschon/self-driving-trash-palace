@@ -2,54 +2,70 @@ import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
 const root = resolve(import.meta.dirname, '..')
-const product = await readFile(
-  resolve(root, 'apps/web/src/components/trash-palace-app.tsx'),
-  'utf8',
-)
-const state = await readFile(resolve(root, 'apps/web/src/lib/product-state.ts'), 'utf8')
-const layout = await readFile(resolve(root, 'apps/web/src/app/(product)/layout.tsx'), 'utf8')
+const sources = await readSources([
+  'apps/web/src/components/trash-palace-app.tsx',
+  'apps/web/src/lib/product-api.ts',
+  'apps/web/src/lib/product-state.ts',
+  'apps/web/src/server/api-contracts.ts',
+  'docs/product/product-language-and-state-contract.md',
+])
 const failures: string[] = []
 
 for (const required of [
-  'Home',
-  'Activity',
-  'Automations',
-  'Household',
-  'Learn',
-  'Night Shift Homecoming',
-  'Scheduled Hauler Access',
+  'createMission',
+  'pollMissionTasks',
+  'getApproval',
+  'answerClarification',
+  'decideApproval',
+  'mission_created',
+  'needs_approval',
+  'checking_result',
+  'PalaceWorkspaceResponseSchema',
+  'MissionProgressResponseSchema',
+  'HelpCatalogEntryResponseSchema',
   'TrashPal',
+  'Palace workspace',
+  'Pal',
 ]) {
-  if (!`${product}\n${state}\n${layout}`.includes(required))
-    failures.push(`Missing customer contract: ${required}`)
+  if (!sources.includes(required)) failures.push(`Missing frozen product contract: ${required}`)
 }
+
 for (const forbidden of [
-  'reduceScenario',
-  'Inject lost response',
-  'Reset scenario',
-  'Reliability Lab',
-  'Local deterministic scenario',
-  'Deliver verifier evidence',
+  'activateAutomation(',
+  'Change recorded',
+  'Approve change',
+  'chat with Pal',
+  'Ask Pal anything',
+  'unlimited chat',
 ]) {
-  if (product.includes(forbidden))
-    failures.push(`Product imports developer-only behavior: ${forbidden}`)
+  if (sources.includes(forbidden))
+    failures.push(`Forbidden product behavior or claim: ${forbidden}`)
 }
-if (!product.includes('activateAutomation(automation'))
-  failures.push('Reviewed automations are not wired to the production API')
-if (!state.includes('buildHomecomingChangeRequest') || !state.includes('buildHaulerChangeRequest'))
-  failures.push('Automation approvals do not have program-specific request contracts')
-if (!product.includes('Outcome unknown'))
-  failures.push('Unknown outcome is not represented in customer language')
-if (
-  !product.includes('Approve change') ||
-  !product.includes('Reject') ||
-  !product.includes('Cancel')
+
+const component = await readFile(
+  resolve(root, 'apps/web/src/components/trash-palace-app.tsx'),
+  'utf8',
 )
-  failures.push('Review decision controls are incomplete')
+for (const forbidden of [
+  'Date(',
+  'toLocaleString(',
+  'toLocaleTimeString(',
+  'Intl.DateTimeFormat(',
+]) {
+  if (component.includes(forbidden)) {
+    failures.push(
+      `Palace presentation time must be server-derived, not browser-local: ${forbidden}`,
+    )
+  }
+}
 
 if (failures.length > 0) {
   process.stderr.write(`${failures.join('\n')}\n`)
   process.exitCode = 1
 } else {
   process.stdout.write('TrashPal product contract verified.\n')
+}
+
+async function readSources(paths: readonly string[]): Promise<string> {
+  return (await Promise.all(paths.map((path) => readFile(resolve(root, path), 'utf8')))).join('\n')
 }

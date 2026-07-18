@@ -15,6 +15,7 @@ export const POSTHOG_EXPORT_HOSTS = Object.freeze({
 } as const)
 
 export const POSTHOG_ORGANIZATION_GROUP_TYPE = 'organization'
+const DEFAULT_MAX_CONFIRMED_INSERT_IDS = 10_000
 
 const PostHogExportRegionSchema = z.enum(['eu', 'us'])
 const PostHogProjectTokenSchema = z
@@ -322,7 +323,11 @@ class ConfiguredPostHogEvidenceExporter implements PostHogEvidenceExporter {
   #closed = false
   #queue: Promise<void> = Promise.resolve()
 
-  public constructor(config: PostHogExportConfig, client?: PostHogClientPort) {
+  public constructor(
+    config: PostHogExportConfig,
+    client?: PostHogClientPort,
+    private readonly maxConfirmedInsertIds = DEFAULT_MAX_CONFIRMED_INSERT_IDS,
+  ) {
     this.#config = config
     this.#client = client
   }
@@ -426,7 +431,7 @@ class ConfiguredPostHogEvidenceExporter implements PostHogEvidenceExporter {
     try {
       await client.flush()
       for (const [insertId, stagedEvent] of staged) {
-        this.#confirmed.set(insertId, stagedEvent.serialized)
+        this.#rememberConfirmed(insertId, stagedEvent.serialized)
       }
       return batchReceipt(targetFor(this.#config), events.length, 'succeeded', results)
     } catch {
@@ -493,10 +498,21 @@ class ConfiguredPostHogEvidenceExporter implements PostHogEvidenceExporter {
       clientStatus,
     }
   }
+
+  #rememberConfirmed(insertId: StableInsertId, serialized: string): void {
+    this.#confirmed.set(insertId, serialized)
+    while (this.#confirmed.size > this.maxConfirmedInsertIds) {
+      const oldest = this.#confirmed.keys().next().value
+      if (oldest === undefined) return
+      this.#confirmed.delete(oldest)
+    }
+  }
 }
 
 export interface CreatePostHogEvidenceExporterDependencies {
   readonly clientFactory?: PostHogClientFactory
+  /** Test-only bound for the in-memory duplicate cache. Production uses 10,000 entries. */
+  readonly maxConfirmedInsertIds?: number
 }
 
 export async function createPostHogEvidenceExporter(
@@ -504,8 +520,13 @@ export async function createPostHogEvidenceExporter(
   dependencies: CreatePostHogEvidenceExporterDependencies = {},
 ): Promise<PostHogEvidenceExporter> {
   const config = parsePostHogExportConfig(input)
+  const maxConfirmedInsertIds =
+    dependencies.maxConfirmedInsertIds ?? DEFAULT_MAX_CONFIRMED_INSERT_IDS
+  if (!Number.isSafeInteger(maxConfirmedInsertIds) || maxConfirmedInsertIds < 1) {
+    throw new RangeError('maxConfirmedInsertIds must be a positive safe integer')
+  }
   if (!config.enabled) {
-    return new ConfiguredPostHogEvidenceExporter(config)
+    return new ConfiguredPostHogEvidenceExporter(config, undefined, maxConfirmedInsertIds)
   }
 
   const clientFactory = dependencies.clientFactory ?? defaultPostHogClientFactory
@@ -519,7 +540,7 @@ export async function createPostHogEvidenceExporter(
   } catch {
     throw new PostHogExportInitializationError()
   }
-  return new ConfiguredPostHogEvidenceExporter(config, client)
+  return new ConfiguredPostHogEvidenceExporter(config, client, maxConfirmedInsertIds)
 }
 
 export function createPostHogEvidenceExporterFromEnvironment(

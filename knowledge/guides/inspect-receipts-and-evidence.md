@@ -1,28 +1,32 @@
-# Inspect receipts and durable evidence
+# Read recent Activity
 
-This guide helps you decide what happened, why Caretaker acted, and which claims are still unproven.
+Use this guide when you need to know whether a recent request needs your decision, is still running, or has reached a final status. **Activity** is a concise operational history: each item shows a request summary, current status, and latest update.
 
-Before opening a receipt, understand [what each evidence artifact can establish](../concepts/evidence-and-improvement.md) and complete the [review and control](review-approve-or-cancel.md) step.
+Before opening Activity, [prepare and review a proposal](create-approve-and-verify-a-routine.md).
 
-## Read from authority outward
+Use [review or reject a proposal](review-approve-or-cancel.md) when the next step needs a member decision. For the technical evidence behind a verified result, see [what proves a result](../concepts/evidence-and-improvement.md).
 
-1. Start with mission state and the verifier receipt. They determine whether the mission is terminal and which criteria passed.
-2. Inspect the operation ledger. One logical operation should survive all retries.
-3. Inspect attempts and gateway receipts. Multiple attempts can describe one operation without multiplying its effect.
-4. Inspect the plan and approval binding. Their hashes, action IDs, protected versions, and expiry must agree.
-5. Inspect the context receipt. It shows selected versions and sources, not whether a model obeyed them.
-6. Use the local evidence trace to correlate safe product events and agent spans with the durable records.
+## Read Activity in this order
 
-| Receipt                        | Question it answers                                                 |
-| ------------------------------ | ------------------------------------------------------------------- |
-| Public context receipt         | Which publishable sources and safe versions were selected?          |
-| Internal context receipt       | What exact inputs, exclusions, hashes, and private correlation ran? |
-| Tool receipt                   | Which typed request and result crossed the broker?                  |
-| Operation and attempt receipts | Did the intended mutation commit, and what delivery history grew?   |
-| Verifier receipt               | Which deterministic outcome predicates passed or failed?            |
-| Analytics export receipt       | Was an allowlisted event submitted, rejected, or delivery-unknown?  |
+1. Start with the request summary. Confirm that it is the work you asked Pal to do.
+2. Read the current status. It tells you whether Pal is working, needs your decision, is checking the result, or has a verified or failed result.
+3. Check the latest update. It tells you when TrashPal last changed that request's status.
+4. If the request needs input or approval, return to **Automations** to continue the decision.
+5. If TrashPal is still checking the result, keep following the same request instead of creating another one.
 
-Do not expose private URIs, prompts, tenant identifiers, raw tokens, or home paths when sharing evidence. A submitted analytics batch is not PostHog ingestion proof.
+| Status                     | What it means                                          | What to do next                                 |
+| -------------------------- | ------------------------------------------------------ | ----------------------------------------------- |
+| **working**                | Pal is preparing, running, or reconciling the request. | Wait for the next update.                       |
+| **needs input**            | Pal needs one bounded answer.                          | Return to **Automations** and answer it.        |
+| **needs approval**         | A proposal is ready for your decision.                 | Review or reject the proposal.                  |
+| **checking the result**    | TrashPal has not verified the requested outcome yet.   | Do not create a duplicate request.              |
+| **verified** or **failed** | TrashPal reached a final status for this request.      | Decide whether a new bounded request is needed. |
+
+Activity does not expose proposal revisions, approval records, operations, delivery attempts, or evidence receipts. It stays focused on what needs attention and what you can safely do next.
+
+## Developer depth
+
+Developers can inspect context receipts, tool receipts, and analytics export records in [the executable API, MCP, and event reference](../resources/executable-contracts.md). Those records explain the runtime contract; they are not part of the customer-facing Activity view.
 
 ## Next step
 

@@ -1,6 +1,6 @@
 # Context has different authority levels
 
-This concept shows how Caretaker receives enough context to work without letting retrieved prose grant permissions.
+This concept shows how Pal receives enough context to work without letting retrieved prose grant permissions.
 
 Prerequisite: [understand why an operation outcome can remain unknown](unknown-outcomes.md).
 

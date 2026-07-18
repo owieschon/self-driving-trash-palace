@@ -29,4 +29,4 @@ The local sink remains the evidence owner until an approved export is configured
 
 ## Next step
 
-[Export analytics-safe evidence to PostHog](export-agent-evidence-to-posthog.md).
+[Validate the improvement metric](validate-an-improvement-metric.md).

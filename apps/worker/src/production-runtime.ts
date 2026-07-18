@@ -310,6 +310,11 @@ export async function composeProductionWorker(
         application_name: `${configuration.workerId}-queue`,
       },
       buildDependencies: (queue) => ({
+        onProductEvidenceDeliveryFailure: (error) => {
+          console.error(
+            `TrashPal product-evidence delivery deferred: ${error instanceof Error ? error.name : 'UnknownError'}`,
+          )
+        },
         outbox: new OutboxDispatcher(
           unitOfWork,
           createSystemOutboxRepository(database),

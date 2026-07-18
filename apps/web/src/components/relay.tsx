@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import type { ButtonHTMLAttributes, HTMLAttributes, ReactNode } from 'react'
 
 export function RelayMark() {
@@ -11,54 +12,67 @@ export function RelayMark() {
 }
 
 export function AppShell({ children }: { children: ReactNode }) {
-  return <main className="r-shell">{children}</main>
+  return <div className="r-shell">{children}</div>
 }
 
 export function TopNav({
   dark,
+  onNewAutomation,
   onTheme,
   onReset,
 }: {
   dark: boolean
+  onNewAutomation: () => void
   onTheme: () => void
   onReset: () => void
 }) {
   return (
-    <header className="r-top">
-      <button className="r-brand" onClick={onReset}>
-        <RelayMark />
-        <span>TrashPal</span>
-      </button>
-      <div className="r-actions">
-        <button className="r-search" aria-label="Search TrashPal">
-          ⌕ <span>Search</span>
-          <kbd>⌘ K</kbd>
+    <>
+      <a className="r-skip-link" href="#main-content">
+        Skip to main content
+      </a>
+      <header className="r-top">
+        <button className="r-brand" onClick={onReset}>
+          <RelayMark />
+          <span>TrashPal</span>
         </button>
-        <button
-          className="r-icon"
-          onClick={onTheme}
-          aria-label={`Switch to ${dark ? 'light' : 'dark'} mode`}
-        >
-          <span className={`r-theme-glyph ${dark ? 'is-dark' : 'is-light'}`} aria-hidden="true" />
-        </button>
-        <button className="r-avatar" aria-label="Rocky account">
-          Rocky
-        </button>
-      </div>
-    </header>
+        <div className="r-actions">
+          <Button className="r-new-automation" variant="primary" onClick={onNewAutomation}>
+            New automation
+          </Button>
+          <button
+            className="r-icon"
+            onClick={onTheme}
+            aria-label={`Switch to ${dark ? 'light' : 'dark'} mode`}
+          >
+            <span className={`r-theme-glyph ${dark ? 'is-dark' : 'is-light'}`} aria-hidden="true" />
+          </button>
+        </div>
+      </header>
+    </>
   )
 }
 
-export function ContextBar({ status, tone }: { status: string; tone: Tone }) {
+export function ContextBar({
+  status,
+  tone,
+  palaceName,
+  presentation,
+}: {
+  status: string
+  tone: Tone
+  palaceName: string
+  presentation: string
+}) {
   return (
     <div className="r-context">
       <div>
         <span>Palaces</span>
         <span aria-hidden="true">/</span>
-        <strong>Sacred Dumpster Palace</strong>
+        <strong>{palaceName}</strong>
       </div>
       <div>
-        <span>Updated 12 sec ago</span>
+        <span>{presentation}</span>
         <Status tone={tone}>{status}</Status>
       </div>
     </div>
@@ -191,6 +205,55 @@ export function Drawer({
   onClose: () => void
   children: ReactNode
 }) {
+  const drawerRef = useRef<HTMLElement>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const previouslyFocused = useRef<HTMLElement | null>(null)
+
+  useEffect(() => {
+    if (!open) return
+    previouslyFocused.current =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null
+    const focusInitial = () => closeButtonRef.current?.focus()
+    const frame = requestAnimationFrame(focusInitial)
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        onClose()
+        return
+      }
+      if (event.key !== 'Tab') return
+      const drawer = drawerRef.current
+      if (drawer === null) return
+      const focusable = Array.from(
+        drawer.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter((element) => !element.hidden && element.getAttribute('aria-hidden') !== 'true')
+      if (focusable.length === 0) {
+        event.preventDefault()
+        drawer.focus()
+        return
+      }
+      const first = focusable[0]
+      const last = focusable.at(-1)
+      if (first === undefined || last === undefined) return
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => {
+      cancelAnimationFrame(frame)
+      document.removeEventListener('keydown', onKeyDown)
+      previouslyFocused.current?.focus()
+      previouslyFocused.current = null
+    }
+  }, [open, onClose])
+
   if (!open) return null
   return (
     <div className="r-backdrop" onClick={onClose}>
@@ -199,9 +262,16 @@ export function Drawer({
         role="dialog"
         aria-modal="true"
         aria-labelledby="drawer-title"
+        ref={drawerRef}
+        tabIndex={-1}
         onClick={(event) => event.stopPropagation()}
       >
-        <button className="r-icon r-drawer-close" onClick={onClose} aria-label="Close evidence">
+        <button
+          ref={closeButtonRef}
+          className="r-icon r-drawer-close"
+          onClick={onClose}
+          aria-label={`Close ${title}`}
+        >
           ×
         </button>
         <span className="r-eyebrow">Safe local evidence</span>

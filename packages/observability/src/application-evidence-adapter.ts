@@ -161,7 +161,7 @@ export interface ApplicationSpanLike {
 }
 
 export type RuntimeEvidenceDiagnostic = Readonly<{
-  code: 'application_observation_not_event_complete'
+  code: 'application_evidence_delivery_failed' | 'application_observation_not_event_complete'
   observationName: string
 }>
 
@@ -234,7 +234,14 @@ export class SafeApplicationEvidenceAdapter {
       return
     }
     assertObservationBinding(observation)
-    await this.captureProduct(observation.evidence)
+    const frozen = this.freezeProduct(observation.evidence)
+    try {
+      await this.captureFrozen(frozen)
+    } catch {
+      // The domain observation was valid and frozen. Delivery can retry elsewhere without
+      // turning an analytics outage into a customer-facing failure.
+      this.#diagnoseDeliveryFailure()
+    }
   }
 
   public async captureProduct(input: RuntimeProductEvidenceInput): Promise<EvidenceCaptureResult> {
@@ -304,6 +311,13 @@ export class SafeApplicationEvidenceAdapter {
     this.#onDiagnostic?.({
       code: 'application_observation_not_event_complete',
       observationName: safeDiagnosticName(name),
+    })
+  }
+
+  #diagnoseDeliveryFailure(): void {
+    this.#onDiagnostic?.({
+      code: 'application_evidence_delivery_failed',
+      observationName: 'evidence.product',
     })
   }
 }

@@ -1,33 +1,30 @@
-# Review, approve, reject, or cancel safely
+# Review or reject a proposal
 
-This guide helps a human retain authority over one consequential Caretaker plan.
+Use this guide to decide whether one exact proposal is right for your Palace before Pal can act on it. Approval applies to that proposal only. It does not give Pal permission to make unrelated changes.
 
-Before reviewing, distinguish [mission and plan identity](../concepts/missions-plans-and-operations.md), understand [why context cannot grant authority](../concepts/context-authority.md), and follow the normal [create, approve, and verify](create-approve-and-verify-a-routine.md) path.
+Before reviewing, [prepare a proposal](create-approve-and-verify-a-routine.md).
 
-## Answer only the material clarification
+See [how a goal becomes an automation](../concepts/missions-plans-and-operations.md) for the records behind one change, and [what Pal can use and what it cannot decide](../concepts/context-authority.md) for the authority boundary.
 
-The homecoming fixture cannot keep both Rocky's stored comfort preference and the 15-point energy bound. Choose Energy first to keep the bound, or Comfort first to revise it explicitly. Either answer creates a new immutable plan revision; it does not patch an already approved plan.
+## Review what would change
 
-## Inspect the approval object
+Choose **Approve proposal** only after you can confirm all of the following:
 
-Approve only after checking:
+1. The objective and safety rules match the outcome you want.
+2. The proposed actions affect the intended Palace resources and do not add a duplicate active automation.
+3. The proposal lists the checks TrashPal will use to assess the result.
+4. The proposal is still current. If the Palace state or a safety rule changed, ask Pal to prepare a new proposal.
 
-1. The objective and explicit constraints match the intended outcome.
-2. The diff replaces the overlapping routine rather than adding a second active routine.
-3. Simulations cover access, timing, energy, and transport failure.
-4. Protected routine versions are current.
-5. The approval names the exact canonical plan hash and expires at a visible time.
+## Reject when the proposal is wrong
 
-Approval creates the server-owned logical operation for the approved action. Caretaker receives permission to activate that operation, not general permission to mutate routines.
+Choose **Reject proposal** when the objective, safety rule, affected resource, or expected result is wrong. The existing automation stays unchanged. Update the goal or constraints, then review a new proposal rather than reusing an old approval.
 
-## Reject when the plan is wrong
+## Stop safely when work already started
 
-Rejecting ends that approval path without a durable routine mutation. Revise the request or constraints, then inspect a new plan revision and approval. Never reuse the rejected approval for changed content.
+If the proposal has not started an operation, cancellation can stop pending work. If a device effect may already have happened, TrashPal keeps the existing record and reconciles it. It does not rewrite history or pretend the result is known.
 
-## Cancel according to the checkpoint
-
-Cancellation before mutation can cancel pending work. After an operation is claimed or a device effect may have occurred, the system preserves terminal evidence, reconciles uncertainty, and keeps a mandatory relock when safety requires it. Recovery may require a separately validated and approved compensating plan; cancellation never rewrites history.
+For example, a cancelled access request may still require the service hatch to be locked again through a separate, bounded action. Use **Activity** to see the request's current status and what requires attention.
 
 ## Next step
 
-[Apply the same controls to Scheduled Hauler Access](schedule-hauler-access.md).
+[Schedule hauler access safely](schedule-hauler-access.md).

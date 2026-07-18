@@ -20,6 +20,7 @@ import {
   type CompleteApplicationProductObservation,
   type RuntimeEvidenceDiagnostic,
   type RuntimeProductEvidenceInput,
+  type EvidenceSink,
 } from './index.js'
 
 const ALIAS_KEY = 'application-evidence-test-key-with-at-least-32-bytes'
@@ -199,6 +200,29 @@ describe('safe application evidence adapter', () => {
         code: 'application_observation_not_event_complete',
         observationName: 'mission.transitioned',
       },
+    ])
+  })
+
+  it('does not let a delivery failure turn a valid domain observation into a product failure', async () => {
+    const diagnostics: RuntimeEvidenceDiagnostic[] = []
+    const failingSink: EvidenceSink = {
+      capture: async () => {
+        throw new Error('analytics transport unavailable')
+      },
+      all: async () => [],
+    }
+    const observability = new SafeApplicationEvidenceAdapter({
+      sink: failingSink,
+      aliaser: new AnalyticsAliaser(ALIAS_KEY),
+      environment: 'test',
+      dataOrigin: 'fixture',
+      appVersion: '0.0.0-test',
+      onDiagnostic: (diagnostic) => diagnostics.push(diagnostic),
+    })
+
+    await expect(observability.record(observation())).resolves.toBeUndefined()
+    expect(diagnostics).toEqual([
+      { code: 'application_evidence_delivery_failed', observationName: 'evidence.product' },
     ])
   })
 

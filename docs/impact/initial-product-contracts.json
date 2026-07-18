@@ -8,7 +8,8 @@
     "contract.bounded-retrieval",
     "contract.evidence-improvement",
     "contract.homecoming-procedure",
-    "contract.lost-response-recovery"
+    "contract.lost-response-recovery",
+    "contract.palace-workspace-projection"
   ],
   "affectedClaimIds": [
     "TP-MODEL-001",
@@ -30,7 +31,9 @@
     "TP-PROCEDURE-002",
     "TP-PROCEDURE-003",
     "TP-INCIDENT-001",
-    "TP-INCIDENT-002"
+    "TP-INCIDENT-002",
+    "TP-PRODUCT-001",
+    "TP-PRODUCT-002"
   ],
   "assessedAt": "2026-07-15T00:00:00.000Z",
   "disposition": "updated",

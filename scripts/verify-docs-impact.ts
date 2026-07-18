@@ -12,7 +12,7 @@ async function readJson(path: string): Promise<unknown> {
 }
 
 export async function verifyDocsImpact(root = process.cwd()): Promise<DocsImpact> {
-  const impactPath = resolve(root, 'docs-impact.json')
+  const impactPath = resolve(root, 'docs/impact/initial-product-contracts.json')
   const [impact, claims, contracts, catalogInput] = await Promise.all([
     readJson(impactPath),
     readJson(resolve(root, 'docs/claims/registry.json')),

@@ -10,13 +10,19 @@ import {
 } from './database-bootstrap.js'
 
 describe('canonical local database seed', () => {
-  it('is an exact pre-mission projection of the canonical evaluation fixture', async () => {
+  it('preserves canonical pre-mission identities while using current public display names', async () => {
     const fixture = await loadCanonicalFixture()
     expect(CANONICAL_LOCAL_SEED.primary).toMatchObject({
-      organization: fixture.primaryTenant.organization,
+      organization: {
+        ...fixture.primaryTenant.organization,
+        name: 'Rocky’s Palace, Inc.',
+      },
       user: fixture.primaryTenant.user,
       membership: fixture.primaryTenant.membership,
-      palace: fixture.primaryTenant.palace,
+      palace: {
+        ...fixture.primaryTenant.palace,
+        name: 'Rocky’s Palace',
+      },
       crewMember: fixture.primaryTenant.crewMember,
       schedules: fixture.primaryTenant.schedules,
       preferences: fixture.primaryTenant.preferences,
@@ -30,14 +36,17 @@ describe('canonical local database seed', () => {
       organization: fixture.mirrorTenant.organization,
       user: fixture.mirrorTenant.user,
       membership: fixture.mirrorTenant.membership,
-      palace: fixture.mirrorTenant.palace,
+      palace: {
+        ...fixture.mirrorTenant.palace,
+        name: 'Sample Palace',
+      },
       routine: fixture.mirrorTenant.similarRoutine,
       routineVersion: fixture.mirrorTenant.similarRoutineVersion,
     })
     expect(CANONICAL_LOCAL_SEED.serviceActor).toEqual({
       user: {
         id: 'usr_caretaker_service',
-        displayName: 'Caretaker service',
+        displayName: 'Pal service',
         createdAt: '2026-08-01T12:00:00-04:00',
       },
       memberships: [

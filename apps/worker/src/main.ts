@@ -66,7 +66,7 @@ function isDirectExecution(): boolean {
 if (isDirectExecution()) {
   void runWorkerMain().catch((error: unknown) => {
     const name = error instanceof Error ? error.name : 'UnknownWorkerError'
-    console.error(`Trash Palace worker stopped: ${name}`)
+    console.error(`TrashPal worker stopped: ${name}`)
     process.exitCode = 1
   })
 }

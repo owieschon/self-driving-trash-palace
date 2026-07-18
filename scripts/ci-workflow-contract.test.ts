@@ -4,6 +4,7 @@ import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 
 const workflowPath = resolve(import.meta.dirname, '../.github/workflows/ci.yml')
+const operationsPath = resolve(import.meta.dirname, '../docs/operations/continuous-integration.md')
 
 describe('CI workflow contract', () => {
   it('keeps every job on the pinned Ubuntu runner with least-privilege defaults', async () => {
@@ -28,11 +29,26 @@ describe('CI workflow contract', () => {
 
   it('does not grant Endor OIDC to forks or Dependabot', async () => {
     const workflow = await readFile(workflowPath, 'utf8')
+    const operations = await readFile(operationsPath, 'utf8')
 
     expect(workflow).toContain('github.event.pull_request.head.repo.full_name == github.repository')
     expect(workflow).toContain("github.event.pull_request.user.login != 'dependabot[bot]'")
+    expect(workflow).toContain("vars.ENDOR_NAMESPACE != ''")
+    expect(operations).toContain('owieschon/self-driving-trash-palace')
+    expect(workflow).not.toContain('owieschon/trash-palace')
+    expect(operations).not.toContain('owieschon/trash-palace')
+    expect(workflow).toContain("if: >-\n      vars.ENDOR_NAMESPACE != '' &&")
     expect(workflow).toContain('id-token: write')
     expect(workflow).toContain('disable_code_snippet_storage: true')
     expect(workflow).toContain('endorctl_checksum:')
+  })
+
+  it('runs the browser journeys in pinned Chromium on Ubuntu', async () => {
+    const workflow = await readFile(workflowPath, 'utf8')
+
+    expect(workflow).toContain('browser-e2e:')
+    expect(workflow).toContain('pnpm exec playwright install --with-deps chromium')
+    expect(workflow).toContain('run: pnpm ui:e2e')
+    expect(workflow).not.toMatch(/playwright install --with-deps (?!chromium)/)
   })
 })

@@ -246,6 +246,25 @@ describe('PostHog export configuration', () => {
   })
 })
 
+describe('PostHog export duplicate cache', () => {
+  it('bounds confirmed insert IDs and permits an evicted ID to be delivered again', async () => {
+    const client = new RecordingPostHogClient()
+    const exporter = await createPostHogEvidenceExporter(enabledConfig(), {
+      clientFactory: () => client,
+      maxConfirmedInsertIds: 2,
+    })
+    const first = productEvent(eventId('evt_posthog_cache_001'))
+    const second = productEvent(eventId('evt_posthog_cache_002'))
+    const third = productEvent(eventId('evt_posthog_cache_003'))
+
+    await exporter.exportBatch([first, second, third])
+    const redelivered = await exporter.exportBatch([first])
+
+    expect(redelivered).toMatchObject({ submittedCount: 1, duplicateCount: 0 })
+    expect(client.captureCalls).toBe(4)
+  })
+})
+
 describe('PostHog capture mapping', () => {
   it('maps aliases, organization group, timestamp, and stable insert ID exactly', () => {
     const event = productEvent()

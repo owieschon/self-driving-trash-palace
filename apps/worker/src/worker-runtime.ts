@@ -19,10 +19,15 @@ import {
   type ServiceContext,
   type VerificationService,
 } from '@trash-palace/application'
-import type { OrganizationId } from '@trash-palace/core'
+import { missionProgramKindOf, type OrganizationId } from '@trash-palace/core'
 
 import { TimerHeartbeat, type HeartbeatPort } from './heartbeat.js'
 import { TimerOutboxPump, type OutboxPumpPort } from './outbox-pump.js'
+import {
+  palMissionResumeEvent,
+  palMissionVerificationEvent,
+  type PalSupervisionPort,
+} from './pal-supervision.js'
 import type { WorkerJobMetadata, WorkerQueuePort } from './pg-boss-adapter.js'
 
 export const WORKER_JOB_TOPICS = [
@@ -42,6 +47,8 @@ export interface WorkerRuntimeDependencies {
   readonly queue: WorkerQueuePort
   readonly outbox: Pick<OutboxDispatcher, 'dispatchBatch'>
   readonly productEvidence?: Pick<ProductEvidenceProjector, 'deliverPending'>
+  /** Evidence delivery is observational. Its failure must not interrupt product work. */
+  readonly onProductEvidenceDeliveryFailure?: (error: unknown) => void
   readonly gatewayDispatch: Pick<GatewayDispatchService, 'dispatch'>
   readonly gatewayEffectReconciliation: Pick<GatewayEffectReconciliationService, 'reconcile'>
   readonly executionDeadline: Pick<ExecutionDeadlineService, 'evaluate'>
@@ -50,6 +57,8 @@ export interface WorkerRuntimeDependencies {
   readonly verification: Pick<VerificationService, 'run'>
   readonly leases: Pick<MissionLeaseService, 'acquire' | 'renew' | 'release'>
   readonly missionRunner: MissionRunnerPort
+  /** Optional observer only. It cannot execute tools, approve work, or verify a result. */
+  readonly palSupervision?: PalSupervisionPort
   readonly serviceContextFor: (organizationId: OrganizationId) => ServiceContext
   readonly heartbeat?: HeartbeatPort
   readonly outboxPump?: OutboxPumpPort
@@ -96,8 +105,8 @@ export class WorkerRuntime {
       this.dependencies.queue.register('mission.resume', (payload, signal, metadata) =>
         this.#resumeMission(payload, signal, metadata),
       ),
-      this.dependencies.queue.register('mission.verify', (payload, signal) =>
-        this.#verifyMission(payload, signal),
+      this.dependencies.queue.register('mission.verify', (payload, signal, metadata) =>
+        this.#verifyMission(payload, signal, metadata),
       ),
       this.dependencies.queue.register('operation.reconcile', (payload, signal) =>
         this.#reconcileOperation(payload, signal),
@@ -112,7 +121,7 @@ export class WorkerRuntime {
       intervalMilliseconds: this.#outboxPumpInterval,
       sweep: async () => {
         await this.dependencies.outbox.dispatchBatch({ ownerId: this.dependencies.workerId })
-        await this.dependencies.productEvidence?.deliverPending(100)
+        await this.#deliverProductEvidence()
       },
     })
   }
@@ -184,9 +193,21 @@ export class WorkerRuntime {
   async #verifyMission(
     payload: Readonly<Record<string, JsonValue>>,
     signal: AbortSignal,
+    job: WorkerJobMetadata,
   ): Promise<void> {
     signal.throwIfAborted()
-    await this.dependencies.verification.run(MissionReferenceSchema.parse(payload))
+    const reference = MissionReferenceSchema.parse(payload)
+    const result = await this.dependencies.verification.run(reference)
+    await this.dependencies.palSupervision?.observe(
+      palMissionVerificationEvent({
+        eventId: `worker:${job.jobId}`,
+        organizationId: reference.organizationId,
+        missionId: reference.missionId,
+        programKind: missionProgramKindOf(result.mission),
+        missionVersion: result.mission.version,
+        status: result.verification.status,
+      }),
+    )
   }
 
   async #resumeMission(
@@ -227,6 +248,16 @@ export class WorkerRuntime {
     } finally {
       await this.dependencies.leases.release(fence)
     }
+    await this.dependencies.palSupervision?.observe(
+      palMissionResumeEvent({
+        eventId: `worker:${job.jobId}`,
+        organizationId: reference.organizationId,
+        missionId: reference.missionId,
+        programKind: missionProgramKindOf(acquired.mission),
+        missionVersion: acquired.mission.version,
+        outcome,
+      }),
+    )
     if (outcome === 'retry') {
       // The current durable job remains unacknowledged until its deterministic successor exists.
       // A failed or response-lost publish therefore redelivers this job without forking the chain.
@@ -240,6 +271,15 @@ export class WorkerRuntime {
   async #sweepOutbox(signal: AbortSignal): Promise<void> {
     signal.throwIfAborted()
     await this.dependencies.outbox.dispatchBatch({ ownerId: this.dependencies.workerId })
+  }
+
+  async #deliverProductEvidence(): Promise<void> {
+    try {
+      await this.dependencies.productEvidence?.deliverPending(100)
+    } catch (error) {
+      // Evidence remains pending for a later worker sweep. Do not leak provider errors into a mission.
+      this.dependencies.onProductEvidenceDeliveryFailure?.(error)
+    }
   }
 }
 

@@ -4,15 +4,15 @@ Status: approved
 Revision: 1.1  
 Source review date: 2026-07-14
 
-This document defines the smallest complete version of TrashPal: one realistic full-stack product, one consequential agent job, one distributed-systems failure, one focused human-and-agent knowledge package, and one honest PostHog evidence trail.
+This document defines the smallest complete version of TrashPal: one realistic full-stack product, one consequential Pal job, one distributed-systems failure, one focused human-and-agent knowledge package, and one honest PostHog evidence trail.
 
 ## 1. Product decision
 
-TrashPal is a fictional multi-tenant SaaS control plane for connected nocturnal homes. Rocky, a raccoon founder, dogfoods the product in his own palace. The product coordinates access, lighting, temperature, and energy through versioned routines and an agent named Caretaker.
+TrashPal is a fictional multi-tenant SaaS for operating connected homes. A **Palace** is one tenant's connected home and its **Palace workspace** is the control surface. Rocky is the seeded member in sample data, not a product mode or a separate audience. The product coordinates access, lighting, temperature, and energy through versioned routines and an agent named **Pal**.
 
-Caretaker has one job:
+Pal has one bounded job:
 
-> Turn an open-ended homecoming goal into a validated, user-approved routine, then own the mission through its first verified execution.
+> Turn a member goal into a validated proposal, operate already-approved routines within their saved limits, and preserve uncertainty until the application can verify a result.
 
 The educational thesis is:
 
@@ -47,10 +47,10 @@ The core delivers:
 - Persistent routines, versions, plans, approvals, operations, attempts, executions, and audit events
 - A durable mission worker that pauses and resumes
 - A typed HTTP API and one Streamable HTTP MCP transport over the same services
-- A real model-backed Caretaker agent for credentialed validation
+- A real model-backed Pal agent for credentialed validation
 - A deterministic external-gateway simulator with bounded fault injection
 - Real PostHog Product Analytics and AI Observability export when separately approved credentials are configured
-- One versioned Caretaker skill with focused references
+- One versioned Pal skill with focused references
 - Generated API, MCP, event, state, and context-receipt reference pages
 - A Reliability Lab and executable guide
 - Deterministic, integration, browser, security, mutation, and live-model evaluations
@@ -74,10 +74,10 @@ PostHog does not control a lock, choose a routine, grant approval, or decide whe
 | Rocky               | Owner               | Read, draft, approve, activate manually, cancel, and propose compensating recovery                                      |
 | Tenant operator     | Operator            | Read, draft, and approve when granted `routine:approve`                                                                 |
 | Tenant observer     | Viewer              | Read state, receipts, and history only                                                                                  |
-| Caretaker           | Service principal   | Read, draft, validate, simulate, request approval, activate an already approved action, reconcile, and inspect evidence |
+| Pal                 | Service principal   | Read, draft, validate, simulate, request approval, activate an already approved action, reconcile, and inspect evidence |
 | External MCP client | Delegated principal | Only the scopes and tenant granted to its credential                                                                    |
 
-Caretaker cannot approve its own plan or expand its scopes.
+Pal cannot approve its own plan or expand its scopes.
 
 ## 3. Core scope
 
@@ -85,7 +85,7 @@ Caretaker cannot approve its own plan or expand its scopes.
 
 - Two fixture tenants for real isolation tests
 - One homecoming mission family
-- Manual and Caretaker-driven paths through the same application services
+- Manual and Pal-driven paths through the same application services
 - One durable agent loop and task ledger
 - One MCP transport and bundled smoke client
 - One authored skill package with references
@@ -103,7 +103,7 @@ Caretaker cannot approve its own plan or expand its scopes.
 - `llms-full.txt`
 - Multi-channel knowledge release machinery
 - Hosted live-agent access, abuse prevention, and public model budgets
-- Additional Caretaker jobs
+- Additional Pal jobs
 - Multiple live harnesses or model providers
 - Voice or multimodal input
 - Real hardware
@@ -628,7 +628,7 @@ An optional credentialed extension inspects the corresponding live model and Pos
 
 ### 9.8 Documentation impact contract
 
-Every public-behavior or contract change emits `docs-impact.json` with affected claim IDs and one disposition: `updated`, `generated-only`, or `no-user-impact` with a reason. CI fails unresolved impact.
+Every public-behavior or contract change updates `docs/impact/initial-product-contracts.json` with affected claim IDs and one disposition: `updated`, `generated-only`, or `no-user-impact` with a reason. CI fails unresolved impact.
 
 Each milestone ships its corresponding concept, guide or reference, example, skill update, and impact decision. The final documentation milestone integrates, tests, and packages the corpus; it does not postpone writing until the end.
 

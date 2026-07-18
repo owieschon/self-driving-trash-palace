@@ -34,6 +34,7 @@ COPY --chown=node:node . .
 RUN test -s node_modules/.modules.yaml \
     && test -s node_modules/.pnpm/lock.yaml \
     && test -s apps/web/node_modules/next/package.json \
-    && node --import tsx -e "void 0"
+    && node --import tsx -e "void 0" \
+    && pnpm --filter @trash-palace/web build
 
 CMD ["pnpm", "--version"]

@@ -173,6 +173,21 @@ describe('local stack lifecycle commands', () => {
 })
 
 describe('local stack composition contract', () => {
+  it('serves the built web application instead of a development HMR server', async () => {
+    const compose = await readFile(resolve(import.meta.dirname, '../compose.yaml'), 'utf8')
+    const web = serviceBlock(compose, 'web', 'gateway-simulator')
+    const dockerfile = await readFile(resolve(import.meta.dirname, '../Dockerfile'), 'utf8')
+
+    expect(dockerfile).toContain('pnpm --filter @trash-palace/web build')
+    expect(web).toContain("'@trash-palace/web',")
+    expect(web).toContain('start,')
+    expect(web).toContain('NODE_ENV: development')
+    expect(web).toContain('loopback-only fixture login')
+    expect(web).toContain('TRASH_PALACE_RUNTIME_ENVIRONMENT:-local')
+    expect(web).toContain('TRASH_PALACE_RUNTIME_EVIDENCE_ORIGIN:-fixture')
+    expect(web).not.toContain('dev,')
+  })
+
   it('shares one protected evidence sink across web and worker without seeding from either', async () => {
     const compose = await readFile(resolve(import.meta.dirname, '../compose.yaml'), 'utf8')
     const web = serviceBlock(compose, 'web', 'gateway-simulator')
@@ -180,8 +195,8 @@ describe('local stack composition contract', () => {
     const evidenceBindings = [
       'TRASH_PALACE_EVIDENCE_ALIAS_KEY: ${TRASH_PALACE_EVIDENCE_ALIAS_KEY:?Run pnpm local:prepare}',
       'TRASH_PALACE_EVIDENCE_SINK_PATH: /var/lib/trash-palace/evidence/caretaker.jsonl',
-      'TRASH_PALACE_ENVIRONMENT: local',
-      'TRASH_PALACE_EVIDENCE_ORIGIN: fixture',
+      'TRASH_PALACE_ENVIRONMENT: ${TRASH_PALACE_RUNTIME_ENVIRONMENT:-local}',
+      'TRASH_PALACE_EVIDENCE_ORIGIN: ${TRASH_PALACE_RUNTIME_EVIDENCE_ORIGIN:-fixture}',
       '- trash-palace-evidence:/var/lib/trash-palace/evidence',
     ]
 
