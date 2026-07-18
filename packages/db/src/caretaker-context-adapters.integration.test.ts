@@ -566,20 +566,6 @@ databaseDescribe('PostgreSQL-backed Caretaker context adapters', () => {
       }),
     )
     if (reserved.kind === 'version_conflict') throw new Error('Tool reservation conflicted')
-    await fencedUnitOfWork.runFenced(context.fence, (repositories) =>
-      repositories.caretakerRuns.checkpoint({
-        runId,
-        expectedVersion: reserved.snapshot.run.version,
-        expectedTaskLedgerVersion: reserved.snapshot.run.taskLedgerVersion,
-        mutationKey: hashCanonical({ kind: 'context-test-result', label }),
-        kind: 'state_persisted',
-        counters,
-        pendingToolCall: null,
-        taskLedger: reserved.snapshot.taskLedger,
-        evidenceRefs: [],
-        occurredAt: new Date(Date.parse(FROZEN_AT) + (expectedVersion + 3) * 1_000).toISOString(),
-      }),
-    )
     const receipt = ToolCallReceiptSchema.parse({
       schemaVersion: 'tool-call-receipt@1',
       id: ReceiptIdSchema.parse(`rcp_${pending.callId.slice(5)}`),
@@ -598,6 +584,20 @@ databaseDescribe('PostgreSQL-backed Caretaker context adapters', () => {
       completedAt: '2026-08-14T05:36:09.000Z',
     })
     await new PgToolCallReceiptRepository(database, ORG, scopes.tenant(ORG)).append(receipt)
+    await fencedUnitOfWork.runFenced(context.fence, (repositories) =>
+      repositories.caretakerRuns.checkpoint({
+        runId,
+        expectedVersion: reserved.snapshot.run.version,
+        expectedTaskLedgerVersion: reserved.snapshot.run.taskLedgerVersion,
+        mutationKey: hashCanonical({ kind: 'context-test-result', label }),
+        kind: 'state_persisted',
+        counters,
+        pendingToolCall: null,
+        taskLedger: reserved.snapshot.taskLedger,
+        evidenceRefs: [],
+        occurredAt: new Date(Date.parse(FROZEN_AT) + (expectedVersion + 3) * 1_000).toISOString(),
+      }),
+    )
   }
 
   function projectionPort(

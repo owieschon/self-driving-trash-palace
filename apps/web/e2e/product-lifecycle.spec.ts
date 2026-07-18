@@ -60,7 +60,7 @@ test('stops a durable request through the cancellation tool and waits for its fi
 
   await expect(page.getByText('Proposal cancelled')).toBeVisible()
   await expect(page.getByRole('button', { name: 'Edit settings' })).toBeVisible()
-  await expect(page.getByRole('button', { name: 'Back to automations' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Back to automations' }).first()).toBeVisible()
   expect(cancellationBodies).toEqual([
     expect.objectContaining({
       missionId: 'mis_hauler',
