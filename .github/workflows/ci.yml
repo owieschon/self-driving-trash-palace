@@ -20,6 +20,7 @@ jobs:
     timeout-minutes: 15
     env:
       CI: 'true'
+      NODE_OPTIONS: '--max-old-space-size=4096'
 
     steps:
       - name: Check out repository
@@ -132,6 +133,7 @@ jobs:
         run: |
           report="$RUNNER_TEMP/postgres-integration.json"
           pnpm exec vitest run packages/db/src packages/integration/src \
+            --maxWorkers=1 \
             --reporter=default \
             --reporter=json \
             --outputFile.json="$report"
