@@ -5,7 +5,7 @@ test('starts with customer Help while keeping developer and API material one cli
 }) => {
   await page.goto('/help')
 
-  await expect(page.getByRole('heading', { name: 'Help' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Help', exact: true })).toBeVisible()
   await expect(
     page.getByRole('article').getByRole('heading', { name: 'TrashPal Help' }),
   ).toBeVisible()
