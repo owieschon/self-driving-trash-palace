@@ -192,6 +192,38 @@ describe('CaretakerMissionRunnerAdapter', () => {
     expect(new Set(calls.map(({ activationKey }) => activationKey)).size).toBe(1)
   })
 
+  it('re-drives final bookkeeping when the activation commits the mission before contention', async () => {
+    const world = new WorkerAdapterWorld()
+    const calls: Parameters<
+      ConstructorParameters<typeof CaretakerMissionRunnerAdapter>[0]['host']['resume']
+    >[0][] = []
+    const runner = world.runner(async (input) => {
+      calls.push(input)
+      if (calls.length === 1) {
+        world.mission = MissionSchema.parse({
+          ...world.mission,
+          state: { status: 'succeeded', phase: 'verify' },
+          version: world.mission.version + 1,
+          updatedAt: LATER,
+        })
+        throw new OptimisticConcurrencyError('Caretaker run')
+      }
+      return {
+        kind: 'completed',
+        runId: RunIdSchema.parse(input.requestedRunId),
+        runVersion: 1,
+        verifierEvidenceIds: [IDS.evidence],
+      }
+    })
+
+    await expect(runner.resume({ mission: world.mission, context: world.context })).resolves.toBe(
+      'completed_checkpoint',
+    )
+    expect(calls).toHaveLength(2)
+    expect(calls[0]?.requestedRunId).toBe(calls[1]?.requestedRunId)
+    expect(calls[0]?.activationKey).toBe(calls[1]?.activationKey)
+  })
+
   it('maps every durable terminal host result to a completed worker checkpoint', async () => {
     const results = ['completed', 'failed', 'cancelled'] as const
     for (const kind of results) {

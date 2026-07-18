@@ -174,14 +174,38 @@ export class CaretakerMissionRunnerAdapter implements MissionRunnerPort {
       activatedAt,
     }
     const resumeHost = () => this.dependencies.host.resume(activation)
-    const result = isTerminalMission(prepared.mission)
-      ? await runTerminalCaretakerActivationWithRetry(resumeHost, input.context.signal)
-      : await resumeHost()
+    const result = await this.#resumeHostWithTerminalRecovery(
+      prepared.mission,
+      resumeHost,
+      input.context,
+    )
     input.context.signal.throwIfAborted()
     if (result.runId !== runId) {
       throw integrity('Caretaker host returned another durable run identity')
     }
     return mapHostResult(result)
+  }
+
+  async #resumeHostWithTerminalRecovery(
+    preparedMission: Mission,
+    resumeHost: () => Promise<CaretakerHostResult>,
+    context: MissionExecutionContext,
+  ): Promise<CaretakerHostResult> {
+    if (isTerminalMission(preparedMission)) {
+      return runTerminalCaretakerActivationWithRetry(resumeHost, context.signal)
+    }
+    try {
+      return await resumeHost()
+    } catch (error) {
+      if (!isOptimisticConcurrencyFailure(error)) throw error
+      const afterConflict = await loadRunnerState(
+        this.dependencies.unitOfWork,
+        context,
+        preparedMission.id,
+      )
+      if (!isTerminalMission(afterConflict.mission)) throw error
+      return runTerminalCaretakerActivationWithRetry(resumeHost, context.signal)
+    }
   }
 }
 
