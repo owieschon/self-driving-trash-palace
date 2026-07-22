@@ -121,7 +121,7 @@ The core may include a hand-authored changelog and a deterministic documentation
 - A generic RAG chatbot
 - Unbounded memory
 - Unapproved autonomous activation
-- A fake PostHog dashboard
+- A fake analytics dashboard
 
 ## 4. Executable flagship fixture
 
@@ -202,7 +202,7 @@ This application-transport fault is distinct from gateway faults. Gateway timeou
 
 ## 5. User experience
 
-### 5.1 Five-minute reviewer path
+### 5.1 Five-minute inspection path
 
 1. Open the Control Room and inspect the current palace and conflicting routine.
 2. Start the prefilled Night Shift mission or enter a valid paraphrase.
@@ -253,11 +253,11 @@ Rocky can create the same typed plan through a manual editor, run validation and
 
 ### 5.7 Design direction
 
-The product is a credible nocturnal operations console, not a game UI and not a PostHog clone. Whimsy lives in Rocky, illustrations, fixtures, empty states, and occasional microcopy. Permissions, errors, and technical reference use plain language.
+The product is a credible nocturnal operations console, not a game UI. Whimsy lives in Rocky, illustrations, fixtures, empty states, and occasional microcopy. Permissions, errors, and technical reference use plain language.
 
 The visual system uses a dense but legible operations grid, project-owned tokens, strong state colors that do not rely on color alone, an original display face paired with a highly readable body face, and accessible headless primitives. Keyboard navigation, focus visibility, responsive behavior, reduced motion, and WCAG AA contrast are gates.
 
-### 5.8 PostHog-informed quick wins
+### 5.8 Product conventions
 
 - Start Here uses a visible Quest Log.
 - Guides are named for outcomes rather than internal feature names.
@@ -300,6 +300,13 @@ flowchart TD
     AG --> OBS
     JOB --> OBS
 ```
+
+Diagram: The Next.js interface calls typed HTTP routes and application services. Mission services
+invoke the bounded agent harness, which receives focused context and uses the canonical MCP tool
+registry. Both the API and MCP registry reach deterministic domain services backed by PostgreSQL
+and a transactional job outbox. Workers call the private gateway simulator; resulting state returns
+through the API. A deterministic verifier records conclusions in PostgreSQL. The API, agent harness,
+and worker emit evidence to the local sink, which may export approved events.
 
 ### 6.1 Technology decisions
 
@@ -910,20 +917,15 @@ Only after the core and credentialed claims are honest, create a short introduct
 
 Until all five conditions happen, this state is Blocked. Fixture pre/post results are not substituted for live-loop evidence.
 
-## 15. Source grounding
+## 15. Integration contracts
 
-The design adapts these PostHog sources, verified on 2026-07-14:
+Three external references constrain the optional PostHog exporter:
 
-- [The self-improving loop](https://posthog.com/docs/self-driving/self-improving-loop)
 - [AI Observability traces](https://posthog.com/docs/ai-observability/traces)
 - [Capturing events](https://posthog.com/docs/product-analytics/capture-events)
-- [How to write product docs](https://posthog.com/handbook/wizard-and-docs/writing-product-docs)
-- [How to use the content writer agent](https://posthog.com/handbook/wizard-and-docs/content-writer-agent)
-- [Context Mill](https://posthog.com/handbook/wizard-and-docs/context-mill)
-- [What we wish we knew before building AI agents](https://newsletter.posthog.com/p/what-we-wish-we-knew-before-building)
-- [We used context engineering to 5x conversion and 2x activation](https://newsletter.posthog.com/p/we-used-ai-to-5x-conversion-and-2x)
+- [Install the Node.js SDK for logs](https://posthog.com/docs/logs/installation/nodejs)
 
-Milestone 0 creates a source lock mapping each borrowed convention to its URL, verification date, and affected claim IDs. Temporally sensitive claims must be reverified before publication. TrashPal does not copy PostHog prose, visuals, or application chrome and does not imply endorsement.
+The [source lock](SOURCE_LOCK.json) maps each integration contract to its verification date and affected claim IDs. Temporally sensitive contracts must be reverified before publication. Product structure, writing conventions, and agent behavior remain repository-owned decisions rather than borrowed provenance.
 
 ## 16. Implementation boundary
 

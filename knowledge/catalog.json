@@ -20,7 +20,7 @@
       },
       "version": "1.0.1",
       "canonicalUri": "docs/decisions/0001-separate-runtime-truth-from-explanation.md",
-      "sha256": "a9356b2370ec934dbe0621538724a24e090ff1f75a6867e75bc79e946b3a0dc8"
+      "sha256": "7ba17be6c4fd349ed80665c72ebde731ea911b4835e9d73ed82998b0acd4f702"
     },
     {
       "id": "evaluation.limitations",
@@ -549,7 +549,7 @@
       },
       "version": "1.2.0",
       "canonicalUri": "knowledge/README.md",
-      "sha256": "53987bd2745212893df1ed55e7b9c1794dad43331a63d39b6d9bb53c7b71d8a2"
+      "sha256": "1ed8343268f14d17dedf7ec278b6d8f178b103569e4695870f7be4a77ff35db9"
     },
     {
       "id": "resource.evaluation-methodology",
@@ -574,7 +574,7 @@
       },
       "version": "1.0.1",
       "canonicalUri": "knowledge/resources/evaluation-methodology-and-limitations.md",
-      "sha256": "2082f30d81b13eb268fc2424a10cf453d343a3028c478f9fa058632bc68547d5"
+      "sha256": "3ac562c6d38c0f3d77fe5462b5e08c80caa276b2a66033a3f24c7e1ba5810817"
     },
     {
       "id": "resource.executable-contracts",

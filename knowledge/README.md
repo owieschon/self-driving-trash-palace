@@ -8,7 +8,7 @@ This is the order a change follows: choose a supported goal, review Pal's propos
 
 An approval records a decision. It does not by itself prove that the change happened.
 
-> **Note:** TrashPal is a reference product, not an official PostHog product. Its default device provider is deterministic and simulated. The SmartThings adapter is implemented but has not been verified against live hardware. The sample workspace uses Rocky as an example member, not as a product mode or a separate audience.
+> **Reference boundary:** The default device provider is deterministic and simulated. The SmartThings adapter is implemented but has not been verified against live hardware. Rocky is the seeded member in sample data, not a product mode or a separate audience.
 
 ![TrashPal control room showing a bounded comfort-versus-energy decision, current household state, and the next scheduled hauler visit](../apps/web/public/docs/trashpal-control-room.png)
 

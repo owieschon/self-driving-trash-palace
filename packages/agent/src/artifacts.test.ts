@@ -169,7 +169,11 @@ describe('retained knowledge artifacts', () => {
     const parsed = validateSourceLock(sourceLock, claims)
 
     expect(parsed.sourceReviewDate).toBe('2026-07-14')
-    expect(parsed.sources).toHaveLength(9)
+    expect(parsed.sources.map((source) => source.id)).toEqual([
+      'posthog.ai-observability-traces',
+      'posthog.capture-events',
+      'posthog.project-token',
+    ])
     expect(parsed.sources.every((source) => source.affectedClaimIds.length > 0)).toBe(true)
   })
 

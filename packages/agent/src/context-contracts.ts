@@ -23,6 +23,17 @@ import {
 const TOOL_RESULT_ERROR_JSON_SCHEMA = z.json().parse(z.toJSONSchema(ToolResultErrorSchema))
 const TOOL_RESULT_ERROR_SCHEMA_HASH = hashToolValue(TOOL_RESULT_ERROR_JSON_SCHEMA)
 
+// Result schemas are registry constants. Converting them to JSON Schema on every request parse made
+// deterministic runs compete for CPU with the rest of the suite and turned a bounded simulation
+// into a wall-clock-dependent test. Cache the canonical projection once; every use below still
+// validates its hash against the selected contract.
+const TOOL_RESULT_CONTRACTS = new Map(
+  TOOL_SCHEMA_PROJECTIONS.map((tool) => {
+    const schema = z.json().parse(z.toJSONSchema(TOOL_RESULT_SCHEMAS[tool.name]))
+    return [tool.name, { schema, schemaHash: hashToolValue(schema) }] as const
+  }),
+)
+
 const ExactToolResultProjectionSchema = z
   .object({
     schemaVersion: z.literal('tool-result-contract@1'),
@@ -100,10 +111,7 @@ export const ExactToolContractSectionSchema = ExactToolContractPayloadSchema.ext
       seen.add(tool.name)
     })
     const expectedResults = new Map(
-      section.tools.map((tool) => {
-        const schema = z.json().parse(z.toJSONSchema(TOOL_RESULT_SCHEMAS[tool.name]))
-        return [tool.name, hashToolValue(schema)] as const
-      }),
+      section.tools.map((tool) => [tool.name, TOOL_RESULT_CONTRACTS.get(tool.name)?.schemaHash]),
     )
     const resultNames = new Set<string>()
     section.results.forEach((result, index) => {
@@ -259,12 +267,15 @@ export function projectExactToolContracts(toolNames: readonly string[]): ExactTo
   }
   const tools = TOOL_SCHEMA_PROJECTIONS.filter((tool) => selected.has(tool.name))
   const results = tools.map((tool) => {
-    const schema = z.json().parse(z.toJSONSchema(TOOL_RESULT_SCHEMAS[tool.name]))
+    const contract = TOOL_RESULT_CONTRACTS.get(tool.name)
+    if (contract === undefined) {
+      throw new Error(`Missing result contract projection for ${tool.name}`)
+    }
     return ExactToolResultProjectionSchema.parse({
       schemaVersion: 'tool-result-contract@1',
       name: tool.name,
-      schema,
-      schemaHash: hashToolValue(schema),
+      schema: contract.schema,
+      schemaHash: contract.schemaHash,
     })
   })
 

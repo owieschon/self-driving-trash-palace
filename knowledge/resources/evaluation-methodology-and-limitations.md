@@ -1,6 +1,6 @@
 # Evaluation methodology and limitations
 
-This resource routes reviewers to the executable corpus, interpretation rules, and credential boundary without duplicating case metadata.
+This resource routes maintainers to the executable corpus, interpretation rules, and credential boundary without duplicating case metadata.
 
 Before evaluating, understand [context authority](../concepts/context-authority.md), know [what evidence can prove](../concepts/evidence-and-improvement.md), and follow the [PostHog export boundary](../posthog-ai/export-agent-evidence-to-posthog.md).
 

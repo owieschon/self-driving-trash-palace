@@ -9,7 +9,7 @@ The typed [navigation manifest](../knowledge/navigation.json) declares six custo
 ## Build and provenance
 
 - [Build specification](BUILD_SPEC.md) defines the approved implementation boundary.
-- [Source lock](SOURCE_LOCK.json) records reviewed external conventions and the claims they affect.
+- [Source lock](SOURCE_LOCK.json) records reviewed integration contracts and the claims they affect.
 - [Claim registry](claims/registry.json) binds stable claim IDs to canonical knowledge sources.
 - [Contract-to-claim registry](contract-claims.json) maps public contract families to the exact claims and canonical source owners checked by the [retained impact assessment](impact/initial-product-contracts.json).
 
