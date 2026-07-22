@@ -51,6 +51,17 @@ describe('compiler-owned host policy', () => {
 
     expect(() => projectHostPolicy(HASH_B)).toThrow(/hash mismatch/i)
   })
+
+  it('keeps cached tool-result projections deterministic across caller mutation', () => {
+    const baseline = projectExactToolContracts(['palaces.get'])
+    const mutableProjection = projectExactToolContracts(['palaces.get'])
+    const mutableResult = mutableProjection.results[0]
+    if (mutableResult === undefined) throw new Error('Tool projection requires one result schema')
+
+    mutableResult.schema = { tampered: true }
+
+    expect(projectExactToolContracts(['palaces.get'])).toEqual(baseline)
+  })
 })
 
 describe('context requests and bundles', () => {

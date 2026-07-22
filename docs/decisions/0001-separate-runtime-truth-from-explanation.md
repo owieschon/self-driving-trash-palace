@@ -6,7 +6,7 @@ Status: Accepted
 
 ## Context
 
-Pal needs compact instructions, developers need executable contracts, and reviewers need durable evidence. Copying the same behavior into policy prose, agent references, docs, and receipts would let those surfaces drift.
+Pal needs compact instructions, developers need executable contracts, and maintainers need durable evidence. Copying the same behavior into policy prose, agent references, docs, and receipts would let those surfaces drift.
 
 ## Decision
 

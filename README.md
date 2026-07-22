@@ -1,12 +1,15 @@
 # TrashPal
 
-TrashPal is a full-stack reference SaaS for connected raccoon homes. Each tenant operates one **Palace** from its Palace workspace. **Pal** is a bounded agent: it prepares proposals, runs already-approved automations inside saved limits, and asks a member when it needs a new decision.
+TrashPal is an executable full-stack reference application for connected raccoon homes. A member manages one **Palace** from its workspace, where **Pal** prepares proposals, runs already-approved automations within saved limits, and asks for a new decision when the request exceeds those limits.
 
-The application, not Pal, owns approval, durable execution, recovery, and verification. A request, approval, or operation is never shown as a verified result until durable evidence supports that claim.
+Connected-home writes become dangerous when the device accepts a request but the response is lost.
+A blind retry can create a duplicate routine; assuming failure can lie about the home's state.
+TrashPal carries one operation identity through approval, execution, reconciliation, and
+verification so that uncertainty remains visible until evidence closes it.
 
-Rocky is the seeded member in the sample data. He is not a product mode or a separate audience.
+The application, not Pal, owns approval, durable execution, recovery, and verification. A request, approval, or operation is not shown as verified until durable evidence supports that result.
 
-This is an independent fictional project, not an official PostHog product. The default executable path uses simulated connected-home devices. The SmartThings adapter is implemented but remains unverified against live hardware.
+The default executable path uses deterministic fixtures and simulated connected-home devices. The SmartThings adapter is implemented, but it has not been verified against live hardware. Rocky is the seeded member in sample data, not a product mode or a separate audience.
 
 ## What runs
 
@@ -27,11 +30,15 @@ flowchart LR
     Policy --> Review
 ```
 
+Diagram: A member goal and current context produce a proposal. Policy and a member decision authorize an operation. Evidence and a verifier then determine whether its outcome is known. This sequence describes the control path; it does not prove that a device action succeeded.
+
 ## Run the local product
 
-With the pinned dependencies installed and Docker running, one command builds and starts PostgreSQL, the web application, gateway simulator, and Pal worker:
+With Docker running, install the pinned dependencies and start PostgreSQL, the web application,
+gateway simulator, and Pal worker:
 
 ```bash
+pnpm install --frozen-lockfile
 pnpm local:up
 ```
 
@@ -42,11 +49,10 @@ Open [TrashPal on loopback](http://127.0.0.1:3300). The command generates ignore
 Run the credential-free quality gate from the repository root:
 
 ```bash
-pnpm install --frozen-lockfile
 pnpm check
 ```
 
-The repository includes a Next.js product, PostgreSQL persistence, HTTP and MCP interfaces, a bounded Pal harness, deterministic and model-promotion evaluations, provider connectors, PostHog-shaped evidence, and one versioned knowledge system for people and agents.
+The repository includes a Next.js product, PostgreSQL persistence, HTTP and MCP interfaces, a bounded Pal harness, deterministic and model-promotion evaluations, provider connectors, sanitized observability evidence, and one versioned knowledge system for people and agents.
 
 ## Learn and maintain
 

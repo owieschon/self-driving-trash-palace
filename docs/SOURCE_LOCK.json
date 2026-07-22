@@ -3,17 +3,6 @@
   "sourceReviewDate": "2026-07-14",
   "sources": [
     {
-      "id": "posthog.self-improving-loop",
-      "title": "The self-improving loop",
-      "url": "https://posthog.com/docs/self-driving/self-improving-loop",
-      "verifiedAt": "2026-07-14",
-      "temporallySensitive": true,
-      "conventions": [
-        "Keep signal, report, investigation, reviewed change, delivery, and measurement distinct"
-      ],
-      "affectedClaimIds": ["TP-EVIDENCE-003"]
-    },
-    {
       "id": "posthog.ai-observability-traces",
       "title": "AI Observability traces",
       "url": "https://posthog.com/docs/ai-observability/traces",
@@ -36,18 +25,6 @@
       "affectedClaimIds": ["TP-EVIDENCE-004"]
     },
     {
-      "id": "posthog.writing-product-docs",
-      "title": "How to write product docs",
-      "url": "https://posthog.com/handbook/wizard-and-docs/writing-product-docs",
-      "verifiedAt": "2026-07-14",
-      "temporallySensitive": true,
-      "conventions": [
-        "Give each document one job and keep one canonical home for current product truth",
-        "Use one central navigation in this order: Overview, Getting started, Concepts, Guides, PostHog AI, Resources"
-      ],
-      "affectedClaimIds": ["TP-KNOWLEDGE-001", "TP-KNOWLEDGE-002"]
-    },
-    {
       "id": "posthog.project-token",
       "title": "Install the Node.js SDK for logs",
       "url": "https://posthog.com/docs/logs/installation/nodejs",
@@ -57,50 +34,6 @@
         "Use the current technical-doc convention: ingestion project tokens start with phc_; reject phx_ personal API keys. This overrides the inconsistent phs_ row in the docs style guide"
       ],
       "affectedClaimIds": ["TP-EVIDENCE-004"]
-    },
-    {
-      "id": "posthog.content-writer-agent",
-      "title": "How to use the content writer agent",
-      "url": "https://posthog.com/handbook/wizard-and-docs/content-writer-agent",
-      "verifiedAt": "2026-07-14",
-      "temporallySensitive": true,
-      "conventions": [
-        "Keep technical accuracy with executable product owners even when automation helps draft prose"
-      ],
-      "affectedClaimIds": ["TP-KNOWLEDGE-001"]
-    },
-    {
-      "id": "posthog.context-mill",
-      "title": "Context Mill",
-      "url": "https://posthog.com/handbook/wizard-and-docs/context-mill",
-      "verifiedAt": "2026-07-14",
-      "temporallySensitive": true,
-      "conventions": [
-        "Separate source, deterministic assembly, versioned delivery, and consumption"
-      ],
-      "affectedClaimIds": ["TP-CONTEXT-001", "TP-CONTEXT-003", "TP-CONTEXT-004"]
-    },
-    {
-      "id": "posthog.agent-lessons",
-      "title": "What we wish we knew before building AI agents",
-      "url": "https://newsletter.posthog.com/p/what-we-wish-we-knew-before-building",
-      "verifiedAt": "2026-07-14",
-      "temporallySensitive": true,
-      "conventions": [
-        "Use bounded tools, explicit context, durable state, and evidence instead of model confidence"
-      ],
-      "affectedClaimIds": ["TP-CONTEXT-001", "TP-RELIABILITY-001"]
-    },
-    {
-      "id": "posthog.context-engineering-case-study",
-      "title": "We used context engineering to 5x conversion and 2x activation",
-      "url": "https://newsletter.posthog.com/p/we-used-ai-to-5x-conversion-and-2x",
-      "verifiedAt": "2026-07-14",
-      "temporallySensitive": true,
-      "conventions": [
-        "Treat context as a versioned product input; no reported numerical result is reused as a TrashPal claim"
-      ],
-      "affectedClaimIds": ["TP-CONTEXT-003", "TP-KNOWLEDGE-001"]
     }
   ]
 }
